@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 12:20:53 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 17:43:38 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/09 11:51:34 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,25 @@
 #include "rt.h"
 #include "vector.h"
 
-static int			has_shadow(void *light, t_vec3 hp_pos, t_geo *geo, t_env *e)
+static int			has_shadow(t_light *light, t_vec3 hp_pos, t_geo *geo, t_env *e)
 {
 	t_geo			*shadow_geo;
 	t_hp			shadow_hp;
 	t_vec3			light_dir;
 	t_ray			shadow_ray;
-	t_spot			*spot;
 
 	shadow_geo = NULL;
-	spot = light;
-	light_dir = vec3_sub_stack(*spot->pos, hp_pos);
-	shadow_ray = init_ray(hp_pos, light_dir, 1);
+	if (light->type == 2)
+	{
+		light_dir = vec3_mult_stack(vec3_add_stack(hp_pos, \
+			*((t_directional *)light->curr)->dir), 20.);
+		vec3_rev(&light_dir);
+	}
+	else if (light->type == 3)
+		light_dir = vec3_sub_stack(*((t_spot *)light->curr)->pos, hp_pos);
+	else
+		return (0);
+	shadow_ray = shoot_ray(hp_pos, light_dir, 1);
 	shadow_geo = ray_hit(&shadow_ray, &shadow_hp, geo, e);
 	if (shadow_geo && shadow_hp.t <= vec3_norm(light_dir))
 		return (1);
@@ -72,8 +79,13 @@ void				apply_lights(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
 	{
 		if (light->type != 1 && geo && r->type == 0)
 		{
+<<<<<<< HEAD
 			if (has_shadow(light->curr, hp.p, geo, e) == 1)
 				color_mult(*light->color, &(r->color));
+=======
+			if (has_shadow(light, hp.p, geo, e) == 1)
+				color_mult(calc_ambient(light), &(r->color));
+>>>>>>> Wip directional light
 			else
 				shade_phong(geo->mater, hp, light, r);
 		}

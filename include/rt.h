@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 15:27:07 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/09 11:51:32 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct		s_cam
 }					t_cam;
 
 /*
-**	TYPE 1- Ambient 2- Directional 3- Spotlight
+**	TYPE 1- Ambient 2- Directional 3- Pointlight
 */
 typedef struct s_light	t_light;
 

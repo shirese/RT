@@ -12,7 +12,7 @@
 
 #include "ray.h"
 #include "light.h"
-#include "rtv1.h"
+#include "rt.h"
 #include "utils.h"
 
 t_ray				shoot_ray(t_vec3 origin, t_vec3 direction, int ray_type)

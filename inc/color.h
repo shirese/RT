@@ -13,7 +13,7 @@
 #ifndef COLOR_H
 # define COLOR_H
 
-# include "rtv1.h"
+# include "rt.h"
 
 void				clamp_color(t_color *c, double min, double max);
 void				color_add(t_color c1, t_color *c2);

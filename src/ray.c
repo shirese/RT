@@ -12,7 +12,7 @@
 
 #include "light.h"
 #include "matrice.h"
-#include "rtv1.h"
+#include "rt.h"
 
 t_vec3				point_at_parameter(double t, t_ray r)
 {

@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 #include "geo.h"
 #include "ray.h"
-#include "rtv1.h"
+#include "rt.h"
 #include "utils.h"
 
 static t_vec3		cylinder_norm(t_geo *geo, t_cylinder *cyl, t_vec3 hp)

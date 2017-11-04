@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "geo.h"
-#include "rtv1.h"
+#include "rt.h"
 
 static t_hp			hit_ortho(t_ray r, t_plane *p, t_vec3 min)
 {

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "color.h"
-#include "rtv1.h"
+#include "rt.h"
 
 void				clamp_color(t_color *c, double min, double max)
 {

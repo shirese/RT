@@ -15,7 +15,7 @@
 #include "geo.h"
 #include "light.h"
 #include "matrice.h"
-#include "rtv1.h"
+#include "rt.h"
 #include "utils.h"
 
 void				parse_geo_attributes(char *line, char *value, t_geo *geo)

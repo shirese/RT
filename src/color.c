@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "color.h"
-#include "rtv1.h"
+#include "rt.h"
 
 void				color_set(t_color c, t_color *c_to_set)
 {

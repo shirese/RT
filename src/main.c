@@ -14,7 +14,7 @@
 #include "geo.h"
 #include "ft_printf.h"
 #include "light.h"
-#include "rtv1.h"
+#include "rt.h"
 #include "utils.h"
 
 #include <fcntl.h>
@@ -32,7 +32,7 @@ void				set_environment(t_env **e)
 static int			setup_error(int type, t_env *e)
 {
 	if (type == 0)
-		ft_putendl("Usage ./rtv1 [scene.cjson]");
+		ft_putendl("Usage ./rt [scene.cjson]");
 	else if (type == 1)
 		ft_putendl("Wrong scene file");
 	if (e)

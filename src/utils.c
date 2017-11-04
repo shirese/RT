@@ -6,14 +6,14 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 13:16:21 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/19 10:18:35 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/04 15:42:52 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "light.h"
 #include "geo.h"
-#include "rtv1.h"
+#include "rt.h"
 #include "vector.h"
 
 static void			ft_atof_cson_norme(int d, double *f, double *r, char **str)

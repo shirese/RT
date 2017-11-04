@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "geo.h"
-#include "rtv1.h"
+#include "rt.h"
 #include "vector.h"
 
 t_vec3				cone_normal(t_geo *geo, t_cone *c, t_vec3 p)

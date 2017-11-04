@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "matrice.h"
-#include "rtv1.h"
+#include "rt.h"
 #include "vector.h"
 
 t_screen			set_screen(t_win win, t_cam *cam)

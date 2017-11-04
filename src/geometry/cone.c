@@ -12,7 +12,7 @@
 
 #include "geo.h"
 #include "ray.h"
-#include "rtv1.h"
+#include "rt.h"
 #include "utils.h"
 
 static void				c_intersec(t_geo *geo, t_ray r, double *abcd, t_hp *hp)

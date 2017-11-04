@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "matrice.h"
-#include "rtv1.h"
+#include "rt.h"
 #include "vector.h"
 
 int					setup_camera(t_cam **cam)

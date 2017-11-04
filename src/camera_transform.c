@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void				cam_rot_x(t_mat4 *cam_matrix, double angle)
 {

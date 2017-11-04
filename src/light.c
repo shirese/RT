@@ -12,7 +12,7 @@
 
 #include "color.h"
 #include "light.h"
-#include "rtv1.h"
+#include "rt.h"
 #include "vector.h"
 
 t_vec3				vec3_reflection(void *l, t_hp hp)

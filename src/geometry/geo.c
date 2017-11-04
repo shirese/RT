@@ -13,7 +13,7 @@
 #include "color.h"
 #include "ft_printf.h"
 #include "geo.h"
-#include "rtv1.h"
+#include "rt.h"
 #include "utils.h"
 
 t_hp				(*g_get_obj_collider(int id))(t_geo *geo, t_ray r)

@@ -13,7 +13,7 @@
 #include "color.h"
 #include "light.h"
 #include "ray.h"
-#include "rtv1.h"
+#include "rt.h"
 #include "vector.h"
 
 static int			has_shadow(void *light, t_vec3 hp_pos, t_geo *geo, t_env *e)

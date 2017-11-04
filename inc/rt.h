@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.h                                             :+:      :+:    :+:   */
+/*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/19 10:52:05 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/04 15:44:11 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RTV1_H
-# define RTV1_H
+#ifndef RT_H
+# define RT_H
 
 # include <SDL.h>
 # include "matrice.h"
 # include "vector.h"
 # include "time.h"
 
-# define WIN_TITLE "rtv1"
+# define WIN_TITLE "Raytracer v0.0"
 # define FLT_MAX 3.402823e+38
 
 typedef struct		s_color

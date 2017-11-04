@@ -13,7 +13,7 @@
 #include "color.h"
 #include "ft_printf.h"
 #include "light.h"
-#include "rtv1.h"
+#include "rt.h"
 #include "utils.h"
 
 int					parse_light_colors(char *value, t_light **light)

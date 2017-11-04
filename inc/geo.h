@@ -13,7 +13,7 @@
 #ifndef GEO_H
 # define GEO_H
 
-# include "rtv1.h"
+# include "rt.h"
 # include "ray.h"
 # include "vector.h"
 

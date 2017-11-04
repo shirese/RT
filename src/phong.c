@@ -12,7 +12,7 @@
 
 #include "color.h"
 #include "light.h"
-#include "rtv1.h"
+#include "rt.h"
 
 static t_color		calc_spec(t_mater *mater, t_hp hp, void *l, t_ray *r)
 {

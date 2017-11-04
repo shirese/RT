@@ -12,7 +12,7 @@
 
 #include "geo.h"
 #include "ray.h"
-#include "rtv1.h"
+#include "rt.h"
 #include "utils.h"
 
 t_hp					hit_disk(t_geo *geo, t_ray r)

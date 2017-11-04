@@ -6,11 +6,11 @@
 #    By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/02 10:55:23 by chaueur           #+#    #+#              #
-#    Updated: 2017/10/19 12:21:19 by chaueur          ###   ########.fr        #
+#    Updated: 2017/11/04 15:44:33 by chaueur          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= rtv1
+NAME			= rt
 TEST			= test
 CC				= clang
 FLAG			= -O3 -c -O1 -Wall -Werror -Wextra -pedantic

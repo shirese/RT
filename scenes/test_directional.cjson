@@ -1,0 +1,26 @@
+window:
+	width: 400
+	height: 300
+camera:
+	pos: 0.0, 0.0, 2.0
+	fov: 90
+light:
+	type: 1
+	color: 0.11, 0.11, 0.11, 1.0
+light:
+	type: 2
+	color: 0.88, 0.88, 0.88, 1.
+	dir: -4.0, -1.0, -4.0
+plane:
+	pos: 0., -4.5., 0.
+	kd: 0.33, 0.33, 0.33, 1.0
+	normal: 0., 1., 0.8
+plane:
+	pos: 0., 0., -4.
+	kd: 0., 0., 1., 1.0
+	normal: 0., 0., 1.
+sphere:
+	pos: 0., -1.5, -3.5
+	kd: 0.13, 0.13, 0.66, 1.0
+	ks: 0.5, 0.5, 0.5
+	radius: 0.5

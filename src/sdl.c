@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 #include "utils.h"
 
 void				sdl_draw_point(SDL_Renderer *rend, int x, int y, t_color c)

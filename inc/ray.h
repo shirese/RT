@@ -13,7 +13,7 @@
 #ifndef RAY_H
 # define RAY_H
 
-# include "rtv1.h"
+# include "rt.h"
 # include "vector.h"
 
 t_geo				*ray_hit(t_ray *r, t_hp *hp, t_geo *from, t_env *e);

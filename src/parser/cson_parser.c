@@ -14,7 +14,7 @@
 #include "ft_printf.h"
 #include "geo.h"
 #include "light.h"
-#include "rtv1.h"
+#include "rt.h"
 #include "utils.h"
 
 static int			handle_error(int err)

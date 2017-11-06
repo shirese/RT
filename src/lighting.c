@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 12:20:53 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/09 11:51:34 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/09 11:53:33 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static int			has_shadow(t_light *light, t_vec3 hp_pos, t_geo *geo, t_env *e)
 	shadow_geo = NULL;
 	if (light->type == 2)
 	{
-		light_dir = vec3_mult_stack(vec3_add_stack(hp_pos, \
-			*((t_directional *)light->curr)->dir), 20.);
+		light_dir = *((t_directional *)light->curr)->dir;
+		light_dir = vec3_mult_stack(light_dir, 1E6);
 		vec3_rev(&light_dir);
 	}
 	else if (light->type == 3)
@@ -79,13 +79,8 @@ void				apply_lights(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
 	{
 		if (light->type != 1 && geo && r->type == 0)
 		{
-<<<<<<< HEAD
 			if (has_shadow(light->curr, hp.p, geo, e) == 1)
 				color_mult(*light->color, &(r->color));
-=======
-			if (has_shadow(light, hp.p, geo, e) == 1)
-				color_mult(calc_ambient(light), &(r->color));
->>>>>>> Wip directional light
 			else
 				shade_phong(geo->mater, hp, light, r);
 		}

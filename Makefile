@@ -6,7 +6,7 @@
 #    By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/02 10:55:23 by chaueur           #+#    #+#              #
-#    Updated: 2017/11/04 15:44:33 by chaueur          ###   ########.fr        #
+#    Updated: 2017/11/07 11:34:29 by chaueur          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ CC				= clang
 FLAG			= -O3 -c -O1 -Wall -Werror -Wextra -pedantic
 DEBUG			= -g -Wno-unused-parameter -Wno-unused-function \
 					-Wno-unused-variable -Wno-uninitialized
-INCS			= -I inc -I frameworks/SDL2.framework/Headers -I ft_printf/inc/
-SRC				=	camera.c camera_transform.c color.c color_utils.c \
+INCS			= -I include -I frameworks/SDL2.framework/Headers -I ft_printf/inc/
+SRC				=	camera.c camera_transform.c color.c color_op.c color_utils.c \
 					environment.c main.c math_utils.c light.c lighting.c \
 					phong.c ray.c raytracer.c sdl.c sdl_event.c transform.c \
 					utils.c

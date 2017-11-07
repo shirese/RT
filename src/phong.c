@@ -31,7 +31,7 @@ static t_color		calc_spec(t_mater *mater, t_hp hp, void *l, t_ray *r)
 	specular.b = mater->ks.b * max(0.0, pow(vec3_dot(hp.normal, reflection), \
 		32.));
 	specular.a = 1.0;
-	clamp_color(&specular, 0.1, 1.0);
+	color_clamp(&specular, 0.1, 1.0);
 	return (specular);
 }
 
@@ -55,7 +55,7 @@ t_color				calc_ambient(t_light *light)
 	ambient.r = light->color->r;
 	ambient.g = light->color->g;
 	ambient.b = light->color->b;
-	clamp_color(&ambient, 0.0, 1.0);
+	color_clamp(&ambient, 0.0, 1.0);
 	return (ambient);
 }
 

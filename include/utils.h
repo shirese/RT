@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/12 13:24:56 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/17 10:45:00 by chaueur          ###   ########.fr       */
+/*   Created: 2017/06/26 12:16:39 by chaueur           #+#    #+#             */
+/*   Updated: 2017/11/06 12:47:40 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_H
-# define RAY_H
+#ifndef UTILS_H
+# define UTILS_H
 
 # include "rt.h"
-# include "vector.h"
 
-t_geo				*ray_hit(t_ray *r, t_hp *hp, t_geo *from, t_env *e);
-t_ray				shoot_ray(t_vec3 origin, t_vec3 direction, int ray_type);
-t_vec3				gen_ray_direction(int i, int j, t_env *e);
-t_vec3				gen_ray_origin(t_mat4 cam_to_world, t_vec3 cam_origin);
-t_vec3				point_at_parameter(double t, t_ray r);
+void				print_env(t_env *e);
+void				free_env(t_env **e);
+void				init_environment(t_env **e);
+
+double				ft_atof_cson(char **str);
+double				clamp(double x, double up, double low);
+double				deg_to_rad(double deg);
+double				min(double i, double j);
+double				max(double i, double j);
+double				positive_smallest(double a, double b);
 
 #endif

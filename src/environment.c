@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/16 18:35:17 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/07 12:02:01 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,15 @@ void				free_env(t_env **e)
 	}
 	free((*e)->lights);
 	free(*e);
+}
+
+void				init_environment(t_env **e)
+{
+	*e = malloc(sizeof(t_env));
+	(*e)->win.width = 0;
+	(*e)->win.height = 0;
+	(*e)->samp_rate = 1;
+	(*e)->cam = NULL;
+	(*e)->lights = NULL;
+	(*e)->geos = NULL;
 }

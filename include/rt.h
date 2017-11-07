@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/04 15:44:11 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/07 11:30:47 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,12 @@ typedef struct		s_screen
 	t_vec3			color;
 }					t_screen;
 
+/*
+**	A sample rate of 4x is equal to double sample in X and Y
+*/
 typedef struct		s_env
 {
+	unsigned int	samp_rate;
 	t_win			win;
 	t_screen		scr;
 	t_ray			ray;
@@ -147,7 +151,6 @@ void				cam_rot_z(t_mat4 *cam_matrix, double angle);
 void				cam_matrix(t_cam *cam, t_vec3 pos, t_vec3 look, t_vec3 up);
 void				ft_translate(t_vec3 *vec, t_vec3 trs);
 
-void				free_env_var(t_env *e);
 double				deg_to_rad(double deg);
 double				clamp(double x, double up, double low);
 double				max(double i, double j);

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 14:34:15 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/18 18:18:06 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/06 12:38:46 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_geo				*ray_hit(t_ray *r, t_hp *hp, t_geo *from, t_env *e)
 	return (nearest_geo);
 }
 
-t_vec3				gen_ray_direction(int i, int j, t_env *e)
+t_vec3				gen_ray_direction(double i, double j, t_env *e)
 {
 	double			x;
 	double			y;

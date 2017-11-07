@@ -6,10 +6,11 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 13:16:21 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/04 15:42:52 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/07 11:43:15 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "color.h"
 #include "ft_printf.h"
 #include "light.h"
 #include "geo.h"
@@ -54,8 +55,8 @@ static void			print_light(t_light *light)
 {
 	ft_printf("\n\n///		LIGHT		////\n\n");
 	ft_printf("TYPE 		[%d]\n", light->type);
-	ft_printf("COLOR 		[%f %f %f %f]\n", light->color->r, \
-		light->color->g, light->color->b, light->color->a);
+	ft_printf("COLOR 		");
+	color_print(*light->color);
 	if (light->type == 2)
 	{
 		ft_printf("DIR 		");
@@ -79,8 +80,8 @@ static void			print_geo(t_geo *geo)
 		vec3_print(geo->rotation->r2);
 		vec3_print(geo->rotation->r3);
 	}
-	ft_printf("\nMATER		[%f %f %f %f]\n", geo->mater->kd.r, \
-		geo->mater->kd.g, geo->mater->kd.b, geo->mater->kd.a);
+	ft_printf("\nMATER		");
+	color_print(geo->mater->kd);
 	if (geo->type == 1 && ft_printf("PLANE\nNORMAL\n"))
 		vec3_print(((t_plane *)(geo->curr))->normal);
 	else if (geo->type == 2)
@@ -100,7 +101,7 @@ static void			print_geo(t_geo *geo)
 	{
 		ft_printf("DISK\nRAD\t\t[%f]\nAXIS\n", ((t_disk *)(geo->curr))->radius);
 		vec3_print(((t_disk *)(geo->curr))->normal);
-	}	
+	}
 }
 
 void				print_env(t_env *e)

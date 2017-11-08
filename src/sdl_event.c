@@ -6,11 +6,12 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 18:41:29 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/04 15:39:53 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/08 15:28:03 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#include "rt_multithread.h"
 
 static int			check_trans_event(SDL_Keycode k, t_env *e)
 {
@@ -57,8 +58,14 @@ void				sdl_get_event(SDL_Event event, t_env *e)
 	if (event.type == SDL_KEYDOWN)
 	{
 		if (check_rot_event(event.key.keysym.sym, e))
-			raytrace(e);
+		{
+			if (!(raytrace_thread(e)))
+				return ;
+		}
 		else if (check_trans_event(event.key.keysym.sym, e))
-			raytrace(e);
+		{
+			if (!(raytrace_thread(e)))
+				return ;
+		}
 	}
 }

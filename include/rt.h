@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/07 11:30:47 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/08 15:27:07 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ typedef struct		s_screen
 */
 typedef struct		s_env
 {
+	t_color			*img;
 	unsigned int	samp_rate;
 	t_win			win;
 	t_screen		scr;
@@ -133,6 +134,7 @@ typedef struct		s_env
 
 int					get_next_line(int const fd, char **line);
 
+t_color				get_px_col(int x, int y, t_env *e);
 void				raytrace(t_env *e);
 
 void				set_background(t_env *e);

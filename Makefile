@@ -6,21 +6,21 @@
 #    By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/02 10:55:23 by chaueur           #+#    #+#              #
-#    Updated: 2017/11/07 11:34:29 by chaueur          ###   ########.fr        #
+#    Updated: 2017/11/07 14:53:53 by chaueur          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= rt
 TEST			= test
 CC				= clang
-FLAG			= -O3 -c -O1 -Wall -Werror -Wextra -pedantic
-DEBUG			= -g -Wno-unused-parameter -Wno-unused-function \
+FLAG			= -O3 -c -O1 -Wall -Werror -Wextra -pedantic -pthread
+DEBUG			= -g -pthread -Wno-unused-parameter -Wno-unused-function \
 					-Wno-unused-variable -Wno-uninitialized
 INCS			= -I include -I frameworks/SDL2.framework/Headers -I ft_printf/inc/
 SRC				=	camera.c camera_transform.c color.c color_op.c color_utils.c \
 					environment.c main.c math_utils.c light.c lighting.c \
-					phong.c ray.c raytracer.c sdl.c sdl_event.c transform.c \
-					utils.c
+					phong.c ray.c raytracer.c render_thr.c sdl.c sdl_event.c \
+					transform.c utils.c
 SRC_PARSER		=	get_next_line.c cson_parser.c cson_parser_2.c cson_parser_light.c\
 					cson_parser_geo.c
 SRC_GEOS		=	cone.c cone2.c cylinder.c disk.c geo.c plane.c sphere.c

@@ -6,13 +6,14 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/07 12:46:21 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/08 16:34:26 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
 #include "ray.h"
 #include "light.h"
+#include "pthread.h"
 #include "rt.h"
 #include "utils.h"
 
@@ -26,9 +27,9 @@ t_ray				init_ray(t_vec3 origin, t_vec3 direction, int ray_type)
 	r.type = ray_type;
 	if (r.type == 1)
 	{
-		r.origin.x += 0.001;
-		r.origin.y += 0.001;
-		r.origin.z += 0.001;
+		r.origin.x += 0.000001;
+		r.origin.y += 0.000001;
+		r.origin.z += 0.000001;
 	}
 	return (r);
 }
@@ -47,7 +48,7 @@ static t_color		shoot_ray(double x, double y, t_env *e)
 	return (r.color);
 }
 
-static t_color		get_px_col(int x, int y, t_env *e)
+t_color				get_px_col(int x, int y, t_env *e)
 {
 	double			ij[2];
 	double			px_pos[2];

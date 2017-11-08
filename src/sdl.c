@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:26:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 16:41:20 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/08 17:49:41 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,13 @@ void				sdl_render(t_env *e)
 	print_env(e);
 	if (!raytrace_thread(e))
 		return ;
-	// raytrace(e);
 	while (1 && SDL_WaitEvent(&ev))
 	{
 		// if (ev.type == SDL_WINDOWEVENT_RESIZED)
 		// {
 		// 	SDL_RenderClear(e->win.rend);
-		// 	raytrace(e);
-		// 	return ;
+		// 	if (!raytrace_thread(e))
+		// 		return ;
 		// }
 		// else if (ev.type == SDL_WINDOWEVENT_MAXIMIZED)
 		// {

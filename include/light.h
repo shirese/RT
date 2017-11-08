@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 17:36:26 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/17 11:18:01 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/08 17:45:49 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,8 @@ int					parse_light_colors(char *value, t_light **light);
 int					parse_light_direction(char *value, t_light **light);
 int					parse_light_position(char *value, t_light **light);
 
+void				apply_ambient_light(t_ray *r, t_env *e);
 void				apply_lights(t_ray *r, t_geo *geo, t_hp hp, t_env *e);
-t_color				calc_ambient(t_light *light);
-t_color				color_new_stack(double r, double g, double b, double a);
-t_color				*color_new(double r, double g, double b, double a);
-t_light				*generate_lights(void);
 
 t_vec3				vec3_reflection(void *l, t_hp hp);
 

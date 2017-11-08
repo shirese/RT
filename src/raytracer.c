@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 16:34:26 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/08 17:36:37 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static t_color		shoot_ray(double x, double y, t_env *e)
 	r = init_ray(gen_ray_origin(*e->cam->cam_to_world, *e->cam->pos), \
 		gen_ray_direction(x, y, e), 0);
 	geo = ray_hit(&r, &hp, NULL, e);
+	apply_ambient_light(&r, e);
 	apply_lights(&r, geo, hp, e);
 	return (r.color);
 }

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:03:22 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/17 14:39:22 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/08 17:45:23 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,6 @@ static t_color		calc_diffuse(t_mater *mater, double lambertian)
 	diffuse.b = mater->kd.b * max(0.0, lambertian);
 	diffuse.a = 1.0;
 	return (diffuse);
-}
-
-t_color				calc_ambient(t_light *light)
-{
-	static t_color	ambient;
-
-	if (!light)
-		return (ambient);
-	ambient.r = light->color->r;
-	ambient.g = light->color->g;
-	ambient.b = light->color->b;
-	color_clamp(&ambient, 0.0, 1.0);
-	return (ambient);
 }
 
 /*

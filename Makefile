@@ -6,11 +6,7 @@
 #    By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/02 10:55:23 by chaueur           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2017/11/08 17:43:53 by chaueur          ###   ########.fr        #
-=======
-#    Updated: 2017/11/06 10:28:02 by chaueur          ###   ########.fr        #
->>>>>>> WIP
+#    Updated: 2017/11/09 11:54:38 by chaueur          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,12 +17,8 @@ FLAG			= -O3 -c -O1 -Wall -Werror -Wextra -pedantic -pthread
 DEBUG			= -g -pthread -Wno-unused-parameter -Wno-unused-function \
 					-Wno-unused-variable -Wno-uninitialized
 INCS			= -I include -I frameworks/SDL2.framework/Headers -I ft_printf/inc/
-<<<<<<< HEAD
 SRC				=	camera.c camera_transform.c color.c color_op.c color_op_2.c \
 					color_utils.c \
-=======
-SRC				=	camera.c camera_transform.c color.c color_utils.c \
->>>>>>> WIP
 					environment.c main.c math_utils.c light.c lighting.c \
 					phong.c ray.c raytracer.c render_thr.c sdl.c sdl_event.c \
 					transform.c utils.c

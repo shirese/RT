@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/09 11:53:03 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/09 11:55:35 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_ray				init_ray(t_vec3 origin, t_vec3 direction, int ray_type)
 	return (r);
 }
 
-static t_color		shoot_ray(double x, double y, t_env *e)
+t_color				shoot_ray(double x, double y, t_env *e)
 {
 	t_geo			*geo;
 	t_hp			hp;

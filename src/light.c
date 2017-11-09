@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 15:31:04 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/13 16:15:13 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/09 12:09:53 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 #include "rt.h"
 #include "vector.h"
 
-t_vec3				vec3_reflection(void *l, t_hp hp)
+t_vec3				vec3_reflection(t_vec3 pos, t_hp hp)
 {
-	t_spot			*s;
 	t_vec3			i;
 	t_vec3			n;
 	t_vec3			r;
 
-	s = l;
-	i = vec3_sub_stack(*s->pos, hp.p);
+	i = vec3_sub_stack(pos, hp.p);
 	n = hp.normal;
 	r = vec3_mult_stack(n, 2 * vec3_dot(i, n));
 	r = vec3_sub_stack(i, r);

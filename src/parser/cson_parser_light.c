@@ -38,7 +38,7 @@ int					parse_light_direction(char *value, t_light **l)
 
 int					parse_light_position(char *value, t_light **light)
 {
-	t_spot			*spot;
+	t_point			*spot;
 
 	spot = (*light)->curr;
 	if ((*light)->type == 3)
@@ -65,7 +65,7 @@ int					assign_light(int type, t_light **light)
 	else if (type == 3)
 	{
 		(*light)->type = 3;
-		(*light)->curr = (void *)malloc(sizeof(t_spot));
+		(*light)->curr = (void *)malloc(sizeof(t_point));
 	}
 	else
 		return (1);

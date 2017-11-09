@@ -64,9 +64,9 @@ static void			print_light(t_light *light)
 	}
 	if (light->type == 3)
 	{
-		ft_printf("\nPOS 		[%f %f %f]\n", ((t_spot *)light->curr)->pos->x,
-			((t_spot *)light->curr)->pos->y,
-			((t_spot *)light->curr)->pos->z);
+		ft_printf("\nPOS 		[%f %f %f]\n", ((t_point *)light->curr)->pos->x,
+			((t_point *)light->curr)->pos->y,
+			((t_point *)light->curr)->pos->z);
 	}
 }
 

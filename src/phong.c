@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:03:22 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/09 15:05:07 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/10 14:48:43 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void				shade_phong(t_mater *mater, t_hp hp, t_light *l, t_ray *r)
 	double			lambertian;
 
 	if (l->type == 2)
-		light_pos = vec3_stack(0., 1E6, 1E6);
+		light_pos = vec3_stack(0., 0.2, 1E6);
 	else
 		light_pos = *((t_point *)l->curr)->pos;
 	lambertian = vec3_dot(hp.normal, vec3_sub_stack(light_pos, hp.p));

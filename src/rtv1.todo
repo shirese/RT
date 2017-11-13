@@ -1,9 +1,14 @@
 
 1. Texture
 
- ☐ Spherical mapping ?
+ ✔ Spherical mapping ? @done (17-11-13 15:00)
    I must apply a transformation to the point of intersection so that the mapping sphere
    is positioned and oriented with respect to the object.
  ☐ Streching texture
  ☐ Offsetting texture
  ☐ Use a library to load an image
+   I must map (s, t) to a 2d array created from a loaded img
+   How can I know (s, t) min/max in advance ?
+   I know it's [0, 1] if spherical mapping so I can map img resolution to it.
+   0.74 0.72
+   310 

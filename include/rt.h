@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/12 15:58:21 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/13 15:59:53 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,12 @@ typedef struct		s_screen
 	t_vec3			color;
 }					t_screen;
 
+typedef struct		s_tex
+{
+	int				width;
+	int				height;
+	unsigned char	*px;
+}					t_tex;
 /*
 **	A sample rate of 4x is equal to double sample in X and Y
 */
@@ -128,6 +134,7 @@ typedef struct		s_env
 	t_win			win;
 	t_screen		scr;
 	t_ray			ray;
+	t_tex			*tex;
 	t_cam			*cam;
 	t_geo			*geos;
 	t_light			*lights;

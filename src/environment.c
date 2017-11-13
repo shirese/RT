@@ -6,9 +6,11 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/10 16:59:17 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/13 16:02:57 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <imago2.h>
 
 #include "matrice.h"
 #include "rt.h"
@@ -55,6 +57,8 @@ void				free_env(t_env **e)
 	}
 	free((*e)->lights);
 	free((*e)->img);
+	img_free_pixels((*e)->tex->px);
+	free((*e)->tex);
 	free(*e);
 }
 
@@ -68,4 +72,5 @@ void				init_environment(t_env **e)
 	(*e)->cam = NULL;
 	(*e)->lights = NULL;
 	(*e)->geos = NULL;
+	(*e)->tex = NULL;
 }

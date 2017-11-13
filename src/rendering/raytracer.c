@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/13 12:37:39 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/13 15:50:31 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static t_color		shoot_ray(double x, double y, t_env *e)
 	apply_ambient_light(&r, e);
 	if (geo)
 	{
-		apply_texture(&r, hp, geo);
+		apply_texture(&r, hp, geo, e);
 		apply_lights(&r, geo, hp, e);
 	}
 	return (r.color);

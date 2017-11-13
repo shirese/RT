@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/09 11:37:25 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 15:26:20 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/13 17:00:06 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "ft_printf.h"
 #include "light.h"
 #include "rt.h"
+#include "texture.h"
 #include "utils.h"
 
 #include <fcntl.h>
@@ -51,6 +52,7 @@ int					main(int ac, char **av)
 		e->img = malloc(sizeof(t_color) * e->scr.nx * e->scr.ny);
 		cam_matrix(e->cam, *e->cam->pos, vec3_stack(0, 0, 1), \
 			vec3_stack(0, 1, 0));
+		e->tex = init_textures("textures/mc.png");
 		sdl_render(e);
 		sdl_stop(e);
 		free_env(&e);

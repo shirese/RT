@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec4.c                                             :+:      :+:    :+:   */
+/*   checkerboard.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/04 12:06:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/12 16:02:25 by chaueur          ###   ########.fr       */
+/*   Created: 2017/11/13 11:29:20 by chaueur           #+#    #+#             */
+/*   Updated: 2017/11/13 12:24:34 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "color.h"
+#include "rt.h"
+#include "texture.h"
 
-t_vec4				vec4_stack(double x, double y, double z, double w)
+t_color				checkerboard_texture(t_vec2 st)
 {
-	t_vec4			v;
-
-	v.x = x;
-	v.y = y;
-	v.z = z;
-	v.w = w;
-	return (v);
-}
-
-t_vec4				*vec4_new(double x, double y, double z, double w)
-{
-	t_vec4			*v;
-
-	v = malloc(sizeof(t_vec4));
-	v->x = x;
-	v->y = y;
-	v->z = z;
-	v->w = w;
-	return (v);
+	st.x *= 10;
+	st.y *= 10;
+	if (((int)floor(st.x) + (int)floor(st.y)) % 2 == 0)
+		return (color_new_stack(1., 1., 1., 1.));
+	return (color_new_stack(0., 0., 0., 1.));
 }

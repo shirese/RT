@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 15:27:07 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/12 15:58:21 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 # include "time.h"
 
 # define WIN_TITLE "Raytracer v0.0"
-# define FLT_MAX 3.402823e+38
+# define INV_PI 0.31830988618379067154
+# define INV2_PI 0.15915494309189533577
 
 typedef struct		s_color
 {

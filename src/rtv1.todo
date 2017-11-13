@@ -1,37 +1,9 @@
-CMD_PARSER
 
-1. Save
-2. Load
-3. Select Geo
-4. Print Geo List
-5. Print Light List
+1. Texture
 
-
- ✔ Deplacement de la camera via les fleches @done (17-06-28 12:02)
- ✔ Rotate geos @done (17-09-29 14:05)
-   ✔ Test cylinder rot @done (17-09-29 14:05)
- ✔ Spotlights @done (17-09-29 14:06)
- ✔ Loader les scenes via commandes @done (17-09-29 11:51)
- ✔ Ajouter des geometries via commandes @done (17-10-13 16:32)
- ✔ Test plane @done (17-10-13 16:32)
-   Issue with color
- ✔ Test plane shadow @done (17-10-13 16:32)
-
- ✔ Creer un cylindre et deplacer la cam et voir si le cylindre reste "droit"todo @done (17-10-13 16:32)
-   ✔ rotation is applied on all geo (bc of ray recursion) @done (17-10-02 11:46)
-     the ray which is not malloc have it's origin and direction modified by the rotate_ray function
-     how can I rotate the ray only if the geometry have a matric rotation setup ?
-     I can stock the original ray into a var ?
-   ✔ ray color is fucked ??? @done (17-10-13 16:32)
- ✔ Plane is fucked @done (17-10-13 16:32)
- ✔ Spotlight currently cast ray everywhere @done (17-10-13 16:32)
- ✔ Plane are casting shadow everywhere since they're infinite @done (17-10-13 16:32)
-
- Issue with rotation
- ✔ Cylinder rotation @done (17-10-18 08:09)
- ✔ Translation @done (17-10-17 15:28)
- ✔ Double ft_printf @done (17-10-17 16:46)
- ✔ Norme... @done (17-10-17 11:06)
- ☐ The cone is casting wrong shadow rays to plane (see test_rotate)
- ☐ The rotation is causing wrong shadow rays casting to plane (see test_rotate)
- ✔ Expose @done (17-10-19 10:59)
+ ☐ Spherical mapping ?
+   I must apply a transformation to the point of intersection so that the mapping sphere
+   is positioned and oriented with respect to the object.
+ ☐ Streching texture
+ ☐ Offsetting texture
+ ☐ Use a library to load an image

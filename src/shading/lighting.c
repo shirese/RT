@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 12:20:53 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 17:43:38 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/13 12:30:18 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void				apply_lights(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
 	light = e->lights;
 	while (light != NULL)
 	{
-		if (light->type != 1 && geo && r->type == 0)
+		if (light->type != 1 && r->type == 0)
 		{
 			if (has_shadow(light->curr, hp.p, geo, e) == 1)
 				color_mult(*light->color, &(r->color));

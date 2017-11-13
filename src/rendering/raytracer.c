@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 17:36:37 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/13 12:37:39 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "light.h"
 #include "pthread.h"
 #include "rt.h"
+#include "texture.h"
 #include "utils.h"
 
 t_ray				init_ray(t_vec3 origin, t_vec3 direction, int ray_type)
@@ -45,7 +46,11 @@ static t_color		shoot_ray(double x, double y, t_env *e)
 		gen_ray_direction(x, y, e), 0);
 	geo = ray_hit(&r, &hp, NULL, e);
 	apply_ambient_light(&r, e);
-	apply_lights(&r, geo, hp, e);
+	if (geo)
+	{
+		apply_texture(&r, hp, geo);
+		apply_lights(&r, geo, hp, e);
+	}
 	return (r.color);
 }
 

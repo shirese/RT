@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:13:10 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/13 12:43:56 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/14 14:21:47 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_vec2					sphere_map(t_vec3 p, t_geo *geo)
 {
 	double				theta;
 	double				phi;
-	t_mat4				world_to_tex;
 	t_vec3				v;
 
 	v = vec3_normalize_stack(vec3_sub_stack(p, *geo->origin));

@@ -6,15 +6,14 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/13 16:02:57 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/15 12:10:50 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <imago2.h>
 
 #include "matrice.h"
 #include "rt.h"
 #include "vector.h"
+#include "SDL_stbimage.h"
 
 t_screen			set_screen(t_win win, t_cam *cam)
 {
@@ -57,7 +56,8 @@ void				free_env(t_env **e)
 	}
 	free((*e)->lights);
 	free((*e)->img);
-	img_free_pixels((*e)->tex->px);
+	// SDL_FreeSurface((*e)->tex); 
+	// img_free_pixels((*e)->tex->px);
 	free((*e)->tex);
 	free(*e);
 }

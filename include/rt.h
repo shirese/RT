@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/13 15:59:53 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/15 12:07:14 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,10 +134,10 @@ typedef struct		s_env
 	t_win			win;
 	t_screen		scr;
 	t_ray			ray;
-	t_tex			*tex;
 	t_cam			*cam;
 	t_geo			*geos;
 	t_light			*lights;
+	SDL_Surface		*tex;
 }					t_env;
 
 int					get_next_line(int const fd, char **line);

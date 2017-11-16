@@ -6,14 +6,15 @@
 #    By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/02 10:55:23 by chaueur           #+#    #+#              #
-#    Updated: 2017/11/16 13:34:54 by chaueur          ###   ########.fr        #
+#    Updated: 2017/11/16 13:41:25 by chaueur          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= rt
 TEST			= test
 CC				= clang
-FLAG			= -O3 -c -O1 -Wall -Werror -Wextra -pedantic -pthread
+FLAG			= -O3 -c -O1 -Wall -Werror -Wextra \
+					-Wno-missing-field-initializers -pedantic -pthread
 DEBUG			= -g -pthread -Wno-unused-parameter -Wno-unused-function \
 					-Wno-unused-variable -Wno-uninitialized -Wno-missing-field-initializers
 INCS			= -I include -I frameworks/SDL2.framework/Headers \

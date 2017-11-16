@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 11:55:40 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/10 16:35:32 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/16 14:41:16 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ int					parse_window(int *fd, char **line, t_env *e)
 	char			*value;
 
 	value = NULL;
-	//ft_printf("%s\n", *line);
 	while (**line == '\t')
 	{
 		value = *line + 8;

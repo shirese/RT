@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:26:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/13 16:46:40 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/16 14:48:25 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,11 @@
 
 void				sdl_draw_point(SDL_Renderer *rend, int x, int y, t_color c)
 {
-	// SDL_SetRenderDrawColor(rend, \
-	// 	(int)(c.r * 255), \
-	// 	(int)(c.g * 255), \
-	// 	(int)(c.b * 255), \
-	// 	(int)(c.a * 255));
 	SDL_SetRenderDrawColor(rend, \
-		(int)(c.r), \
-		(int)(c.g), \
-		(int)(c.b), \
-		(int)(c.a));
+		(int)(c.r * 255), \
+		(int)(c.g * 255), \
+		(int)(c.b * 255), \
+		(int)(c.a * 255));
 	SDL_RenderDrawPoint(rend, x, y);
 }
 
@@ -60,18 +55,6 @@ void				sdl_render(t_env *e)
 		return ;
 	while (1 && SDL_WaitEvent(&ev))
 	{
-		// if (ev.type == SDL_WINDOWEVENT_RESIZED)
-		// {
-		// 	SDL_RenderClear(e->win.rend);
-		// 	if (!raytrace_thread(e))
-		// 		return ;
-		// }
-		// else if (ev.type == SDL_WINDOWEVENT_MAXIMIZED)
-		// {
-		// 	SDL_RenderClear(e->win.rend);
-		// 	raytrace(e);
-		// 	return ;
-		// }
 		if (ev.type == SDL_KEYDOWN && ev.key.keysym.sym == SDLK_ESCAPE)
 			return ;
 		else if (ev.type == SDL_QUIT)

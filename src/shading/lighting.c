@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 12:20:53 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/13 16:45:36 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/16 13:47:33 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ void				apply_lights(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
 	{
 		if (light->type != 1 && r->type == 0)
 		{
-			// if (has_shadow(light->curr, hp.p, geo, e) == 1)
-			// 	color_mult(*light->color, &(r->color));
-			// else
-			// 	shade_phong(geo->mater, hp, light, r);
+			if (has_shadow(light->curr, hp.p, geo, e) == 1)
+				color_mult(*light->color, &(r->color));
+			else
+				shade_phong(geo->mater, hp, light, r);
 		}
 		light = light->next;
 	}

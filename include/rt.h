@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/22 06:48:22 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/22 08:48:26 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct		s_mater
 	double			alpha;
 }					t_mater;
 /*
-**	TYPE 1- Color 2- Normal map
+**	TYPE 1- Color 2- Normal map 3- Generated noise
 */
 typedef struct		s_tex
 {

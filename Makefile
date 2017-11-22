@@ -6,7 +6,7 @@
 #    By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/02 10:55:23 by chaueur           #+#    #+#              #
-#    Updated: 2017/11/22 06:32:38 by chaueur          ###   ########.fr        #
+#    Updated: 2017/11/22 08:03:40 by chaueur          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,8 @@ SRC_PARSER		=	get_next_line.c cson_parser.c cson_parser_2.c \
 SRC_RENDER		=	ray.c raytracer.c render_thr.c
 SRC_SDL			=	sdl.c sdl_event.c
 SRC_SHADING		=	light.c lighting.c phong.c
-SRC_TEX			=	checkerboard.c planar_mapping.c spherical_mapping.c \
-					texture.c uv_texture.c
+SRC_TEX			=	checkerboard.c perlin.c planar_mapping.c \
+					spherical_mapping.c texture.c uv_texture.c
 SRC_VECS		=	vec2.c \
 					vec3.c vec3_adv_op.c vec3_basic_op.c vec3_basic_op_stack.c \
 					vec3_utils.c\

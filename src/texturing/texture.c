@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 15:44:36 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/22 08:54:02 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/22 16:45:21 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_color				get_image_px(t_vec2 st, SDL_Surface *tex)
 void				apply_texture(t_ray *r, t_hp *hp, t_geo *geo, t_env *e)
 {
 	Uint32			col;
+	double			rgb;
 
 	e->tex->uv = sphere_mapping(*hp, geo);
 	if (e->tex->type != 3)
@@ -71,20 +72,28 @@ void				apply_texture(t_ray *r, t_hp *hp, t_geo *geo, t_env *e)
 			e->tex->uv.y * e->tex->curr->h);
 	}
 	else
-		col = get_perlin_noise_pixel(e->tex->uv.x * PERLIN_XY, \
+		rgb = get_perlin_noise_pixel(e->tex->uv.x * PERLIN_XY, \
 			e->tex->uv.y * PERLIN_XY);
-	if (e->tex->type != 2)
+	if (e->tex->type == 1)
 	{
-		r->color = color_new_stack((col) & 0xff, \
+		color_set(color_new_stack((col) & 0xff, \
 			(col >> 8) & 0xff, \
-			(col >> 16) & 0xff, 255.);
+			(col >> 16) & 0xff, 255.), &r->color);
 		color_div_fac(&(r->color), 255);
 	}
-	else
+	else if (e->tex->type == 2)
 	{
 		hp->normal.x = ((col) & 0xff) / 255.;
 		hp->normal.y = ((col >> 8) & 0xff) / 255.;
 		hp->normal.z = ((col >> 16) & 0xff) / 255.;
+	}
+	else if (e->tex->type == 3)
+	{
+		r->color.r = rgb;
+		r->color.g = rgb;
+		r->color.b = rgb;
+		r->color.a = 1.;
+		// color_set(color_new_stack(rgb, rgb, rgb, 1.), &r->color);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 08:03:53 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/22 10:41:57 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/22 16:34:48 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,11 @@ double				noise(double x, double y, double z)
 												grad(p[aabb[5]+1], x-1, y-1, z-1 )))));
 }
 
-int					get_perlin_noise_pixel(int x, int y)
+double				get_perlin_noise_pixel(int x, int y)
 {
-	int				c;
 	double			n;
 
-	n = noise(0.1 * x, 0.1 * y, 0.);
-	n = n / 2 + 0.5;
-	c = 255 * n;
-	return (c);
+	n = noise(0.01 * (double)x, 0.01 * (double)y, 0.);
+	n = n / 2. + 0.5;
+	return (n);
 }

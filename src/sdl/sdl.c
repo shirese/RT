@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:26:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/16 14:48:25 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/22 16:15:38 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void				sdl_render(t_env *e)
 	print_env(e);
 	if (!raytrace_thread(e))
 		return ;
+	// raytrace(e);
 	while (1 && SDL_WaitEvent(&ev))
 	{
 		if (ev.type == SDL_KEYDOWN && ev.key.keysym.sym == SDLK_ESCAPE)

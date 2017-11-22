@@ -6,11 +6,12 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/22 06:56:03 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/22 16:11:12 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
+#include "ft_printf.h"
 #include "ray.h"
 #include "light.h"
 #include "pthread.h"

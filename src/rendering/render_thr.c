@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 14:13:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 15:51:56 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/22 16:07:05 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void			render_px(t_env *e)
 	int				x;
 	int				y;
 
-	SDL_RenderClear(e->win.rend);
 	y = 0;
 	while (y < e->scr.ny)
 	{

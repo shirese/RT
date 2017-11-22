@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/16 14:49:31 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/22 06:58:53 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void				free_env(t_env **e)
 	}
 	free((*e)->lights);
 	free((*e)->img);
-	SDL_FreeSurface((*e)->tex); 
+	SDL_FreeSurface((*e)->tex->curr); 
+	free((*e)->tex);
 	free(*e);
 }
 

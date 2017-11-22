@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 15:44:36 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/16 14:49:09 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/22 06:59:14 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,31 @@ t_color				get_image_px(t_vec2 st, SDL_Surface *tex)
 	return (c);
 }
 
-SDL_Surface			*init_textures(const char *img_path)
+void				apply_texture(t_ray *r, t_hp *hp, t_geo *geo, t_env *e)
 {
+	Uint32			col;
+
+	e->tex->uv = sphere_mapping(*hp, geo);
+	col = get_pixel(e->tex->curr, e->tex->uv.x * e->tex->curr->w, \
+		e->tex->uv.y * e->tex->curr->h);
+	if (e->tex->type == 1)
+	{
+		r->color = color_new_stack((col) & 0xff, \
+			(col >> 8) & 0xff, \
+			(col >> 16) & 0xff, 255.);
+		color_div_fac(&(r->color), 255);
+	}
+	else if (e->tex->type == 2)
+	{
+		hp->normal.x = ((col) & 0xff) / 255.;
+		hp->normal.y = ((col >> 8) & 0xff) / 255.;
+		hp->normal.z = ((col >> 16) & 0xff) / 255.;
+	}
+}
+
+t_tex				*init_textures(int type, const char *img_path)
+{
+	t_tex			*tex;
 	SDL_Surface		*px;
 
 	if (!(px = STBIMG_Load(img_path)))
@@ -69,18 +92,9 @@ SDL_Surface			*init_textures(const char *img_path)
 		ft_printf("Failed to load image: %s\n", img_path);
 		return (NULL);
 	}
-	return (px);
-}
-
-void				apply_texture(t_ray *r, t_hp hp, t_geo *geo, t_env *e)
-{
-	t_vec2			uv;
-	Uint32			col;
-
-	uv = sphere_mapping(hp, geo);
-	col = get_pixel(e->tex, uv.x * e->tex->w, uv.y * e->tex->h);
-	r->color = color_new_stack((col) & 0xff, \
-		(col >> 8) & 0xff, \
-		(col >> 16) & 0xff, 255.);
-	color_div_fac(&(r->color), 255);
+	tex = malloc(sizeof(t_tex));
+	tex->type = type;
+	tex->uv = vec2_stack(0., 0.);
+	tex->curr = px;
+	return (tex);
 }

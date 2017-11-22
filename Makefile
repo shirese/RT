@@ -6,7 +6,7 @@
 #    By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/02 10:55:23 by chaueur           #+#    #+#              #
-#    Updated: 2017/11/16 13:41:25 by chaueur          ###   ########.fr        #
+#    Updated: 2017/11/22 06:32:38 by chaueur          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,6 @@ SRCS_VECS		= $(addprefix $(DIR_SRC_VECS)/, $(SRC_VECS))
 SRCS_UTILS		= $(addprefix $(DIR_SRC_UTILS)/, $(SRC_UTILS))
 
 LIBFTPRINTF 	= ft_printf/libftprintf.a
-LIB_IMAGO		= libimago/libimago.dylib
 LIB_SDL2		= -framework SDL2
 LIB_PATH		= -F frameworks
 
@@ -89,7 +88,6 @@ all : $(NAME)
 
 debug :
 	cd ft_printf && make;
-	cd libimago && ./configure && make && make install
 	$(CC) $(FLAG) $(DEBUG) $(SRCS) $(SRCS_CAMERA) $(SRCS_COLOR) $(SRCS_GEOS) \
 	$(SRCS_MATS) $(SRCS_PARSER) $(SRCS_RENDER) $(SRCS_SDL) $(SRCS_SHADING) \
 	$(SRCS_TEX) $(SRCS_UTILS) $(SRCS_VECS) $(INCS)
@@ -98,7 +96,7 @@ debug :
 	$(SRC_MATS:.c=.o) $(SRC_PARSER:.c=.o)  $(SRC_RENDER:.c=.o) $(SRC_SDL:.c=.o) \
 	$(SRC_SHADING:.c=.o) $(SRC_UTILS:.c=.o) $(SRC_TEX:.c=.o) $(SRC_VECS:.c=.o) \
 	$(DIR_OBJ)/
-	$(CC) $(LIB_PATH) $(LIB_SDL2) $(LIB_IMAGO) $(LIBFTPRINTF) -o $(NAME) $(OBJ) \
+	$(CC) $(LIB_PATH) $(LIB_SDL2) $(LIBFTPRINTF) -o $(NAME) $(OBJ) \
 	$(OBJ_CAMERA) $(OBJ_COLOR) $(OBJ_GEOS) $(OBJ_MATS) $(OBJ_PARSER) \
 	$(OBJ_RENDER) $(OBJ_SDL) $(OBJ_SHADING) $(OBJ_TEX) $(OBJ_UTILS) $(OBJ_VECS)
 	@printf "\e[32m------------------------------------------------------\e[0m\n"
@@ -107,7 +105,6 @@ debug :
 
 $(NAME) :
 	cd ft_printf && make;
-	cd libimago && ./configure && make && make install
 	$(CC) $(FLAG) $(SRCS) $(SRCS_CAMERA) $(SRCS_COLOR) $(SRCS_GEOS) \
 	$(SRCS_MATS) $(SRCS_PARSER) $(SRCS_RENDER) $(SRCS_SDL) $(SRCS_SHADING) \
 	$(SRCS_TEX) $(SRCS_UTILS) $(SRCS_VECS) $(INCS)
@@ -116,7 +113,7 @@ $(NAME) :
 	$(SRC_MATS:.c=.o) $(SRC_PARSER:.c=.o)  $(SRC_RENDER:.c=.o) $(SRC_SDL:.c=.o) \
 	$(SRC_SHADING:.c=.o) $(SRC_UTILS:.c=.o) $(SRC_TEX:.c=.o) $(SRC_VECS:.c=.o) \
 	$(DIR_OBJ)/
-	$(CC) $(LIB_PATH) $(LIB_SDL2) $(LIB_IMAGO) $(LIBFTPRINTF) -o $(NAME) $(OBJ) \
+	$(CC) $(LIB_PATH) $(LIB_SDL2) $(LIBFTPRINTF) -o $(NAME) $(OBJ) \
 	$(OBJ_CAMERA) $(OBJ_COLOR) $(OBJ_GEOS) $(OBJ_MATS) $(OBJ_PARSER) \
 	$(OBJ_RENDER) $(OBJ_SDL) $(OBJ_SHADING) $(OBJ_TEX) $(OBJ_UTILS) $(OBJ_VECS)
 	@printf "\e[32m------------------------------------------------------\e[0m\n"

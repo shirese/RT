@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/16 13:35:43 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/22 06:48:22 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,15 @@ typedef struct		s_mater
 	t_color			ks;
 	double			alpha;
 }					t_mater;
-
+/*
+**	TYPE 1- Color 2- Normal map
+*/
+typedef struct		s_tex
+{
+	int				type;
+	t_vec2			uv;
+	SDL_Surface		*curr;
+}					t_tex;
 /*
 **	TYPE 1- Plane 2- Cone 3- Cylinder 4- Sphere
 */
@@ -131,7 +139,7 @@ typedef struct		s_env
 	t_cam			*cam;
 	t_geo			*geos;
 	t_light			*lights;
-	SDL_Surface		*tex;
+	t_tex			*tex;
 }					t_env;
 
 int					get_next_line(int const fd, char **line);

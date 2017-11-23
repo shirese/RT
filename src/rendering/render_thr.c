@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 14:13:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 15:51:56 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/23 16:03:58 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void			render_px(t_env *e)
 	int				x;
 	int				y;
 
-	SDL_RenderClear(e->win.rend);
 	y = 0;
 	while (y < e->scr.ny)
 	{
@@ -50,8 +49,6 @@ static void			compute_tile_px(int tile, t_env *e)
 		i = 0;
 		while (i < TILESIZE)
 		{
-			t_color debug;
-			debug = get_px_col(x + i, y + j, e);
 			e->img[e->scr.nx * (y + j) + (x + i)] = get_px_col(x + i, y + j, e);
 			i++;
 		}
@@ -65,20 +62,20 @@ static void			compute_tile_px(int tile, t_env *e)
 */
 static void			*render_tile(void *arg)
 {
-	t_thread_data	*data;
+	t_thread_data	*thr_data;
 	int				tile;
 	int				tiles_num;
 
-	data = (t_thread_data *)arg;
+	thr_data = (t_thread_data *)arg;
 	tile = 0;
-	tiles_num = (data->e->scr.nx / TILESIZE) * \
-		(data->e->scr.ny / TILESIZE);
+	tiles_num = (thr_data->e->scr.nx / TILESIZE) * \
+		(thr_data->e->scr.ny / TILESIZE);
 	while (1)
 	{
-		tile = __sync_add_and_fetch(&data->tile_id, 1) - 1;
+		tile = __sync_add_and_fetch(&thr_data->tile_id, 1) - 1;
 		if (tile >= tiles_num)
 			break ;
-		compute_tile_px(tile, data->e);
+		compute_tile_px(tile, thr_data->e);
 	}
 	pthread_exit(NULL);
 }
@@ -90,7 +87,6 @@ int					raytrace_thread(t_env *e)
 	int				i;
 	int				rc;
 
-	SDL_RenderClear(e->win.rend);
 	i = 0;
 	thr_data.tile_id = 0;
 	thr_data.e = e;
@@ -111,9 +107,4 @@ int					raytrace_thread(t_env *e)
 	}
 	render_px(e);
 	return (1);
-	// 
-	
-	// 
-	// SDL_UpdateWindowSurface(e->win.handle);
-	// SDL_RenderPresent(e->win.rend);
 }

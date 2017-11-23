@@ -165,5 +165,6 @@ void				sdl_draw_point(SDL_Renderer *rend, int x, int y, t_color c);
 t_env				*sdl_init(t_env *e);
 void				sdl_render(t_env *e);
 void				sdl_stop(t_env *e);
+void				color_of_ray(t_env *env, t_ray *r, int rec);
 
 #endif

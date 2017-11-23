@@ -1,4 +1,4 @@
-window:
+window:	
 	width: 800
 	height: 600
 camera:
@@ -6,12 +6,18 @@ camera:
 	fov: 90
 light:
 	type: 1
-	color: 0.14, 0.14, 0.14, 1.
+	color: 0.14, 0.14, 0.14, 4.
 light:
 	type: 3
 	color: 0.80, 0.80, 0.80, 0.7
 	dir: 0.0, 0.0, 0.0
 	pos: 1.4, 0., 2.0
+plane:
+	pos: 0., -.5, -4.5
+	kd: 1, 1, 0, 1.0
+	ks: 0.5, 0.5, 0.5
+	ior: 1.2
+	normal: 0, 0.2, 1
 pipe:
 	pos: 0, 0, -0.5
 	kd: 0.13, 0.13, 0.13, 1.0
@@ -19,10 +25,4 @@ pipe:
 	axis: 0., 1., 0.
 	radius: 0.3
 	height: 1
-plane:
-	pos: 0., -.5, -4.5
-	kd: 1, 1, 0, 1.0
-	ks: 0.5, 0.5, 0.5
-	ior: 1.2
-	normal: 0, 1, 1
 	

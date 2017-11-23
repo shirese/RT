@@ -25,11 +25,11 @@ static t_color		calc_spec(t_mater *mater, t_hp hp, void *l, t_ray *r)
 	v = vec3_sub_stack(r->origin, hp.p);
 	reflection = vec3_reflection(l, hp);
 	specular.r = mater->ks.r * max(0.0, pow(vec3_dot(hp.normal, reflection), \
-		32.));
+		2.));
 	specular.g = mater->ks.g * max(0.0, pow(vec3_dot(hp.normal, reflection), \
-		32.));
+		2.));
 	specular.b = mater->ks.b * max(0.0, pow(vec3_dot(hp.normal, reflection), \
-		32.));
+		2.));
 	specular.a = 1.0;
 	color_clamp(&specular, 0.1, 1.0);
 	return (specular);

@@ -34,6 +34,15 @@ t_ray				init_ray(t_vec3 origin, t_vec3 direction, int ray_type)
 	return (r);
 }
 
+void				color_of_ray(t_env *env, t_ray *r, int rec)
+{
+	t_geo		*geo;
+	t_hp		hp;
+
+	geo = ray_hit(r, &hp, NULL, env);
+	apply_lights_beta(r, geo, hp, env);
+}
+
 static t_color		shoot_ray(double x, double y, t_env *e)
 {
 	t_geo			*geo;
@@ -43,10 +52,7 @@ static t_color		shoot_ray(double x, double y, t_env *e)
 	geo = NULL;
 	r = init_ray(gen_ray_origin(*e->cam->cam_to_world, *e->cam->pos), \
 		gen_ray_direction(x, y, e), 0);
-	geo = ray_hit(&r, &hp, NULL, e);
-	apply_lights_beta(&r, geo, hp, e);
-	//apply_ambient_light(&r, e);
-	//apply_lights(&r, geo, hp, e);
+	color_of_ray(e, &r, 0);
 	return (r.color);
 }
 

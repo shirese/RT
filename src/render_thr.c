@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 14:13:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/23 14:08:30 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/23 16:03:58 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void			render_px(t_env *e)
 	int				x;
 	int				y;
 
-	SDL_RenderClear(e->win.rend);
 	y = 0;
 	while (y < e->scr.ny)
 	{
@@ -35,30 +34,7 @@ static void			render_px(t_env *e)
 	SDL_RenderPresent(e->win.rend);
 }
 
-static void			sync_tile(int tile, t_color *tile_px, t_env *e)
-{
-	int				i;
-	int				j;
-	int				x;
-	int				y;
-
-	i = 0;
-	j = 0;
-	x = TILESIZE * (tile % (e->scr.nx / TILESIZE));
-	y = TILESIZE * (tile / (e->scr.nx / TILESIZE));
-	while (j < TILESIZE)
-	{
-		i = 0;
-		while (i < TILESIZE)
-		{
-			e->img[e->scr.nx * (y + j) + (x + i)] = tile_px[j * TILESIZE + i];
-			i++;
-		}
-		j++;
-	}
-}
-
-static void			compute_tile_px(int tile, t_color *tile_px, t_env *e)
+static void			compute_tile_px(int tile, t_env *e)
 {
 	int				i;
 	int				j;
@@ -73,7 +49,7 @@ static void			compute_tile_px(int tile, t_color *tile_px, t_env *e)
 		i = 0;
 		while (i < TILESIZE)
 		{
-			tile_px[j * TILESIZE + i] = get_px_col(x + i, y + j, e);
+			e->img[e->scr.nx * (y + j) + (x + i)] = get_px_col(x + i, y + j, e);
 			i++;
 		}
 		j++;
@@ -87,7 +63,6 @@ static void			compute_tile_px(int tile, t_color *tile_px, t_env *e)
 static void			*render_tile(void *arg)
 {
 	t_thread_data	*thr_data;
-	t_color			*tile_px;
 	int				tile;
 	int				tiles_num;
 
@@ -97,17 +72,10 @@ static void			*render_tile(void *arg)
 		(thr_data->e->scr.ny / TILESIZE);
 	while (1)
 	{
-		tile_px = malloc(sizeof(t_color) * TILESIZE * TILESIZE);
-		if (!tile_px)
-			break ;
 		tile = __sync_add_and_fetch(&thr_data->tile_id, 1) - 1;
 		if (tile >= tiles_num)
 			break ;
-		compute_tile_px(tile, tile_px, thr_data->e);
-		pthread_mutex_lock(&thr_data->mutex);
-		sync_tile(tile, tile_px, thr_data->e);
-		pthread_mutex_unlock(&thr_data->mutex);
-		free(tile_px);
+		compute_tile_px(tile, thr_data->e);
 	}
 	pthread_exit(NULL);
 }
@@ -121,7 +89,6 @@ int					raytrace_thread(t_env *e)
 
 	i = 0;
 	thr_data.tile_id = 0;
-	pthread_mutex_init(&thr_data.mutex, NULL);
 	thr_data.e = e;
 	while (i < NUM_THREADS)
 	{
@@ -139,6 +106,5 @@ int					raytrace_thread(t_env *e)
 		i++;
 	}
 	render_px(e);
-	pthread_mutex_destroy(&thr_data.mutex);
 	return (1);
 }

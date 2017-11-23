@@ -102,6 +102,12 @@ static void			print_geo(t_geo *geo)
 		ft_printf("DISK\nRAD\t\t[%f]\nAXIS\n", ((t_disk *)(geo->curr))->radius);
 		vec3_print(((t_disk *)(geo->curr))->normal);
 	}
+	else if (geo->type == 6)
+	{
+		ft_printf("PIPE\nRAD\t\t[%f]\nAXIS\t\t\n", ((t_pipe *)(geo->curr))->radius);
+		vec3_print(((t_pipe *)(geo->curr))->axis);
+		ft_printf("HEIGHT[%f]\t\t\n", ((t_pipe *)(geo->curr))->height);
+	}
 }
 
 void				print_env(t_env *e)

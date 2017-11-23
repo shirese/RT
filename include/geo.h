@@ -62,6 +62,7 @@ typedef struct		s_pipe
 void				add_geometry(t_geo *geo, t_geo **geos);
 int					add_disk(int *fd, char **line, t_env *e);
 void				parse_geo_attributes(char *line, char *value, t_geo *geo);
+int					add_pipe(int *fd, char **line, t_env *e);
 
 t_vec3				cone_normal(t_geo *geo, t_cone *c, t_vec3 p);
 double				beta2_cone(double expr, double n, double angle);

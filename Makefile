@@ -25,7 +25,7 @@ SRC_GEOS		=	cone.c cone2.c cylinder.c disk.c geo.c plane.c pipe.c sphere.c
 SRC_MATS		=	mat3.c mat3_rot.c mat4.c
 SRC_PARSER		=	get_next_line.c cson_parser.c cson_parser_2.c \
 					cson_parser_light.c cson_parser_geo.c
-SRC_RENDER		=	ray.c raytracer.c render_thr.c
+SRC_RENDER		=	ray.c raytracer.c raypath.c render_thr.c
 SRC_SDL			=	sdl.c sdl_event.c
 SRC_SHADING		=	light.c lighting.c phong.c
 SRC_VECS		=	vec3.c vec3_adv_op.c vec3_basic_op.c vec3_basic_op_stack.c\

@@ -56,6 +56,7 @@ static int			setup_geo(t_geo **geo)
 	}
 	(*geo)->mater->kd = color_new_stack(0., 0., 0., 0.);
 	(*geo)->mater->ks = color_new_stack(0., 0., 0., 0.);
+	(*geo)->mater->ior = 1.0;
 	(*geo)->is_hit = NULL;
 	(*geo)->next = NULL;
 	return (1);
@@ -82,7 +83,13 @@ int					malloc_geo(void **type, int size, int geo_id, t_geo **geo)
 	if (geo_id == 4)
 		((t_sphere *)*type)->radius = 0;
 	if (geo_id == 5)
-		((t_disk *)*type)->radius = 0;	
+		((t_disk *)*type)->radius = 0;
+	if (geo_id == 6)
+	{
+		((t_pipe *)*type)->radius = 0;
+		((t_pipe *)*type)->axis = vec3_stack(0., 0., 0.);
+		((t_pipe *)*type)->height = 0;
+	}	
 	return (1);
 }
 

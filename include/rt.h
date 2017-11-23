@@ -20,6 +20,8 @@
 
 # define WIN_TITLE "Raytracer v0.0"
 # define FLT_MAX 3.402823e+38
+# define MAX_RECURSION 5
+#define EPSILON 0.001
 
 typedef struct		s_color
 {
@@ -166,5 +168,13 @@ t_env				*sdl_init(t_env *e);
 void				sdl_render(t_env *e);
 void				sdl_stop(t_env *e);
 void				color_of_ray(t_env *env, t_ray *r, int rec);
+double				ior_of_refraction(t_geo *geo, t_ray r, t_hp hp);
+double 				ior_point(t_geo *geo, t_vec3 pos);
+void				fresnel(t_ray r, t_hp hp, double n, double *krefl);
+void        		dispatch(t_ray r, t_geo *g, t_hp hp);
 
+int 				belong_to(t_geo *g, t_vec3 pos);
+t_ray				reflect_ray(t_ray r, t_hp hp);
+t_ray 				refract_ray(t_geo *geo, t_ray r, t_hp hp);
+t_ray				add_epsilon(t_ray r, t_vec3 normal);
 #endif

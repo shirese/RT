@@ -37,10 +37,29 @@ t_ray				init_ray(t_vec3 origin, t_vec3 direction, int ray_type)
 void				color_of_ray(t_env *env, t_ray *r, int rec)
 {
 	t_geo		*geo;
+	t_geo		*g;
+	t_light		*l;
 	t_hp		hp;
+	int			nb_sum;
+
+	nb_sum = 0;
 
 	geo = ray_hit(r, &hp, NULL, env);
 	apply_lights_beta(r, geo, hp, env);
+	if (geo != NULL && rec < MAX_RECURSION)
+	{
+		l = env->lights;
+		g = env->geos;
+		while (l)
+		{
+			nb_sum++;
+			if (l->type != 1)
+			{
+
+			}
+			l = l->next;
+		}
+	}
 }
 
 static t_color		shoot_ray(double x, double y, t_env *e)

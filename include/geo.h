@@ -79,6 +79,11 @@ t_hp				hit_disk(t_geo *geo, t_ray r);
 
 int					malloc_geo(void **type, int size, int geo_id, t_geo **geo);
 
+int					belong_to_cone(t_geo *geo, t_vec3 pos);
+int					belong_to_cylinder(t_geo *geo, t_vec3 pos);
+int					belong_to_disk(t_geo *geo, t_vec3 pos);
+int					belong_to_sphere(t_geo *geo, t_vec3 pos);
 int					belong_to_pipe(t_geo *geo, t_vec3 pos);
+int					belong_to_plane(t_geo *geo, t_vec3 pos);
 t_hp				hit_pipe(t_geo *geo, t_ray r);
 #endif

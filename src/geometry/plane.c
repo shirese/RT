@@ -13,6 +13,18 @@
 #include "geo.h"
 #include "rt.h"
 
+int					belong_to_plane(t_geo *geo, t_vec3 pos)
+{
+	t_plane		*plane;
+	t_vec3		diff;
+
+	plane = (t_plane*)geo->curr;
+	diff = vec3_sub_stack(*geo->origin, pos);
+	if (vec3_dot(diff, plane->normal) == 0.0)
+		return (1);
+	return (0);
+}
+
 static t_hp			hit_ortho(t_ray r, t_plane *p, t_vec3 min)
 {
 	t_hp			hp;

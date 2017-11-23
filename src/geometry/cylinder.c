@@ -16,6 +16,24 @@
 #include "rt.h"
 #include "utils.h"
 
+int					belong_to_cylinder(t_geo *geo, t_vec3 pos)
+{
+	t_cylinder		*cyl;
+	t_vec3			diff;
+	t_vec3			proj;
+	t_vec3			dif;
+	double 			len;
+
+	cyl = (t_cylinder*)geo->curr;
+	diff = vec3_sub_stack(pos, *geo->origin);
+	len = vec3_dot(diff, cyl->axis);
+	proj = vec3_add_mult_stack(*geo->origin, cyl->axis, len);
+	dif = vec3_sub_stack(proj, pos);
+	if (vec3_norm(dif) <= cyl->radius)
+		return (1);
+	return (0);
+}
+
 static t_vec3		cylinder_norm(t_geo *geo, t_cylinder *cyl, t_vec3 hp)
 {
 	t_vec3			normal;

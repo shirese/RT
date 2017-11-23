@@ -15,6 +15,20 @@
 #include "rt.h"
 #include "utils.h"
 
+int					belong_to_disk(t_geo *geo, t_vec3 pos)
+{
+	t_disk		    *d;
+	t_vec3			diff;
+	double 			len;
+
+	d = (t_disk*)geo->curr;
+	diff = vec3_sub_stack(*geo->origin, pos);
+	len = vec3_dot(diff, d->normal);
+	if (len == 0.0 && vec3_norm(diff) <= d->radius)
+		return (1);
+	return (0);
+}
+
 t_hp					hit_disk(t_geo *geo, t_ray r)
 {
 	double				expr[2];

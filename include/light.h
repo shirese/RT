@@ -45,5 +45,7 @@ void				add_light(t_light *light, t_light **lights);
 int					setup_light(t_light **light);
 
 void				shade_phong(t_mater *mater, t_hp hp, t_light *l, t_ray *r);
+void				apply_lights_beta(t_ray *r, t_geo *geo, t_hp hp, t_env *e);
+t_color				calc_ambient(t_light *light);
 
 #endif

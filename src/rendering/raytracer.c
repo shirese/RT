@@ -44,8 +44,9 @@ static t_color		shoot_ray(double x, double y, t_env *e)
 	r = init_ray(gen_ray_origin(*e->cam->cam_to_world, *e->cam->pos), \
 		gen_ray_direction(x, y, e), 0);
 	geo = ray_hit(&r, &hp, NULL, e);
-	apply_ambient_light(&r, e);
-	apply_lights(&r, geo, hp, e);
+	apply_lights_beta(&r, geo, hp, e);
+	//apply_ambient_light(&r, e);
+	//apply_lights(&r, geo, hp, e);
 	return (r.color);
 }
 
@@ -80,6 +81,7 @@ t_color				get_px_col(int x, int y, t_env *e)
 
 void				raytrace(t_env *e)
 {
+	t_color			c;
 	int				x;
 	int				y;
 
@@ -90,7 +92,8 @@ void				raytrace(t_env *e)
 		x = 0;
 		while (x < e->scr.nx)
 		{
-			sdl_draw_point(e->win.rend, x, y, get_px_col(x, y, e));
+			c = shoot_ray(x, y, e);
+			sdl_draw_point(e->win.rend, x, y, c/*get_px_col(x, y, e)*/);
 			x++;
 		}
 		y++;

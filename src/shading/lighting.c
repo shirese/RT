@@ -80,3 +80,23 @@ void				apply_lights(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
 		light = light->next;
 	}
 }
+
+void				apply_lights_beta(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
+{
+	t_light			*light;
+
+	light = e->lights;
+	while (light != NULL)
+	{
+		if (light->type == 1)
+			color_add(calc_ambient(light), &(r->color));
+		else if (geo && r->type == 0)
+		{
+			if (has_shadow(light->curr, hp.p, geo, e) == 1)
+				color_mult(calc_ambient(light), &(r->color));
+			else
+				shade_phong(geo->mater, hp, light, r);
+		}
+		light = light->next;
+	}
+}

@@ -39,6 +39,7 @@ typedef struct		s_ray
 	t_vec3			direction;
 	t_vec3			point_at_parameter;
 	t_color			color;
+	double			ior;
 }					t_ray;
 
 typedef struct		s_hit_point
@@ -46,6 +47,7 @@ typedef struct		s_hit_point
 	double			t;
 	t_vec3			p;
 	t_vec3			normal;
+	double			ior;
 }					t_hp;
 
 typedef struct		s_mater
@@ -53,6 +55,7 @@ typedef struct		s_mater
 	t_color			kd;
 	t_color			ks;
 	double			alpha;
+	double			ior;
 }					t_mater;
 
 /*

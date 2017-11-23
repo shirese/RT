@@ -6,13 +6,14 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 15:44:36 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/22 16:45:21 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/23 15:58:45 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
 #include "ft_printf.h"
 #include "rt.h"
+#include "rt_multithread.h"
 #include "texture.h"
 
 #define SDL_STBIMAGE_IMPLEMENTATION
@@ -72,8 +73,10 @@ void				apply_texture(t_ray *r, t_hp *hp, t_geo *geo, t_env *e)
 			e->tex->uv.y * e->tex->curr->h);
 	}
 	else
+	{
 		rgb = get_perlin_noise_pixel(e->tex->uv.x * PERLIN_XY, \
 			e->tex->uv.y * PERLIN_XY);
+	}
 	if (e->tex->type == 1)
 	{
 		color_set(color_new_stack((col) & 0xff, \
@@ -89,11 +92,9 @@ void				apply_texture(t_ray *r, t_hp *hp, t_geo *geo, t_env *e)
 	}
 	else if (e->tex->type == 3)
 	{
-		r->color.r = rgb;
-		r->color.g = rgb;
-		r->color.b = rgb;
-		r->color.a = 1.;
-		// color_set(color_new_stack(rgb, rgb, rgb, 1.), &r->color);
+		pthread_mutex_lock(&e->mutex);
+		color_set(color_new_stack(rgb, rgb, rgb, 1.), &r->color);
+		pthread_mutex_unlock(&e->mutex);
 	}
 }
 

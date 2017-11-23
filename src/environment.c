@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/22 06:58:53 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/23 15:55:27 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include "matrice.h"
 #include "rt.h"
+#include "rt_multithread.h"
 #include "vector.h"
 #include "SDL_stbimage.h"
 
@@ -60,6 +61,7 @@ void				free_env(t_env **e)
 	free((*e)->img);
 	SDL_FreeSurface((*e)->tex->curr); 
 	free((*e)->tex);
+	pthread_mutex_destroy(&(*e)->mutex);
 	free(*e);
 }
 
@@ -74,4 +76,5 @@ void				init_environment(t_env **e)
 	(*e)->lights = NULL;
 	(*e)->geos = NULL;
 	(*e)->tex = NULL;
+	pthread_mutex_init(&(*e)->mutex, NULL);
 }

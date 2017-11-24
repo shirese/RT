@@ -20,7 +20,7 @@
 
 # define WIN_TITLE "Raytracer v0.0"
 # define FLT_MAX 3.402823e+38
-# define MAX_RECURSION 3
+# define MAX_RECURSION 5
 #define EPSILON 0.001
 
 typedef struct		s_color

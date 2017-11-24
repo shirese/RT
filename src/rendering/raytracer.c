@@ -59,7 +59,7 @@ void				color_of_ray(t_env *env, t_ray *r, int rec)
 	geo = ray_hit(r, &hp, NULL, env);
 	if (geo && geo->mater->kd.a != 1)
 		apply_lights_beta(r, geo, hp, env);
-	else if (rec >= MAX_RECURSION)
+	else if (rec >= MAX_RECURSION || !geo)
 		apply_ambient_light(r, env);
 	translate_ray(r, hp);
 	if (geo != NULL && rec < MAX_RECURSION)
@@ -70,7 +70,6 @@ void				color_of_ray(t_env *env, t_ray *r, int rec)
 		{
 			if (l->type != 1)
 			{
-				
 				if (!(k_refl = malloc(sizeof(double))))
        				return ;
 				n2 = ior_of_refraction(geo, *r, hp);
@@ -78,18 +77,10 @@ void				color_of_ray(t_env *env, t_ray *r, int rec)
 				{
 					*k_refl = 0;
 					refr = refract_ray(g, *r, hp);
-					
         			color_of_ray(env, &refr, rec + 1);
-					color_set(r->color, &(refr.color));
 					if (rec == 2)
-					{
-						color_print(r->color);
-					}
-					/*else
-					{
-						color_add_mult((refr.color), &(r->color), 1);
-						nb_sum++;
-					}*/
+						color_print(refr.color);
+					color_set(r->color, &(refr.color));
 				}
 				else
 				{
@@ -99,12 +90,17 @@ void				color_of_ray(t_env *env, t_ray *r, int rec)
     				{
        					refl = reflect_ray(*r, hp);
         				color_of_ray(env, &refl, rec + 1);
+						if (rec == 1)
+							color_print(refl.color);
        					color_add_mult((refl.color), &(r->color), *k_refl);
     				}
     				if (1 - *k_refl > 0)
     				{
         				refr = refract_ray(g, *r, hp);
         				color_of_ray(env, &refr, rec + 1);
+						//printf("REC %d \n", rec);
+						if (rec == 1)
+							color_print(refr.color);
         				color_add_mult((refr.color), &(r->color), (1 - *k_refl));
     				}
 				}

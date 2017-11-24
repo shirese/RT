@@ -106,24 +106,3 @@ void				fresnel(t_ray r, t_hp hp, double n, double *krefl)
 		*krefl = (rs * rs + rp * rp) / 2;
 	}
 }
-
-void        dispatch(t_ray r, t_geo *g, t_hp hp)
-{
-    t_ray   refl;
-    t_ray   refr;
-    double *k_refl;
-    double n2;
-
-    if (!(k_refl = malloc(sizeof(double))))
-        return ;
-    n2 = ior_of_refraction(g, r, hp);
-    fresnel(r, hp, n2, k_refl);
-    if (*k_refl > 0)
-    {
-        refl = reflect_ray(r, hp);
-    }
-    if (1 - *k_refl > 0)
-    {
-
-    }
-}

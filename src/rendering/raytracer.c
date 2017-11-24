@@ -34,32 +34,85 @@ t_ray				init_ray(t_vec3 origin, t_vec3 direction, int ray_type)
 	return (r);
 }
 
+
+void				translate_ray(t_ray *r, t_hp hp)
+{
+	r->direction = vec3_normalize_stack(r->direction);
+	r->origin = vec3_sub_stack(hp.p, r->direction);
+}
+
+
 void				color_of_ray(t_env *env, t_ray *r, int rec)
 {
 	t_geo		*geo;
 	t_geo		*g;
 	t_light		*l;
 	t_hp		hp;
+	t_ray   	refl;
+    t_ray   	refr;
+    double 		*k_refl;
+	double 		n2;
 	int			nb_sum;
 
 	nb_sum = 0;
 
 	geo = ray_hit(r, &hp, NULL, env);
-	apply_lights_beta(r, geo, hp, env);
+	if (geo && geo->mater->kd.a != 1)
+		apply_lights_beta(r, geo, hp, env);
+	else if (rec >= MAX_RECURSION)
+		apply_ambient_light(r, env);
+	translate_ray(r, hp);
 	if (geo != NULL && rec < MAX_RECURSION)
 	{
 		l = env->lights;
 		g = env->geos;
 		while (l)
 		{
-			nb_sum++;
 			if (l->type != 1)
 			{
-
+				
+				if (!(k_refl = malloc(sizeof(double))))
+       				return ;
+				n2 = ior_of_refraction(geo, *r, hp);
+				if (geo->mater->kd.a == 1)
+				{
+					*k_refl = 0;
+					refr = refract_ray(g, *r, hp);
+					
+        			color_of_ray(env, &refr, rec + 1);
+					color_set(r->color, &(refr.color));
+					if (rec == 2)
+					{
+						color_print(r->color);
+					}
+					/*else
+					{
+						color_add_mult((refr.color), &(r->color), 1);
+						nb_sum++;
+					}*/
+				}
+				else
+				{
+					nb_sum++;
+					fresnel(*r, hp, n2, k_refl);
+					if (*k_refl > 0)
+    				{
+       					refl = reflect_ray(*r, hp);
+        				color_of_ray(env, &refl, rec + 1);
+       					color_add_mult((refl.color), &(r->color), *k_refl);
+    				}
+    				if (1 - *k_refl > 0)
+    				{
+        				refr = refract_ray(g, *r, hp);
+        				color_of_ray(env, &refr, rec + 1);
+        				color_add_mult((refr.color), &(r->color), (1 - *k_refl));
+    				}
+				}
 			}
 			l = l->next;
 		}
 	}
+	color_div_fac(&(r->color), nb_sum + 1);
 }
 
 static t_color		shoot_ray(double x, double y, t_env *e)

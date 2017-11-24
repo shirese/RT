@@ -18,3 +18,16 @@ void				color_print(t_color c)
 {
 	ft_printf("[R %f G %f B %f A %f]\n", c.r, c.g, c.b, c.a);
 }
+
+
+
+void			color_add_mult(t_color c1, t_color *c2, double fact)
+{
+	if (c2)
+	{
+		c2->r += fact * c1.r;
+		c2->g += fact * c1.g;
+		c2->b += fact * c1.b;
+		color_clamp(c2, 0.0, 1.0);
+	}
+}

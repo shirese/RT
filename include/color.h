@@ -25,5 +25,6 @@ void				color_mult(t_color c1, t_color *c2);
 void				color_set(t_color c, t_color *c_to_set);
 t_color				color_new_stack(double r, double g, double b, double a);
 t_color				*color_new(double r, double g, double b, double a);
+void			color_add_mult(t_color c1, t_color *c2, double fact);
 
 #endif

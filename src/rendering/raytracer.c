@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 17:36:37 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/29 11:12:57 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void				raytrace(t_env *e)
 {
 	int				x;
 	int				y;
+	t_color			px_col;
 
 	SDL_RenderClear(e->win.rend);
 	y = 0;
@@ -90,7 +91,10 @@ void				raytrace(t_env *e)
 		x = 0;
 		while (x < e->scr.nx)
 		{
-			sdl_draw_point(e->win.rend, x, y, get_px_col(x, y, e));
+			px_col = get_px_col(x, y, e);
+			if (e->filter != 0)
+				apply_filters(&px_col, e);
+			sdl_draw_point(e->win.rend, x, y, px_col);
 			x++;
 		}
 		y++;

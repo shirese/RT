@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 14:13:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/23 16:03:58 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/29 11:27:32 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void			render_px(t_env *e)
 {
 	int				x;
 	int				y;
+	t_color			px_col;
 
 	y = 0;
 	while (y < e->scr.ny)
@@ -25,7 +26,10 @@ static void			render_px(t_env *e)
 		x = 0;
 		while (x < e->scr.nx)
 		{
-			sdl_draw_point(e->win.rend, x, y, e->img[y * e->scr.nx + x]);
+			px_col = e->img[y * e->scr.nx + x];
+			if (e->filter != 0)
+				apply_filters(&px_col, e);
+			sdl_draw_point(e->win.rend, x, y, px_col);
 			x++;
 		}
 		y++;

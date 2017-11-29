@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 15:27:07 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/28 16:52:34 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct		s_screen
 typedef struct		s_env
 {
 	t_color			*img;
+	unsigned int	filter;
 	unsigned int	samp_rate;
 	t_win			win;
 	t_screen		scr;

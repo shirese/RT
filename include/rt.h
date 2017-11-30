@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
+/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 15:27:07 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/30 18:09:51 by shirese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "time.h"
 
 # define WIN_TITLE "Raytracer v0.0"
+# define SAVE_PATH "saves/save00"
 # define FLT_MAX 3.402823e+38
 
 typedef struct		s_color

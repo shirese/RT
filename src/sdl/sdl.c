@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   sdl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
+/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:26:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 17:49:41 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/30 19:04:44 by shirese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
+#include "ft_printf.h"
 #include "rt.h"
 #include "rt_multithread.h"
 #include "utils.h"
@@ -31,17 +32,19 @@ t_env				*sdl_init(t_env *e)
 		return (NULL);
 	else
 	{
-		SDL_CreateWindowAndRenderer(e->win.width, e->win.height, \
-			SDL_WINDOW_RESIZABLE, &(e->win.handle), &(e->win.rend));
+		e->win.handle = SDL_CreateWindow(WIN_TITLE, SDL_WINDOWPOS_UNDEFINED, \
+			SDL_WINDOWPOS_UNDEFINED, e->win.width, e->win.height, SDL_WINDOW_BORDERLESS);
 		if (!e->win.handle)
 		{
-			e->win.width = 0;
-			e->win.height = 0;
-		}
-		else
-			SDL_SetWindowTitle(e->win.handle, WIN_TITLE);
-		if (e->win.width == 0 || e->win.height == 0)
+			ft_printf("SDL_CreateWindow failed: %s\n", SDL_GetError());
 			return (NULL);
+		}
+		e->win.rend = SDL_CreateRenderer(e->win.handle, -1, SDL_RENDERER_SOFTWARE);
+		if (!e->win.rend)
+		{
+			ft_printf("SDL_CreateRenderer failed: %s\n", SDL_GetError());
+			return (NULL);
+		}
 	}
 	return (e);
 }

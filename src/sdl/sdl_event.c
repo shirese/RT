@@ -3,15 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   sdl_event.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
+/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 18:41:29 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 15:28:03 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/30 19:01:57 by shirese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include "rt.h"
 #include "rt_multithread.h"
+
+static void			sdl_save_img(t_env *e)
+{
+	SDL_Surface		*info_surface;
+	SDL_Surface		*save_surface;
+	int				w;
+	int				h;
+
+	if (!(info_surface = SDL_GetWindowSurface(e->win.handle)))
+	{
+		ft_printf("SDL_GetWindowSurface failed: %s\n", SDL_GetError());
+		return ;
+	}
+	unsigned char * pixels[info_surface->w * info_surface->h * info_surface->format->BytesPerPixel];
+	if (SDL_RenderReadPixels(e->win.rend, &info_surface->clip_rect, info_surface->format->format, pixels, info_surface->w * info_surface->format->BytesPerPixel) != 0) {
+		ft_printf("fe,wlfew");
+		return ;
+	}
+	save_surface = SDL_CreateRGBSurfaceFrom(pixels, info_surface->w, info_surface->h, info_surface->format->BitsPerPixel, info_surface->w * info_surface->format->BytesPerPixel, info_surface->format->Rmask, info_surface->format->Gmask, info_surface->format->Bmask, info_surface->format->Amask);
+	if (save_surface == NULL)
+	{
+		ft_printf("SDL_CreateRGBSurfaceFrom failed: %s\n", SDL_GetError());
+		return ;
+	}
+	SDL_SaveBMP(save_surface, "save.bmp");
+	SDL_FreeSurface(save_surface);
+}
 
 static int			check_trans_event(SDL_Keycode k, t_env *e)
 {
@@ -67,5 +95,7 @@ void				sdl_get_event(SDL_Event event, t_env *e)
 			if (!(raytrace_thread(e)))
 				return ;
 		}
+		else if (event.key.keysym.sym == SDLK_p)
+			sdl_save_img(e);
 	}
 }

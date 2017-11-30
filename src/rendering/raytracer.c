@@ -55,13 +55,24 @@ void				color_of_ray(t_env *env, t_ray *r, int rec)
 	int			nb_sum;
 
 	nb_sum = 0;
-
+	//puts("DANIEL");
 	geo = ray_hit(r, &hp, NULL, env);
 	if (geo && geo->mater->kd.a != 1)
+	{
+		//if (rec == 4)
+			//puts("BOUCLE 1");
 		apply_lights_beta(r, geo, hp, env);
+
+	}
 	else if (rec >= MAX_RECURSION || !geo)
+	{
+		//if (rec == 4)
+			//puts("BOUCLE 2");
 		apply_ambient_light(r, env);
+	}
 	translate_ray(r, hp);
+	/*if (rec == 4)
+			puts("BOUCLE 3");*/
 	if (geo != NULL && rec < MAX_RECURSION)
 	{
 		l = env->lights;
@@ -78,29 +89,23 @@ void				color_of_ray(t_env *env, t_ray *r, int rec)
 					*k_refl = 0;
 					refr = refract_ray(g, *r, hp);
         			color_of_ray(env, &refr, rec + 1);
-					if (rec == 2)
-						color_print(refr.color);
-					color_set(r->color, &(refr.color));
+					color_set(refr.color, &(r->color));
 				}
 				else
 				{
 					nb_sum++;
 					fresnel(*r, hp, n2, k_refl);
+					*k_refl = 1;
 					if (*k_refl > 0)
     				{
        					refl = reflect_ray(*r, hp);
         				color_of_ray(env, &refl, rec + 1);
-						if (rec == 1)
-							color_print(refl.color);
        					color_add_mult((refl.color), &(r->color), *k_refl);
     				}
     				if (1 - *k_refl > 0)
     				{
         				refr = refract_ray(g, *r, hp);
         				color_of_ray(env, &refr, rec + 1);
-						//printf("REC %d \n", rec);
-						if (rec == 1)
-							color_print(refr.color);
         				color_add_mult((refr.color), &(r->color), (1 - *k_refl));
     				}
 				}
@@ -119,8 +124,13 @@ static t_color		shoot_ray(double x, double y, t_env *e)
 
 	geo = NULL;
 	r = init_ray(gen_ray_origin(*e->cam->cam_to_world, *e->cam->pos), \
-		gen_ray_direction(x, y, e), 0);
-	color_of_ray(e, &r, 0);
+		gen_ray_direction(x, y, e), 1);
+	//if (x == 400 && y == 386)
+		color_of_ray(e, &r, 0);
+	
+
+	/*if (r.color.r == 0.44 && r.color.g == 0.14 && r.color.b == 0.14)
+		printf("Pixel %f %f \n", x, y);*/
 	return (r.color);
 }
 

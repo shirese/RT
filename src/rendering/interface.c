@@ -46,7 +46,7 @@ t_ray				add_epsilon(t_ray r, t_vec3 normal)
 		r_new.origin = vec3_add_mult_stack(r.origin, normal, eps);
 	else if (vec3_dot(r.direction, normal) < 0)
 		r_new.origin = vec3_add_mult_stack(r.origin, normal, -eps);
-	r_new.type = 0;
+	r_new.type = 1;
 	r_new.direction = r.direction;
 	r_new.point_at_parameter = r.point_at_parameter;
 	r_new.color = r.color;
@@ -68,7 +68,7 @@ t_ray				reflect_ray(t_ray r, t_hp hp)
 	normal = vec3_normalize_stack(normal);
 	len = vec3_dot(i, normal);
 	refl = vec3_add_mult_stack(i, normal, -2 * len);
-	r_refl.type = 0;
+	r_refl.type = 1;
 	r_refl.origin = hp.p;
 	r_refl.direction = refl;
 	r_refl.point_at_parameter = vec3_stack(0.0, 0.0, 0.0);
@@ -107,9 +107,9 @@ t_ray 				refract_ray(t_geo *geo, t_ray r, t_hp hp)
 		c2 = sqrt(1 - (pow(n, 2) * (1 - pow(c1, 2))));
 	t = vec3_mult_stack(i, n);
 	t2 = vec3_mult_stack(hp.normal, n * c1 - c2);
-	t = vec3_sub_stack(t2, t);
+	t = vec3_add_stack(t2, t);
 	t = vec3_normalize_stack(t);
-	r_refr.type = 0;
+	r_refr.type = 1;
 	r_refr.origin = hp.p;
 	r_refr.direction = t;
 	r_refr.point_at_parameter = vec3_stack(0.0, 0.0, 0.0);

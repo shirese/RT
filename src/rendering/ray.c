@@ -55,7 +55,7 @@ t_geo				*ray_hit(t_ray *r, t_hp *hp, t_geo *from, t_env *e)
 		if (geo != from)
 		{
 			latest_hp = geo->is_hit(geo, tr);
-			if (latest_hp.t != -1 && is_nearest(latest_hp, hp, &min_dist))
+			if (latest_hp.t != -1 && is_nearest(latest_hp, hp, &min_dist) && (r->type != 2 || geo->mater->kd.a != 1))
 				nearest_geo = geo;
 		}
 		geo = geo->next;

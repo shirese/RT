@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
+/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 12:20:53 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 17:43:38 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/01 22:04:42 by shirese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void				apply_ambient_light(t_ray *r, t_env *e)
 		i = 1;
 		is_set = 1;
 		light = e->lights;
-		ambient = color_new_stack(0., 0., 0., 1.);
+		ambient = color_new_stack(0., 0., 0.);
 		while (light != NULL)
 		{
 			if (light->type == 1)

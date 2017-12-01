@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cson_parser_light.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
+/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 17:40:36 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/22 12:00:12 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/01 22:05:40 by shirese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 int					parse_light_colors(char *value, t_light **light)
 {
-	color_set(color_new_stack(ft_atof_cson(&value), ft_atof_cson(&value), \
-			ft_atof_cson(&value), ft_atof_cson(&value)), (*light)->color);
+	color_set(color_new_stack(aton_cson(&value), aton_cson(&value), \
+			aton_cson(&value)), (*light)->color);
 	if ((*light)->color)
 		return (0);
 	return (1);
@@ -29,8 +29,8 @@ int					parse_light_direction(char *value, t_light **l)
 {
 	if ((*l)->type == 2)
 	{
-		((t_directional *)((*l)->curr))->dir = vec3_new(ft_atof_cson(&value), \
-			ft_atof_cson(&value), ft_atof_cson(&value));
+		((t_directional *)((*l)->curr))->dir = vec3_new(aton_cson(&value), \
+			aton_cson(&value), aton_cson(&value));
 		return (0);
 	}
 	return (1);
@@ -43,8 +43,8 @@ int					parse_light_position(char *value, t_light **light)
 	spot = (*light)->curr;
 	if ((*light)->type == 3)
 	{
-		spot->pos = vec3_new(ft_atof_cson(&value), \
-			ft_atof_cson(&value), ft_atof_cson(&value));
+		spot->pos = vec3_new(aton_cson(&value), \
+			aton_cson(&value), aton_cson(&value));
 		return (0);
 	}
 	return (1);

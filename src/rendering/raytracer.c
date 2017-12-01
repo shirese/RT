@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
+/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 17:36:37 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/01 22:05:18 by shirese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_ray				init_ray(t_vec3 origin, t_vec3 direction, int ray_type)
 
 	r.origin = origin;
 	r.direction = vec3_normalize_stack(direction);
-	r.color = color_new_stack(0.0, 0.0, 0.0, 1.0);
+	r.color = color_new_stack(0.0, 0.0, 0.0);
 	r.type = ray_type;
 	if (r.type == 1)
 	{
@@ -58,7 +58,7 @@ t_color				get_px_col(int x, int y, t_env *e)
 
 	if (e->samp_rate == 1)
 		return (shoot_ray(x, y, e));
-	px_col = color_new_stack(0., 0., 0., 1.);
+	px_col = color_new_stack(0., 0., 0.);
 	ij[0] = 0;
 	if (!samp_count)
 		samp_count = 1 / (pow((e->samp_rate / 2), 2));

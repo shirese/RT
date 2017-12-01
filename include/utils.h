@@ -19,7 +19,7 @@ void				print_env(t_env *e);
 void				free_env(t_env **e);
 void				init_environment(t_env **e);
 
-double				ft_atof_cson(char **str);
+double				aton_cson(char **str);
 double				clamp(double x, double up, double low);
 double				deg_to_rad(double deg);
 double				min(double i, double j);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
+/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:03:22 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 17:45:23 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/01 21:57:35 by shirese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static t_color		calc_spec(t_mater *mater, t_hp hp, void *l, t_ray *r)
 		32.));
 	specular.b = mater->ks.b * max(0.0, pow(vec3_dot(hp.normal, reflection), \
 		32.));
-	specular.a = 1.0;
 	color_clamp(&specular, 0.1, 1.0);
 	return (specular);
 }
@@ -42,7 +41,6 @@ static t_color		calc_diffuse(t_mater *mater, double lambertian)
 	diffuse.r = mater->kd.r * max(0.0, lambertian);
 	diffuse.g = mater->kd.g * max(0.0, lambertian);
 	diffuse.b = mater->kd.b * max(0.0, lambertian);
-	diffuse.a = 1.0;
 	return (diffuse);
 }
 

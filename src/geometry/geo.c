@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   geo.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
+/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:26:59 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/18 17:31:22 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/01 22:04:52 by shirese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static int			setup_geo(t_geo **geo)
 		free((*geo));
 		return (0);
 	}
-	(*geo)->mater->kd = color_new_stack(0., 0., 0., 0.);
-	(*geo)->mater->ks = color_new_stack(0., 0., 0., 0.);
+	(*geo)->mater->kd = color_new_stack(0., 0., 0.);
+	(*geo)->mater->ks = color_new_stack(0., 0., 0.);
 	(*geo)->is_hit = NULL;
 	(*geo)->next = NULL;
 	return (1);

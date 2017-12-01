@@ -72,11 +72,11 @@ int					parse_camera(int *fd, char **line, t_env *e)
 	{
 		value = *line + 4;
 		if (!ft_strncmp(*line, "\tpos", 4) && (value += 2))
-			vec3_set(ft_atof_cson(&value), ft_atof_cson(&value), \
-				ft_atof_cson(&value), e->cam->pos);
+			vec3_set(aton_cson(&value), aton_cson(&value), \
+				aton_cson(&value), e->cam->pos);
 		else if (!ft_strncmp(*line, "\trotation", 4) && (value += 7))
-			e->cam->cam_to_world = setup_camera_rotation(ft_atof_cson(&value), \
-				ft_atof_cson(&value), ft_atof_cson(&value));
+			e->cam->cam_to_world = setup_camera_rotation(aton_cson(&value), \
+				aton_cson(&value), aton_cson(&value));
 		else if (!ft_strncmp(*line, "\tfov", 4) && (value += 2))
 			e->cam->fov = ft_atoi(value);
 		else

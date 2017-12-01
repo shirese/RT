@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
+/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:26:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 17:49:41 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/01 21:56:59 by shirese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void				sdl_draw_point(SDL_Renderer *rend, int x, int y, t_color c)
 		(int)(c.r * 255), \
 		(int)(c.g * 255), \
 		(int)(c.b * 255), \
-		(int)(c.a * 255));
+		255);
 	SDL_RenderDrawPoint(rend, x, y);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
+/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 13:16:21 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/07 11:43:15 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/01 21:52:45 by shirese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 #include "rt.h"
 #include "vector.h"
 
-static void			ft_atof_cson_norme(int d, double *f, double *r, char **str)
+static void			aton_cson_norme(int d, double *f, double *r, char **str)
 {
 	if (d)
 		*f /= 10.0f;
 	*r = *r * 10.0f + (double)(**str - '0');
 }
 
-double				ft_atof_cson(char **str)
+double				aton_cson(char **str)
 {
 	double			rez;
 	double			fact;
@@ -44,7 +44,7 @@ double				ft_atof_cson(char **str)
 		if (dot_seen == 0 && **str == '.')
 			dot_seen = 1;
 		else if (ft_isdigit(**str))
-			ft_atof_cson_norme(dot_seen, &fact, &rez, str);
+			aton_cson_norme(dot_seen, &fact, &rez, str);
 		(*str)++;
 	}
 	(*str) += 2;

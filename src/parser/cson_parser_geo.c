@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cson_parser_geo.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
+/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 18:39:18 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 17:46:17 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/01 21:54:03 by shirese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,28 @@
 #include "rt.h"
 #include "utils.h"
 
-void				parse_geo_attributes(char *line, char *value, t_geo *geo)
+void				parse_geo_attributes(char *line, char *v, t_geo *geo)
 {
-	if (ft_strncmp(line, "\tpos", 4) == 0 && (value += 2))
-		vec3_set(ft_atof_cson(&value), ft_atof_cson(&value), \
-			ft_atof_cson(&value), geo->origin);
-	if (ft_strncmp(line, "\trotation", 9) == 0 && (value += 7))
+	if (ft_strncmp(line, "\tpos", 4) == 0 && (v += 2))
+		vec3_set(aton_cson(&v), aton_cson(&v), aton_cson(&v), geo->origin);
+	if (ft_strncmp(line, "\trotation", 9) == 0 && (v += 7))
 	{
-		geo->rotation = mat3_rot(ft_atof_cson(&value), ft_atof_cson(&value), \
-			-ft_atof_cson(&value));
+		geo->rotation = mat3_rot(aton_cson(&v), aton_cson(&v), -aton_cson(&v));
 	}
-	if (ft_strncmp(line, "\ttranslate", 10) == 0 && (value += 8))
+	if (ft_strncmp(line, "\ttranslate", 10) == 0 && (v += 8))
 	{
-		vec3_trans(vec3_stack(ft_atof_cson(&value), ft_atof_cson(&value), \
-			ft_atof_cson(&value)), geo->origin);
+		vec3_trans(vec3_stack(aton_cson(&v), aton_cson(&v), \
+			aton_cson(&v)), geo->origin);
 	}
-	if (ft_strncmp(line, "\tkd", 3) == 0 && (value += 1))
+	if (ft_strncmp(line, "\tkd", 3) == 0 && (v += 1))
 	{
-		geo->mater->kd = color_new_stack(ft_atof_cson(&value), \
-			ft_atof_cson(&value), ft_atof_cson(&value), ft_atof_cson(&value));
+		geo->mater->kd = color_new_stack(aton_cson(&v), aton_cson(&v), \
+			aton_cson(&v));
 	}
-	if (ft_strncmp(line, "\tks", 3) == 0 && (value += 1))
+	if (ft_strncmp(line, "\tks", 3) == 0 && (v += 1))
 	{
-		geo->mater->ks = color_new_stack(ft_atof_cson(&value), \
-			ft_atof_cson(&value), ft_atof_cson(&value), 1.0);
+		geo->mater->ks = color_new_stack(aton_cson(&v), \
+			aton_cson(&v), aton_cson(&v));
 	}
 }
 
@@ -62,8 +60,8 @@ int					add_plane(int *fd, char **line, t_env *e)
 		if (ft_strncmp(*line, "\tn", 2) != 0)
 			parse_geo_attributes(*line, value, geo);
 		else if (ft_strncmp(*line, "\tnormal", 7) == 0 && (value += 5))
-			plane->normal = vec3_stack(ft_atof_cson(&value), \
-				ft_atof_cson(&value), ft_atof_cson(&value));
+			plane->normal = vec3_stack(aton_cson(&value), \
+				aton_cson(&value), aton_cson(&value));
 	}
 	geo->type = 1;
 	geo->curr = (void *)plane;
@@ -89,8 +87,8 @@ int					add_cone(int *fd, char **line, t_env *e)
 		if (ft_strncmp(*line, "\tangle", 6) && ft_strncmp(*line, "\taxis", 5))
 			parse_geo_attributes(*line, value, geo);
 		else if (ft_strncmp(*line, "\taxis", 5) == 0 && (value += 3))
-			cone->axis = vec3_stack(ft_atof_cson(&value), ft_atof_cson(&value),\
-				ft_atof_cson(&value));
+			cone->axis = vec3_stack(aton_cson(&value), aton_cson(&value),\
+				aton_cson(&value));
 		else if (ft_strncmp(*line, "\tangle", 6) == 0 && (value += 4))
 			cone->angle = ft_atof(value);
 	}
@@ -118,8 +116,8 @@ int					add_cylinder(int *fd, char **line, t_env *e)
 		if (ft_strncmp(*line, "\tradius", 7) && ft_strncmp(*line, "\taxis", 5))
 			parse_geo_attributes(*line, value, geo);
 		else if (ft_strncmp(*line, "\taxis", 5) == 0 && (value += 3))
-			cylinder->axis = vec3_stack(ft_atof_cson(&value), \
-				ft_atof_cson(&value), ft_atof_cson(&value));
+			cylinder->axis = vec3_stack(aton_cson(&value), \
+				aton_cson(&value), aton_cson(&value));
 		else if (ft_strncmp(*line, "\tradius", 7) == 0 && (value += 5))
 			cylinder->radius = ft_atof(value);
 	}
@@ -176,8 +174,8 @@ int					add_disk(int *fd, char **line, t_env *e)
 			disk->radius = ft_atof(value);
 		else if (ft_strncmp(*line, "\tnormal", 7) == 0 && (value += 5))
 		{
-			disk->normal = vec3_stack(ft_atof_cson(&value), \
-			ft_atof_cson(&value), ft_atof_cson(&value));
+			disk->normal = vec3_stack(aton_cson(&value), \
+			aton_cson(&value), aton_cson(&value));
 			//ft_putnbr(disk->normal.z);
 		}
 	}

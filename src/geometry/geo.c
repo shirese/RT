@@ -6,7 +6,7 @@
 /*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:26:59 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/01 22:04:52 by shirese          ###   ########.fr       */
+/*   Updated: 2017/12/01 22:08:41 by shirese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static int			setup_geo(t_geo **geo)
 	}
 	(*geo)->mater->kd = color_new_stack(0., 0., 0.);
 	(*geo)->mater->ks = color_new_stack(0., 0., 0.);
+	(*geo)->mater->ns = 32.;
 	(*geo)->is_hit = NULL;
 	(*geo)->next = NULL;
 	return (1);

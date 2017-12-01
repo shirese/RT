@@ -6,7 +6,7 @@
 /*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:03:22 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/01 21:57:35 by shirese          ###   ########.fr       */
+/*   Updated: 2017/12/01 22:09:32 by shirese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ static t_color		calc_spec(t_mater *mater, t_hp hp, void *l, t_ray *r)
 	v = vec3_sub_stack(r->origin, hp.p);
 	reflection = vec3_reflection(l, hp);
 	specular.r = mater->ks.r * max(0.0, pow(vec3_dot(hp.normal, reflection), \
-		32.));
+		mater->ns));
 	specular.g = mater->ks.g * max(0.0, pow(vec3_dot(hp.normal, reflection), \
-		32.));
+		mater->ns));
 	specular.b = mater->ks.b * max(0.0, pow(vec3_dot(hp.normal, reflection), \
-		32.));
+		mater->ns));
 	color_clamp(&specular, 0.1, 1.0);
 	return (specular);
 }

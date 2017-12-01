@@ -6,7 +6,7 @@
 /*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 18:39:18 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/01 21:54:03 by shirese          ###   ########.fr       */
+/*   Updated: 2017/12/01 22:09:54 by shirese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void				parse_geo_attributes(char *line, char *v, t_geo *geo)
 		geo->mater->ks = color_new_stack(aton_cson(&v), \
 			aton_cson(&v), aton_cson(&v));
 	}
+	if (ft_strncmp(line, "\tns", 3) == 0 && (v += 1))
+		geo->mater->ns = aton_cson(&v);
 }
 
 int					add_plane(int *fd, char **line, t_env *e)

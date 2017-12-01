@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 15:27:07 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/01 20:53:50 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,13 @@ typedef struct		s_mater
 
 /*
 **	TYPE 1- Plane 2- Cone 3- Cylinder 4- Sphere
+**	SHADER TYPE 1- Phong 2- Toon
 */
 typedef struct s_geo	t_geo;
 struct				s_geo
 {
 	int				type;
+	int				shader_type;
 	void			*curr;
 	t_vec3			*origin;
 	t_mat3			*rotation;

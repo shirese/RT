@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/26 16:26:59 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/18 17:31:22 by chaueur          ###   ########.fr       */
+/*   Created: 2017/12/01 21:26:10 by chaueur           #+#    #+#             */
+/*   Updated: 2017/12/01 21:28:24 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static int			setup_geo(t_geo **geo)
 	}
 	(*geo)->rotation = NULL;
 	(*geo)->type = 0;
+	(*geo)->shader_type = 1;
 	(*geo)->curr = NULL;
 	(*geo)->mater = malloc(sizeof(t_mater));
 	if (!(*geo)->mater)
@@ -80,7 +81,7 @@ int					malloc_geo(void **type, int size, int geo_id, t_geo **geo)
 	if (geo_id == 4)
 		((t_sphere *)*type)->radius = 0;
 	if (geo_id == 5)
-		((t_disk *)*type)->radius = 0;	
+		((t_disk *)*type)->radius = 0;
 	return (1);
 }
 

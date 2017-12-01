@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 18:39:18 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 17:46:17 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/01 20:55:34 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void				parse_geo_attributes(char *line, char *value, t_geo *geo)
 		geo->mater->ks = color_new_stack(ft_atof_cson(&value), \
 			ft_atof_cson(&value), ft_atof_cson(&value), 1.0);
 	}
+	if (ft_strncmp(line, "\tshader", 7) == 0 && (value += 5))
+		geo->shader_type = ft_atof_cson(&value);
 }
 
 int					add_plane(int *fd, char **line, t_env *e)

@@ -30,6 +30,8 @@ t_hp				(*g_get_obj_collider(int id))(t_geo *geo, t_ray r)
 		return (hit_disk);
 	if (id == 6)
 		return (hit_pipe);
+	if (id == 7)
+		return (hit_parahyp);	
 	return (NULL);
 }
 
@@ -54,9 +56,10 @@ static int			setup_geo(t_geo **geo)
 		free((*geo));
 		return (0);
 	}
-	(*geo)->mater->kd = color_new_stack(0., 0., 0., 0.);
-	(*geo)->mater->ks = color_new_stack(0., 0., 0., 0.);
+	(*geo)->mater->kd = color_new_stack(0., 0., 0., 0.5);
+	(*geo)->mater->ks = color_new_stack(0., 0., 0., 1.);
 	(*geo)->mater->ior = 1.0;
+	(*geo)->mater->kg = color_new_stack(0., 0., 0., 0.);
 	(*geo)->is_hit = NULL;
 	(*geo)->next = NULL;
 	return (1);
@@ -89,6 +92,12 @@ int					malloc_geo(void **type, int size, int geo_id, t_geo **geo)
 		((t_pipe *)*type)->radius = 0;
 		((t_pipe *)*type)->axis = vec3_stack(0., 0., 0.);
 		((t_pipe *)*type)->height = 0;
+	}
+	if (geo_id == 7)
+	{
+		((t_parahyp *)*type)->facta = 1.0;
+		((t_parahyp *)*type)->factb = 1.0;
+		((t_parahyp *)*type)->height = 1.0;
 	}	
 	return (1);
 }

@@ -31,7 +31,9 @@ int 				belong_to(t_geo *g, t_vec3 pos)
 	else if (g->type == 5)
 		return (belong_to_disk(g, pos));
 	else if (g->type == 6)
-		return (belong_to_pipe(g, pos));
+		return (belong_to_pipe_2(g, pos));
+	else if (g->type == 7)
+		return (belong_to_parahyp(g, pos));
 	return (0);
 }
 
@@ -98,17 +100,35 @@ t_ray 				refract_ray(t_geo *geo, t_ray r, t_hp hp)
 	c2 = 0.0;
 	ior_1 = r.ior;
 	ior_2 = ior_of_refraction(geo, r, hp);
+	//printf("INDICE REFRACT 1 %f\n", ior_1);
+	//printf("INDICE REFRACT 2 %f\n", ior_2);
 	i = r.direction;
 	i = vec3_normalize_stack(i);
 	hp.normal = vec3_normalize_stack(hp.normal);
 	c1 = clamp(vec3_dot(i, hp.normal), -1, 1);
+	//printf("COORD I %f %f %f \n", i.x, i.y, i.z);
+	//printf("COORD N %f %f %f \n", hp.normal.x, hp.normal.y, hp.normal.z);
+	//printf("c1 %f\n", c1);
+	if (c1 < 0)
+		c1 = -c1;
+	else
+		hp.normal = vec3_mult_stack(hp.normal, -1);
 	n = (ior_1 / ior_2);
 	if (1 - (pow(n, 2) * (1 - pow(c1, 2))) >= 0)
 		c2 = sqrt(1 - (pow(n, 2) * (1 - pow(c1, 2))));
+	else
+	{
+		//puts("ALLERGIE");
+		r_refr.type = 0;
+		return (r_refr);
+	}
 	t = vec3_mult_stack(i, n);
 	t2 = vec3_mult_stack(hp.normal, n * c1 - c2);
 	t = vec3_add_stack(t2, t);
 	t = vec3_normalize_stack(t);
+	
+	
+	//printf("COORD T %f %f %f \n", t.x, t.y, t.z);
 	r_refr.type = 1;
 	r_refr.origin = hp.p;
 	r_refr.direction = t;

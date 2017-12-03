@@ -20,8 +20,8 @@
 
 # define WIN_TITLE "Raytracer v0.0"
 # define FLT_MAX 3.402823e+38
-# define MAX_RECURSION 5
-#define EPSILON 0.001
+# define MAX_RECURSION 7
+#define EPSILON 0.000001
 
 typedef struct		s_color
 {
@@ -58,6 +58,7 @@ typedef struct		s_mater
 	t_color			ks;
 	double			alpha;
 	double			ior;
+	t_color			kg;
 }					t_mater;
 
 /*

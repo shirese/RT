@@ -49,13 +49,14 @@ t_geo				*ray_hit(t_ray *r, t_hp *hp, t_geo *from, t_env *e)
 	min_dist = INFINITY;
 	geo = e->geos;
 	nearest_geo = NULL;
+	
 	while (geo != NULL)
 	{
 		tr = *r;
 		if (geo != from)
 		{
 			latest_hp = geo->is_hit(geo, tr);
-			if (latest_hp.t != -1 && is_nearest(latest_hp, hp, &min_dist) && (r->type != 2 || geo->mater->kd.a != 1))
+			if (latest_hp.t != -1 && is_nearest(latest_hp, hp, &min_dist) && (r->type != 2 || geo->mater->kd.a != 0.0))
 				nearest_geo = geo;
 		}
 		geo = geo->next;

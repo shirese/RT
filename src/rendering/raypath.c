@@ -22,38 +22,46 @@ double 				ior_point(t_geo *geo, t_vec3 pos)
 {
 	t_geo *g;
 	g = geo;
-
 	while (g)
 	{
 		if (g->type == 1)
 		{
+			//printf("JOUET 1");
 			if (belong_to_plane(g, pos) == 1)
 				return (g->mater->ior);
 		}
-		else if (g->type == 8)
+		else if (g->type == 2)
 		{
+			//printf("JOUET 2");
 			if (belong_to_cone(g, pos) == 1)
 				return (g->mater->ior);
 		}
 		else if (g->type == 3)
 		{
+			//printf("JOUET 3");
 			if (belong_to_cylinder(g, pos) == 1)
 				return (g->mater->ior);
 		}
 		else if (g->type == 4)
 		{
+			//printf("JOUET 4");
 			if (belong_to_sphere(g, pos) == 1)
 					return (g->mater->ior);
 		}
 		else if (g->type == 5)
 		{
+			//printf("JOUET 4");
 			if (belong_to_disk(g, pos) == 1)
 				return (g->mater->ior);
 		}
 		else if (g->type == 6)
 		{
-			if (belong_to_pipe(g, pos) == 1)
+			//printf("I %d \n", i);
+			if (belong_to_pipe_2(g, pos) == 1)
+			{
+				//printf("PAR LA %f", g->mater->ior);
 				return (g->mater->ior);
+			}
 		}
 		g = g->next;	
 	}
@@ -74,6 +82,7 @@ double				ior_of_refraction(t_geo *geo, t_ray r, t_hp hp)
 	i = r.direction;
 	i = vec3_normalize_stack(i);
 	eps = vec3_add_mult_stack(r.origin, i, len + EPSILON);
+	//printf("COORD %f %f %f \n", eps.x, eps.y, eps.z);
 	return (ior_point(geo, eps));
 }
 

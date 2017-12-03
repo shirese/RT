@@ -48,6 +48,12 @@ void				parse_geo_attributes(char *line, char *value, t_geo *geo)
 	{
 		geo->mater->ior = ft_atof(value);
 	}
+	if (ft_strncmp(line, "\tkg", 3) == 0 && (value += 1))
+	{
+		geo->mater->kg = color_new_stack(ft_atof_cson(&value), \
+			ft_atof_cson(&value), ft_atof_cson(&value), ft_atof_cson(&value));
+	}
+
 }
 
 int					add_plane(int *fd, char **line, t_env *e)
@@ -223,5 +229,39 @@ int					add_pipe(int *fd, char **line, t_env *e)
 	if (geo->rotation)
 		rotate(&(pipe->axis), *geo->rotation);
 	add_geometry(geo, &(e->geos));
+	return (0);
+}
+
+int					add_parahyp(int *fd, char **line, t_env *e)
+{
+	char			*value;
+	t_geo			*geo;
+	t_parahyp			*ph;
+
+	value = NULL;
+	geo = NULL;
+	
+	if (!malloc_geo((void **)(&ph), sizeof(t_parahyp), 7, &geo))
+		return (11);
+	while (get_next_line(*fd, line) && **line == '\t' && (value = *line + 4))
+	{
+		if (ft_strncmp(*line, "\tfacta", 4) && ft_strncmp(*line, "\tfactb", 4) && \
+		ft_strncmp(*line, "\theight", 7))
+			parse_geo_attributes(*line, value, geo);
+		else if (ft_strncmp(*line, "\tfacta", 6) == 0 && (value += 4))
+			ph->facta = ft_atof(value);
+		else if (ft_strncmp(*line, "\tfactb", 6) == 0 && (value += 4))
+			ph->factb = ft_atof(value);
+		else if (ft_strncmp(*line, "\theight", 7) == 0 && (value += 5))
+			ph->height = ft_atof(value);
+	}
+	geo->type = 7;
+	geo->curr = (void *)ph;
+	geo->is_hit = g_get_obj_collider(geo->type);
+	//if (geo->rotation)
+		//rotate(&(parahyp->axis), *geo->rotation);
+	add_geometry(geo, &(e->geos));
+	
+	printf("ALORS %f %f %f \n", ph->facta, ph->factb, ph->height);
 	return (0);
 }

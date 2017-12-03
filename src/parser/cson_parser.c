@@ -41,6 +41,8 @@ static int			handle_error(int err)
 			ft_printf("Invalid geo(disk)\n");
 		if (err == 10)
 			ft_printf("Invalid geo(pipe)\n");
+		if (err == 11)
+			ft_printf("Invalid geo(parabolide hyperbolique)\n");
 		return (1);
 	}
 	return (0);

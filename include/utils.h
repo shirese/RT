@@ -25,5 +25,6 @@ double				deg_to_rad(double deg);
 double				min(double i, double j);
 double				max(double i, double j);
 double				positive_smallest(double a, double b);
+double				non_positive_smallest(double a, double b);
 
 #endif

@@ -75,7 +75,7 @@ void				apply_lights(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
 			if (has_shadow(light->curr, hp.p, geo, e) == 1)
 				color_mult(*light->color, &(r->color));
 			else
-				shade_phong(geo->mater, hp, light, r);
+				shade_phong(geo, hp, light, r);
 		}
 		light = light->next;
 	}
@@ -100,7 +100,7 @@ void				apply_lights_beta(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
 			else
 			{
 				//puts("PHONG");
-				shade_phong(geo->mater, hp, light, r);
+				shade_phong(geo, hp, light, r);
 			}
 		}
 		light = light->next;

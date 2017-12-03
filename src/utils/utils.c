@@ -82,16 +82,17 @@ static void			print_geo(t_geo *geo)
 	}
 	ft_printf("\nMATER		");
 	color_print(geo->mater->kd);
+	ft_printf("\n");
 	if (geo->type == 1 && ft_printf("PLANE\nNORMAL\n"))
 		vec3_print(((t_plane *)(geo->curr))->normal);
 	else if (geo->type == 2)
 	{
-		ft_printf("CONE\nANGLE	[%f]\nAXIS\n", ((t_cone *)(geo->curr))->angle);
+		ft_printf("CONE\nANGLE	[%f]\nAXIS\n\n", ((t_cone *)(geo->curr))->angle);
 		vec3_print(((t_cone *)(geo->curr))->axis);
 	}
 	else if (geo->type == 3)
 	{
-		ft_printf("CYLINDER\nRAD\t\t[%f]\nAXIS\n", \
+		ft_printf("CYLINDER\nRAD\t\t[%f]\nAXIS\n\n", \
 			((t_cylinder *)(geo->curr))->radius);
 		vec3_print(((t_cylinder *)(geo->curr))->axis);
 	}
@@ -99,14 +100,19 @@ static void			print_geo(t_geo *geo)
 		ft_printf("SPHERE\nRAD\t\t[%f]\n", ((t_sphere *)(geo->curr))->radius);
 	else if (geo->type == 5)
 	{
-		ft_printf("DISK\nRAD\t\t[%f]\nAXIS\n", ((t_disk *)(geo->curr))->radius);
+		ft_printf("DISK\nRAD\t\t[%f]\nAXIS\n\n", ((t_disk *)(geo->curr))->radius);
 		vec3_print(((t_disk *)(geo->curr))->normal);
 	}
 	else if (geo->type == 6)
 	{
 		ft_printf("PIPE\nRAD\t\t[%f]\nAXIS\t\t\n", ((t_pipe *)(geo->curr))->radius);
 		vec3_print(((t_pipe *)(geo->curr))->axis);
-		ft_printf("HEIGHT[%f]\t\t\n", ((t_pipe *)(geo->curr))->height);
+		ft_printf("HEIGHT[%f]\t\t\n\n", ((t_pipe *)(geo->curr))->height);
+	}
+	else if (geo->type == 7)
+	{
+		ft_printf("PARAHYP\n\nFACT A\t\t[%f]\nFACT B\t\t[%f]\nHEIGHT\t\t[%f]\n", ((t_parahyp *)(geo->curr))->facta,\
+		 ((t_parahyp *)(geo->curr))->factb, ((t_parahyp *)(geo->curr))->height);
 	}
 }
 

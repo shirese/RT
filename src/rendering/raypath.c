@@ -30,7 +30,7 @@ double 				ior_point(t_geo *geo, t_vec3 pos)
 			if (belong_to_plane(g, pos) == 1)
 				return (g->mater->ior);
 		}
-		else if (g->type == 2)
+		else if (g->type == 8)
 		{
 			if (belong_to_cone(g, pos) == 1)
 				return (g->mater->ior);

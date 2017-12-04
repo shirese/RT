@@ -109,11 +109,6 @@ static void			print_geo(t_geo *geo)
 		vec3_print(((t_pipe *)(geo->curr))->axis);
 		ft_printf("HEIGHT[%f]\t\t\n\n", ((t_pipe *)(geo->curr))->height);
 	}
-	else if (geo->type == 7)
-	{
-		ft_printf("PARAHYP\n\nFACT A\t\t[%f]\nFACT B\t\t[%f]\nHEIGHT\t\t[%f]\n", ((t_parahyp *)(geo->curr))->facta,\
-		 ((t_parahyp *)(geo->curr))->factb, ((t_parahyp *)(geo->curr))->height);
-	}
 }
 
 void				print_env(t_env *e)

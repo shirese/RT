@@ -31,8 +31,6 @@ int					parse_geo(int *fd, char **line, t_env *e)
 		return (add_disk(fd, line, e));
 	else if (ft_strncmp(*line, "pipe", 4) == 0)
 		return (add_pipe(fd, line, e));
-	else if (ft_strncmp(*line, "parahyp", 7) == 0)
-		return (add_parahyp(fd, line, e));
 	return (7);
 }
 
@@ -96,7 +94,6 @@ int					parse_window(int *fd, char **line, t_env *e)
 	char			*value;
 
 	value = NULL;
-	//ft_printf("%s\n", *line);
 	while (**line == '\t')
 	{
 		value = *line + 8;

@@ -21,51 +21,54 @@
 double 				ior_point(t_geo *geo, t_vec3 pos)
 {
 	t_geo *g;
+	double res;
+
+	res = 0;
 	g = geo;
 	while (g)
 	{
 		if (g->type == 1)
 		{
-			//printf("JOUET 1");
 			if (belong_to_plane(g, pos) == 1)
 				return (g->mater->ior);
 		}
 		else if (g->type == 2)
 		{
-			//printf("JOUET 2");
 			if (belong_to_cone(g, pos) == 1)
 				return (g->mater->ior);
 		}
-		else if (g->type == 3)
-		{
-			//printf("JOUET 3");
-			if (belong_to_cylinder(g, pos) == 1)
-				return (g->mater->ior);
-		}
-		else if (g->type == 4)
-		{
-			//printf("JOUET 4");
-			if (belong_to_sphere(g, pos) == 1)
-					return (g->mater->ior);
-		}
-		else if (g->type == 5)
-		{
-			//printf("JOUET 4");
-			if (belong_to_disk(g, pos) == 1)
-				return (g->mater->ior);
-		}
-		else if (g->type == 6)
-		{
-			//printf("I %d \n", i);
-			if (belong_to_pipe_2(g, pos) == 1)
-			{
-				//printf("PAR LA %f", g->mater->ior);
-				return (g->mater->ior);
-			}
-		}
+		else if ((res = ior_point2(g, pos)))
+			return (res);
 		g = g->next;	
 	}
 	return (1.0);
+}
+
+double 				ior_point2(t_geo *g, t_vec3 pos)
+{
+	if (g->type == 3)
+	{
+		if (belong_to_cylinder(g, pos) == 1)
+			return (g->mater->ior);
+	}
+	else if (g->type == 4)
+	{
+		if (belong_to_sphere(g, pos) == 1)
+				return (g->mater->ior);
+	}
+	else if (g->type == 5)
+	{
+		if (belong_to_disk(g, pos) == 1)
+			return (g->mater->ior);
+	}
+	else if (g->type == 6)
+	{
+		if (belong_to_pipe_2(g, pos) == 1)
+		{
+			return (g->mater->ior);
+		}
+	}
+	return (0.0);
 }
 
 double				ior_of_refraction(t_geo *geo, t_ray r, t_hp hp)
@@ -82,36 +85,41 @@ double				ior_of_refraction(t_geo *geo, t_ray r, t_hp hp)
 	i = r.direction;
 	i = vec3_normalize_stack(i);
 	eps = vec3_add_mult_stack(r.origin, i, len + EPSILON);
-	//printf("COORD %f %f %f \n", eps.x, eps.y, eps.z);
 	return (ior_point(geo, eps));
 }
 
-
-void				fresnel(t_ray r, t_hp hp, double n, double *krefl)
+double		find_krefl(t_geo *geo, t_hp hp, t_ray r)
 {
-	t_vec3 normal;
+	if (geo->mater->kg.g == 1.0)
+		return (1);
+	else if (geo->mater->kg.b == 1.0)
+		return (0);
+	else if (geo->mater->kg.a == 1.0)
+		return (coeff_fresnel(r, hp, geo));
+	return (0);
+}
+
+double		coeff_fresnel(t_ray r, t_hp hp, t_geo *geo)
+{
 	double cosi;
-	double etai;
-	double etat;
 	double sint;
 	double cost;
 	double rs;
-	double rp;
+	double n;
 
+	n = ior_of_refraction(geo, r, hp);
 	r.direction = vec3_normalize_stack(r.direction);
-	normal = vec3_normalize_stack(hp.normal);
-	cosi = clamp(vec3_dot(r.direction, normal), -1, 1);
-	etai = r.ior;
-	etat = n;
-	sint = (etai / etat) * sqrt(max(0, 1 - pow(cosi, 2)));
+	cosi = clamp(vec3_dot(r.direction, vec3_normalize_stack(hp.normal)), -1, 1);
+	sint = (r.ior / n) * sqrt(max(0, 1 - pow(cosi, 2)));
 	if (sint >= 1.0)
-		*krefl = 1;
+		return (1);
 	else 
 	{
 		cosi = fabs(cosi);
 		cost = sqrt(max(0.0, 1 - pow(sint, 2)));
-		rs = ((etat * cosi) - (etai * cost)) / ((etat * cosi) + (etai * cost));	
-		rp = ((etai * cosi) - (etat * cost)) / ((etai * cosi) + (etat * cost));
-		*krefl = (rs * rs + rp * rp) / 2;
+		rs = ((n * cosi) - (r.ior * cost)) / ((n * cosi) + (r.ior * cost));	
+		n = ((r.ior * cosi) - (n * cost)) / ((r.ior * cosi) + (n * cost));
+		return ((rs * rs + n * n) / 2);
 	}
 }
+

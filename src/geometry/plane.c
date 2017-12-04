@@ -46,7 +46,7 @@ t_hp				hit_plane(t_geo *geo, t_ray r)
 	t_vec3			min;
 	t_plane			*p;
 	double			dot[2];
-
+	
 	hp.t = -1;
 	min = vec3_sub_stack(*geo->origin, r.origin);
 	p = geo->curr;

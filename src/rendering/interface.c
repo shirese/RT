@@ -32,8 +32,6 @@ int 				belong_to(t_geo *g, t_vec3 pos)
 		return (belong_to_disk(g, pos));
 	else if (g->type == 6)
 		return (belong_to_pipe_2(g, pos));
-	else if (g->type == 7)
-		return (belong_to_parahyp(g, pos));
 	return (0);
 }
 
@@ -48,11 +46,8 @@ t_ray				add_epsilon(t_ray r, t_vec3 normal)
 		r_new.origin = vec3_add_mult_stack(r.origin, normal, eps);
 	else if (vec3_dot(r.direction, normal) < 0)
 		r_new.origin = vec3_add_mult_stack(r.origin, normal, -eps);
-	r_new.type = 1;
-	r_new.direction = r.direction;
-	r_new.point_at_parameter = r.point_at_parameter;
+	r_new = init_ray(r_new.origin, r.direction, 1, r.ior);
 	r_new.color = r.color;
-	r_new.ior = r.ior;
 	return (r_new);
 }
 
@@ -70,71 +65,45 @@ t_ray				reflect_ray(t_ray r, t_hp hp)
 	normal = vec3_normalize_stack(normal);
 	len = vec3_dot(i, normal);
 	refl = vec3_add_mult_stack(i, normal, -2 * len);
-	r_refl.type = 1;
-	r_refl.origin = hp.p;
-	r_refl.direction = refl;
-	r_refl.point_at_parameter = vec3_stack(0.0, 0.0, 0.0);
-	r_refl.color = color_new_stack(0.0, 0.0, 0.0, 0.0);
-	r_refl.ior = r.ior;
-	/*while (belong_to(g, r_refl.origin))
-	{
-		r_refl = add_epsilon(r_refl, normal);
-		puts("fred");
-	}*/
+	r_refl = init_ray(hp.p, refl, 1, r.ior);
 	r_refl = add_epsilon(r_refl, normal);
 	return (r_refl);
+}
+
+static int				value_c2(double n, double *c1, double *c2, t_vec3 *normal)
+{
+	if (*c1 < 0)
+		*c1 = -*c1;
+	else
+		*normal = vec3_mult_stack(*normal, -1);
+	if (1 - (pow(n, 2) * (1 - pow(*c1, 2))) >= 0)
+		*c2 = sqrt(1 - (pow(n, 2) * (1 - pow(*c1, 2))));
+	else
+		return (-1);
+	return (1);
 }
 
 t_ray 				refract_ray(t_geo *geo, t_ray r, t_hp hp) 
 { 
 	t_ray	r_refr;
-	t_vec3 i;
 	t_vec3 t;
-	t_vec3 t2;
-	double ior_1;
 	double ior_2;
 	double c1;
 	double c2;
-	double n;
 
 	c2 = 0.0;
-	ior_1 = r.ior;
 	ior_2 = ior_of_refraction(geo, r, hp);
-	//printf("INDICE REFRACT 1 %f\n", ior_1);
-	//printf("INDICE REFRACT 2 %f\n", ior_2);
-	i = r.direction;
-	i = vec3_normalize_stack(i);
 	hp.normal = vec3_normalize_stack(hp.normal);
-	c1 = clamp(vec3_dot(i, hp.normal), -1, 1);
-	//printf("COORD I %f %f %f \n", i.x, i.y, i.z);
-	//printf("COORD N %f %f %f \n", hp.normal.x, hp.normal.y, hp.normal.z);
-	//printf("c1 %f\n", c1);
-	if (c1 < 0)
-		c1 = -c1;
-	else
-		hp.normal = vec3_mult_stack(hp.normal, -1);
-	n = (ior_1 / ior_2);
-	if (1 - (pow(n, 2) * (1 - pow(c1, 2))) >= 0)
-		c2 = sqrt(1 - (pow(n, 2) * (1 - pow(c1, 2))));
-	else
+	c1 = clamp(vec3_dot(vec3_normalize_stack(r.direction), hp.normal), -1, 1);
+	if (value_c2((r.ior / ior_2), &c1, &c2, &(hp.normal)) == - 1)
 	{
-		//puts("ALLERGIE");
 		r_refr.type = 0;
 		return (r_refr);
 	}
-	t = vec3_mult_stack(i, n);
-	t2 = vec3_mult_stack(hp.normal, n * c1 - c2);
-	t = vec3_add_stack(t2, t);
+	t = vec3_mult_stack(vec3_normalize_stack(r.direction), (r.ior / ior_2));
+	t = vec3_add_stack(vec3_mult_stack(hp.normal, (r.ior / ior_2) * c1 - c2), t);
 	t = vec3_normalize_stack(t);
-	
-	
-	//printf("COORD T %f %f %f \n", t.x, t.y, t.z);
-	r_refr.type = 1;
-	r_refr.origin = hp.p;
-	r_refr.direction = t;
-	r_refr.point_at_parameter = vec3_stack(0.0, 0.0, 0.0);
-	r_refr.color = color_new_stack(0.0, 0.0, 0.0, 0.0);
-	r_refr.ior = ior_2;
+	r_refr = init_ray(hp.p, t, 1, ior_2);
 	r_refr = add_epsilon(r_refr, hp.normal);
 	return (r_refr);
 }

@@ -39,9 +39,9 @@ typedef struct		s_ray
 	int				type;
 	t_vec3			origin;
 	t_vec3			direction;
-	t_vec3			point_at_parameter;
 	t_color			color;
 	double			ior;
+	int				rec;
 }					t_ray;
 
 typedef struct		s_hit_point
@@ -168,13 +168,20 @@ void				sdl_draw_point(SDL_Renderer *rend, int x, int y, t_color c);
 t_env				*sdl_init(t_env *e);
 void				sdl_render(t_env *e);
 void				sdl_stop(t_env *e);
-void				color_of_ray(t_env *env, t_ray *r, int rec);
+void				color_of_ray(t_env *env, t_ray *r);
 double				ior_of_refraction(t_geo *geo, t_ray r, t_hp hp);
 double 				ior_point(t_geo *geo, t_vec3 pos);
+double 				ior_point2(t_geo *g, t_vec3 pos);
 void				fresnel(t_ray r, t_hp hp, double n, double *krefl);
 
 int 				belong_to(t_geo *g, t_vec3 pos);
 t_ray				reflect_ray(t_ray r, t_hp hp);
 t_ray 				refract_ray(t_geo *geo, t_ray r, t_hp hp);
 t_ray				add_epsilon(t_ray r, t_vec3 normal);
+double				coeff_fresnel(t_ray r, t_hp hp, t_geo *geo);
+double				find_krefl(t_geo *geo, t_hp hp, t_ray r);
+void				throw_new_rays(t_env *env, t_ray *r, t_hp hp, double k_refl);
+void				throw_reflect_ray(t_ray *r, t_hp hp, t_env *env, double k_refl);
+void				throw_refract_ray(t_ray *r, t_hp hp, t_env *env, double k_refl);
+int					reflect_or_refract(t_geo *geo);
 #endif

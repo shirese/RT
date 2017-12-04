@@ -41,8 +41,6 @@ static int			handle_error(int err)
 			ft_printf("Invalid geo(disk)\n");
 		if (err == 10)
 			ft_printf("Invalid geo(pipe)\n");
-		if (err == 11)
-			ft_printf("Invalid geo(parabolide hyperbolique)\n");
 		return (1);
 	}
 	return (0);
@@ -60,7 +58,6 @@ int					cson_parse(int fd, t_env *e)
 	get_next_line(fd, &line);
 	while (*line)
 	{
-		//ft_putstr(line);
 		if (!err && !ft_strncmp(line, "window", 6) && get_next_line(fd, &line))
 			err = parse_window(&fd, &line, e);
 		if (!err && !ft_strncmp(line, "camera", 6))

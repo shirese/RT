@@ -52,6 +52,13 @@ typedef struct 		s_disk
 	double 			radius;
 }					t_disk;
 
+typedef struct		s_parahyp
+{
+	double			facta;
+	double			factb;
+	double			height;
+}					t_parahyp;
+
 void				add_geometry(t_geo *geo, t_geo **geos);
 int					add_disk(int *fd, char **line, t_env *e);
 void				parse_geo_attributes(char *line, char *value, t_geo *geo);
@@ -70,5 +77,7 @@ t_hp				hit_sphere(t_geo *geo, t_ray r);
 t_hp				hit_disk(t_geo *geo, t_ray r);
 
 int					malloc_geo(void **type, int size, int geo_id, t_geo **geo);
+int					belong_to_parahyp(t_geo *geo, t_vec3 pos);
+t_hp                hit_parahyp(t_geo *geo, t_ray r);
 
 #endif

@@ -189,3 +189,37 @@ int					add_disk(int *fd, char **line, t_env *e)
 	add_geometry(geo, &(e->geos));
 	return (0);
 }
+
+
+int					add_parahyp(int *fd, char **line, t_env *e)
+{
+	char			*value;
+	t_geo			*geo;
+	t_parahyp			*ph;
+
+	value = NULL;
+	geo = NULL;
+	
+	if (!malloc_geo((void **)(&ph), sizeof(t_parahyp), 7, &geo))
+		return (11);
+	while (get_next_line(*fd, line) && **line == '\t' && (value = *line + 4))
+	{
+		if (ft_strncmp(*line, "\tfacta", 4) && ft_strncmp(*line, "\tfactb", 4) && \
+		ft_strncmp(*line, "\theight", 7))
+			parse_geo_attributes(*line, value, geo);
+		else if (ft_strncmp(*line, "\tfacta", 6) == 0 && (value += 4))
+			ph->facta = ft_atof(value);
+		else if (ft_strncmp(*line, "\tfactb", 6) == 0 && (value += 4))
+			ph->factb = ft_atof(value);
+		else if (ft_strncmp(*line, "\theight", 7) == 0 && (value += 5))
+			ph->height = ft_atof(value);
+	}
+	geo->type = 7;
+	geo->curr = (void *)ph;
+	geo->is_hit = g_get_obj_collider(geo->type);
+	//if (geo->rotation)
+		//rotate(&(parahyp->axis), *geo->rotation);
+	add_geometry(geo, &(e->geos));
+	
+	return (0);
+}

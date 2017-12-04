@@ -28,7 +28,10 @@ t_hp				(*g_get_obj_collider(int id))(t_geo *geo, t_ray r)
 		return (hit_sphere);
 	if (id == 5)
 		return (hit_disk);
+	if (id == 7)
+		return (hit_parahyp);
 	return (NULL);
+	
 }
 
 static int			setup_geo(t_geo **geo)
@@ -81,7 +84,13 @@ int					malloc_geo(void **type, int size, int geo_id, t_geo **geo)
 	if (geo_id == 4)
 		((t_sphere *)*type)->radius = 0;
 	if (geo_id == 5)
-		((t_disk *)*type)->radius = 0;	
+		((t_disk *)*type)->radius = 0;
+	if (geo_id == 7)
+	{
+		((t_parahyp *)*type)->facta = 1.0;
+		((t_parahyp *)*type)->factb = 1.0;
+		((t_parahyp *)*type)->height = 1.0;
+	}
 	return (1);
 }
 

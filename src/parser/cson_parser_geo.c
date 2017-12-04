@@ -178,7 +178,6 @@ int					add_disk(int *fd, char **line, t_env *e)
 		{
 			disk->normal = vec3_stack(aton_cson(&value), \
 			aton_cson(&value), aton_cson(&value));
-			//ft_putnbr(disk->normal.z);
 		}
 	}
 	geo->type = 5;
@@ -220,6 +219,5 @@ int					add_parahyp(int *fd, char **line, t_env *e)
 	//if (geo->rotation)
 		//rotate(&(parahyp->axis), *geo->rotation);
 	add_geometry(geo, &(e->geos));
-	
 	return (0);
 }

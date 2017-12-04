@@ -53,17 +53,11 @@ t_hp                hit_parahyp(t_geo *geo, t_ray r)
     abcd[1] = (2 * orig.x * dir.x / pow(ph->facta, 2)) - (2 * orig.y * dir.y / pow(ph->factb, 2)) - (dir.z / ph->height); 
     abcd[2] = pow((orig.x / ph->facta), 2) - pow((orig.y / ph->factb), 2) - (orig.z / ph->height);
     abcd[3] = pow(abcd[1], 2) - 4 * abcd[0] * abcd[2];
-    if (abcd[3] > 0)
+    if (abcd[3] >= 0)
     {
         hp.t = positive_smallest((-abcd[1] - sqrt(abcd[3])) / (2 * abcd[0]), \
 			(-abcd[1] + sqrt(abcd[3])) / (2 * abcd[0]));
 		hp.p = point_at_parameter(hp.t, r);
-		hp.normal = parahyp_norm(ph, hp.p);
-    }
-    else if (abcd[3] == 0)
-    {
-        hp.t = (-abcd[1] / 2 * abcd[0]);
-        hp.p = point_at_parameter(hp.t, r);
 		hp.normal = parahyp_norm(ph, hp.p);
     }
     if (hp.t <= 0)

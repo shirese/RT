@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 16:12:49 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/18 17:27:02 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/05 13:19:39 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ typedef struct 		s_disk
 }					t_disk;
 
 void				add_geometry(t_geo *geo, t_geo **geos);
-int					add_disk(int *fd, char **line, t_env *e);
 void				parse_geo_attributes(char *line, char *value, t_geo *geo);
-
+void				parse_geo_attributes_2(char *line, char *value, t_geo *geo);
+int					add_parahyp(int *fd, char **line, t_env *e);
 t_vec3				cone_normal(t_geo *geo, t_cone *c, t_vec3 p);
 double				beta2_cone(double expr, double n, double angle);
 double				beta_cone(double expr, double n, double a, double o);
@@ -70,5 +70,12 @@ t_hp				hit_sphere(t_geo *geo, t_ray r);
 t_hp				hit_disk(t_geo *geo, t_ray r);
 
 int					malloc_geo(void **type, int size, int geo_id, t_geo **geo);
+
+int					belong_to(t_geo *g, t_vec3 pos);
+int					belong_to_cone(t_geo *geo, t_vec3 pos);
+int					belong_to_cylinder(t_geo *geo, t_vec3 pos);
+int					belong_to_disk(t_geo *geo, t_vec3 pos);
+int					belong_to_sphere(t_geo *geo, t_vec3 pos);
+int					belong_to_plane(t_geo *geo, t_vec3 pos);
 
 #endif

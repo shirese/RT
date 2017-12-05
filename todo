@@ -2,3 +2,4 @@
  ✔ Add coeff spec @done (17-12-01 22:10)
  ☐ Merge directional light
  ☐ Fix makefile
+ ☐ Fix ft_ftoa.c leaks into ft_printf

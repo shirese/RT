@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 13:30:03 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/19 10:53:18 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/05 12:34:52 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,25 @@
 #include "ray.h"
 #include "rt.h"
 #include "utils.h"
+
+int					belong_to_cylinder(t_geo *geo, t_vec3 pos)
+{
+	t_cylinder		*cyl;
+	t_vec3			diff;
+	t_vec3			proj;
+	t_vec3			dif;
+	double 			len;
+
+	cyl = (t_cylinder*)geo->curr;
+	diff = vec3_sub_stack(pos, *geo->origin);
+	len = vec3_dot(diff, cyl->axis);
+	proj = vec3_add_stack(*geo->origin, \
+		vec3_mult_stack(cyl->axis, len));
+	dif = vec3_sub_stack(proj, pos);
+	if (vec3_norm(dif) <= cyl->radius)
+		return (1);
+	return (0);
+}
 
 static t_vec3		cylinder_norm(t_geo *geo, t_cylinder *cyl, t_vec3 hp)
 {

@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_utils.c                                      :+:      :+:    :+:   */
+/*   geo_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/13 16:08:25 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/05 12:26:22 by chaueur          ###   ########.fr       */
+/*   Created: 2017/12/05 12:06:59 by chaueur           #+#    #+#             */
+/*   Updated: 2017/12/05 12:08:14 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "color.h"
-#include "ft_printf.h"
+#include "geo.h"
 #include "rt.h"
 
-void				color_print(t_color c)
+int					belong_to(t_geo *g, t_vec3 pos)
 {
-	ft_printf("[R %f G %f B %f]\n", c.r, c.g, c.b);
+	if (g->type == 1)
+		return (belong_to_plane(g, pos));
+	else if (g->type == 2)
+		return (belong_to_cone(g, pos));
+	else if (g->type == 3)
+		return (belong_to_cylinder(g, pos));
+	else if (g->type == 4)
+		return (belong_to_sphere(g, pos));
+	else if (g->type == 5)
+		return (belong_to_disk(g, pos));
+	return (0);
 }

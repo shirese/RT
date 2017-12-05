@@ -45,3 +45,11 @@ t_vec3				*vec3_mult(t_vec3 *v, double factor)
 	v_ret = vec3_new(v->x * factor, v->y * factor, v->z * factor);
 	return (v_ret);
 }
+
+t_vec3				vec3_add_mult_stack(t_vec3 v1, t_vec3 v2, double n)
+{
+	t_vec3			v;
+
+	v = vec3_stack((v1.x + n * v2.x), (v1.y + n * v2.y), (v1.z + n * v2.z));
+	return (v);
+}

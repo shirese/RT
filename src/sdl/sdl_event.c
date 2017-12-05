@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 18:41:29 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 15:28:03 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/05 16:52:12 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,13 @@ void				sdl_get_event(SDL_Event event, t_env *e)
 	{
 		if (check_rot_event(event.key.keysym.sym, e))
 		{
+			// raytrace(e);
 			if (!(raytrace_thread(e)))
 				return ;
 		}
 		else if (check_trans_event(event.key.keysym.sym, e))
 		{
+			raytrace(e);
 			if (!(raytrace_thread(e)))
 				return ;
 		}

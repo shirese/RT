@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 11:55:40 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/10 16:35:32 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/05 12:52:00 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int					parse_geo(int *fd, char **line, t_env *e)
 		return (add_sphere(fd, line, e));
 	else if (ft_strncmp(*line, "disk", 4) == 0)
 		return (add_disk(fd, line, e));
-	return (4);
+	return (7);
 }
 
 int					parse_light(int *fd, char **line, t_env *e)
@@ -72,11 +72,11 @@ int					parse_camera(int *fd, char **line, t_env *e)
 	{
 		value = *line + 4;
 		if (!ft_strncmp(*line, "\tpos", 4) && (value += 2))
-			vec3_set(aton_cson(&value), aton_cson(&value), \
-				aton_cson(&value), e->cam->pos);
+			vec3_set(atof_cson(&value), atof_cson(&value), \
+				atof_cson(&value), e->cam->pos);
 		else if (!ft_strncmp(*line, "\trotation", 4) && (value += 7))
-			e->cam->cam_to_world = setup_camera_rotation(aton_cson(&value), \
-				aton_cson(&value), aton_cson(&value));
+			e->cam->cam_to_world = setup_camera_rotation(atof_cson(&value), \
+				atof_cson(&value), atof_cson(&value));
 		else if (!ft_strncmp(*line, "\tfov", 4) && (value += 2))
 			e->cam->fov = ft_atoi(value);
 		else
@@ -92,7 +92,6 @@ int					parse_window(int *fd, char **line, t_env *e)
 	char			*value;
 
 	value = NULL;
-	//ft_printf("%s\n", *line);
 	while (**line == '\t')
 	{
 		value = *line + 8;

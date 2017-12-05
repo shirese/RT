@@ -60,5 +60,5 @@ t_vec4				vec4_normalize_stack(t_vec4 v);
 
 t_vec4				vec4_stack(double x, double y, double w, double z);
 t_vec4				*vec4_new(double x, double y, double z, double w);
-
+t_vec3				vec3_add_mult_stack(t_vec3 v1, t_vec3 v2, double n);
 #endif

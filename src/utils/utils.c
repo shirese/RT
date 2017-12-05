@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 13:16:21 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/01 21:52:45 by shirese          ###   ########.fr       */
+/*   Updated: 2017/12/05 15:52:35 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 #include "rt.h"
 #include "vector.h"
 
-static void			aton_cson_norme(int d, double *f, double *r, char **str)
+static void			atof_cson_norme(int d, double *f, double *r, char **str)
 {
 	if (d)
 		*f /= 10.0f;
 	*r = *r * 10.0f + (double)(**str - '0');
 }
 
-double				aton_cson(char **str)
+double				atof_cson(char **str)
 {
 	double			rez;
 	double			fact;
@@ -44,7 +44,7 @@ double				aton_cson(char **str)
 		if (dot_seen == 0 && **str == '.')
 			dot_seen = 1;
 		else if (ft_isdigit(**str))
-			aton_cson_norme(dot_seen, &fact, &rez, str);
+			atof_cson_norme(dot_seen, &fact, &rez, str);
 		(*str)++;
 	}
 	(*str) += 2;
@@ -70,6 +70,16 @@ static void			print_light(t_light *light)
 	}
 }
 
+static void			print_geo_mater(t_mater *m)
+{
+	ft_printf("\nMATER\t\t");
+	color_print(m->kd);
+	ft_printf("\t\t");
+	color_print(m->ks);
+	ft_printf("ILLUM\t\t[%d]\nIOR\t\t[%f]\nNS\t\t[%f]\n", m->illum, m->ior, m->ns);
+	ft_printf("\n");
+}
+
 static void			print_geo(t_geo *geo)
 {
 	ft_printf("\n\n///		GEO	[%p]	////\n\nORIGIN		", (void *)geo);
@@ -80,18 +90,17 @@ static void			print_geo(t_geo *geo)
 		vec3_print(geo->rotation->r2);
 		vec3_print(geo->rotation->r3);
 	}
-	ft_printf("\nMATER		");
-	color_print(geo->mater->kd);
-	if (geo->type == 1 && ft_printf("PLANE\nNORMAL\n"))
+	print_geo_mater(geo->mater);
+	if (geo->type == 1 && ft_printf("PLANE\nNORMAL\t\t"))
 		vec3_print(((t_plane *)(geo->curr))->normal);
 	else if (geo->type == 2)
 	{
-		ft_printf("CONE\nANGLE	[%f]\nAXIS\n", ((t_cone *)(geo->curr))->angle);
+		ft_printf("CONE\nANGLE	[%f]\nAXIS\n\n", ((t_cone *)(geo->curr))->angle);
 		vec3_print(((t_cone *)(geo->curr))->axis);
 	}
 	else if (geo->type == 3)
 	{
-		ft_printf("CYLINDER\nRAD\t\t[%f]\nAXIS\n", \
+		ft_printf("CYLINDER\nRAD\t\t[%f]\nAXIS\n\n", \
 			((t_cylinder *)(geo->curr))->radius);
 		vec3_print(((t_cylinder *)(geo->curr))->axis);
 	}
@@ -99,7 +108,7 @@ static void			print_geo(t_geo *geo)
 		ft_printf("SPHERE\nRAD\t\t[%f]\n", ((t_sphere *)(geo->curr))->radius);
 	else if (geo->type == 5)
 	{
-		ft_printf("DISK\nRAD\t\t[%f]\nAXIS\n", ((t_disk *)(geo->curr))->radius);
+		ft_printf("DISK\nRAD\t\t[%f]\nAXIS\n\n", ((t_disk *)(geo->curr))->radius);
 		vec3_print(((t_disk *)(geo->curr))->normal);
 	}
 }
@@ -110,12 +119,12 @@ void				print_env(t_env *e)
 	t_geo			*geo;
 
 	ft_printf("\n\n///////////		ENV		///////////\n\n");
-	ft_printf("WIN \t%d*%d\n", e->win.width, e->win.height);
+	ft_printf("WIN\t\t%d*%d\n", e->win.width, e->win.height);
 	ft_printf("SCREEN\t\tRATIO [%f] SCALE [%f]\n", e->scr.asp_ratio, \
 		e->scr.scale);
-	ft_printf("CAM		");
+	ft_printf("CAM\t\t");
 	vec3_print(*e->cam->pos);
-	ft_printf("\nfov [%f]\n", e->cam->fov);
+	ft_printf("\nFOV\t\t[%f]\n", e->cam->fov);
 	light = e->lights;
 	while (light)
 	{

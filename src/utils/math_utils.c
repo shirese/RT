@@ -12,25 +12,6 @@
 
 #include "rt.h"
 
-double				positive_smallest(double a, double b)
-{
-	if (a < 0)
-	{
-		if (b > 0)
-			return (b);
-		return (INFINITY);
-	}
-	if (b < 0)
-	{
-		if (a > 0)
-			return (a);
-		return (INFINITY);
-	}
-	if (a < b)
-		return (a);
-	return (b);
-}
-
 double				deg_to_rad(double deg)
 {
 	double			rad;
@@ -57,3 +38,4 @@ double				clamp(double x, double min, double max)
 		x = max;
 	return (x);
 }
+

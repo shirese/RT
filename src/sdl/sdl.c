@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:26:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/01 21:56:59 by shirese          ###   ########.fr       */
+/*   Updated: 2017/12/05 16:52:00 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void				sdl_render(t_env *e)
 	SDL_Event		ev;
 
 	print_env(e);
+	// raytrace(e);
 	if (!raytrace_thread(e))
 		return ;
 	while (1 && SDL_WaitEvent(&ev))

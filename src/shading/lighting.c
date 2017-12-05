@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 12:20:53 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/01 22:04:42 by shirese          ###   ########.fr       */
+/*   Updated: 2017/12/05 16:58:38 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int			has_shadow(void *light, t_vec3 hp_pos, t_geo *geo, t_env *e)
 	shadow_geo = NULL;
 	spot = light;
 	light_dir = vec3_sub_stack(*spot->pos, hp_pos);
-	shadow_ray = init_ray(hp_pos, light_dir, 1);
+	shadow_ray = init_ray(hp_pos, light_dir, 2, 1.0);
 	shadow_geo = ray_hit(&shadow_ray, &shadow_hp, geo, e);
 	if (shadow_geo && shadow_hp.t <= vec3_norm(light_dir))
 		return (1);
@@ -66,17 +66,63 @@ void				apply_ambient_light(t_ray *r, t_env *e)
 void				apply_lights(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
 {
 	t_light			*light;
+	double			k_refl;
+
 
 	light = e->lights;
-	while (light != NULL)
+	while (light != NULL && geo)
 	{
-		if (light->type != 1 && geo && r->type == 0)
+		if (light->type != 1)
 		{
-			if (has_shadow(light->curr, hp.p, geo, e) == 1)
-				color_mult(*light->color, &(r->color));
-			else
-				shade_phong(geo->mater, hp, light, r);
+			if (r->type != 2)
+			{
+				if (has_shadow(light->curr, hp.p, geo, e) == 1)
+					color_mult(*light->color, &(r->color));
+				else
+					shade_phong(geo, hp, light, r);
+			}
+			if (geo->mater->illum != 1 && r->rec < MAX_RECURSION)
+			{
+				translate_ray(r, hp);
+				r->rec++;
+				k_refl = find_krefl(geo, hp, *r);
+				throw_new_rays(r, hp, k_refl, e);
+			}
 		}
 		light = light->next;
 	}
+	if (r->rec)
+	{
+		color_div_fac(&(r->color), r->rec + 1);
+		color_clamp(&(r->color), 0.0, 1.0);
+	}
 }
+
+// void				apply_lights_beta(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
+// {
+// 	t_light			*light;
+
+// 	light = e->lights;
+// 	while (light != NULL)
+// 	{
+// 		if (light->type == 1)
+// 			color_add(calc_ambient(light), &(r->color));
+// 		else if (geo && r->type == 1)
+// 		{
+// 			if (has_shadow(light->curr, hp.p, geo, e) == 1)
+// 				color_mult(calc_ambient(light), &(r->color));
+// 			else
+// 				shade_phong(geo, hp, light, r);
+// 		}
+// 		light = light->next;
+// 	}
+// }
+
+// void				local_light(t_env *env, t_hp hp, t_geo *geo, t_ray *r)
+// {
+// 	if (geo && geo->mater->kg.r == 1.0)
+// 		apply_lights_beta(r, geo, hp, env);
+// 	else if (r->rec >= MAX_RECURSION || !geo)
+// 		apply_ambient_light(r, env);
+// 	translate_ray(r, hp);
+// }

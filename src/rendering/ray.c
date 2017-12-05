@@ -6,13 +6,33 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 14:34:15 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/06 12:38:46 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/05 15:35:00 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "color.h"
 #include "light.h"
 #include "matrice.h"
 #include "rt.h"
+
+t_ray				init_ray(t_vec3 origin, t_vec3 direction, int ray_type, float ior)
+{
+	t_ray			r;
+
+	r.origin = origin;
+	r.direction = vec3_normalize_stack(direction);
+	r.color = color_new_stack(0.0, 0.0, 0.0);
+	r.type = ray_type;
+	r.ior = ior;
+	r.rec = 0;
+	if (r.type == 1)
+	{
+		r.origin.x += 0.000001;
+		r.origin.y += 0.000001;
+		r.origin.z += 0.000001;
+	}
+	return (r);
+}
 
 t_vec3				point_at_parameter(double t, t_ray r)
 {
@@ -22,45 +42,6 @@ t_vec3				point_at_parameter(double t, t_ray r)
 	tmp = vec3_mult_stack(r.direction, t);
 	pap = vec3_add_stack(r.origin, tmp);
 	return (pap);
-}
-
-static int			is_nearest(t_hp latest_hp, t_hp *hp, double *md)
-{
-	double			dist;
-
-	dist = vec3_norm(latest_hp.p);
-	if (dist < *md)
-	{
-		*md = dist;
-		*hp = latest_hp;
-		return (1);
-	}
-	return (0);
-}
-
-t_geo				*ray_hit(t_ray *r, t_hp *hp, t_geo *from, t_env *e)
-{
-	double			min_dist;
-	t_hp			latest_hp;
-	t_ray			tr;
-	t_geo			*geo;
-	t_geo			*nearest_geo;
-
-	min_dist = INFINITY;
-	geo = e->geos;
-	nearest_geo = NULL;
-	while (geo != NULL)
-	{
-		tr = *r;
-		if (geo != from)
-		{
-			latest_hp = geo->is_hit(geo, tr);
-			if (latest_hp.t != -1 && is_nearest(latest_hp, hp, &min_dist))
-				nearest_geo = geo;
-		}
-		geo = geo->next;
-	}
-	return (nearest_geo);
 }
 
 t_vec3				gen_ray_direction(double i, double j, t_env *e)

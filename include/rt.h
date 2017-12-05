@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/01 22:08:21 by shirese          ###   ########.fr       */
+/*   Updated: 2017/12/05 16:58:34 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 # include "vector.h"
 # include "time.h"
 
-# define WIN_TITLE "Raytracer v0.0"
+# define WIN_TITLE "Raytracer v0.1"
 # define FLT_MAX 3.402823e+38
+# define MAX_RECURSION 7
+#define EPSILON 0.000001
 
 typedef struct		s_color
 {
@@ -30,15 +32,16 @@ typedef struct		s_color
 }					t_color;
 
 /*
-**	RAY TYPE 1- Primary 2- Shadow
+**	RAY TYPE 1- Primary 2- Shadow 3- Refr/Refl
 */
 typedef struct		s_ray
 {
 	int				type;
 	t_vec3			origin;
 	t_vec3			direction;
-	t_vec3			point_at_parameter;
 	t_color			color;
+	double			ior;
+	int				rec;
 }					t_ray;
 
 typedef struct		s_hit_point
@@ -46,13 +49,19 @@ typedef struct		s_hit_point
 	double			t;
 	t_vec3			p;
 	t_vec3			normal;
+	double			ior;
 }					t_hp;
 
+/*
+**	ILLUM TYPE 1- Diffuse 2- Relexion 3- Refraction
+**	4- Reflexion + Refraction
+*/
 typedef struct		s_mater
 {
 	t_color			kd;
 	t_color			ks;
-	double			alpha;
+	int				illum;
+	double			ior;
 	double			ns;
 }					t_mater;
 
@@ -136,6 +145,7 @@ typedef struct		s_env
 int					get_next_line(int const fd, char **line);
 
 t_color				get_px_col(int x, int y, t_env *e);
+t_color				find_ray_color(double x, double y, t_env *e);
 void				raytrace(t_env *e);
 
 void				set_background(t_env *e);
@@ -163,5 +173,12 @@ void				sdl_draw_point(SDL_Renderer *rend, int x, int y, t_color c);
 t_env				*sdl_init(t_env *e);
 void				sdl_render(t_env *e);
 void				sdl_stop(t_env *e);
+
+void				fresnel(t_ray r, t_hp hp, double n, double *krefl);
+double				coeff_fresnel(t_ray r, t_hp hp, t_geo *geo);
+double				find_krefl(t_geo *geo, t_hp hp, t_ray r);
+double				find_ior(t_geo *geo, t_ray r, t_hp hp);
+double				ior_at_point(t_geo *geo, t_vec3 pos);
+double				ior_at_point2(t_geo *g, t_vec3 pos);
 
 #endif

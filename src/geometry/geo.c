@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   geo.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:26:59 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/01 22:08:41 by shirese          ###   ########.fr       */
+/*   Updated: 2017/12/05 13:54:40 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ static int			setup_geo(t_geo **geo)
 	(*geo)->mater->kd = color_new_stack(0., 0., 0.);
 	(*geo)->mater->ks = color_new_stack(0., 0., 0.);
 	(*geo)->mater->ns = 32.;
+	(*geo)->mater->illum = 1;
+	(*geo)->mater->ior = 1.0;
 	(*geo)->is_hit = NULL;
 	(*geo)->next = NULL;
 	return (1);
@@ -68,6 +70,8 @@ int					malloc_geo(void **type, int size, int geo_id, t_geo **geo)
 	if (!*type)
 		return (0);
 	(*geo)->curr = *type;
+	(*geo)->type = geo_id;
+	(*geo)->is_hit = g_get_obj_collider(geo_id);
 	if (geo_id == 2)
 	{
 		((t_cone *)*type)->angle = 0;
@@ -81,7 +85,7 @@ int					malloc_geo(void **type, int size, int geo_id, t_geo **geo)
 	if (geo_id == 4)
 		((t_sphere *)*type)->radius = 0;
 	if (geo_id == 5)
-		((t_disk *)*type)->radius = 0;	
+		((t_disk *)*type)->radius = 0;
 	return (1);
 }
 

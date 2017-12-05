@@ -15,6 +15,18 @@
 #include "rt.h"
 #include "utils.h"
 
+int					belong_to_sphere(t_geo *geo, t_vec3 pos)
+{
+	t_sphere	*sphere;
+	t_vec3		diff;
+	
+	sphere = (t_sphere*)geo->curr;
+	diff = vec3_sub_stack(*geo->origin, pos);
+	if (vec3_norm(diff) <= sphere->radius)
+		return (1);
+	return (0);
+}
+
 t_hp				hit_sphere(t_geo *geo, t_ray r)
 {
 	double			abcd[4];

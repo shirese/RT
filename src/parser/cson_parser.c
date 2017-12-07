@@ -59,7 +59,7 @@ int					cson_parse(int fd, t_env *e)
 	
 	while (*line)
 	{
-		
+		//puts(line);
 		if (!err && !ft_strncmp(line, "window", 6) && get_next_line(fd, &line))
 		{
 			puts("FRANCE");
@@ -77,7 +77,7 @@ int					cson_parse(int fd, t_env *e)
 		}
 		if (!err && ft_strncmp(line, "light", 5))
 		{	
-			puts("ESPANIA");
+			//puts("ESPANIA");
 			err = parse_geo(&fd, &line, e);
 		}
 		if (handle_error(err) != 0)

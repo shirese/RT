@@ -56,7 +56,6 @@ void				add_geometry(t_geo *geo, t_geo **geos);
 void				parse_geo_attributes(char *line, char *value, t_geo *geo);
 void				parse_geo_attributes_2(char *line, char *value, t_geo *geo);
 int					add_parahyp(int *fd, char **line, t_env *e);
-t_vec3				cone_normal(t_geo *geo, t_cone *c, t_vec3 p);
 double				beta2_cone(double expr, double n, double angle);
 double				beta_cone(double expr, double n, double a, double o);
 double				alpha2_cone(double expr, double n, double angle);
@@ -78,4 +77,15 @@ int					belong_to_disk(t_geo *geo, t_vec3 pos);
 int					belong_to_sphere(t_geo *geo, t_vec3 pos);
 int					belong_to_plane(t_geo *geo, t_vec3 pos);
 
+t_vec3				sphere_norm(t_geo *geo, t_hp hp);
+t_vec3				cylinder_norm(t_geo *geo, t_hp hp);
+int					is_cut(t_geo *geo);
+int					belong_after_cut(t_geo *geo, t_hp hp);
+t_hp				first_in_cut(t_geo *geo, t_ray r, t_hp hp_1, t_hp hp_2);
+t_hp				hit_and_cut(t_geo *geo, t_hp hp_1, t_hp hp_2, t_ray r);
+int					is_on_cut(t_cut	*cut, t_hp hp);
+t_vec3				norm_cut(t_geo *geo, t_hp hp);
+int					register_cut(t_geo *geo, int *fd, char **line, char *value);
+void				print_cut(t_geo *geo);
+t_vec3				cone_normal(t_geo *geo, t_vec3 p);
 #endif

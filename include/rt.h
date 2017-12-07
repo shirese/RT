@@ -44,6 +44,12 @@ typedef struct		s_ray
 	int				rec;
 }					t_ray;
 
+typedef struct      s_cut
+{
+    t_vec3          cut_normal;
+    t_vec3          cut_position;
+}                   t_cut;
+
 typedef struct		s_hit_point
 {
 	double			t;
@@ -78,6 +84,8 @@ struct				s_geo
 	t_mater			*mater;
 	t_hp			(*is_hit)(t_geo *geo, t_ray r);
 	t_geo			*next;
+	t_cut			*cut;
+	int				nb_cut;
 };
 /*
 **	The camera matrix is a 4x4 matrix with

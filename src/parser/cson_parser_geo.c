@@ -55,9 +55,14 @@ int					add_plane(int *fd, char **line, t_env *e)
 	while (get_next_line(*fd, line) && **line == '\t')
 	{
 		value = *line + 4;
-		if (ft_strncmp(*line, "\tnormal", 7) == 0 && (value += 5))
+		if (ft_strncmp(*line, "\tnormal", 7) == 0 && (value += 5) && ft_strncmp(*line, "\tcut_normal", 11))
 			plane->normal = vec3_stack(atof_cson(&value), \
 				atof_cson(&value), atof_cson(&value));
+		else if (ft_strncmp(*line, "\tcut_normal", 11) == 0  && (value += 9))
+		{
+			if (!register_cut(geo, fd, line, value))
+				return (12);
+		}
 		else
 			parse_geo_attributes(*line, value, geo);
 	}
@@ -77,10 +82,15 @@ int					add_cone(int *fd, char **line, t_env *e)
 	geo = NULL;
 	if (!malloc_geo((void **)(&cone), sizeof(t_cone), 2, &geo))
 		return (6);
-	while (get_next_line(*fd, line) && **line == '\t' && (value = *line + 4))
+	while (get_next_line(*fd, line) && **line == '\t' && (value = *line + 4) && ft_strncmp(*line, "\tcut_normal", 11))
 	{
 		if (ft_strncmp(*line, "\tangle", 6) && ft_strncmp(*line, "\taxis", 5))
 			parse_geo_attributes(*line, value, geo);
+		else if (ft_strncmp(*line, "\tcut_normal", 11) == 0  && (value += 9))
+		{
+			if (!register_cut(geo, fd, line, value))
+				return (12);
+		}
 		else if (ft_strncmp(*line, "\taxis", 5) == 0 && (value += 3))
 			cone->axis = vec3_stack(atof_cson(&value), atof_cson(&value),\
 				atof_cson(&value));
@@ -101,12 +111,19 @@ int					add_cylinder(int *fd, char **line, t_env *e)
 
 	value = NULL;
 	geo = NULL;
+	
 	if (!malloc_geo((void **)(&cylinder), sizeof(t_cylinder), 3, &geo))
 		return (7);
 	while (get_next_line(*fd, line) && **line == '\t' && (value = *line + 4))
 	{
-		if (ft_strncmp(*line, "\tradius", 7) && ft_strncmp(*line, "\taxis", 5))
-			parse_geo_attributes(*line, value, geo);
+		
+		if (ft_strncmp(*line, "\tradius", 7) && ft_strncmp(*line, "\taxis", 5) && ft_strncmp(*line, "\tcut_normal", 11))
+			parse_geo_attributes(*line, value, geo);	
+		else if (ft_strncmp(*line, "\tcut_normal", 11) == 0  && (value += 9))
+		{
+			if (!register_cut(geo, fd, line, value))
+				return (12);
+		}
 		else if (ft_strncmp(*line, "\taxis", 5) == 0 && (value += 3))
 			cylinder->axis = vec3_stack(atof_cson(&value), \
 				atof_cson(&value), atof_cson(&value));
@@ -116,6 +133,7 @@ int					add_cylinder(int *fd, char **line, t_env *e)
 	if (geo->rotation)
 		rotate(&(cylinder->axis), *geo->rotation);
 	add_geometry(geo, &(e->geos));
+	print_cut(geo);
 	return (0);
 }
 

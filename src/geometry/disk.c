@@ -48,9 +48,10 @@ t_hp					hit_disk(t_geo *geo, t_ray r)
     if (expr[1] <= 0)
     {
         hp.t = expr[0];
-       
         hp.p = point_at_parameter(hp.t, r);
         hp.normal = d->normal;
+        if (is_cut(geo) && !belong_after_cut(geo, hp))
+				hp.t = -1;
     }
 	return (hp);
 }

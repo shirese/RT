@@ -37,6 +37,7 @@ static int			setup_geo(t_geo **geo)
 	if (!*geo)
 		return (0);
 	(*geo)->origin = vec3_new(0, 0, 0);
+	(*geo)->cut = NULL;
 	if (!(*geo)->origin)
 	{
 		free(*geo);
@@ -44,8 +45,10 @@ static int			setup_geo(t_geo **geo)
 	}
 	(*geo)->rotation = NULL;
 	(*geo)->type = 0;
+	(*geo)->nb_cut = 0;
 	(*geo)->curr = NULL;
 	(*geo)->mater = malloc(sizeof(t_mater));
+	
 	if (!(*geo)->mater)
 	{
 		free((*geo)->origin);
@@ -59,6 +62,7 @@ static int			setup_geo(t_geo **geo)
 	(*geo)->mater->ior = 1.0;
 	(*geo)->is_hit = NULL;
 	(*geo)->next = NULL;
+	
 	return (1);
 }
 

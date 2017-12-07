@@ -39,6 +39,8 @@ static int			handle_error(int err)
 			ft_printf("Invalid geo(sphere)\n");
 		if (err == 9)
 			ft_printf("Invalid geo(disk)\n");
+		if (err == 12)
+			ft_printf("Invalid cut(cut_normal has to be followed directly by cut_position)\n");
 		return (1);
 	}
 	return (0);
@@ -54,18 +56,35 @@ int					cson_parse(int fd, t_env *e)
 	err = 0;
 	i = 0;
 	get_next_line(fd, &line);
+	
 	while (*line)
 	{
+		
 		if (!err && !ft_strncmp(line, "window", 6) && get_next_line(fd, &line))
+		{
+			puts("FRANCE");
 			err = parse_window(&fd, &line, e);
+		}
 		if (!err && !ft_strncmp(line, "camera", 6))
-			err = parse_camera(&fd, &line, e);
+		{
+			puts("BELGIUM");
+				err = parse_camera(&fd, &line, e);
+		}
 		if (!err && !ft_strncmp(line, "light", 5))
+		{
+			puts("ITALIA");
 			err = parse_light(&fd, &line, e);
+		}
 		if (!err && ft_strncmp(line, "light", 5))
+		{	
+			puts("ESPANIA");
 			err = parse_geo(&fd, &line, e);
+		}
 		if (handle_error(err) != 0)
+		{
+			puts("DEUTSCHLAND");
 			return (0);
+		}
 	}
 	return (1);
 }

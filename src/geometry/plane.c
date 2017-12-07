@@ -46,7 +46,7 @@ t_hp				hit_plane(t_geo *geo, t_ray r)
 	t_vec3			min;
 	t_plane			*p;
 	double			dot[2];
-	
+
 	hp.t = -1;
 	min = vec3_sub_stack(*geo->origin, r.origin);
 	p = geo->curr;
@@ -64,6 +64,8 @@ t_hp				hit_plane(t_geo *geo, t_ray r)
 			r.origin.z + dot[0] * r.direction.z);
 			hp.t = vec3_norm(vec3_sub_stack(r.origin, hp.p));
 			hp.normal = p->normal;
+			if (is_cut(geo) && !belong_after_cut(geo, hp))
+				hp.t = -1;
 		}
 	}
 	return (hp);

@@ -1,0 +1,29 @@
+window:
+	width: 1200
+	height: 800
+camera:
+	pos: 0.0, 0.0, 2.0
+	fov: 90
+light:
+	type: 1
+	color: 0.18, 0.18, 0.18, 1.0
+light:
+	type: 3
+	color: 0.88, 0.88, 0.88, 1.
+	dir: 0.0, 0.0, 0.0
+	pos: 0.0, 10.0, 30.0
+light:
+	type: 3
+	color: 0.88, 0.88, 0.88, 1.
+	dir: 0.0, 0.0, 0.0
+	pos: 0.0, -10.0, 30.0
+cylinder:
+	pos: 0., 0., -7.
+	axis: 0., 1.0, 0.0
+	kd: 1., 1., 0., 1.
+	ks: 0.5, 0.5, 0.5, 1.
+	kg: 1.0, 1.0, 0.0, 0.0
+	ior: 1.0
+	radius: 0.3
+	cut_normal : 0.0, 1.0, 0.0
+	cut_position : 0.0, 0., -7.

@@ -49,11 +49,13 @@ t_env				*sdl_init(t_env *e)
 void				sdl_render(t_env *e)
 {
 	SDL_Event		ev;
-
+		
 	print_env(e);
-	// raytrace(e);
-	if (!raytrace_thread(e))
-		return ;
+
+	raytrace(e);
+	
+	/*if (!raytrace_thread(e))
+		return ;*/
 	while (1 && SDL_WaitEvent(&ev))
 	{
 		// if (ev.type == SDL_WINDOWEVENT_RESIZED)

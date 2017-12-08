@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/05 16:17:40 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/08 08:33:30 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void				throw_reflect_ray(t_ray *r, t_hp hp, double k_refl, t_env *e)
 	{
 		throw_ray(&refl, e);
 		color_mult_fac(&(refl.color), k_refl);
-		color_add(refl.color, &(r->color));
+		color_add_no_clamp(refl.color, &(r->color));
 	}
 	else
 		r->rec--;
@@ -50,7 +50,7 @@ void				throw_refract_ray(t_ray *r, t_hp hp, double k_refl, t_env *e)
 	{
 		throw_ray(&refr, e);
 		color_mult_fac(&(refr.color), (1 - k_refl));
-		color_add(refr.color, &(r->color));
+		color_add_no_clamp(refr.color, &(r->color));
 	}
 	else
 		r->rec--;
@@ -60,6 +60,6 @@ void				throw_new_rays(t_ray *r, t_hp hp, double k_refl, t_env *e)
 {
 	if (k_refl > 0)
 		throw_reflect_ray(r, hp, k_refl, e);
-	else if (1 - k_refl > 0)
+	if (1 - k_refl > 0)
 		throw_refract_ray(r, hp, k_refl, e);
 }

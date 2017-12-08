@@ -3,3 +3,7 @@
  ☐ Merge directional light
  ☐ Fix makefile
  ☐ Fix ft_ftoa.c leaks into ft_printf
+ ☐ Reflection leads to less luminosity
+ ☐ Reflection is not mult by shadow
+ ☐ Refraction still buggy
+ ☐ Fix shadow left column test_multiple_spot

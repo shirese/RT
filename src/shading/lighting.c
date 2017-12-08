@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 12:20:53 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/05 16:58:38 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/08 09:32:46 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,22 @@ void				apply_lights(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
 	{
 		if (light->type != 1)
 		{
-			if (r->type != 2)
+			if (geo->mater->illum != 4)
 			{
-				if (has_shadow(light->curr, hp.p, geo, e) == 1)
-					color_mult(*light->color, &(r->color));
-				else
+				// if (has_shadow(light->curr, hp.p, geo, e) == 1)
+				// {
+				// 	printf("... %d\n", r->type);
+				// 	color_print(r->color);
+				// 	color_print(*light->color);
+				// 	color_mult(*light->color, &(r->color));
+				// 	color_print(r->color);
+				// }
+				// else
 					shade_phong(geo, hp, light, r);
 			}
 			if (geo->mater->illum != 1 && r->rec < MAX_RECURSION)
 			{
-				translate_ray(r, hp);
+				// translate_ray(r, hp);
 				r->rec++;
 				k_refl = find_krefl(geo, hp, *r);
 				throw_new_rays(r, hp, k_refl, e);
@@ -92,10 +98,7 @@ void				apply_lights(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
 		light = light->next;
 	}
 	if (r->rec)
-	{
 		color_div_fac(&(r->color), r->rec + 1);
-		color_clamp(&(r->color), 0.0, 1.0);
-	}
 }
 
 // void				apply_lights_beta(t_ray *r, t_geo *geo, t_hp hp, t_env *e)

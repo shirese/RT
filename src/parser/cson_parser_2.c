@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 11:55:40 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/05 12:52:00 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/08 09:09:58 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int					parse_geo(int *fd, char **line, t_env *e)
 		return (add_sphere(fd, line, e));
 	else if (ft_strncmp(*line, "disk", 4) == 0)
 		return (add_disk(fd, line, e));
-	return (7);
+	return (4);
 }
 
 int					parse_light(int *fd, char **line, t_env *e)

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/08 09:25:37 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/08 10:20:29 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,29 +62,9 @@ void				throw_ray(t_ray *r, t_env *e)
 	t_hp			hp;
 
 	geo = ray_hit(r, &hp, NULL, e);
-	apply_ambient_light(r, e);
+	if (r->type != 3)
+		apply_ambient_light(r, e);
 	apply_lights(r, geo, hp, e);
-	// if (r->rec)
-	// {
-	// 	color_div_fac(&(r->color), r->rec + 1);
-	// 	color_clamp(&(r->color), 0.0, 1.0);
-	// }
-	// local_light(env, hp, geo, r);
-	// if (geo != NULL && r->rec < MAX_RECURSION && reflect_or_refract(geo))
-	// {
-	// 	l = env->lights;
-	// 	g = env->geos;
-	// 	while (l)
-	// 	{
-	// 		if (l->type != 1)
-	// 		{
-	// 			r->rec++;
-	// 			k_refl = find_krefl(geo, hp, *r);
-	// 			throw_new_rays(env, r, hp, k_refl);
-	// 		}
-	// 		l = l->next;
-	// 	}
-	// }
 }
 
 t_color				find_ray_color(double x, double y, t_env *e)

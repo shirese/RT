@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 13:16:21 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/05 15:52:35 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/08 10:48:16 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,12 @@ static void			print_geo(t_geo *geo)
 		vec3_print(((t_plane *)(geo->curr))->normal);
 	else if (geo->type == 2)
 	{
-		ft_printf("CONE\nANGLE	[%f]\nAXIS\n\n", ((t_cone *)(geo->curr))->angle);
+		ft_printf("CONE\nANGLE	[%f]\nAXIS\t\t", ((t_cone *)(geo->curr))->angle);
 		vec3_print(((t_cone *)(geo->curr))->axis);
 	}
 	else if (geo->type == 3)
 	{
-		ft_printf("CYLINDER\nRAD\t\t[%f]\nAXIS\n\n", \
+		ft_printf("CYLINDER\nRAD\t\t[%f]\nAXIS\t\t", \
 			((t_cylinder *)(geo->curr))->radius);
 		vec3_print(((t_cylinder *)(geo->curr))->axis);
 	}
@@ -108,7 +108,7 @@ static void			print_geo(t_geo *geo)
 		ft_printf("SPHERE\nRAD\t\t[%f]\n", ((t_sphere *)(geo->curr))->radius);
 	else if (geo->type == 5)
 	{
-		ft_printf("DISK\nRAD\t\t[%f]\nAXIS\n\n", ((t_disk *)(geo->curr))->radius);
+		ft_printf("DISK\nRAD\t\t[%f]\nNORMAL\t\t", ((t_disk *)(geo->curr))->radius);
 		vec3_print(((t_disk *)(geo->curr))->normal);
 	}
 }

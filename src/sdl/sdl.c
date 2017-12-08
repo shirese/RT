@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:26:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/08 09:22:17 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/08 11:04:35 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void				sdl_render(t_env *e)
 	SDL_Event		ev;
 
 	print_env(e);
-	raytrace(e);
-	// if (!raytrace_thread(e))
-		// return ;
+	// raytrace(e);
+	if (!raytrace_thread(e))
+		return ;
 	while (1 && SDL_WaitEvent(&ev))
 	{
 		// if (ev.type == SDL_WINDOWEVENT_RESIZED)

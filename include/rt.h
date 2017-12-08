@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/05 16:58:34 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 12:07:47 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # define WIN_TITLE "Raytracer v0.1"
 # define FLT_MAX 3.402823e+38
-# define MAX_RECURSION 7
+# define MAX_RECURSION 4
 #define EPSILON 0.000001
 
 typedef struct		s_color

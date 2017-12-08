@@ -1,0 +1,20 @@
+window:	
+	width: 800
+	height: 600
+camera:
+	pos: 0.0, 0.0, 2.0
+	fov: 90
+light:
+	type: 1
+	color: 0.14, 0.14, 0.14, 4.
+light:
+	type: 3
+	color: 0.80, 0.80, 0.80, 0.7
+	dir: 0.0, 0.0, 0.0
+	pos: 1.4, 0., 2.0
+sphere:
+	pos: 0., 0., -1.
+	kd: 1., 0., 0., 0.
+	ks: .5, .5, .5, 1.
+	radius: 0.5
+	ior: 1.3

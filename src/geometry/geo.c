@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:26:59 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/05 13:54:40 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 14:32:17 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,21 @@
 #include "utils.h"
 
 t_hp				(*g_get_obj_collider(int id))(t_geo *geo, t_ray r)
+{
+	if (id == 1)
+		return (hit_plane);
+	if (id == 2)
+		return (hit_cone);
+	if (id == 3)
+		return (hit_cylinder);
+	if (id == 4)
+		return (hit_sphere);
+	if (id == 5)
+		return (hit_disk);
+	return (NULL);
+}
+
+t_hp				(*g_get_neg_obj_collider(int id))(t_geo *geo, t_ray r)
 {
 	if (id == 1)
 		return (hit_plane);

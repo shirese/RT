@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/08 10:20:29 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/08 16:09:32 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ void				throw_ray(t_ray *r, t_env *e)
 	if (r->type != 3)
 		apply_ambient_light(r, e);
 	apply_lights(r, geo, hp, e);
+	// I'm not sure why we need that....
+	// if (r->rec)
+	// 	color_div_fac(&(r->color), r->rec);
 }
 
 t_color				find_ray_color(double x, double y, t_env *e)

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 12:03:50 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/05 15:30:49 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 12:23:38 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ double				ior_at_point(t_geo *geo, t_vec3 pos)
 			return (g->mater->ior);	
 		g = g->next;
 	}
-	return (0.0);
+	return (1.0);
 }
 
 double				find_ior(t_geo *geo, t_ray r, t_hp hp)
@@ -73,13 +73,13 @@ double		coeff_fresnel(t_ray r, t_hp hp, t_geo *geo)
 	n = find_ior(geo, r, hp);
 	r.direction = vec3_normalize_stack(r.direction);
 	cosi = clamp(vec3_dot(r.direction, vec3_normalize_stack(hp.normal)), -1, 1);
-	sint = (r.ior / n) * sqrt(max(0, 1 - pow(cosi, 2)));
+	sint = (r.ior / n) * sqrt(max(0, 1 - cosi * cosi));
 	if (sint >= 1.0)
 		return (1);
 	else 
 	{
 		cosi = fabs(cosi);
-		cost = sqrt(max(0.0, 1 - pow(sint, 2)));
+		cost = sqrt(max(0.0, 1 - sint * sint));
 		rs = ((n * cosi) - (r.ior * cost)) / ((n * cosi) + (r.ior * cost));	
 		n = ((r.ior * cosi) - (n * cost)) / ((r.ior * cosi) + (n * cost));
 		return ((rs * rs + n * n) / 2);

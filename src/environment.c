@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/07 13:17:17 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 12:07:22 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void				init_environment(t_env **e)
 	(*e)->img = NULL;
 	(*e)->win.width = 0;
 	(*e)->win.height = 0;
-	(*e)->samp_rate = 1;
+	(*e)->samp_rate = 4;
 	(*e)->cam = NULL;
 	(*e)->lights = NULL;
 	(*e)->geos = NULL;

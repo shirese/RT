@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/08 10:18:32 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 12:25:37 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@
 #include "pthread.h"
 #include "rt.h"
 #include "utils.h"
-
-void				translate_ray(t_ray *r, t_hp hp)
-{
-	r->direction = vec3_normalize_stack(r->direction);
-	r->origin = vec3_sub_stack(hp.p, r->direction);
-}
 
 void				throw_reflect_ray(t_ray *r, t_hp hp, double k_refl, t_env *e)
 {
@@ -58,8 +52,11 @@ void				throw_refract_ray(t_ray *r, t_hp hp, double k_refl, t_env *e)
 
 void				throw_new_rays(t_ray *r, t_hp hp, double k_refl, t_env *e)
 {
-	if (k_refl > 0)
-		throw_reflect_ray(r, hp, k_refl, e);
-	if (1 - k_refl > 0)
+	if (k_refl < 1.)
+	{
+		r->rec++;
 		throw_refract_ray(r, hp, k_refl, e);
+	}
+	r->rec++;
+	throw_reflect_ray(r, hp, k_refl, e);
 }

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 12:20:53 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/08 10:21:33 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/08 16:09:15 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,22 +74,19 @@ void				apply_lights(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
 	{
 		if (light->type != 1)
 		{
-			if (geo->mater->illum != 4)
+			if (geo->mater->illum == 1)
 			{
 				if (r->type != 3 && has_shadow(light->curr, hp.p, geo, e) == 1)
 					color_mult(*light->color, &(r->color));
 				else
 					shade_phong(geo, hp, light, r);
 			}
-			if (geo->mater->illum != 1 && r->rec < MAX_RECURSION)
+			else if (r->rec < MAX_RECURSION)
 			{
-				r->rec++;
 				k_refl = find_krefl(geo, hp, *r);
 				throw_new_rays(r, hp, k_refl, e);
 			}
 		}
 		light = light->next;
 	}
-	if (r->rec)
-		color_div_fac(&(r->color), r->rec + 1);
 }

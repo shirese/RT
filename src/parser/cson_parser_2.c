@@ -29,7 +29,7 @@ int					parse_geo(int *fd, char **line, t_env *e)
 		return (add_sphere(fd, line, e));
 	else if (ft_strncmp(*line, "disk", 4) == 0)
 		return (add_disk(fd, line, e));
-	return (0);
+	return (1);
 }
 
 int					parse_light(int *fd, char **line, t_env *e)

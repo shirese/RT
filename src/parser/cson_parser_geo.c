@@ -86,14 +86,14 @@ int					add_cone(int *fd, char **line, t_env *e)
 		return (6);
 	while (get_next_line(*fd, line) && **line == '\t' && (value = *line + 4))
 	{
-		puts("ORLEANS77");
+		//puts("ENNui");
+		//puts(*line);
 		if (ft_strncmp(*line, "\tangle", 6) && ft_strncmp(*line, "\taxis", 5) && ft_strncmp(*line, "\tcut_normal", 11))
 			parse_geo_attributes(*line, value, geo);
 		else if (ft_strncmp(*line, "\tcut_normal", 11) == 0  && (value += 9))
 		{
 			if (!register_cut(geo, fd, line, value))
 				return (12);
-				
 		}
 		else if (ft_strncmp(*line, "\taxis", 5) == 0 && (value += 3))
 			cone->axis = vec3_stack(atof_cson(&value), atof_cson(&value),\
@@ -104,7 +104,6 @@ int					add_cone(int *fd, char **line, t_env *e)
 	if (geo->rotation)
 		rotate(&(cone->axis), *geo->rotation);
 	add_geometry(geo, &(e->geos));
-	puts("poil");
 	return (0);
 }
 

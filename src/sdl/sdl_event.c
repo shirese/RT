@@ -38,7 +38,7 @@ static int			check_rot_event(SDL_Keycode k, t_env *e)
 	int				rot;
 
 	rot = 0;
-	if (k == SDLK_e && (rot = 1))
+	if (k == SDLK_e  && (rot = 1))
 		cam_rot_x(e->cam->cam_to_world, M_PI / 200);
 	if (k == SDLK_r && (rot = 1))
 		cam_rot_x(e->cam->cam_to_world, -M_PI / 200);

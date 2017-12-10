@@ -8,33 +8,43 @@ light:
 	type: 1
 	color: 0.11, 0.11, 0.11, 1.0
 light:
-	type: 3
+	type: 2
 	color: 0.88, 0.88, 0.88, 1.
 	dir: 0.0, 0.0, 0.0
-	pos: 0.0, 5.0, 2.0
+	pos: 0.0, 3.0, 4.0
 disk:
-	pos: -3.5, 3.5, -3.5
+	pos: -3.5, 1.5, -3.5
 	kd: 0., 1., 1., 
 	ks: 0.5, 0.5, 0.5,
 	ior: 1.
 	normal: 0.0, 0.0, 1.0
 	radius: 0.5
-	cut_normal: 0.0, 0.0, 1.0
-	cut_position: 0.0, -1., -1.8
+	cut_normal: -1.0, 0.0, 1.0
+	cut_position: -3.5, 3.5, -3.5
 plane:
 	pos: 0., -1., -1.5
-	kd: 0., 1., 1., 
+	kd: 1, 0., 1., 
 	ks: 0.5, 0.5, 0.5, 1.
 	ior: 1.2
 	normal: 0, 1, 0.3
-	cut_normal: 0.0, -1.0, 0.0
-	cut_position: 0, 0.5, -5.5
-cone:
-	pos: 0, 0.5, -5.5
-	kd: 0., 1., 1., 1.
+	cut_normal: 0.0, 0.0, 1.0
+	cut_position: 0, -1., -1.5
+	cut_normal: 1.0, 0.0, 1.0
+	cut_position: 0., -1., -1.5
+	cut_normal: -1.0, 0.0, 1.0
+	cut_position: 0.5, -1., -1.5
+	cut_normal: 0.0, 0.0, -1.0
+	cut_position: 0, -1., -0.5
+cylinder:
+	pos: 0., 0., -1.5
+	axis: 0., 1., 0
+	rotation: 0., 0., 0.
+	kd: 1., 0., 0., 1.
 	ks: 0.5, 0.5, 0.5, 1.
+	radius: 0.3
 	ior: 1.
-	axis: 0., 1.0, 0.0
-	angle: 15.
-	cut_normal: -1.0, 0.0, 0.0
-	cut_position: -3.6, 3.5, -3.5
+	radius: 0.4
+	cut_normal: 0.0, 1.0, 0.0
+	cut_position: 0., -0.3, -1.5
+	cut_normal: 0.0, -1.0, 0.0
+	cut_position: 0., 0.3, -1.5

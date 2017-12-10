@@ -77,8 +77,8 @@ int					cson_parse(int fd, t_env *e)
 		}
 		if (!err && ft_strncmp(line, "light", 5))
 		{	
-			//puts("ESPANIA");
 			err = parse_geo(&fd, &line, e);
+			//puts("CHENIL");
 		}
 		if (handle_error(err) != 0)
 		{

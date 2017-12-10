@@ -88,4 +88,9 @@ t_vec3				norm_cut(t_geo *geo, t_hp hp);
 int					register_cut(t_geo *geo, int *fd, char **line, char *value);
 void				print_cut(t_geo *geo);
 t_vec3				cone_normal(t_geo *geo, t_vec3 p);
+
+int					set_borns(double to, double dn, double *born_sup, double *born_inf);
+double				value_t(t_vec3 normal, t_ray r, double *dn);
+double				distance_from_hp1(t_ray r, t_geo *geo, t_hp hp_1, t_hp hp_2);
+t_vec3				usual_norm(t_geo *geo, t_hp hp);
 #endif

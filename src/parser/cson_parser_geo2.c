@@ -30,7 +30,6 @@ int					register_cut(t_geo *geo, int *fd, char **line, char *value)
 	geo->nb_cut++;
 	if (get_next_line(*fd, line) && **line == '\t' && (value = *line + 4))
 	{
-		puts(*line);
 		if (ft_strncmp(*line, "\tcut_position", 13) == 0 && (value += 11))
 		{
 			cut_position = vec3_stack(atof_cson(&value), atof_cson(&value), \
@@ -41,17 +40,10 @@ int					register_cut(t_geo *geo, int *fd, char **line, char *value)
 			new_cut[geo->nb_cut - 1].cut_position = cut_position;
 		}
 		else
-		{
-			puts("LILLE");
 			return (0);
-		}
 	}
 	else
-	{
-		puts("LYON");
-		puts(*line);
 		return (0);
-	}
 	geo->cut = new_cut;
 	return (1);
 }

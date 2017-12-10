@@ -16,14 +16,14 @@
 #include "rt.h"
 #include "utils.h"
 
-int				is_cut(t_geo *geo)
+int					is_cut(t_geo *geo)
 {
 	return (geo->nb_cut > 0);
 }
 
 int					is_on_cut(t_cut	*cut, t_hp hp)
 {
-	double res;
+	double			res;
 	
 	res = vec3_dot(vec3_sub_stack(hp.p, cut->cut_position), cut->cut_normal);
 	if (fabs(res) <= 0.0000001)
@@ -33,9 +33,9 @@ int					is_on_cut(t_cut	*cut, t_hp hp)
 
 int					belong_after_cut(t_geo *geo, t_hp hp)
 {
-	double res;
-	t_cut	*cut;
-	int i;
+	double			res;
+	t_cut			*cut;
+	int				i;
 
 	cut = geo->cut;
 	i = 0;

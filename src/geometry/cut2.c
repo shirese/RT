@@ -19,8 +19,8 @@
 
 void				print_cut(t_geo *geo)
 {
-	t_cut	*cut;
-	int 	i;
+	t_cut			*cut;
+	int				i;
 
 	i = 0;
 	cut = geo->cut;
@@ -35,10 +35,10 @@ void				print_cut(t_geo *geo)
 	} 
 }
 
-t_vec3			norm_cut(t_geo *geo, t_hp hp)
+t_vec3				norm_cut(t_geo *geo, t_hp hp)
 {
-	t_cut		*cut;
-	int			i;
+	t_cut			*cut;
+	int				i;
 
 	i = 0;
 	if (is_cut(geo))
@@ -70,8 +70,8 @@ int					set_borns(double to, double dn, double *born_sup, double *born_inf)
 
 double				value_t(t_vec3 normal, t_ray r, double *dn)
 {
-	double ndx;
-	double to;
+	double			ndx;
+	double			to;
 
 	vec3_normalize(&normal);
 	ndx = vec3_dot(normal, vec3_normalize_stack(r.direction));

@@ -50,7 +50,7 @@ void				sdl_render(t_env *e)
 {
 	SDL_Event		ev;
 		
-	print_env(e);
+	//print_env(e);
 
 	raytrace(e);
 	

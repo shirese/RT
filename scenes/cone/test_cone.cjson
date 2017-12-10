@@ -2,7 +2,7 @@ window:
 	width: 600
 	height: 500
 camera:
-	pos: 0.0, 0.0, 2.0
+	pos: 0.0, 0.0, 4.0
 	fov: 90
 light:
 	type: 1
@@ -13,8 +13,13 @@ light:
 	dir: 0.0, 0.0, 0.0
 	pos: 0.0, 0.5, 3.0
 cone:
-	pos: 0.2, 0.5, -1.5
-	kd: 0., 0., 0.66,
+	pos: 0., 0., -1.5
+	kd: 0., 1., 0.2,
 	ks: 0.1, 0.1, 0.1
-	axis: 1., 0.0, 0.0
+	axis: 0., 1.0, 0.0
+	cut_normal: 0.0, -1.0, -1.0
+	cut_position: 0, 2, -1.5
+	cut_normal: 0.0, 1.0, -1.0
+	cut_position: 0, -2, -1.5
 	angle: 15.
+

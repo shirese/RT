@@ -59,7 +59,7 @@ void				sdl_get_event(SDL_Event event, t_env *e)
 	{
 		if (check_rot_event(event.key.keysym.sym, e))
 		{
-			// raytrace(e);
+			 raytrace(e);
 			if (!(raytrace_thread(e)))
 				return ;
 		}

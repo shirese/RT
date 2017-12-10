@@ -63,6 +63,8 @@ int					set_borns(double to, double dn, double *born_sup, double *born_inf)
 		else
 			*born_inf = max(to, *born_inf);
 	}
+	else if (dn < 0)
+		return (1);
 	else
 		return (0);
 	return (1);

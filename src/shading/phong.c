@@ -62,7 +62,7 @@ t_color				calc_ambient(t_light *light)
 **	+ [rs,gs,bs]max0(R•Li)p ) )
 */
 
-void				shade_phong(t_geo	*geo, t_hp hp, t_light *l, t_ray *r)
+void				shade_phong(t_geo *geo, t_hp hp, t_light *l, t_ray *r)
 {
 	t_spot			*s;
 	double			lambertian;
@@ -77,6 +77,9 @@ void				shade_phong(t_geo	*geo, t_hp hp, t_light *l, t_ray *r)
 		normal = vec3_normalize_stack(hp.normal);
 		dir = vec3_normalize_stack(vec3_sub_stack(*s->pos, hp.p));
 		lambertian = vec3_dot(normal, dir);
+		//puts("lamborghini");
+		//printf("LAMBERTIAN %F\n", lambertian);
+		//lambertian = fabs(lambertian);
 		if (lambertian > 0.0)
 		{
 			color_add(calc_diffuse(mater, lambertian), &(r->color));

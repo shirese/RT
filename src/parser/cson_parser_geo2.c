@@ -72,6 +72,7 @@ int					add_sphere(int *fd, char **line, t_env *e)
 			sphere->radius = ft_atof(value);
 	}
 	add_geometry(geo, &(e->geos));
+	//print_cut(geo);
 	return (0);
 }
 
@@ -108,6 +109,6 @@ int					add_disk(int *fd, char **line, t_env *e)
 	if (geo->rotation)
 		rotate(&(disk->normal), *geo->rotation);
 	add_geometry(geo, &(e->geos));
-	
+	//print_cut(geo);
 	return (0);
 }

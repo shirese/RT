@@ -113,9 +113,6 @@ t_hp					hit_cone(t_geo *geo, t_ray r)
 	abcd[2] = cone_gamma(expr[1], geo, r);
 	abcd[3] = abcd[1] * abcd[1] - 4 * abcd[0] * abcd[2];
 	if (abcd[3] >= 0)
-	{
-		c_intersec(geo, r, abcd);
-		return (hp);
-	}
+		return (c_intersec(geo, r, abcd));
 	return (hp);
 }

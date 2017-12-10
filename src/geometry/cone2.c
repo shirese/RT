@@ -23,7 +23,7 @@ t_vec3				cone_normal(t_geo *geo, t_vec3 p)
 	t_vec3			sub;
 	t_vec3			add;
 
-	c = (t_cone*)geo;
+	c = (t_cone*)geo->curr;
 	sub = vec3_sub_stack(p, *geo->origin);
 	h = vec3_mult_stack(c->axis, vec3_dot(sub, c->axis));
 	add = vec3_add_stack(*geo->origin, h);

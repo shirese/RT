@@ -59,32 +59,16 @@ int					cson_parse(int fd, t_env *e)
 	
 	while (*line)
 	{
-		//puts(line);
 		if (!err && !ft_strncmp(line, "window", 6) && get_next_line(fd, &line))
-		{
-			puts("FRANCE");
 			err = parse_window(&fd, &line, e);
-		}
 		if (!err && !ft_strncmp(line, "camera", 6))
-		{
-			puts("BELGIUM");
-				err = parse_camera(&fd, &line, e);
-		}
+			err = parse_camera(&fd, &line, e);
 		if (!err && !ft_strncmp(line, "light", 5))
-		{
-			puts("ITALIA");
 			err = parse_light(&fd, &line, e);
-		}
 		if (!err && ft_strncmp(line, "light", 5))
-		{	
 			err = parse_geo(&fd, &line, e);
-			//puts("CHENIL");
-		}
 		if (handle_error(err) != 0)
-		{
-			puts("DEUTSCHLAND");
 			return (0);
-		}
 	}
 	return (1);
 }

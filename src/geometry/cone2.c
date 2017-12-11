@@ -14,10 +14,9 @@
 #include "rt.h"
 #include "vector.h"
 
-
 t_vec3				cone_normal(t_geo *geo, t_vec3 p)
 {
-	t_cone 			*c;
+	t_cone			*c;
 	t_vec3			h;
 	t_vec3			v;
 	t_vec3			sub;

@@ -27,7 +27,7 @@ int					belong_to_cone(t_geo *geo, t_vec3 pos)
 	proj = vec3_add_stack(c->axis, \
 		vec3_mult_stack(*geo->origin, vec3_dot(diff, c->axis)));
 	dif = vec3_sub_stack(proj, pos);
-	oh =  vec3_sub_stack(proj, *geo->origin); 
+	oh = vec3_sub_stack(proj, *geo->origin);
 	if (vec3_norm(dif) <= tan(c->angle) * vec3_norm(oh))
 		return (1);
 	return (0);

@@ -21,10 +21,10 @@ int					is_cut(t_geo *geo)
 	return (geo->nb_cut > 0);
 }
 
-int					is_on_cut(t_cut	*cut, t_hp hp)
+int					is_on_cut(t_cut *cut, t_hp hp)
 {
 	double			res;
-	
+
 	res = vec3_dot(vec3_sub_stack(hp.p, cut->cut_position), cut->cut_normal);
 	if (fabs(res) <= 0.0000001)
 		return (1);
@@ -41,7 +41,8 @@ int					belong_after_cut(t_geo *geo, t_hp hp)
 	i = 0;
 	while (i < geo->nb_cut)
 	{
-		res = vec3_dot(vec3_sub_stack(hp.p, cut[i].cut_position), cut[i].cut_normal);
+		res = vec3_dot(vec3_sub_stack(hp.p, cut[i].cut_position), \
+		cut[i].cut_normal);
 		if (res < 0)
 			return (0);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 13:30:03 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/05 12:34:52 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 16:25:37 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int					belong_to_cylinder(t_geo *geo, t_vec3 pos)
 	t_vec3			diff;
 	t_vec3			proj;
 	t_vec3			dif;
-	double 			len;
+	double			len;
 
 	cyl = (t_cylinder*)geo->curr;
 	diff = vec3_sub_stack(pos, *geo->origin);

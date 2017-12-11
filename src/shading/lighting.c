@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 12:20:53 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/08 16:09:15 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 16:58:48 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ void				apply_ambient_light(t_ray *r, t_env *e)
 void				apply_lights(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
 {
 	t_light			*light;
-	double			k_refl;
-
+	double			kr;
 
 	light = e->lights;
 	while (light != NULL && geo)
@@ -83,8 +82,8 @@ void				apply_lights(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
 			}
 			else if (r->rec < MAX_RECURSION)
 			{
-				k_refl = find_krefl(geo, hp, *r);
-				throw_new_rays(r, hp, k_refl, e);
+				kr = find_krefl(geo, hp, *r);
+				throw_new_rays(r, hp, kr, e);
 			}
 		}
 		light = light->next;

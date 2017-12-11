@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/23 11:19:35 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/05 12:52:03 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 16:03:30 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static int			handle_error(int err)
 			ft_printf("Invalid geo(sphere)\n");
 		if (err == 9)
 			ft_printf("Invalid geo(disk)\n");
+		if (err == 10)
+			ft_printf("Invalid geo(hyperbolic paraboloid)\n");
 		return (1);
 	}
 	return (0);

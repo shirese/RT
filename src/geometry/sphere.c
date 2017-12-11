@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 16:19:56 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/18 17:37:26 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 16:51:45 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 int					belong_to_sphere(t_geo *geo, t_vec3 pos)
 {
-	t_sphere	*sphere;
-	t_vec3		diff;
-	
+	t_sphere		*sphere;
+	t_vec3			diff;
+
 	sphere = (t_sphere*)geo->curr;
 	diff = vec3_sub_stack(*geo->origin, pos);
 	if (vec3_norm(diff) <= sphere->radius)

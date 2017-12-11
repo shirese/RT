@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:35:24 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/19 12:19:29 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 16:51:20 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 int					belong_to_plane(t_geo *geo, t_vec3 pos)
 {
-	t_plane		*plane;
-	t_vec3		diff;
+	t_plane			*plane;
+	t_vec3			diff;
 
 	plane = (t_plane*)geo->curr;
 	diff = vec3_sub_stack(*geo->origin, pos);
@@ -46,7 +46,7 @@ t_hp				hit_plane(t_geo *geo, t_ray r)
 	t_vec3			min;
 	t_plane			*p;
 	double			dot[2];
-	
+
 	hp.t = -1;
 	min = vec3_sub_stack(*geo->origin, r.origin);
 	p = geo->curr;

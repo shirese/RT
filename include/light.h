@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 17:36:26 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/05 14:52:11 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 16:20:43 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void				add_light(t_light *light, t_light **lights);
 int					setup_light(t_light **light);
 
 void				shade_phong(t_geo *geo, t_hp hp, t_light *l, t_ray *r);
-// void				apply_lights_beta(t_ray *r, t_geo *geo, t_hp hp, t_env *e);
-// void				local_light(t_env *env, t_hp hp, t_geo *geo, t_ray *r);
 t_color				calc_ambient(t_light *light);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 14:34:15 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/05 15:35:00 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 16:54:25 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 #include "matrice.h"
 #include "rt.h"
 
-t_ray				init_ray(t_vec3 origin, t_vec3 direction, int ray_type, float ior)
+t_ray				init_ray(t_vec3 origin, t_vec3 dir, int r_type, float ior)
 {
 	t_ray			r;
 
 	r.origin = origin;
-	r.direction = vec3_normalize_stack(direction);
+	r.direction = vec3_normalize_stack(dir);
 	r.color = color_new_stack(0.0, 0.0, 0.0);
-	r.type = ray_type;
+	r.type = r_type;
 	r.ior = ior;
 	r.rec = 0;
 	if (r.type == 1)

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/13 10:19:11 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/05 12:30:52 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 16:47:43 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int					belong_to_cone(t_geo *geo, t_vec3 pos)
 	proj = vec3_add_stack(c->axis, \
 		vec3_mult_stack(*geo->origin, vec3_dot(diff, c->axis)));
 	dif = vec3_sub_stack(proj, pos);
-	oh =  vec3_sub_stack(proj, *geo->origin); 
+	oh = vec3_sub_stack(proj, *geo->origin);
 	if (vec3_norm(dif) <= tan(c->angle) * vec3_norm(oh))
 		return (1);
 	return (0);

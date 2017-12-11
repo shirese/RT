@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/11 12:07:22 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 17:32:42 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,35 @@ t_screen			set_screen(t_win win, t_cam *cam)
 {
 	t_screen		scr;
 
-	scr.asp_ratio = (double)win.width / (double)win.height;
+	scr.asp_ratio = (double)win.w / (double)win.h;
 	scr.scale = tan(deg_to_rad(cam->fov * 0.5));
-	scr.nx = win.width;
-	scr.ny = win.height;
+	scr.nx = win.w;
+	scr.ny = win.h;
 	scr.low_left_corner = vec3_stack(-2.0, -1.0, -1.0);
 	scr.horizontal = vec3_stack(4.0, 0.0, 0.0);
 	scr.vertical = vec3_stack(0.0, 2.0, 0.0);
 	return (scr);
 }
 
-void				free_env(t_env **e)
+static void			free_lights(t_env **e)
 {
 	void			*tmp;
 
-	free((*e)->cam->pos);
-	free((*e)->cam->cam_to_world);
-	free((*e)->cam);
+	while ((*e)->lights)
+	{
+		tmp = (t_light *)(*e)->lights;
+		(*e)->lights = (*e)->lights->next;
+		free(((t_light *)tmp)->curr);
+		free(((t_light *)tmp)->color);
+		free(tmp);
+	}
+	free((*e)->lights);
+}
+
+static void			free_geos(t_env **e)
+{
+	void			*tmp;
+
 	while ((*e)->geos)
 	{
 		tmp = (t_geo *)(*e)->geos;
@@ -45,15 +57,15 @@ void				free_env(t_env **e)
 		free(tmp);
 	}
 	free((*e)->geos);
-	while ((*e)->lights)
-	{
-		tmp = (t_light *)(*e)->lights;
-		(*e)->lights = (*e)->lights->next;
-		free(((t_light *)tmp)->curr);
-		free(((t_light *)tmp)->color);
-		free(tmp);
-	}
-	free((*e)->lights);
+}
+
+void				free_env(t_env **e)
+{
+	free((*e)->cam->pos);
+	free((*e)->cam->cam_to_world);
+	free((*e)->cam);
+	free_geos(e);
+	free_lights(e);
 	free((*e)->img);
 	free(*e);
 }
@@ -62,8 +74,8 @@ void				init_environment(t_env **e)
 {
 	*e = malloc(sizeof(t_env));
 	(*e)->img = NULL;
-	(*e)->win.width = 0;
-	(*e)->win.height = 0;
+	(*e)->win.w = 0;
+	(*e)->win.h = 0;
 	(*e)->samp_rate = 4;
 	(*e)->cam = NULL;
 	(*e)->lights = NULL;

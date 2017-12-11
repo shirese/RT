@@ -6,14 +6,15 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 16:13:46 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/04 21:38:45 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 16:59:17 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-double 				lerp(double t, double a, double b) {
-	return a + t * (b - a);
+double				lerp(double t, double a, double b)
+{
+	return (a + t * (b - a));
 }
 
 double				positive_smallest(double a, double b)

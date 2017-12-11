@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 11:55:40 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/08 09:09:58 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 16:16:53 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int					parse_geo(int *fd, char **line, t_env *e)
 		return (add_sphere(fd, line, e));
 	else if (ft_strncmp(*line, "disk", 4) == 0)
 		return (add_disk(fd, line, e));
+	else if (ft_strncmp(*line, "paraboloid", 10) == 0)
+		return (add_paraboloid(fd, line, e));
 	return (4);
 }
 
@@ -98,14 +100,14 @@ int					parse_window(int *fd, char **line, t_env *e)
 		if (ft_strncmp(*line, "\twidth", 6) && ft_strncmp(*line, "\theight", 7))
 			break ;
 		else if (!ft_strncmp(*line, "\twidth", 6))
-			e->win.width = ft_atoi(value);
+			e->win.w = ft_atoi(value);
 		else if (!ft_strncmp(*line, "\theight", 7) && (value += 1))
-			e->win.height = ft_atoi(value);
+			e->win.h = ft_atoi(value);
 		get_next_line(*fd, line);
 	}
-	if ((e->win.width > 0 && e->win.width < 2550))
+	if ((e->win.w > 0 && e->win.w < 2550))
 	{
-		if ((e->win.height > 0 && e->win.height < 1440))
+		if ((e->win.h > 0 && e->win.h < 1440))
 			return (0);
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:26:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/08 11:04:35 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 17:26:36 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ t_env				*sdl_init(t_env *e)
 		return (NULL);
 	else
 	{
-		SDL_CreateWindowAndRenderer(e->win.width, e->win.height, \
+		SDL_CreateWindowAndRenderer(e->win.w, e->win.h, \
 			SDL_WINDOW_RESIZABLE, &(e->win.handle), &(e->win.rend));
 		if (!e->win.handle)
 		{
-			e->win.width = 0;
-			e->win.height = 0;
+			e->win.w = 0;
+			e->win.h = 0;
 		}
 		else
 			SDL_SetWindowTitle(e->win.handle, WIN_TITLE);
-		if (e->win.width == 0 || e->win.height == 0)
+		if (e->win.w == 0 || e->win.h == 0)
 			return (NULL);
 	}
 	return (e);
@@ -51,23 +51,10 @@ void				sdl_render(t_env *e)
 	SDL_Event		ev;
 
 	print_env(e);
-	// raytrace(e);
 	if (!raytrace_thread(e))
 		return ;
 	while (1 && SDL_WaitEvent(&ev))
 	{
-		// if (ev.type == SDL_WINDOWEVENT_RESIZED)
-		// {
-		// 	SDL_RenderClear(e->win.rend);
-		// 	if (!raytrace_thread(e))
-		// 		return ;
-		// }
-		// else if (ev.type == SDL_WINDOWEVENT_MAXIMIZED)
-		// {
-		// 	SDL_RenderClear(e->win.rend);
-		// 	raytrace(e);
-		// 	return ;
-		// }
 		if (ev.type == SDL_KEYDOWN && ev.key.keysym.sym == SDLK_ESCAPE)
 			return ;
 		else if (ev.type == SDL_QUIT)

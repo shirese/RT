@@ -6,10 +6,9 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/11 12:25:37 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 16:55:26 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "color.h"
 #include "ray.h"
@@ -18,7 +17,7 @@
 #include "rt.h"
 #include "utils.h"
 
-void				throw_reflect_ray(t_ray *r, t_hp hp, double k_refl, t_env *e)
+void				throw_reflect_ray(t_ray *r, t_hp hp, double kr, t_env *e)
 {
 	t_ray refl;
 
@@ -27,14 +26,14 @@ void				throw_reflect_ray(t_ray *r, t_hp hp, double k_refl, t_env *e)
 	if (refl.type != 0)
 	{
 		throw_ray(&refl, e);
-		color_mult_fac(&(refl.color), k_refl);
+		color_mult_fac(&(refl.color), kr);
 		color_add(refl.color, &(r->color));
 	}
 	else
 		r->rec--;
 }
 
-void				throw_refract_ray(t_ray *r, t_hp hp, double k_refl, t_env *e)
+void				throw_refract_ray(t_ray *r, t_hp hp, double kr, t_env *e)
 {
 	t_ray			refr;
 
@@ -43,20 +42,20 @@ void				throw_refract_ray(t_ray *r, t_hp hp, double k_refl, t_env *e)
 	if (refr.type != 0)
 	{
 		throw_ray(&refr, e);
-		color_mult_fac(&(refr.color), (1 - k_refl));
+		color_mult_fac(&(refr.color), (1 - kr));
 		color_add(refr.color, &(r->color));
 	}
 	else
 		r->rec--;
 }
 
-void				throw_new_rays(t_ray *r, t_hp hp, double k_refl, t_env *e)
+void				throw_new_rays(t_ray *r, t_hp hp, double kr, t_env *e)
 {
-	if (k_refl < 1.)
+	if (kr < 1.)
 	{
 		r->rec++;
-		throw_refract_ray(r, hp, k_refl, e);
+		throw_refract_ray(r, hp, kr, e);
 	}
 	r->rec++;
-	throw_reflect_ray(r, hp, k_refl, e);
+	throw_reflect_ray(r, hp, kr, e);
 }

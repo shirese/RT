@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 18:39:18 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/05 15:50:00 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 16:47:10 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int					add_cone(int *fd, char **line, t_env *e)
 	geo = NULL;
 	if (!malloc_geo((void **)(&cone), sizeof(t_cone), 2, &geo))
 		return (6);
+	cone->angle = 0;
+	cone->axis = vec3_stack(0., 0., 0.);
 	while (get_next_line(*fd, line) && **line == '\t' && (value = *line + 4))
 	{
 		if (ft_strncmp(*line, "\tangle", 6) && ft_strncmp(*line, "\taxis", 5))
@@ -103,6 +105,8 @@ int					add_cylinder(int *fd, char **line, t_env *e)
 	geo = NULL;
 	if (!malloc_geo((void **)(&cylinder), sizeof(t_cylinder), 3, &geo))
 		return (7);
+	cylinder->radius = 0;
+	cylinder->axis = vec3_stack(0., 0., 0.);
 	while (get_next_line(*fd, line) && **line == '\t' && (value = *line + 4))
 	{
 		if (ft_strncmp(*line, "\tradius", 7) && ft_strncmp(*line, "\taxis", 5))
@@ -119,3 +123,26 @@ int					add_cylinder(int *fd, char **line, t_env *e)
 	return (0);
 }
 
+int					add_sphere(int *fd, char **line, t_env *e)
+{
+	char			*value;
+	t_geo			*geo;
+	t_sphere		*sphere;
+
+	value = NULL;
+	geo = NULL;
+	if (!malloc_geo((void **)(&sphere), sizeof(t_sphere), 4, &geo))
+		return (8);
+	sphere->radius = 0;
+	while (get_next_line(*fd, line) && **line == '\t')
+	{
+		value = *line + 4;
+		if (ft_strncmp(*line, "\tradius", 7) != 0)
+			parse_geo_attributes(*line, value, geo);
+		else if (ft_strncmp(*line, "\tradius", 7) == 0 && (value += 5))
+			sphere->radius = ft_atof(value);
+	}
+	geo->type = 4;
+	add_geometry(geo, &(e->geos));
+	return (0);
+}

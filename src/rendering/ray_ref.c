@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 12:12:35 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/11 12:24:04 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 16:55:01 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int			value_c2(double n, double *c1, double *c2, t_vec3 *normal)
 	return (1);
 }
 
-t_ray				refract_ray(t_geo *geo, t_ray r, t_hp hp) 
+t_ray				refract_ray(t_geo *geo, t_ray r, t_hp hp)
 {
 	t_ray			r_refr;
 	t_vec3			t;
@@ -68,14 +68,15 @@ t_ray				refract_ray(t_geo *geo, t_ray r, t_hp hp)
 	c2 = 0.0;
 	ior_2 = find_ior(geo, r, hp);
 	c1 = clamp(vec3_dot(r.direction, hp.normal), -1, 1);
-	if (value_c2((r.ior / ior_2), &c1, &c2, &(hp.normal)) == - 1)
+	if (value_c2((r.ior / ior_2), &c1, &c2, &(hp.normal)) == -1)
 	{
 		r_refr.type = 0;
 		return (r_refr);
 	}
 	c2 = sqrt(c2);
 	t = vec3_mult_stack(r.direction, (r.ior / ior_2));
-	t = vec3_add_stack(vec3_mult_stack(hp.normal, (r.ior / ior_2) * c1 - c2), t);
+	t = vec3_add_stack(vec3_mult_stack(hp.normal, \
+		(r.ior / ior_2) * c1 - c2), t);
 	t = vec3_normalize_stack(t);
 	r_refr = init_ray(hp.p, t, 3, ior_2);
 	add_epsilon(&r_refr, hp.normal);

@@ -35,7 +35,6 @@ static t_vec3		paraboloid_norm(t_paraboloid *para, t_vec3 hp)
 
 	normal = vec3_stack(2 * hp.x / pow(para->facta, 2), -2 * hp.y / \
 			pow(para->factb, 2), -1 / para->height);
-	
 	normal = vec3_normalize_stack(normal);
 	return (normal);
 }

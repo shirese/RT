@@ -6,7 +6,7 @@
 /*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:26:59 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/01 22:08:41 by shirese          ###   ########.fr       */
+/*   Updated: 2017/12/11 15:09:17 by fgallois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_hp				(*g_get_obj_collider(int id))(t_geo *geo, t_ray r)
 	if (id == 7)
 		return (hit_parahyp);
 	return (NULL);
-	
 }
 
 static int			setup_geo(t_geo **geo)

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/09 11:37:25 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 15:26:20 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 16:51:59 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int					main(int ac, char **av)
 	t_env		*e;
 
 	e = NULL;
-	if (ac != 2 || !av[1]) 
+	if (ac != 2 || !av[1])
 		return (setup_error(0, e));
 	init_environment(&e);
 	if (!(cson_parse(open(av[1], O_RDONLY), e)))

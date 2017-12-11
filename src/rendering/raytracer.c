@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/01 22:05:18 by shirese          ###   ########.fr       */
+/*   Updated: 2017/12/11 16:55:12 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,69 +17,71 @@
 #include "rt.h"
 #include "utils.h"
 
-t_ray				init_ray(t_vec3 origin, t_vec3 direction, int ray_type)
+static int			is_nearest(t_hp latest_hp, t_hp *hp, double *md)
 {
-	t_ray			r;
+	double			dist;
 
-	r.origin = origin;
-	r.direction = vec3_normalize_stack(direction);
-	r.color = color_new_stack(0.0, 0.0, 0.0);
-	r.type = ray_type;
-	if (r.type == 1)
+	dist = vec3_norm(latest_hp.p);
+	if (dist < *md)
 	{
-		r.origin.x += 0.000001;
-		r.origin.y += 0.000001;
-		r.origin.z += 0.000001;
+		*md = dist;
+		*hp = latest_hp;
+		return (1);
 	}
-	return (r);
+	return (0);
 }
 
-static t_color		shoot_ray(double x, double y, t_env *e)
+t_geo				*ray_hit(t_ray *r, t_hp *hp, t_geo *from, t_env *e)
+{
+	double			min_dist;
+	t_hp			latest_hp;
+	t_ray			tr;
+	t_geo			*geo;
+	t_geo			*nearest_geo;
+
+	min_dist = INFINITY;
+	geo = e->geos;
+	nearest_geo = NULL;
+	while (geo != NULL)
+	{
+		tr = *r;
+		if (geo != from)
+		{
+			latest_hp = geo->is_hit(geo, tr);
+			if (latest_hp.t != -1 && is_nearest(latest_hp, hp, &min_dist))
+				nearest_geo = geo;
+		}
+		geo = geo->next;
+	}
+	return (nearest_geo);
+}
+
+void				throw_ray(t_ray *r, t_env *e)
 {
 	t_geo			*geo;
 	t_hp			hp;
+
+	geo = ray_hit(r, &hp, NULL, e);
+	if (r->type != 3)
+		apply_ambient_light(r, e);
+	apply_lights(r, geo, hp, e);
+}
+
+t_color				find_ray_color(double x, double y, t_env *e)
+{
+	t_geo			*geo;
 	t_ray			r;
 
 	geo = NULL;
 	r = init_ray(gen_ray_origin(*e->cam->cam_to_world, *e->cam->pos), \
-		gen_ray_direction(x, y, e), 0);
-	geo = ray_hit(&r, &hp, NULL, e);
-	apply_ambient_light(&r, e);
-	apply_lights(&r, geo, hp, e);
+		gen_ray_direction(x, y, e), 1, 1.0);
+	throw_ray(&r, e);
 	return (r.color);
-}
-
-t_color				get_px_col(int x, int y, t_env *e)
-{
-	double			ij[2];
-	double			px_pos[2];
-	static double	samp_count;
-	t_color			px_col;
-
-	if (e->samp_rate == 1)
-		return (shoot_ray(x, y, e));
-	px_col = color_new_stack(0., 0., 0.);
-	ij[0] = 0;
-	if (!samp_count)
-		samp_count = 1 / (pow((e->samp_rate / 2), 2));
-	while (ij[0]++ < e->samp_rate / 2)
-	{
-		ij[1] = 0;
-		while (ij[1]++ < e->samp_rate / 2)
-		{
-			px_pos[0] = x + ij[0] / (e->samp_rate / 2);
-			px_pos[1] = y + ij[1] / (e->samp_rate / 2);
-			color_add_no_clamp(shoot_ray(px_pos[0], px_pos[1], e), &px_col);
-		}
-	}
-	px_col.r *= samp_count;
-	px_col.g *= samp_count;
-	px_col.b *= samp_count;
-	return (px_col);
 }
 
 void				raytrace(t_env *e)
 {
+	t_color			c;
 	int				x;
 	int				y;
 
@@ -90,7 +92,8 @@ void				raytrace(t_env *e)
 		x = 0;
 		while (x < e->scr.nx)
 		{
-			sdl_draw_point(e->win.rend, x, y, get_px_col(x, y, e));
+			c = find_ray_color(x, y, e);
+			sdl_draw_point(e->win.rend, x, y, c);
 			x++;
 		}
 		y++;

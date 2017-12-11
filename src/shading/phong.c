@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:03:22 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/01 22:09:32 by shirese          ###   ########.fr       */
+/*   Updated: 2017/12/08 11:32:29 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,39 @@ static t_color		calc_diffuse(t_mater *mater, double lambertian)
 	return (diffuse);
 }
 
+t_color				calc_ambient(t_light *light)
+{
+	static t_color	ambient;
+
+	if (!light)
+		return (ambient);
+	ambient.r = light->color->r;
+	ambient.g = light->color->g;
+	ambient.b = light->color->b;
+	color_clamp(&ambient, 0.0, 1.0);
+	return (ambient);
+}
+
 /*
 **	[ra,ga,ba] + Σi( [Lr,Lg,Lb] ( [rd,gd,bd]max0(n•Li)
 **	+ [rs,gs,bs]max0(R•Li)p ) )
 */
 
-void				shade_phong(t_mater *mater, t_hp hp, t_light *l, t_ray *r)
+void				shade_phong(t_geo *geo, t_hp hp, t_light *l, t_ray *r)
 {
 	t_spot			*s;
 	double			lambertian;
+	t_vec3			normal;
+	t_vec3			dir;
+	t_mater			*mater;
 
+	mater = geo->mater;
 	if (l->type != 1)
 	{
 		s = (t_spot *)l->curr;
-		lambertian = vec3_dot(hp.normal, vec3_sub_stack(*s->pos, hp.p));
+		normal = vec3_normalize_stack(hp.normal);
+		dir = vec3_normalize_stack(vec3_sub_stack(*s->pos, hp.p));
+		lambertian = vec3_dot(normal, dir);
 		if (lambertian > 0.0)
 		{
 			color_add(calc_diffuse(mater, lambertian), &(r->color));

@@ -6,12 +6,24 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:35:24 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/19 12:19:29 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 16:51:20 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "geo.h"
 #include "rt.h"
+
+int					belong_to_plane(t_geo *geo, t_vec3 pos)
+{
+	t_plane			*plane;
+	t_vec3			diff;
+
+	plane = (t_plane*)geo->curr;
+	diff = vec3_sub_stack(*geo->origin, pos);
+	if (vec3_dot(diff, plane->normal) == 0.0)
+		return (1);
+	return (0);
+}
 
 static t_hp			hit_ortho(t_ray r, t_plane *p, t_vec3 min)
 {

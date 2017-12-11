@@ -18,8 +18,8 @@
 
 int					parse_light_colors(char *value, t_light **light)
 {
-	color_set(color_new_stack(aton_cson(&value), aton_cson(&value), \
-			aton_cson(&value)), (*light)->color);
+	color_set(color_new_stack(atof_cson(&value), atof_cson(&value), \
+			atof_cson(&value)), (*light)->color);
 	if ((*light)->color)
 		return (0);
 	return (1);
@@ -29,8 +29,8 @@ int					parse_light_direction(char *value, t_light **l)
 {
 	if ((*l)->type == 2)
 	{
-		((t_directional *)((*l)->curr))->dir = vec3_new(aton_cson(&value), \
-			aton_cson(&value), aton_cson(&value));
+		((t_directional *)((*l)->curr))->dir = vec3_new(atof_cson(&value), \
+			atof_cson(&value), atof_cson(&value));
 		return (0);
 	}
 	return (1);
@@ -43,8 +43,8 @@ int					parse_light_position(char *value, t_light **light)
 	spot = (*light)->curr;
 	if ((*light)->type == 3)
 	{
-		spot->pos = vec3_new(aton_cson(&value), \
-			aton_cson(&value), aton_cson(&value));
+		spot->pos = vec3_new(atof_cson(&value), \
+			atof_cson(&value), atof_cson(&value));
 		return (0);
 	}
 	return (1);

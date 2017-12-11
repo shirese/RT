@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 12:20:53 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/01 22:04:42 by shirese          ###   ########.fr       */
+/*   Updated: 2017/12/11 16:58:48 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int			has_shadow(void *light, t_vec3 hp_pos, t_geo *geo, t_env *e)
 	shadow_geo = NULL;
 	spot = light;
 	light_dir = vec3_sub_stack(*spot->pos, hp_pos);
-	shadow_ray = init_ray(hp_pos, light_dir, 1);
+	shadow_ray = init_ray(hp_pos, light_dir, 2, 1.0);
 	shadow_geo = ray_hit(&shadow_ray, &shadow_hp, geo, e);
 	if (shadow_geo && shadow_hp.t <= vec3_norm(light_dir))
 		return (1);
@@ -66,16 +66,25 @@ void				apply_ambient_light(t_ray *r, t_env *e)
 void				apply_lights(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
 {
 	t_light			*light;
+	double			kr;
 
 	light = e->lights;
-	while (light != NULL)
+	while (light != NULL && geo)
 	{
-		if (light->type != 1 && geo && r->type == 0)
+		if (light->type != 1)
 		{
-			if (has_shadow(light->curr, hp.p, geo, e) == 1)
-				color_mult(*light->color, &(r->color));
-			else
-				shade_phong(geo->mater, hp, light, r);
+			if (geo->mater->illum == 1)
+			{
+				if (r->type != 3 && has_shadow(light->curr, hp.p, geo, e) == 1)
+					color_mult(*light->color, &(r->color));
+				else
+					shade_phong(geo, hp, light, r);
+			}
+			else if (r->rec < MAX_RECURSION)
+			{
+				kr = find_krefl(geo, hp, *r);
+				throw_new_rays(r, hp, kr, e);
+			}
 		}
 		light = light->next;
 	}

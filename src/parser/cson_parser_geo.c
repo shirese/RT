@@ -196,7 +196,7 @@ int					add_parahyp(int *fd, char **line, t_env *e)
 
 	value = NULL;
 	geo = NULL;
-	if (!malloc_geo((void **)(&ph), sizeof(t_parahyp), 7, &geo))
+	if (!malloc_geo((void **)(&ph), sizeof(t_parahyp), 6, &geo))
 		return (11);
 	while (get_next_line(*fd, line) && **line == '\t' && (value = *line + 4))
 	{

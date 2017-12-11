@@ -28,7 +28,7 @@ t_hp				(*g_get_obj_collider(int id))(t_geo *geo, t_ray r)
 		return (hit_sphere);
 	if (id == 5)
 		return (hit_disk);
-	if (id == 7)
+	if (id == 6)
 		return (hit_parahyp);
 	return (NULL);
 }

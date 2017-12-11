@@ -25,5 +25,10 @@ int					belong_to(t_geo *g, t_vec3 pos)
 		return (belong_to_sphere(g, pos));
 	else if (g->type == 5)
 		return (belong_to_disk(g, pos));
+	else if (g->type == 6)
+	{
+		puts("JUIOL");
+		return (belong_to_paraboloid(g, pos));
+	}
 	return (0);
 }

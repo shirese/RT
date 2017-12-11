@@ -2,7 +2,7 @@ window:
 	width: 800
 	height: 500
 camera:
-	pos: 1.0, 3.0, 10.0
+	pos: 1.0, 3.0, 40.0
 	fov: 90
 light:
 	type: 1
@@ -26,4 +26,5 @@ paraboloid:
 	factb: 2.0
 	height: 1.0
 	ior: 1.1
+
 

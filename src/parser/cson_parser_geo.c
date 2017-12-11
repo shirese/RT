@@ -6,7 +6,7 @@
 /*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 18:39:18 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/01 22:09:54 by shirese          ###   ########.fr       */
+/*   Updated: 2017/12/11 15:35:23 by fgallois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ void				parse_geo_attributes(char *line, char *v, t_geo *geo)
 	if (ft_strncmp(line, "\tpos", 4) == 0 && (v += 2))
 		vec3_set(aton_cson(&v), aton_cson(&v), aton_cson(&v), geo->origin);
 	if (ft_strncmp(line, "\trotation", 9) == 0 && (v += 7))
-	{
 		geo->rotation = mat3_rot(aton_cson(&v), aton_cson(&v), -aton_cson(&v));
-	}
 	if (ft_strncmp(line, "\ttranslate", 10) == 0 && (v += 8))
 	{
 		vec3_trans(vec3_stack(aton_cson(&v), aton_cson(&v), \
@@ -194,17 +192,16 @@ int					add_parahyp(int *fd, char **line, t_env *e)
 {
 	char			*value;
 	t_geo			*geo;
-	t_parahyp			*ph;
+	t_parahyp		*ph;
 
 	value = NULL;
 	geo = NULL;
-	
 	if (!malloc_geo((void **)(&ph), sizeof(t_parahyp), 7, &geo))
 		return (11);
 	while (get_next_line(*fd, line) && **line == '\t' && (value = *line + 4))
 	{
-		if (ft_strncmp(*line, "\tfacta", 4) && ft_strncmp(*line, "\tfactb", 4) && \
-		ft_strncmp(*line, "\theight", 7))
+		if (ft_strncmp(*line, "\tfacta", 4) && ft_strncmp(*line, "\tfactb", 4)\
+				&& ft_strncmp(*line, "\theight", 7))
 			parse_geo_attributes(*line, value, geo);
 		else if (ft_strncmp(*line, "\tfacta", 6) == 0 && (value += 4))
 			ph->facta = ft_atof(value);
@@ -216,8 +213,6 @@ int					add_parahyp(int *fd, char **line, t_env *e)
 	geo->type = 7;
 	geo->curr = (void *)ph;
 	geo->is_hit = g_get_obj_collider(geo->type);
-	//if (geo->rotation)
-		//rotate(&(parahyp->axis), *geo->rotation);
 	add_geometry(geo, &(e->geos));
 	return (0);
 }

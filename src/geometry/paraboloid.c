@@ -68,7 +68,7 @@ t_hp				hit_paraboloid(t_geo *geo, t_ray r)
 		hp.p = point_at_parameter(hp.t, r);
 		hp.normal = paraboloid_norm(para, hp.p);
 	}
-	if (hp.t <= 0)
+	if (hp.t < 0)
 		hp.t = -1;
 	return (hp);
 }

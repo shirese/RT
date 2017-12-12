@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 17:40:36 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/22 12:00:12 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/12 12:21:48 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,19 @@ int					parse_light_direction(char *value, t_light **l)
 {
 	if ((*l)->type == 2)
 	{
-		((t_directional *)((*l)->curr))->dir = vec3_new(ft_atof_cson(&value), \
-			ft_atof_cson(&value), ft_atof_cson(&value));
+		vec3_set(ft_atof_cson(&value), ft_atof_cson(&value), \
+		ft_atof_cson(&value), ((t_directional *)((*l)->curr))->dir);
 		return (0);
 	}
 	return (1);
 }
 
-int					parse_light_position(char *value, t_light **light)
+int					parse_light_position(char *value, t_light **l)
 {
-	t_point			*spot;
-
-	spot = (*light)->curr;
-	if ((*light)->type == 3)
+	if ((*l)->type == 3)
 	{
-		spot->pos = vec3_new(ft_atof_cson(&value), \
-			ft_atof_cson(&value), ft_atof_cson(&value));
+		vec3_set(ft_atof_cson(&value), ft_atof_cson(&value), \
+		ft_atof_cson(&value), ((t_point *)((*l)->curr))->pos);
 		return (0);
 	}
 	return (1);
@@ -52,20 +49,20 @@ int					parse_light_position(char *value, t_light **light)
 
 int					assign_light(int type, t_light **light)
 {
+	(*light)->curr = NULL;
 	if (type == 1)
-	{
 		(*light)->type = 1;
-		(*light)->curr = (void *)malloc(sizeof(t_ambient));
-	}
 	else if (type == 2)
 	{
 		(*light)->type = 2;
 		(*light)->curr = (void *)malloc(sizeof(t_directional));
+		((t_directional *)(*light)->curr)->dir = vec3_new(0., 0., 0.);
 	}
 	else if (type == 3)
 	{
 		(*light)->type = 3;
 		(*light)->curr = (void *)malloc(sizeof(t_point));
+		((t_point *)(*light)->curr)->pos = vec3_new(0., 0., 0.);
 	}
 	else
 		return (1);

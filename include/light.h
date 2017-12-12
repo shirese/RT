@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 17:36:26 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/09 12:10:02 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/12 12:14:15 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 # define LIGHT_H
 
 # include "rt.h"
-
-typedef struct		s_ambient
-{
-	int				toto;
-}					t_ambient;
 
 typedef struct		s_directional
 {

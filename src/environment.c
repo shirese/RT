@@ -6,10 +6,11 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/09 12:33:10 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/12 12:26:03 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "light.h"
 #include "matrice.h"
 #include "rt.h"
 #include "vector.h"
@@ -26,6 +27,26 @@ t_screen			set_screen(t_win win, t_cam *cam)
 	scr.horizontal = vec3_stack(4.0, 0.0, 0.0);
 	scr.vertical = vec3_stack(0.0, 2.0, 0.0);
 	return (scr);
+}
+
+static void			free_lights(t_env **e)
+{
+	t_light			*tmp;
+
+	while ((*e)->lights)
+	{
+		tmp = (*e)->lights;
+		(*e)->lights = (*e)->lights->next;
+		if (tmp->type == 2)
+			free(((t_directional *)tmp->curr)->dir);
+		else if (tmp->type == 3)
+			free(((t_point *)tmp->curr)->pos);
+		if (tmp->curr)
+			free((tmp)->curr);
+		free((tmp)->color);
+		free(tmp);
+	}
+	free((*e)->lights);
 }
 
 void				free_env(t_env **e)
@@ -45,15 +66,7 @@ void				free_env(t_env **e)
 		free(tmp);
 	}
 	free((*e)->geos);
-	while ((*e)->lights)
-	{
-		tmp = (t_light *)(*e)->lights;
-		(*e)->lights = (*e)->lights->next;
-		free(((t_light *)tmp)->curr);
-		free(((t_light *)tmp)->color);
-		free(tmp);
-	}
-	free((*e)->lights);
+	free_lights(e);
 	free((*e)->img);
 	free(*e);
 }

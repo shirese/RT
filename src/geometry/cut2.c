@@ -75,9 +75,11 @@ double				value_t(t_vec3 normal, t_ray r, double *dn)
 	double			ndx;
 	double			to;
 
+	to = 0;
 	vec3_normalize(&normal);
 	ndx = vec3_dot(normal, vec3_normalize_stack(r.direction));
-	to = *dn / ndx;
+	if (ndx != 0.0)
+		to = *dn / ndx;
 	return (to);
 }
 

@@ -23,7 +23,7 @@ int					parse_geo(int *fd, char **line, t_env *e)
 		return (add_cone(fd, line, e));
 	else if (ft_strncmp(*line, "cylinder", 8) == 0)
 		return (add_cylinder(fd, line, e));
-	else if (ft_strncmp(*line, "plane", 4) == 0)
+	else if (ft_strncmp(*line, "plane", 5) == 0)
 		return (add_plane(fd, line, e));
 	else if (ft_strncmp(*line, "sphere", 6) == 0)
 		return (add_sphere(fd, line, e));

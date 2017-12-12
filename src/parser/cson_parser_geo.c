@@ -71,7 +71,6 @@ int					add_plane(int *fd, char **line, t_env *e)
 	if (geo->rotation)
 		rotate(&(plane->normal), *geo->rotation);
 	add_geometry(geo, &(e->geos));
-	//print_cut(geo);
 	return (0);
 }
 
@@ -98,19 +97,15 @@ int					add_cone(int *fd, char **line, t_env *e)
 		{
 			cone->axis = vec3_stack(atof_cson(&value), atof_cson(&value),\
 				atof_cson(&value));
-			//vec3_print(cone->axis);
-			
 		}
 		else if (ft_strncmp(*line, "\tangle", 6) == 0 && (value += 4))
 		{
-			cone->angle = ft_atof(value);
-			cone->angle = cone->angle * M_PI / 180;
+			cone->angle = ft_atof(value) * M_PI / 180;
 		}
 	}
 	if (geo->rotation)
 		rotate(&(cone->axis), *geo->rotation);
 	add_geometry(geo, &(e->geos));
-	//print_cut(geo);
 	return (0);
 }
 

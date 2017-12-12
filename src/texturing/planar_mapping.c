@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec4.c                                             :+:      :+:    :+:   */
+/*   planar_mapping.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/04 12:06:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/12 16:02:25 by chaueur          ###   ########.fr       */
+/*   Created: 2017/11/14 14:01:02 by chaueur           #+#    #+#             */
+/*   Updated: 2017/11/14 14:23:16 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "rt.h"
+#include "texture.h"
 #include "vector.h"
 
-t_vec4				vec4_stack(double x, double y, double z, double w)
+t_vec2				planar_mapping(t_hp hp, t_geo *geo)
 {
-	t_vec4			v;
+	t_vec3			vs;
+	t_vec3			vt;
+	double			ds;
+	double			dt;
 
-	v.x = x;
-	v.y = y;
-	v.z = z;
-	v.w = w;
-	return (v);
-}
 
-t_vec4				*vec4_new(double x, double y, double z, double w)
-{
-	t_vec4			*v;
-
-	v = malloc(sizeof(t_vec4));
-	v->x = x;
-	v->y = y;
-	v->z = z;
-	v->w = w;
-	return (v);
+	vs = vec3_stack(1., 0., 0.);
+	vt = vec3_stack(0., 1., 0.);
+	ds = dt = geo->origin->z;
+	return (vec2_stack(ds + vec3_dot(hp.p, vs), dt + vec3_dot(hp.p, vt)));
 }

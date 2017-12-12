@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:26:59 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/11 17:33:50 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/12 17:30:35 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static int			setup_geo(t_geo **geo)
 	(*geo)->type = 0;
 	(*geo)->curr = NULL;
 	(*geo)->is_hit = NULL;
+	(*geo)->tex = NULL;
 	(*geo)->next = NULL;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 14:34:15 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/11 16:54:25 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/12 17:29:30 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_vec3				gen_ray_direction(double i, double j, t_env *e)
 
 	x = (2 * (i + 0.5) / e->scr.nx - 1) * e->scr.scale;
 	y = (1 - 2 * (j + 0.5) / e->scr.ny) * e->scr.scale * 1 / e->scr.asp_ratio;
-	ray_direction = mat4_mult_vec(*e->cam->cam_to_world, vec3_stack(x, y, -1.));
+	ray_direction = mat4_mult_vec3(*e->cam->cam_to_world, vec3_stack(x, y, -1.));
 	vec3_normalize(&ray_direction);
 	return (ray_direction);
 }
@@ -61,6 +61,6 @@ t_vec3				gen_ray_origin(t_mat4 cam_to_world, t_vec3 cam_origin)
 {
 	t_vec3			ray_origin;
 
-	ray_origin = mat4_mult_vec(cam_to_world, cam_origin);
+	ray_origin = mat4_mult_vec3(cam_to_world, cam_origin);
 	return (ray_origin);
 }

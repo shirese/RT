@@ -19,12 +19,9 @@
 
 static int			is_nearest(t_hp latest_hp, t_hp *hp, double *md)
 {
-	double			dist;
-
-	dist = vec3_norm(latest_hp.p);
-	if (dist < *md)
+	if (latest_hp.t < *md)
 	{
-		*md = dist;
+		*md = latest_hp.t;
 		*hp = latest_hp;
 		return (1);
 	}
@@ -75,8 +72,7 @@ t_color				find_ray_color(double x, double y, t_env *e)
 	geo = NULL;
 	r = init_ray(gen_ray_origin(*e->cam->cam_to_world, *e->cam->pos), \
 		gen_ray_direction(x, y, e), 1, 1.0);
-	//if (x == 200 && y == 100)
-		throw_ray(&r, e);
+	throw_ray(&r, e);
 	return (r.color);
 }
 

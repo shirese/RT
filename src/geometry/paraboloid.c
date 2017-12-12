@@ -16,10 +16,10 @@
 #include "rt.h"
 #include "utils.h"
 
-int					belong_to_paraboloid(t_geo *geo, t_vec3 pos)
+int						belong_to_paraboloid(t_geo *geo, t_vec3 pos)
 {
-	t_paraboloid	*para;
-	double			res;
+	t_paraboloid		*para;
+	double				res;
 
 	para = (t_paraboloid*)geo->curr;
 	res = pow((pos.x / para->facta), 2) - pow((pos.y / para->factb), 2) - \
@@ -29,9 +29,9 @@ int					belong_to_paraboloid(t_geo *geo, t_vec3 pos)
 	return (0);
 }
 
-static t_vec3		paraboloid_norm(t_paraboloid *para, t_vec3 hp)
+static t_vec3			paraboloid_norm(t_paraboloid *para, t_vec3 hp)
 {
-	t_vec3			normal;
+	t_vec3				normal;
 
 	normal = vec3_stack(2 * hp.x / pow(para->facta, 2), -2 * hp.y / \
 			pow(para->factb, 2), -1 / para->height);
@@ -39,22 +39,30 @@ static t_vec3		paraboloid_norm(t_paraboloid *para, t_vec3 hp)
 	return (normal);
 }
 
-t_hp				hit_paraboloid(t_geo *geo, t_ray r)
+static void				fill_hp(double *abcd, t_paraboloid *para, t_ray r\
+	, t_hp *hp)
 {
-	t_paraboloid	*para;
-	t_hp			hp;
-	t_vec3			dir;
-	t_vec3			orig;
-	double			abcd[4];
+	hp->t = -1;
+	hp->t = positive_smallest((-abcd[1] - sqrt(abcd[3])) / (2 * abcd[0]), \
+	(-abcd[1] + sqrt(abcd[3])) / (2 * abcd[0]));
+	hp->p = point_at_parameter(hp->t, r);
+	hp->normal = paraboloid_norm(para, hp->p);
+}
+
+t_hp					hit_paraboloid(t_geo *geo, t_ray r)
+{
+	t_paraboloid		*para;
+	t_hp				hp;
+	t_vec3				dir;
+	t_vec3				orig;
+	double				abcd[4];
 
 	para = (t_paraboloid *)geo->curr;
 	dir = r.direction;
 	orig = r.origin;
+	hp.t = -1;
 	if (para->facta == 0 || para->factb == 0 || para->height == 0)
-	{
-		hp.t = -1;
 		return (hp);
-	}
 	abcd[0] = pow((dir.x / para->facta), 2) - pow((dir.y / para->factb), 2);
 	abcd[1] = (2 * orig.x * dir.x / pow(para->facta, 2)) - (2 * orig.y * dir.y \
 			/ pow(para->factb, 2)) - (dir.z / para->height);
@@ -62,13 +70,6 @@ t_hp				hit_paraboloid(t_geo *geo, t_ray r)
 	- (orig.z / para->height);
 	abcd[3] = pow(abcd[1], 2) - 4 * abcd[0] * abcd[2];
 	if (abcd[3] >= 0)
-	{
-		hp.t = positive_smallest((-abcd[1] - sqrt(abcd[3])) / (2 * abcd[0]), \
-				(-abcd[1] + sqrt(abcd[3])) / (2 * abcd[0]));
-		hp.p = point_at_parameter(hp.t, r);
-		hp.normal = paraboloid_norm(para, hp.p);
-	}
-	if (hp.t < 0)
-		hp.t = -1;
+		fill_hp(abcd, para, r, &hp);
 	return (hp);
 }

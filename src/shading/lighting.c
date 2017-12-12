@@ -29,7 +29,7 @@ static int			has_shadow(void *light, t_vec3 hp_pos, t_geo *geo, t_env *e)
 	light_dir = vec3_sub_stack(*spot->pos, hp_pos);
 	shadow_ray = init_ray(hp_pos, light_dir, 2, 1.0);
 	shadow_geo = ray_hit(&shadow_ray, &shadow_hp, geo, e);
-	if (shadow_geo && shadow_hp.t <= vec3_norm(light_dir))
+	if (shadow_geo && shadow_hp.t != -1 && shadow_hp.t <= vec3_norm(light_dir))
 		return (1);
 	return (0);
 }

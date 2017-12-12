@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/23 15:54:00 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/12 16:22:32 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ typedef struct		s_mater
 	t_color			ks;
 	double			alpha;
 }					t_mater;
+
 /*
-**	TYPE 1- Color 2- Normal map 3- Generated noise
+**	TYPE 1- Image 2- Normal map 3- Checkerboard 4- Perlin
 */
 typedef struct		s_tex
 {
@@ -64,9 +65,11 @@ typedef struct		s_tex
 	t_vec2			uv;
 	SDL_Surface		*curr;
 }					t_tex;
+
 /*
 **	TYPE 1- Plane 2- Cone 3- Cylinder 4- Sphere
 */
+
 typedef struct s_geo	t_geo;
 struct				s_geo
 {
@@ -76,6 +79,7 @@ struct				s_geo
 	t_mat3			*rotation;
 	t_mater			*mater;
 	t_hp			(*is_hit)(t_geo *geo, t_ray r);
+	t_tex			*tex;
 	t_geo			*next;
 };
 /*
@@ -139,7 +143,6 @@ typedef struct		s_env
 	t_cam			*cam;
 	t_geo			*geos;
 	t_light			*lights;
-	t_tex			*tex;
 	pthread_mutex_t	mutex;
 }					t_env;
 

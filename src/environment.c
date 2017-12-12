@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/23 15:55:27 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/12 17:05:09 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,29 @@ t_screen			set_screen(t_win win, t_cam *cam)
 	return (scr);
 }
 
+static void			free_geos(t_env **e)
+{
+	t_geo			*geo;
+
+	geo = NULL;
+	while ((*e)->geos)
+	{
+		geo = (*e)->geos;
+		free(geo->curr);
+		free(geo->origin);
+		free(geo->mater);
+		if (geo->tex)
+		{
+			if (geo->tex->curr)
+				SDL_FreeSurface(geo->tex->curr); 
+			free(geo->tex);
+		}
+		(*e)->geos = (*e)->geos->next;
+		free(geo);
+	}
+	free((*e)->geos);
+}
+
 void				free_env(t_env **e)
 {
 	void			*tmp;
@@ -39,16 +62,7 @@ void				free_env(t_env **e)
 	free((*e)->cam->pos);
 	free((*e)->cam->cam_to_world);
 	free((*e)->cam);
-	while ((*e)->geos)
-	{
-		tmp = (t_geo *)(*e)->geos;
-		free((*e)->geos->curr);
-		free((*e)->geos->origin);
-		free((*e)->geos->mater);
-		(*e)->geos = (*e)->geos->next;
-		free(tmp);
-	}
-	free((*e)->geos);
+	free_geos(e);
 	while ((*e)->lights)
 	{
 		tmp = (t_light *)(*e)->lights;
@@ -59,8 +73,6 @@ void				free_env(t_env **e)
 	}
 	free((*e)->lights);
 	free((*e)->img);
-	SDL_FreeSurface((*e)->tex->curr); 
-	free((*e)->tex);
 	pthread_mutex_destroy(&(*e)->mutex);
 	free(*e);
 }
@@ -75,6 +87,5 @@ void				init_environment(t_env **e)
 	(*e)->cam = NULL;
 	(*e)->lights = NULL;
 	(*e)->geos = NULL;
-	(*e)->tex = NULL;
 	pthread_mutex_init(&(*e)->mutex, NULL);
 }

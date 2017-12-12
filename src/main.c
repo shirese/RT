@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/09 11:37:25 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/23 16:00:18 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/12 17:01:20 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ int					main(int ac, char **av)
 		e->img = malloc(sizeof(t_color) * e->scr.nx * e->scr.ny);
 		cam_matrix(e->cam, *e->cam->pos, vec3_stack(0, 0, 1), \
 			vec3_stack(0, 1, 0));
-		e->tex = init_textures(3, NULL);
-		e->tex = init_textures(1, "textures/moon.jpg");
+		e->geos->tex = init_textures(4, NULL);
 		sdl_render(e);
 		sdl_stop(e);
 		free_env(&e);

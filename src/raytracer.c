@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/09 11:55:35 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/12 14:33:13 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ t_ray				init_ray(t_vec3 origin, t_vec3 direction, int ray_type)
 	t_ray			r;
 
 	r.origin = origin;
-	r.direction = vec3_normalize_stack(direction);
+	r.direction = direction;
+	// r.direction = vec3_normalize_stack(direction);
 	r.color = color_new_stack(0.0, 0.0, 0.0, 1.0);
 	r.type = ray_type;
 	if (r.type == 1)

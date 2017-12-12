@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 13:22:20 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/17 11:17:19 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/12 13:54:46 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_vec3				vec3_normalize_stack(t_vec3 v);
 t_vec3				vec3_sub_stack(t_vec3 v1, t_vec3 v2);
 t_vec3				vec3_stack(double x, double y, double z);
 
+void				vec3_mult_fact(t_vec3 *v, double factor);
 void				vec3_normalize(t_vec3 *v);
 void				vec3_print(t_vec3 v);
 void				vec3_rev(t_vec3 *v);

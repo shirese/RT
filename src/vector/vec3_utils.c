@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 12:03:03 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/16 17:59:56 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/12 14:18:50 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,5 @@ void				vec3_normalize(t_vec3 *v)
 
 void				vec3_print(t_vec3 v)
 {
-	ft_printf("[%f %f %f]\n", v.x, v.y, v.z);
+	printf("[%f %f %f]\n", v.x, v.y, v.z);
 }

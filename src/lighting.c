@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 12:20:53 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/10 14:45:57 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/12 14:34:25 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,9 @@ static int			has_shadow(t_light *light, t_vec3 hp_pos, t_geo *geo, t_env *e)
 	t_ray			shadow_ray;
 
 	shadow_geo = NULL;
-	if (light->type == 2)
-	{
-		light_dir = *((t_directional *)light->curr)->dir;
-		light_dir = vec3_mult_stack(light_dir, 1E6);
-		vec3_rev(&light_dir);
-	}
-	else if (light->type == 3)
-		light_dir = vec3_sub_stack(*((t_point *)light->curr)->pos, hp_pos);
-	else
+	if (light->type == 1)
 		return (0);
+	light_dir = get_light_dir(hp_pos, light);
 	shadow_ray = init_ray(hp_pos, light_dir, 1);
 	shadow_geo = ray_hit(&shadow_ray, &shadow_hp, geo, e);
 	if (shadow_geo && shadow_hp.t <= vec3_norm(light_dir))

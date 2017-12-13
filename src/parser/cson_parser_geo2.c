@@ -77,11 +77,8 @@ int								add_sphere(int *fd, char **line, t_env *e)
 		value = *line + 4;
 		if (ft_strncmp(*line, "\tradius", 7) == 0 && (value += 5))
 			sphere->radius = ft_atof(value);
-		else
-		{
-			if ((err = parse_geo_attributes(line, value, geo, fd)))
+		else if ((err = parse_geo_attributes(line, value, geo, fd)))
 				return (err);
-		}
 	}
 	add_geometry(geo, &(e->geos));
 	return (0);
@@ -95,6 +92,7 @@ int								add_disk(int *fd, char **line, t_env *e)
 	int							err;
 
 	geo = NULL;
+	value = NULL;
 	if (!malloc_geo((void **)(&disk), sizeof(t_disk), 5, &geo))
 		return (9);
 	while (get_next_line(*fd, line) && **line == '\t' && (value = *line + 4))
@@ -104,11 +102,8 @@ int								add_disk(int *fd, char **line, t_env *e)
 		else if (ft_strncmp(*line, "\tnormal", 7) == 0 && (value += 5))
 			disk->normal = vec3_stack(atof_cson(&value), \
 				atof_cson(&value), atof_cson(&value));
-		else
-		{
-			if ((err = parse_geo_attributes(line, value, geo, fd)))
+		else if ((err = parse_geo_attributes(line, value, geo, fd)))
 				return (err);
-		}
 	}
 	if (geo->rotation)
 		rotate(&(disk->normal), *geo->rotation);

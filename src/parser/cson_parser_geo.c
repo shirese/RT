@@ -76,11 +76,8 @@ int					add_plane(int *fd, char **line, t_env *e)
 		if (ft_strncmp(*line, "\tnormal", 7) == 0 && (value += 5))
 			plane->normal = vec3_stack(atof_cson(&value), \
 				atof_cson(&value), atof_cson(&value));
-		else
-		{
-			if ((err = parse_geo_attributes(line, value, geo, fd)))
+		else if ((err = parse_geo_attributes(line, value, geo, fd)))
 				return (err);
-		}
 	}
 	if (geo->rotation)
 		rotate(&(plane->normal), *geo->rotation);
@@ -96,6 +93,7 @@ int					add_cone(int *fd, char **line, t_env *e)
 	int				err;
 
 	geo = NULL;
+	value = NULL;
 	if (!malloc_geo((void **)(&cone), sizeof(t_cone), 2, &geo))
 		return (6);
 	while (get_next_line(*fd, line) && **line == '\t' && (value = *line + 4))
@@ -105,11 +103,8 @@ int					add_cone(int *fd, char **line, t_env *e)
 				atof_cson(&value));
 		else if (ft_strncmp(*line, "\tangle", 6) == 0 && (value += 4))
 			cone->angle = ft_atof(value) * M_PI / 180;
-		else
-		{
-			if ((err = parse_geo_attributes(line, value, geo, fd)))
+		else if ((err = parse_geo_attributes(line, value, geo, fd)))
 				return (err);
-		}
 	}
 	if (geo->rotation)
 		rotate(&(cone->axis), *geo->rotation);
@@ -125,6 +120,7 @@ int					add_cylinder(int *fd, char **line, t_env *e)
 	int				err;
 
 	geo = NULL;
+	value = NULL;
 	if (!malloc_geo((void **)(&cylinder), sizeof(t_cylinder), 3, &geo))
 		return (7);
 	while (get_next_line(*fd, line) && **line == '\t' && (value = *line + 4))
@@ -134,11 +130,8 @@ int					add_cylinder(int *fd, char **line, t_env *e)
 				atof_cson(&value), atof_cson(&value));
 		else if (ft_strncmp(*line, "\tradius", 7) == 0 && (value += 5))
 			cylinder->radius = ft_atof(value);
-		else
-		{
-			if ((err = parse_geo_attributes(line, value, geo, fd)))
+		else if ((err = parse_geo_attributes(line, value, geo, fd)))
 				return (err);
-		}
 	}
 	if (geo->rotation)
 		rotate(&(cylinder->axis), *geo->rotation);

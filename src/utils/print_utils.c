@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:59:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/11 17:43:17 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/13 13:34:05 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void			print_geo_mater(t_mater *m)
 	color_print(m->ks);
 	ft_printf("ILLUM\t\t[%d]\nIOR\t\t[%f]\nNS\t\t[%f]\n", m->illum, \
 		m->ior, m->ns);
-	ft_printf("\n");
+	ft_printf("REFLECTIVITY\t[%f]\n\n", m->reflectivity);
 }
 
 static void			print_geo2(t_geo *geo)

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 13:24:56 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/05 14:50:27 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/13 14:49:56 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_vec3				point_at_parameter(double t, t_ray r);
 
 void				translate_ray(t_ray *r, t_hp hp);
 void				throw_ray(t_ray *r, t_env *e);
-void				throw_new_rays(t_ray *r, t_hp hp, double kr, t_env *e);
-void				throw_reflect_ray(t_ray *r, t_hp hp, double kr, t_env *e);
-void				throw_refract_ray(t_ray *r, t_hp hp, double kr, t_env *e);
+void				throw_new_rays(t_ray *r, t_hp hp, t_geo *from, t_env *e);
+t_color				throw_reflect_ray(t_ray *r, t_hp hp, t_geo *from, t_env *e);
+t_color				throw_refract_ray(t_ray *r, t_hp hp, t_env *e);
 
 #endif

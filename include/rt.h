@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/12 17:33:48 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/13 12:39:32 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct		s_mater
 	int				illum;
 	double			ior;
 	double			ns;
+	double			reflectivity;
 }					t_mater;
 
 /*

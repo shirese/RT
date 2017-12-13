@@ -1,5 +1,5 @@
 window:
-	width: 1920
+	width: 800
 	height: 1080
 camera:
 	pos: 0.0, 0.0, 2.0

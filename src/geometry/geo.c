@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:26:59 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/13 13:51:05 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/13 16:03:06 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static int			setup_geo_mater(t_geo **geo)
 	(*geo)->mater->illum = 1;
 	(*geo)->mater->ior = 1.0;
 	(*geo)->mater->reflectivity = 1.;
+	(*geo)->mater->transparency = 1.;
 	return (1);
 }
 

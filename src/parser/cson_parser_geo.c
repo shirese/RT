@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 18:39:18 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/13 13:31:35 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/13 15:56:33 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void				parse_geo_attributes(char *line, char *v, t_geo *geo)
 		geo->mater->illum = ft_atof(v);
 	if (ft_strncmp(line, "\treflectivity", 13) == 0 && (v += 11))
 		geo->mater->reflectivity = ft_atof(v);
+	if (ft_strncmp(line, "\ttransparency", 13) == 0 && (v += 11))
+		geo->mater->transparency = ft_atof(v);
 	if (ft_strncmp(line, "\tior", 4) == 0 && (v += 2))
 		geo->mater->ior = ft_atof(v);
 }

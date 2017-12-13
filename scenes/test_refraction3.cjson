@@ -19,6 +19,7 @@ cylinder:
 	ks: 0.25, 0.25, 0.25
 	illum: 3
 	ior: 1.5
+	transparency: 0.5
 	axis: 0., 1, 0.2
 	radius: 0.4
 	height: 0.9

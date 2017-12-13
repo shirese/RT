@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/13 15:18:41 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/13 16:12:21 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ void				throw_new_rays(t_ray *r, t_hp hp, t_geo *from, t_env *e)
 	refl_col = throw_reflect_ray(r, hp, from, e);
 	color_mult_fac(&refl_col, kr);
 	color_add(refl_col, &(r->color));
+	color_mult_fac(&refr_col, from->mater->transparency);
 	color_add(refr_col, &(r->color));
 }

@@ -22,8 +22,8 @@ cylinder:
 	axis: 0., 1.0, 0.0
 	kd: 1., 1., 0., 1.
 	ks: 0.5, 0.5, 0.5, 1.
-	kg: 1.0, 1.0, 0.0, 0.0
 	ior: 1.0
 	radius: 0.3
-	cut_normal : 0.0, 1.0, 0.0
-	cut_position : 0.0, 0., -7.
+	cut_position : 0.0, 1.0, 0.0
+	cut_normal : 0.0, 0., -7.
+

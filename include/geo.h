@@ -53,8 +53,8 @@ typedef struct 		s_disk
 }					t_disk;
 
 void				add_geometry(t_geo *geo, t_geo **geos);
-void				parse_geo_attributes(char *line, char *value, t_geo *geo);
-void				parse_geo_attributes_2(char *line, char *value, t_geo *geo);
+int					parse_geo_attributes(char **line, char *value, t_geo *geo, int *fd);
+int					parse_geo_attributes_2(char **line, char *value, t_geo *geo, int *fd);
 int					add_parahyp(int *fd, char **line, t_env *e);
 double				beta2_cone(double expr, double n, double angle);
 double				beta_cone(double expr, double n, double a, double o);

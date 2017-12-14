@@ -55,6 +55,7 @@ static void			print_geo_mater(t_mater *m)
 
 static void			print_geo2(t_geo *geo)
 {
+	t_geo		*tmp;
 	if (geo->type == 3)
 	{
 		ft_printf("CYLINDER\nRAD\t\t[%f]\nAXIS\t\t", \
@@ -76,9 +77,23 @@ static void			print_geo2(t_geo *geo)
 			((t_paraboloid *)(geo->curr))->factb,\
 			((t_paraboloid *)(geo->curr))->height);
 	}
+	if (is_scene_dug(geo))
+	{
+		tmp = geo;
+		ft_printf("NEGATIF OBJECTS :\n");
+		while (tmp)
+		{
+			if (tmp->neg)
+			{
+				print_geo(tmp->neg);
+				ft_printf("\n");
+			}
+			tmp = tmp->next;
+		}
+	}
 }
 
-static void			print_geo(t_geo *geo)
+void			print_geo(t_geo *geo)
 {
 	ft_printf("\n\n///		GEO	[%p]	////\n\nORIGIN		", (void *)geo);
 	vec3_print(*geo->origin);

@@ -36,12 +36,24 @@ int					main(int ac, char **av)
 {
 	t_env		*e;
 
+	t_sphere *sp;
 	e = NULL;
 	if (ac != 2 || !av[1]) 
 		return (setup_error(0, e));
 	init_environment(&e);
 	if (!(cson_parse(open(av[1], O_RDONLY), e)))
 		return (setup_error(1, e));
+	puts("ALLIER");
+	sp = new_sphere(e->geos, vec3_new(0.2, 0.8, 0.0), 0.3);
+	puts("ALLIER89");
+	add_coeff_to_objet((t_geo*)sp, color_new_stack(0.2, 0.8, 0.1),color_new_stack(0.5, 0.5, 0.5), 1.0);
+	puts("ALLIER55");
+	if (sp)
+	{
+		add_geometry_negative(e->geos, 0, (t_geo *)sp);
+	}
+
+
 	if (!(e = sdl_init(e)))
 	{
 		ft_printf("Error while initializing SDL\n");

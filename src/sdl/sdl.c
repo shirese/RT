@@ -50,6 +50,7 @@ void				sdl_render(t_env *e)
 {
 	SDL_Event		ev;
 
+	
 	print_env(e);
 	if (!raytrace_thread(e))
 		return ;

@@ -15,6 +15,22 @@
 #include "rt.h"
 #include "utils.h"
 
+
+t_disk				*new_disk(t_geo *g, t_vec3 *position, t_vec3 normal, double radius)
+{
+	t_disk 		*d;
+	t_geo		*geo;
+
+	geo = NULL;
+	if (!malloc_geo((void **)(&d), sizeof(t_disk), 5, &geo))
+		return (0);
+	*geo->origin = *position;
+	d = (t_disk*)geo->curr;
+	d->normal = normal;
+	d->radius = radius;
+	return (d);
+}
+
 int					belong_to_disk(t_geo *geo, t_vec3 pos)
 {
 	t_disk			*d;

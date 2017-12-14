@@ -15,6 +15,20 @@
 #include "rt.h"
 #include "utils.h"
 
+t_sphere			*new_sphere(t_geo *g, t_vec3 *position, double radius)
+{
+	t_sphere 	*sphere;
+	t_geo		*geo;
+
+	geo = NULL;
+	if (!malloc_geo((void **)(&sphere), sizeof(t_sphere), 4, &geo))
+		return (0);
+	*geo->origin = *position;
+	sphere = (t_sphere*)geo->curr;
+	sphere->radius = radius;
+	return (sphere);
+}
+
 int					belong_to_sphere(t_geo *geo, t_vec3 pos)
 {
 	t_sphere		*sphere;

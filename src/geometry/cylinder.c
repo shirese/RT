@@ -16,6 +16,21 @@
 #include "rt.h"
 #include "utils.h"
 
+t_cylinder				*new_cylinder(t_geo *g, t_vec3 *position, t_vec3 axis, double radius)
+{
+	t_cylinder 	*cyl;
+	t_geo		*geo;
+
+	geo = NULL;
+	if (!malloc_geo((void **)(&cyl), sizeof(t_cylinder), 3, &geo))
+		return (0);
+	*geo->origin = *position;
+	cyl = (t_cylinder*)geo->curr;
+	cyl->axis = axis;
+	cyl->radius = radius;
+	return (cyl);
+}
+
 int					belong_to_cylinder(t_geo *geo, t_vec3 pos)
 {
 	t_cylinder		*cyl;

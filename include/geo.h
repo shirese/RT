@@ -60,8 +60,8 @@ typedef struct		s_paraboloid
 }					t_paraboloid;
 
 void				add_geometry(t_geo *geo, t_geo **geos);
-void				parse_geo_attributes(char *line, char *value, t_geo *geo);
-void				parse_geo_attributes_2(char *line, char *value, t_geo *geo);
+int					parse_geo_attributes(char *line, char *v, t_geo *geo, int *fd);
+int					parse_geo_attributes_2(char *line, char *value, t_geo *geo, int *fd);
 
 t_vec3				cone_normal(t_geo *geo, t_cone *c, t_vec3 p);
 double				beta2_cone(double expr, double n, double angle);
@@ -87,4 +87,13 @@ int					belong_to_disk(t_geo *geo, t_vec3 pos);
 int					belong_to_sphere(t_geo *geo, t_vec3 pos);
 int					belong_to_plane(t_geo *geo, t_vec3 pos);
 
+t_cone				*new_cone(t_geo *g, t_vec3 *position, t_vec3 axis, double angle);
+t_cylinder			*new_cylinder(t_geo *g, t_vec3 *position, t_vec3 axis, double radius);
+t_disk				*new_disk(t_geo *g, t_vec3 *position, t_vec3 normal, double radius);
+t_paraboloid		*new_paraboloid(t_geo *g, t_vec3 *position, double a, double b);
+t_plane				*new_plane(t_geo *g, t_vec3 *position, t_vec3 normal);
+t_sphere			*new_sphere(t_geo *g, t_vec3 *position, double radius);
+int					is_geo_dug(t_geo *geo);
+int         		is_scene_dug(t_geo *geo);
+void				print_geo(t_geo *geo);
 #endif

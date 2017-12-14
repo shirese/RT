@@ -16,6 +16,23 @@
 #include "rt.h"
 #include "utils.h"
 
+
+t_paraboloid					*new_paraboloid(t_geo *g, t_vec3 *position, double a, double b)
+{
+	t_paraboloid	*pb;
+	t_geo			*geo;
+
+	geo = NULL;
+	if (!malloc_geo((void **)(&pb), sizeof(t_paraboloid), 6, &geo))
+		return (0);
+	*geo->origin = *position;
+	pb = (t_paraboloid*)geo->curr;
+	pb->facta = a;
+	pb->factb = b;
+	pb->height = 1.0;
+	return (pb);
+}
+
 int					belong_to_paraboloid(t_geo *geo, t_vec3 pos)
 {
 	t_paraboloid	*para;

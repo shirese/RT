@@ -51,6 +51,14 @@ static int			setup_geo_mater(t_geo **geo)
 	return (1);
 }
 
+void				add_coeff_to_objet(t_geo *geo, t_color kd,t_color ks, double ior)
+{
+	
+	/*geo->mater->kd = kd;
+	geo->mater->ks = ks;
+	geo->mater->ior = ior;*/
+}
+
 static int			setup_geo(t_geo **geo)
 {
 	*geo = malloc(sizeof(t_geo));
@@ -97,4 +105,27 @@ void				add_geometry(t_geo *geo, t_geo **geos)
 			tmp = tmp->next;
 		tmp->next = geo;
 	}
+}
+
+int				add_geometry_negative(t_geo *geo, int i, t_geo *neg0)
+{
+	t_geo		*tmp;
+
+	if (!geo || !neg0)
+		return (0);
+	else
+	{
+		tmp = geo;
+		while (tmp && i > 0)
+		{
+			i--;
+			tmp = tmp->next;
+		}
+		if (i == 0 && tmp)
+		{
+			tmp->neg = neg0;
+			return (1);
+		}
+	}
+	return (0);
 }

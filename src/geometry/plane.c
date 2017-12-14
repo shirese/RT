@@ -13,6 +13,20 @@
 #include "geo.h"
 #include "rt.h"
 
+t_plane				*new_plane(t_geo *g, t_vec3 *position, t_vec3 normal)
+{
+	t_plane 	*plane;
+	t_geo		*geo;
+
+	geo = NULL;
+	if (!malloc_geo((void **)(&plane), sizeof(t_plane), 1, &geo))
+		return (0);
+	*geo->origin = *position;
+	plane = (t_plane*)geo->curr;
+	plane->normal = normal;
+	return (plane);
+}
+
 int					belong_to_plane(t_geo *geo, t_vec3 pos)
 {
 	t_plane			*plane;

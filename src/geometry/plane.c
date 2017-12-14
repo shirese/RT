@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:35:24 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/13 10:52:13 by fgallois         ###   ########.fr       */
+/*   Updated: 2017/12/14 12:27:49 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 int					belong_to_plane(t_geo *geo, t_vec3 pos)
 {
-	t_plane		*plane;
-	t_vec3		diff;
+	t_plane			*plane;
+	t_vec3			diff;
 
 	plane = (t_plane*)geo->curr;
 	diff = vec3_sub_stack(*geo->origin, pos);

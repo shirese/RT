@@ -6,15 +6,17 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/05 16:15:47 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/14 12:23:51 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
+#include "ft_printf.h"
 #include "ray.h"
 #include "light.h"
 #include "pthread.h"
 #include "rt.h"
+#include "texture.h"
 #include "utils.h"
 
 static int			is_nearest(t_hp latest_hp, t_hp *hp, double *md)
@@ -62,8 +64,14 @@ void				throw_ray(t_ray *r, t_env *e)
 	t_hp			hp;
 
 	geo = ray_hit(r, &hp, NULL, e);
-	apply_ambient_light(r, e);
-	apply_lights(r, geo, hp, e);
+	if (r->type != 3)
+		apply_ambient_light(r, e);
+	if (geo)
+	{
+		if (geo->tex)
+			apply_texture(r, &hp, geo);
+		apply_lights(r, geo, hp, e);
+	}
 }
 
 t_color				find_ray_color(double x, double y, t_env *e)

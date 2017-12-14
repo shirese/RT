@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 18:07:50 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/18 10:26:24 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 16:59:00 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,3 @@ double				clamp(double x, double min, double max)
 		x = max;
 	return (x);
 }
-

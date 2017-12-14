@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 16:12:49 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/05 13:19:39 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/14 12:33:54 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,31 @@ typedef struct		s_sphere
 	double			radius;
 }					t_sphere;
 
-typedef struct 	s_parallelog
+typedef struct		s_parallelog
 {
 	t_vec3			direction1;
-	t_vec3			direction2;	
+	t_vec3			direction2;
 }					t_parallelog;
 
-typedef struct 		s_disk
+typedef struct		s_disk
 {
 	t_vec3			normal;
-	double 			radius;
+	double			radius;
 }					t_disk;
 
+typedef struct		s_paraboloid
+{
+	double			facta;
+	double			factb;
+	double			height;
+}					t_paraboloid;
+
 void				add_geometry(t_geo *geo, t_geo **geos);
-int					parse_geo_attributes(char **line, char *value, t_geo *geo, int *fd);
-int					parse_geo_attributes_2(char **line, char *value, t_geo *geo, int *fd);
+void				parse_geo_attributes(char **line, char *value, t_geo *geo, int *fd);
+void				parse_geo_attributes_2(char **line, char *value, t_geo *geo, int *fd);
 int					add_parahyp(int *fd, char **line, t_env *e);
+
+t_vec3				cone_normal(t_geo *geo, t_vec3 p);
 double				beta2_cone(double expr, double n, double angle);
 double				beta_cone(double expr, double n, double a, double o);
 double				alpha2_cone(double expr, double n, double angle);
@@ -64,11 +73,13 @@ double				alpha_cone(double expr, double n, double dir);
 t_hp				(*g_get_obj_collider(int id))(t_geo *geo, t_ray r);
 t_hp				hit_cone(t_geo *geo, t_ray r);
 t_hp				hit_cylinder(t_geo *geo, t_ray r);
+t_hp				hit_paraboloid(t_geo *geo, t_ray r);
 t_hp				hit_plane(t_geo *geo, t_ray r);
 t_hp				hit_sphere(t_geo *geo, t_ray r);
 t_hp				hit_disk(t_geo *geo, t_ray r);
 
 int					malloc_geo(void **type, int size, int geo_id, t_geo **geo);
+int					belong_to_paraboloid(t_geo *geo, t_vec3 pos);
 
 int					belong_to(t_geo *g, t_vec3 pos);
 int					belong_to_cone(t_geo *geo, t_vec3 pos);
@@ -87,7 +98,6 @@ int					is_on_cut(t_cut	*cut, t_hp hp);
 t_vec3				norm_cut(t_geo *geo, t_hp hp);
 int					register_cut(t_geo *geo, int *fd, char **line, char *value);
 void				print_cut(t_geo *geo);
-t_vec3				cone_normal(t_geo *geo, t_vec3 p);
 
 int					set_borns(double to, double dn, double *born_sup, double *born_inf);
 double				value_t(t_vec3 normal, t_ray r, double *dn);

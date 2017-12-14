@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/05 16:58:34 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/13 12:39:32 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@
 # include "vector.h"
 # include "time.h"
 
-# define WIN_TITLE "Raytracer v0.1"
+# define EPSILON 0.000001
 # define FLT_MAX 3.402823e+38
-# define MAX_RECURSION 7
-#define EPSILON 0.000001
+# define INV_PI 0.31830988618379067154
+# define INV2_PI 0.15915494309189533577
+# define MAX_RECURSION 4
+# define WIN_TITLE "Raytracer v0.2"
 
 typedef struct		s_color
 {
@@ -69,11 +71,23 @@ typedef struct		s_mater
 	int				illum;
 	double			ior;
 	double			ns;
+	double			reflectivity;
 }					t_mater;
+
+/*
+**	TYPE 1- Image 2- Normal map 3- Checkerboard 4- Perlin
+*/
+typedef struct		s_tex
+{
+	int				type;
+	t_vec2			uv;
+	SDL_Surface		*curr;
+}					t_tex;
 
 /*
 **	TYPE 1- Plane 2- Cone 3- Cylinder 4- Sphere
 */
+
 typedef struct s_geo	t_geo;
 struct				s_geo
 {
@@ -83,6 +97,7 @@ struct				s_geo
 	t_mat3			*rotation;
 	t_mater			*mater;
 	t_hp			(*is_hit)(t_geo *geo, t_ray r);
+	t_tex			*tex;
 	t_geo			*next;
 	t_cut			*cut;
 	int				nb_cut;
@@ -119,8 +134,8 @@ typedef struct		s_win
 {
 	SDL_Window		*handle;
 	SDL_Renderer	*rend;
-	int				width;
-	int				height;
+	int				w;
+	int				h;
 }					t_win;
 
 typedef struct		s_screen
@@ -148,6 +163,7 @@ typedef struct		s_env
 	t_cam			*cam;
 	t_geo			*geos;
 	t_light			*lights;
+	pthread_mutex_t	mutex;
 }					t_env;
 
 int					get_next_line(int const fd, char **line);

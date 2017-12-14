@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/23 11:19:35 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/13 10:52:31 by fgallois         ###   ########.fr       */
+/*   Updated: 2017/12/14 12:26:38 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static int			handle_error(int err)
 			ft_printf("Invalid geo(disk)\n");
 		if (err == 12)
 			ft_printf("Invalid cut(cut_normal has to be followed directly by cut_position)\n");
+		if (err == 10)
+			ft_printf("Invalid geo(hyperbolic paraboloid)\n");
 		return (1);
 	}
 	return (0);

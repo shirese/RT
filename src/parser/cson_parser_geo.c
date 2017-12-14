@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 18:39:18 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/14 13:06:33 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/14 14:43:46 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ t_geo *geo, int *fd)
 		geo->mater->reflectivity = ft_atof(v);
 	else if (ft_strncmp(*line, "\tior", 4) == 0 && (v += 2))
 		geo->mater->ior = ft_atof(v);
-	// else if (ft_strncmp(*line, "\tcut_position", 13) == 0 && (v += 11))
-	// {
-	// 	if (!register_cut(geo, fd, line, v))
-	// 		return ;
-	// }
+	else if (ft_strncmp(*line, "\tcut_position", 13) == 0 && (v += 11))
+	{
+		if (!register_cut(geo, fd, line, v))
+			return ;
+	}
 }
 
 int					add_plane(int *fd, char **line, t_env *e)
@@ -67,9 +67,8 @@ int					add_plane(int *fd, char **line, t_env *e)
 	geo = NULL;
 	if (!malloc_geo((void **)(&plane), sizeof(t_plane), 1, &geo))
 		return (5);
-	while (get_next_line(*fd, line) && **line == '\t')
+	while (get_next_line(*fd, line) && **line == '\t' && (v = *line + 4))
 	{
-		v = *line + 4;
 		if (ft_strncmp(*line, "\tnormal", 7) == 0 && (v += 5))
 			plane->normal = vec3_stack(atof_cson(&v), \
 				atof_cson(&v), atof_cson(&v));

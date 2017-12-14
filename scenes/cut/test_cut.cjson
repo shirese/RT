@@ -13,12 +13,11 @@ light:
 	dir: 0.0, 0.0, 0.0
 	pos: 2.0, 1.0, 2.0
 sphere:
-	pos: 0., 0.2, -.5
+	pos: 0., 0., -.5
 	kd: 0.83, 0.50, 0.16, 1.0
 	kd: 1., 0., 1., 1.
 	ks: 0.5, 0.5, 0.5, 1.
 	ior: 1.
 	radius: 0.8
+	cut_position : 0., 0., -0.5
 	cut_normal : 1.0, 1.0, 0.0
-	cut_position : 0., 0.2, -0.5
-

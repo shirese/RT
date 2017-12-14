@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/09 11:37:25 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/14 13:22:16 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/14 15:02:14 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int					main(int ac, char **av)
 		e->img = malloc(sizeof(t_color) * e->scr.nx * e->scr.ny);
 		cam_matrix(e->cam, *e->cam->pos, vec3_stack(0, 0, 1), \
 			vec3_stack(0, 1, 0));
+		e->geos->tex = init_textures(2, "textures/brick_bump.jpg");
 		sdl_render(e);
 		sdl_stop(e);
 		free_env(&e);

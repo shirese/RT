@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:59:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/13 13:34:05 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/14 13:44:35 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void				print_env(t_env *e)
 	while (geo)
 	{
 		print_geo(geo);
+		print_cut(geo);
 		geo = geo->next;
 	}
 }

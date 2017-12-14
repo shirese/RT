@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 13:30:03 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/14 12:29:43 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/14 14:00:54 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_vec3				cylinder_norm(t_geo *geo, t_hp hp)
 	t_vec3			project;
 	float			dot;
 
-	cyl = (t_cylinder *)geo;
+	cyl = (t_cylinder *)geo->curr;
 	tmp = vec3_sub_stack(hp.p, *geo->origin);
 	dot = vec3_dot(tmp, cyl->axis);
 	project = vec3_mult_stack(cyl->axis, dot);
@@ -76,13 +76,15 @@ t_hp				hit_cylinder(t_geo *geo, t_ray r)
 		hp_1.t = positive_smallest((-abcd[1] - sqrt(abcd[3])) / (2 * abcd[0]), \
 			(-abcd[1] + sqrt(abcd[3])) / (2 * abcd[0]));
 		hp_1.p = point_at_parameter(hp_1.t, r);
-		hp_1.normal = norm_cut(geo, hp_1);
-		
-		hp_2.t = non_positive_smallest((-abcd[1] - sqrt(abcd[3])) / (2 * abcd[0]), \
-			(-abcd[1] + sqrt(abcd[3])) / (2 * abcd[0]));
-		hp_2.p = point_at_parameter(hp_2.t, r);
-		hp_2.normal = norm_cut(geo, hp_2);
-		return (hit_and_cut(geo, hp_1, hp_2, r));
+		hp_1.normal = cylinder_norm(geo, hp_1);
+		if (is_cut(geo))
+		{
+			hp_2.t = non_positive_smallest((-abcd[1] - sqrt(abcd[3])) / (2 * abcd[0]), \
+				(-abcd[1] + sqrt(abcd[3])) / (2 * abcd[0]));
+			hp_2.p = point_at_parameter(hp_2.t, r);
+			hp_2.normal = norm_cut(geo, hp_2);
+			return (hit_and_cut(geo, hp_1, hp_2, r));
+		}
 	}
 	return (hp_1);
 }

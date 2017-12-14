@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 18:39:18 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/14 12:59:33 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/14 13:49:00 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,12 @@ int					register_cut(t_geo *geo, int *fd, char **line, char *v)
 	atof_cson(&v));
 	if (get_next_line(*fd, line) && **line == '\t' && (v = *line + 4))
 	{
-		if (!(new_cut = add_normal_cut(geo, line, v, cut_position)))
-			return (0);
 		geo->nb_cut++;
+		if (!(new_cut = add_normal_cut(geo, line, v, cut_position)))
+		{
+			geo->nb_cut--;
+			return (0);
+		}
 		geo->cut = new_cut;
 		return (1);
 	}

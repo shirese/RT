@@ -6,11 +6,11 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 10:50:59 by fgallois          #+#    #+#             */
-/*   Updated: 2017/12/14 13:17:23 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/14 13:51:43 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#include "ft_printf.h"
 #include "geo.h"
 #include "ray.h"
 #include "rt.h"
@@ -25,11 +25,10 @@ void				print_cut(t_geo *geo)
 	cut = geo->cut;
 	while (i < geo->nb_cut)
 	{
-		printf("Cut\n\tNormale \n");
-		vec3_print(cut[i].cut_normal);
-		printf("\tPosition \n");
+		ft_printf("\nCUT\nPOS\t\t");
 		vec3_print(cut[i].cut_position);
-		printf("\n");
+		ft_printf("NORMAL\t\t");
+		vec3_print(cut[i].cut_normal);
 		i++;
 	}
 }

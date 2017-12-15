@@ -1,6 +1,6 @@
 window:
-	width: 800
-	height: 1080
+	width: 400
+	height: 300
 camera:
 	pos: 0.0, 0.0, 2.0
 	fov: 90
@@ -37,7 +37,7 @@ sphere:
 	ks: 0.5, 0.5, 0.5
 	radius: 1.
 	illum: 4
-	ior: 1.
+	ior: 1.000293
 sphere:
 	pos: 0., 2., -3.
 	kd: 1, 1, 0
@@ -47,25 +47,9 @@ sphere:
 	ior: 2.417
 plane:
 	pos: 0., -1., -10.0
-	kd: .88, 0.88, 0.88, 1.0
-	normal: 0, 0, 1.
+	kd: .88, 0.88, 0.88
+	normal: 0, 0
 plane:
 	pos: 0., -1., 5.0
-	kd: .88, 0.88, 0.88, 1.0
+	kd: .88, 0.88, 0.88
 	normal: 0, 0, -1.
-plane:
-	pos: 5., 0., 0.
-	kd: .88, 0.88, 0.88, 1.0
-	normal: -1, 0, 0.
-plane:
-	pos: -5., 0., 0.0
-	kd: .88, 0.88, 0.88, 1.0
-	normal: 1., 0, 0.
-plane:
-	pos: 0., 5., 0.
-	kd: .88, 0.88, 0.88, 1.0
-	normal: 0, -1., 0.
-plane:
-	pos: 0., -5., 0.0
-	kd: .88, 0.88, 0.88, 1.0
-	normal: 0., 1., 0.

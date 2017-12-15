@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/13 12:39:32 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/15 16:42:35 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ typedef struct		s_ray
 	int				rec;
 }					t_ray;
 
-typedef struct      s_cut
+typedef struct		s_cut
 {
-    t_vec3          cut_normal;
-    t_vec3          cut_position;
-}                   t_cut;
+	t_vec3			cut_normal;
+	t_vec3			cut_position;
+}					t_cut;
 
 typedef struct		s_hit_point
 {

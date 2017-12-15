@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 10:51:32 by fgallois          #+#    #+#             */
-/*   Updated: 2017/12/14 12:29:34 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/15 15:03:25 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ t_hp				hit_disk(t_geo *geo, t_ray r)
 		hp.t = expr[0];
 		hp.p = point_at_parameter(hp.t, r);
 		hp.normal = d->normal;
+		if (is_cut(geo) && !belong_after_cut(geo, hp))
+			hp.t = -1;
 	}
 	return (hp);
 }

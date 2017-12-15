@@ -6,16 +6,10 @@ camera:
 	fov: 90
 light:
 	type: 1
-	color: 0.11, 0.11, 0.11, 1.0
+	color: 0.11, 0.11, 0.11
 light:
 	type: 3
-	color: 0.88, 0.88, 0.88, 1.
-	dir: 0.0, 0.0, 0.0
-	pos: 0.0, 0.0, 4.0
-light:
-	type: 3
-	color: 0.88, 0.88, 0.88, 1.
-	dir: 0.0, 0.0, 0.0
+	color: 0.88, 0.88, 0.88
 	pos: 0.0, 2.0, 2.0
 disk:
 	pos: -3.5, 1.5, -3.5
@@ -24,10 +18,10 @@ disk:
 	ior: 1.
 	normal: 0.0, 0.0, 1.0
 	radius: 0.5
-	cut_position: -3.5, 3.5, -3.5
-	cut_normal: -1.0, 0.0, 1.0
+	cut_position: -3.5, 1.5, -3.5
+	cut_normal: 1.0, 0.0, 0.0
 plane:
-	pos: 0., -1., -1.5
+	pos: 5., -1., -1.5
 	kd: 1, 0., 1., 
 	ks: 0.5, 0.5, 0.5,
 	ior: 1.2
@@ -35,9 +29,9 @@ plane:
 	cut_position: 0, -1., -1.5
 	cut_normal: 0.0, 0.0, 1.0
 	cut_position: 0., -1., -1.5
-	cut_normal: 1.0, 0.0, 1.0
+	cut_normal: 1.0, 0.0
 	cut_position: 0.5, -1., -1.5
-	cut_normal: -1.0, 0.0, 1.0
+	cut_normal: -1.0, 0.0
 	cut_position: 0, -1., -0.5
 	cut_normal: 0.0, 0.0, -1.0
 cone:

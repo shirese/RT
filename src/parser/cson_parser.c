@@ -39,8 +39,6 @@ static int			handle_error(int err)
 			ft_printf("Invalid geo(sphere)\n");
 		if (err == 9)
 			ft_printf("Invalid geo(disk)\n");
-		if (err == 12)
-			ft_printf("Invalid cut(cut_normal has to be followed directly by cut_position)\n");
 		if (err == 10)
 			ft_printf("Invalid geo(hyperbolic paraboloid)\n");
 		return (1);
@@ -58,7 +56,6 @@ int					cson_parse(int fd, t_env *e)
 	err = 0;
 	i = 0;
 	get_next_line(fd, &line);
-	
 	while (*line)
 	{
 		if (!err && !ft_strncmp(line, "window", 6) && get_next_line(fd, &line))

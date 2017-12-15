@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:59:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/14 13:44:35 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/15 11:34:08 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static void			print_lights(t_env *e)
 		}
 		if (light->type == 3)
 		{
-			ft_printf("\nPOS 		[%f %f %f]\n", ((t_spot *)light->curr)->pos->x,
+			ft_printf("\nPOS 		[%f %f %f]\n", \
+				((t_spot *)light->curr)->pos->x,
 				((t_spot *)light->curr)->pos->y,
 				((t_spot *)light->curr)->pos->z);
 		}

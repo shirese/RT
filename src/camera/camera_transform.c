@@ -102,11 +102,9 @@ void				cam_matrix(t_cam *cam, t_vec3 pos, t_vec3 look, t_vec3 up)
 	t_vec3			dir;
 	t_vec3			left;
 
+	v = vec4_stack(0.0, 0.0, 0.0, 0.0);
 	if (!cam->cam_to_world)
-	{
-		v = vec4_stack(0.0, 0.0, 0.0, 0.0);
 		cam->cam_to_world = mat4_new(v, v, v, v);
-	}
 	dir = vec3_normalize_stack(vec3_sub_stack(pos, look));
 	left = vec3_normalize_stack(vec3_cross_prod_stack(vec3_normalize_stack(up),\
 		dir));

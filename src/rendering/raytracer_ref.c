@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/13 15:18:41 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/15 11:26:30 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_color			throw_reflect_ray(t_ray *r, t_hp hp, t_geo *from, t_env *e)
 
 t_color			throw_refract_ray(t_ray *r, t_hp hp, t_env *e)
 {
-	t_ray			refr;
+	t_ray		refr;
 
 	refr = refract_ray(e->geos, *r, hp);
 	refr.rec = r->rec;
@@ -47,11 +47,11 @@ t_color			throw_refract_ray(t_ray *r, t_hp hp, t_env *e)
 	return (refr.color);
 }
 
-void				throw_new_rays(t_ray *r, t_hp hp, t_geo *from, t_env *e)
+void			throw_new_rays(t_ray *r, t_hp hp, t_geo *from, t_env *e)
 {
-	double			kr;
-	t_color			refr_col;
-	t_color			refl_col;
+	double		kr;
+	t_color		refr_col;
+	t_color		refl_col;
 
 	kr = find_krefl(from, hp, *r);
 	refr_col = color_new_stack(0., 0., 0.);

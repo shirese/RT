@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <imago2.h>
-
 #include "matrice.h"
 #include "rt.h"
 #include "rt_multithread.h"
@@ -61,7 +59,7 @@ static void			free_geos(t_env **e)
 		if (geo->tex)
 		{
 			if (geo->tex->curr)
-				SDL_FreeSurface(geo->tex->curr); 
+				SDL_FreeSurface(geo->tex->curr);
 			free(geo->tex);
 		}
 		(*e)->geos = (*e)->geos->next;
@@ -88,7 +86,7 @@ void				init_environment(t_env **e)
 	(*e)->img = NULL;
 	(*e)->win.w = 0;
 	(*e)->win.h = 0;
-	(*e)->samp_rate = 1;
+	(*e)->samp_rate = 8;
 	(*e)->cam = NULL;
 	(*e)->lights = NULL;
 	(*e)->geos = NULL;

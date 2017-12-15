@@ -14,6 +14,7 @@
 #include "cson_parser.h"
 #include "ft_printf.h"
 #include "geo.h"
+#include "ft_printf.h"
 #include "light.h"
 #include "matrice.h"
 #include "rt.h"

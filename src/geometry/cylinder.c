@@ -37,7 +37,7 @@ int					belong_to_cylinder(t_geo *geo, t_vec3 pos)
 
 t_vec3				cylinder_norm(t_geo *geo, t_hp hp)
 {
-	t_cylinder 		*cyl;
+	t_cylinder		*cyl;
 	t_vec3			normal;
 	t_vec3			tmp;
 	t_vec3			project;

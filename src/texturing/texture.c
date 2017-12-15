@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 15:44:36 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/12 17:58:15 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/15 11:33:55 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static Uint32		get_pixel(SDL_Surface *surface, int x, int y)
 	bpp = surface->format->BytesPerPixel;
 	p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
 	if (bpp == 1)
-		return *p;
+		return (*p);
 	if (bpp == 2)
-		return *(Uint16 *)p;
+		return (*(Uint16 *)p);
 	if (bpp == 3)
 	{
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
@@ -39,7 +39,7 @@ static Uint32		get_pixel(SDL_Surface *surface, int x, int y)
 	}
 	if (bpp == 4)
 		return (*(Uint32 *)p);
-	return 0;
+	return (0);
 }
 
 t_color				get_image_px(t_vec2 st, SDL_Surface *tex)

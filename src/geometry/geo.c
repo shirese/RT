@@ -36,7 +36,6 @@ t_hp				(*g_get_obj_collider(int id))(t_geo *geo, t_ray r)
 static int			setup_geo_mater(t_geo **geo)
 {
 	(*geo)->mater = malloc(sizeof(t_mater));
-	
 	if (!(*geo)->mater)
 	{
 		free((*geo)->origin);
@@ -71,7 +70,6 @@ static int			setup_geo(t_geo **geo)
 	(*geo)->is_hit = NULL;
 	(*geo)->tex = NULL;
 	(*geo)->next = NULL;
-	
 	return (1);
 }
 

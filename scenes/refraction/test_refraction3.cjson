@@ -1,6 +1,6 @@
 window:
-	width: 800
-	height: 600
+	width: 1680
+	height: 1050
 camera:
 	pos: 0.0, 0., 2.0
 	fov: 90
@@ -28,8 +28,6 @@ cylinder:
 	cut_normal: 0., -1., 0.
 cylinder:
 	pos: -0.2, -0.15, -0.5
-	translate: 1., 0., 0.
-	rotation: 90., 0., 0.
 	kd: 0.13, 0.13, 1.0
 	ks: 0.25, 0.25, 0.25
 	illum: 1

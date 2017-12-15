@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 18:41:29 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/13 12:53:10 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/15 11:27:25 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int			check_rot_event(SDL_Keycode k, t_env *e)
 	int				rot;
 
 	rot = 0;
-	if (k == SDLK_e  && (rot = 1))
+	if (k == SDLK_e && (rot = 1))
 		cam_rot_x(e->cam->cam_to_world, M_PI / 200);
 	if (k == SDLK_r && (rot = 1))
 		cam_rot_x(e->cam->cam_to_world, -M_PI / 200);

@@ -16,7 +16,7 @@
 #include "utils.h"
 
 
-t_disk				*new_disk(t_geo *g, t_vec3 *position, t_vec3 normal, double radius)
+t_geo				*new_disk(t_vec3 *position, t_vec3 normal, double radius)
 {
 	t_disk 		*d;
 	t_geo		*geo;
@@ -24,11 +24,18 @@ t_disk				*new_disk(t_geo *g, t_vec3 *position, t_vec3 normal, double radius)
 	geo = NULL;
 	if (!malloc_geo((void **)(&d), sizeof(t_disk), 5, &geo))
 		return (0);
-	*geo->origin = *position;
-	d = (t_disk*)geo->curr;
+	geo->origin = position;
 	d->normal = normal;
 	d->radius = radius;
-	return (d);
+	return (geo);
+}
+
+t_vec3				disk_norm(t_geo *geo)
+{
+	t_disk	*d;
+	d = (t_disk*)geo;
+
+	return (d->normal);
 }
 
 int					belong_to_disk(t_geo *geo, t_vec3 pos)

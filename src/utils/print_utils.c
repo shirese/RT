@@ -103,7 +103,7 @@ void			print_geo(t_geo *geo)
 		vec3_print(geo->rotation->r2);
 		vec3_print(geo->rotation->r3);
 	}
-	print_geo_mater(geo->mater);
+	//print_geo_mater(geo->mater);
 	if (geo->type == 1 && ft_printf("PLANE\nNORMAL\t\t"))
 		vec3_print(((t_plane *)(geo->curr))->normal);
 	else if (geo->type == 2)

@@ -14,7 +14,7 @@
 #include "rt.h"
 #include "vector.h"
 
-t_cone					*new_cone(t_geo *g, t_vec3 *position, t_vec3 axis, double angle)
+t_geo					*new_cone(t_vec3 *position, t_vec3 axis, double angle)
 {
 	t_cone 			*cone;
 	t_geo			*geo;
@@ -22,11 +22,10 @@ t_cone					*new_cone(t_geo *g, t_vec3 *position, t_vec3 axis, double angle)
 	geo = NULL;
 	if (!malloc_geo((void **)(&cone), sizeof(t_cone), 2, &geo))
 		return (0);
-	*geo->origin = *position;
-	cone = (t_cone*)geo->curr;
+	geo->origin = position;
 	cone->axis = axis;
-	cone->angle = angle * M_PI / 180;
-	return (cone);
+	cone->angle = angle * M_PI / 180;	
+	return (geo);
 }
 
 

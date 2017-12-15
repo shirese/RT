@@ -15,7 +15,7 @@
 #include "rt.h"
 #include "utils.h"
 
-t_sphere			*new_sphere(t_geo *g, t_vec3 *position, double radius)
+t_geo			*new_sphere(t_vec3 *position, double radius)
 {
 	t_sphere 	*sphere;
 	t_geo		*geo;
@@ -23,10 +23,14 @@ t_sphere			*new_sphere(t_geo *g, t_vec3 *position, double radius)
 	geo = NULL;
 	if (!malloc_geo((void **)(&sphere), sizeof(t_sphere), 4, &geo))
 		return (0);
-	*geo->origin = *position;
-	sphere = (t_sphere*)geo->curr;
+	geo->origin = position;
 	sphere->radius = radius;
-	return (sphere);
+	return (geo);
+}
+
+t_vec3				sphere_norm(t_geo *geo, t_vec3 pos)
+{
+	return (vec3_sub_stack(pos, *geo->origin));
 }
 
 int					belong_to_sphere(t_geo *geo, t_vec3 pos)
@@ -41,15 +45,14 @@ int					belong_to_sphere(t_geo *geo, t_vec3 pos)
 	return (0);
 }
 
-t_hp				hit_sphere(t_geo *geo, t_ray r)
+void				solutions_sphere(t_geo *geo, t_ray r, t_hp *sol)
 {
+	t_sphere		*sphere;
 	double			abcd[4];
 	double			t[2];
-	t_hp			hp;
 	t_vec3			oc;
-	t_sphere		*sphere;
 
-	hp.t = -1;
+	sol[0].t = -1;
 	sphere = (t_sphere *)geo->curr;
 	oc = vec3_sub_stack(r.origin, *geo->origin);
 	abcd[0] = vec3_dot(r.direction, r.direction);
@@ -60,10 +63,23 @@ t_hp				hit_sphere(t_geo *geo, t_ray r)
 	{
 		t[0] = (-abcd[1] - sqrt(abcd[3])) / (2 * abcd[0]);
 		t[1] = (-abcd[1] + sqrt(abcd[3])) / (2 * abcd[0]);
-		hp.t = positive_smallest(t[0], t[1]);
-		hp.p = point_at_parameter(hp.t, r);
-		hp.normal = vec3_sub_stack(hp.p, *geo->origin);
-		vec3_normalize(&hp.normal);
+		sol[0].t = positive_smallest(t[0], t[1]);
+		sol[0].p = point_at_parameter(sol[0].t, r);
+		sol[1].t = non_positive_smallest(t[0], t[1]);
+		sol[1].p = point_at_parameter(sol[1].t, r);
+		sol[0].normal = sphere_norm(geo, sol[0].p);
+		sol[1].normal = sphere_norm(geo, sol[1].p);
+		vec3_normalize(&sol[0].normal);
+		vec3_normalize(&sol[1].normal);
 	}
-	return (hp);
+}
+
+t_hp				hit_sphere(t_geo *geo, t_ray r)
+{
+	t_hp	sol[2];
+
+	solutions_sphere(geo, r, sol);
+	if (is_geo_dug(geo))
+		return (first_outside_neg(geo, r, sol));
+	return (sol[0]);
 }

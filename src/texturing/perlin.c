@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 08:03:53 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/15 12:42:21 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/15 12:54:24 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,14 @@ double				noise(double x, double y, double z)
 	uvw[1] = fade(y);
 	uvw[2] = fade(z);
 	norme_noise(xyz, aabb);
-	return (lerp(uvw[2], lerp(uvw[1], lerp(uvw[0], grad(p[aabb[1]], x, y, z), \
-			grad(p[aabb[4]], x - 1, y, z)), \
-			lerp(uvw[0], grad(p[aabb[2]], x, y - 1, z), \
-			grad(p[aabb[5]], x - 1, y - 1, z))), \
-			lerp(uvw[1], lerp(uvw[0], grad(p[aabb[1] + 1], x, y, z - 1), \
-			grad(p[aabb[4] + 1], x - 1, y, z - 1)), \
-			lerp(uvw[0], grad(p[aabb[2] + 1], x, y - 1, z - 1), \
-			grad(p[aabb[5] + 1], x - 1, y - 1, z - 1)))));
+	return (lerp(uvw[2], lerp(uvw[1], lerp(uvw[0], grad(g_p[aabb[1]], x, y, z), \
+			grad(g_p[aabb[4]], x - 1, y, z)), \
+			lerp(uvw[0], grad(g_p[aabb[2]], x, y - 1, z), \
+			grad(g_p[aabb[5]], x - 1, y - 1, z))), \
+			lerp(uvw[1], lerp(uvw[0], grad(g_p[aabb[1] + 1], x, y, z - 1), \
+			grad(g_p[aabb[4] + 1], x - 1, y, z - 1)), \
+			lerp(uvw[0], grad(g_p[aabb[2] + 1], x, y - 1, z - 1), \
+			grad(g_p[aabb[5] + 1], x - 1, y - 1, z - 1)))));
 }
 
 double				get_perlin_noise_pixel(int x, int y)

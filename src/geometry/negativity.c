@@ -90,6 +90,22 @@ double        value_dist_neg(t_geo *geo, t_ray r, t_hp *sol_geo)
     return (min);
 }
 
+void        normal_neg(t_geo *geo, t_hp hp)
+{
+    t_geo   *neg;
+    t_vec3  normal;
+
+    neg = geo->neg
+    while (neg)
+    {   
+        if (hp.t == neg->t_start || hp.t == neg->t_end)
+        {
+            normal = 
+        }
+
+    }
+}
+
 t_hp        first_outside_neg(t_geo *geo, t_ray r, t_hp *sol_geo)
 {
     t_hp    hp_after_neg;
@@ -100,6 +116,7 @@ t_hp        first_outside_neg(t_geo *geo, t_ray r, t_hp *sol_geo)
     if (x != -1)
     {
         hp_after_neg.p = point_at_parameter(x, r);
+        if (x )
         hp_after_neg.normal = normal_neg(geo, hp_after_neg);
     }
     return (hp_after_neg.t);

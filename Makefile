@@ -6,7 +6,7 @@
 #    By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/02 10:55:23 by chaueur           #+#    #+#              #
-#    Updated: 2017/12/12 17:59:26 by chaueur          ###   ########.fr        #
+#    Updated: 2017/12/15 11:24:16 by chaueur          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,9 @@ DIR_OBJ			= obj/
 SRC_MAIN		=	environment.c main.c
 SRC_CAMERA		=	camera.c camera_transform.c
 SRC_COLOR		=	color.c color_op.c color_op_2.c color_utils.c
-SRC_GEOS		=	cone.c cone2.c cone3.c cylinder.c disk.c geo.c paraboloid.c plane.c sphere.c
-SRC_MATS		=	mat3.c mat3_rot.c mat4.c
+SRC_GEOS		=	cone.c cone2.c cone3.c cut.c cut2.c cut3.c cylinder.c \
+					disk.c geo.c paraboloid.c plane.c sphere.c
+SRC_MATS		=	mat3.c mat3_rot.c mat4.c mat4_utils.c
 SRC_PARSER		=	get_next_line.c cson_parser.c cson_parser_2.c \
 					cson_parser_light.c cson_parser_geo.c cson_parser_geo2.c
 SRC_RENDER		=	ray.c ray_ref.c raytracer.c raytracer_ref.c render.c render_thr.c

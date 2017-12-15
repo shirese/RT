@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:01:02 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/14 14:23:16 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/15 11:28:44 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ t_vec2				planar_mapping(t_hp hp, t_geo *geo)
 	double			ds;
 	double			dt;
 
-
 	vs = vec3_stack(1., 0., 0.);
 	vt = vec3_stack(0., 1., 0.);
-	ds = dt = geo->origin->z;
+	ds = geo->origin->z;
+	dt = geo->origin->z;
 	return (vec2_stack(ds + vec3_dot(hp.p, vs), dt + vec3_dot(hp.p, vt)));
 }

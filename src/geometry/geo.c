@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:26:59 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/13 16:03:06 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/15 16:57:57 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static int			setup_geo(t_geo **geo)
 	if (!*geo)
 		return (0);
 	(*geo)->origin = vec3_new(0, 0, 0);
+	(*geo)->cut = NULL;
 	if (!(*geo)->origin || !(setup_geo_mater(geo)))
 	{
 		free(*geo);
@@ -65,6 +66,7 @@ static int			setup_geo(t_geo **geo)
 	}
 	(*geo)->rotation = NULL;
 	(*geo)->type = 0;
+	(*geo)->nb_cut = 0;
 	(*geo)->curr = NULL;
 	(*geo)->is_hit = NULL;
 	(*geo)->tex = NULL;

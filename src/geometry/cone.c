@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 11:45:04 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/18 15:39:44 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/13 10:51:24 by fgallois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,31 @@
 #include "rt.h"
 #include "utils.h"
 
-static void				c_intersec(t_geo *geo, t_ray r, double *abcd, t_hp *hp)
+t_hp					c_intersec(t_geo *geo, t_ray r, double *abcd)
 {
+	t_hp				hp_1;
+	t_hp				hp_2;
 	double				det;
-	double				t0;
-	double				t1;
 	t_cone				*c;
 	t_vec3				p;
 
-	det = sqrt(abcd[3]);
-	t0 = (-abcd[1] - det) / (2 * abcd[0]);
-	t1 = (-abcd[1] + det) / (2 * abcd[0]);
 	c = (t_cone *)geo->curr;
-	hp->t = positive_smallest(t0, t1);
-	hp->p = point_at_parameter(hp->t, r);
-	p = vec3_stack(r.origin.x + hp->t * r.direction.x, \
-		r.origin.y + hp->t * r.direction.y, \
-		r.origin.z + hp->t * r.direction.z);
-	hp->normal = cone_normal(geo, c, p);
+	det = sqrt(abcd[3]);
+	hp_1.t = positive_smallest((-abcd[1] - det) / (2 * abcd[0]),\
+	(-abcd[1] + det) / (2 * abcd[0]));
+	hp_1.p = point_at_parameter(hp_1.t, r);
+	p = vec3_stack(r.origin.x + hp_1.t * r.direction.x, \
+		r.origin.y + hp_1.t * r.direction.y, \
+		r.origin.z + hp_1.t * r.direction.z);
+	hp_1.normal = norm_cut(geo, hp_1);
+	hp_2.t = non_positive_smallest((-abcd[1] - det) / (2 * abcd[0]),\
+	(-abcd[1] + det) / (2 * abcd[0]));
+	hp_2.p = point_at_parameter(hp_2.t, r);
+	p = vec3_stack(r.origin.x + hp_2.t * r.direction.x, \
+		r.origin.y + hp_2.t * r.direction.y, \
+		r.origin.z + hp_2.t * r.direction.z);
+	hp_2.normal = norm_cut(geo, hp_2);
+	return (hit_and_cut(geo, hp_1, hp_2, r));
 }
 
 double					cone_gamma(double expr, t_geo *geo, t_ray r)
@@ -104,9 +111,6 @@ t_hp					hit_cone(t_geo *geo, t_ray r)
 	abcd[2] = cone_gamma(expr[1], geo, r);
 	abcd[3] = abcd[1] * abcd[1] - 4 * abcd[0] * abcd[2];
 	if (abcd[3] >= 0)
-	{
-		c_intersec(geo, r, abcd, &hp);
-		return (hp);
-	}
+		return (c_intersec(geo, r, abcd));
 	return (hp);
 }

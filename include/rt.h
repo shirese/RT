@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/13 15:55:57 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/15 16:59:06 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ typedef struct		s_ray
 	double			ior;
 	int				rec;
 }					t_ray;
+
+typedef struct		s_cut
+{
+	t_vec3			cut_normal;
+	t_vec3			cut_position;
+}					t_cut;
 
 typedef struct		s_hit_point
 {
@@ -94,6 +100,8 @@ struct				s_geo
 	t_hp			(*is_hit)(t_geo *geo, t_ray r);
 	t_tex			*tex;
 	t_geo			*next;
+	t_cut			*cut;
+	int				nb_cut;
 };
 /*
 **	The camera matrix is a 4x4 matrix with

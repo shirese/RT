@@ -1,0 +1,60 @@
+window:
+	width: 800
+	height: 600
+camera:
+	pos: 0.0, 0.0, 2.0
+	fov: 90
+light:
+	type: 1
+	color: 0.11, 0.11, 0.11
+light:
+	type: 3
+	color: 0.88, 0.88, 0.88
+	pos: 0.0, 2.0, 2.0
+disk:
+	pos: -3.5, 1.5, -3.5
+	kd: 0., 1., 1.,
+	ks: 0.5, 0.5, 0.5,
+	ior: 1.
+	normal: 0.0, 0.0, 1.0
+	radius: 0.5
+	cut_position: -3.5, 1.5, -3.5
+	cut_normal: 1.0, 0.0, 0.0
+plane:
+	pos: 5., -1., -1.5
+	kd: 1, 0., 1., 
+	ks: 0.5, 0.5, 0.5,
+	ior: 1.2
+	normal: 0, 1, 0.3
+	cut_position: 0, -1., -1.5
+	cut_normal: 0.0, 0.0, 1.0
+	cut_position: 0., -1., -1.5
+	cut_normal: 1.0, 0.0
+	cut_position: 0.5, -1., -1.5
+	cut_normal: -1.0, 0.0
+	cut_position: 0, -1., -0.5
+	cut_normal: 0.0, 0.0, -1.0
+cone:
+	pos: 1.7, -0.2, -1.
+	kd: 0., 1., 0.5,
+	ks: 0.5, 0.5, 0.5
+	axis: 0., 1.0, 2
+	angle: 25.
+	cut_position: 1.7, -0.7, -1
+	cut_normal: 0.0, 1.0, 0.0
+	cut_position: 1.7, 0.7, -1
+	cut_normal: 0.0, -1.0, -1.0
+cylinder:
+	pos: 0., -0.8, -1.5
+	axis: 0., 1., 0
+	rotation: 0., 0., 0.
+	kd: 1., 0., 0.,
+	ks: 0.5, 0.5, 0.5,
+	radius: 0.3
+	illum: 1.4
+	ior: 1.
+	radius: 0.4
+	cut_position: 0., -0.3, -1.5
+	cut_normal: 0.0, 1.0, 0.0
+	cut_position: 0., 0.5, -1.5
+	cut_normal: 0.0, -1.0, 0.0

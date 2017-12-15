@@ -10,3 +10,4 @@
  ☐ Fix shadow left column test_multiple_spot
  ☐ Fix specular Plane
  ☐ Fix checkboard && perlin pixel multithread issue
+ ☐ test_refl_multiple_spot.cjson fucked if illum 3 on cylinders

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:35:24 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/11 16:51:20 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/14 12:27:49 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ t_hp				hit_plane(t_geo *geo, t_ray r)
 			r.origin.z + dot[0] * r.direction.z);
 			hp.t = vec3_norm(vec3_sub_stack(r.origin, hp.p));
 			hp.normal = p->normal;
+			if (is_cut(geo) && !belong_after_cut(geo, hp))
+				hp.t = -1;
 		}
 	}
 	return (hp);

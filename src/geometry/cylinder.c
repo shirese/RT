@@ -75,7 +75,6 @@ void				solutions_cylinder(t_geo *geo, t_ray r, t_hp *sol)
 	
 	cyl = (t_cylinder *)geo->curr;
 	x = vec3_sub_stack(r.origin, *geo->origin);
-	vec3_normalize(&cyl->axis);
 	dot[0] = vec3_dot(r.direction, cyl->axis);
 	dot[1] = vec3_dot(x, cyl->axis);
 	abcd[0] = vec3_dot(r.direction, r.direction) - dot[0] * dot[0];

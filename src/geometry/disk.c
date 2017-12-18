@@ -56,10 +56,10 @@ t_hp				hit_disk(t_geo *geo, t_ray r)
 {
 	double			expr[2];
 	t_disk			*d;
-	t_hp			hp;
+	t_hp			sol;
 
 	d = (t_disk *)geo->curr;
-	hp.t = -1;
+	sol.t = -1;
 	vec3_normalize(&(d->normal));
 	expr[0] = ((*geo->origin).x - r.origin.x) * d->normal.x + \
 	((*geo->origin).y - r.origin.y) * d->normal.y + \
@@ -74,9 +74,9 @@ t_hp				hit_disk(t_geo *geo, t_ray r)
 		(*geo->origin).z, 2) - pow(d->radius, 2);
 	if (expr[1] <= 0)
 	{
-		hp.t = expr[0];
-		hp.p = point_at_parameter(hp.t, r);
-		hp.normal = d->normal;
+		sol.t = expr[0];
+		sol.p = point_at_parameter(sol.t, r);
+		sol.normal = d->normal;
 	}
-	return (hp);
+	return (sol);
 }

@@ -47,3 +47,11 @@ int					belong_to_cone(t_geo *geo, t_vec3 pos)
 		return (1);
 	return (0);
 }
+
+t_hp					hit_cone(t_geo *geo, t_ray r)
+{
+	t_hp		sol[2];
+
+	solutions_cone(geo, r, sol);
+	return (sol[0]);
+}

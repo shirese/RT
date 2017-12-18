@@ -207,4 +207,6 @@ double				ior_at_point2(t_geo *g, t_vec3 pos);
 void				add_coeff_to_objet(t_geo *geo, t_color kd,t_color ks, double ior);
 int					add_geometry_negative(t_geo *geo, int i, t_geo *neg0);
 t_hp                first_outside_neg(t_geo *geo, t_ray r, t_hp *sol_geo);
+t_hp                is_touched_by_neg(t_geo *geo, t_ray r, t_hp sol_geo);
+int        			set_borns_neg(t_geo *geo, t_ray r);
 #endif

@@ -100,12 +100,3 @@ void				solutions_cone(t_geo *geo, t_ray r, t_hp *sol)
 		c_intersec(geo, r, sol);
 	}
 }
-
-t_hp					hit_cone(t_geo *geo, t_ray r)
-{
-	t_hp		sol[2];
-
-	solutions_cone(geo, r, sol);
-	return (sol[0]);
-}
-

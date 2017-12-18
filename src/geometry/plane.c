@@ -63,12 +63,12 @@ static t_hp			hit_ortho(t_ray r, t_plane *p, t_vec3 min)
 
 t_hp				hit_plane(t_geo *geo, t_ray r)
 {
-	t_hp			hp;
+	t_hp			sol;
 	t_vec3			min;
 	t_plane			*p;
 	double			dot[2];
 
-	hp.t = -1;
+	sol.t = -1;
 	min = vec3_sub_stack(*geo->origin, r.origin);
 	p = geo->curr;
 	dot[0] = vec3_dot(p->normal, min);
@@ -80,12 +80,14 @@ t_hp				hit_plane(t_geo *geo, t_ray r)
 		dot[0] /= dot[1];
 		if (dot[0] > 0.0)
 		{
-			hp.p = vec3_stack(r.origin.x + dot[0] * \
+			sol.p = vec3_stack(r.origin.x + dot[0] * \
 			r.direction.x, r.origin.y + dot[0] * r.direction.y, \
 			r.origin.z + dot[0] * r.direction.z);
-			hp.t = vec3_norm(vec3_sub_stack(r.origin, hp.p));
-			hp.normal = p->normal;
+			sol.t = vec3_norm(vec3_sub_stack(r.origin, sol.p));
+			sol.normal = p->normal;
+			if (is_geo_dug(geo))
+				return (is_touched_by_neg(geo, r, sol));
 		}
 	}
-	return (hp);
+	return (sol);
 }

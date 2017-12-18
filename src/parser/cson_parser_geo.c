@@ -148,5 +148,6 @@ int					add_cylinder(int *fd, char **line, t_env *e)
 	if (geo->rotation)
 		rotate(&(cylinder->axis), *geo->rotation);
 	add_geometry(geo, &(e->geos));
+	vec3_normalize(&cylinder->axis);
 	return (0);
 }

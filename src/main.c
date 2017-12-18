@@ -45,15 +45,23 @@ int					main(int ac, char **av)
 		return (setup_error(1, e));
 
 	
-	g = new_cylinder(vec3_new(0., 0., -1.5),vec3_stack(1.0, 0., 0.), 0.6);
+	/*g = new_cylinder(vec3_new(0., 0.2, -1.5),vec3_stack(0.0, 0., 1.), 0.3);
 	add_coeff_to_objet(g, color_new_stack(0.2, 0.8, 0.1), color_new_stack(0.5, 0.5, 0.5), 1.0);
 	
 	if (g)
 	{
 		add_geometry_negative(e->geos, 0, g);
+	}*/
+
+	/*g = new_sphere(vec3_new(0., -1.0, -1.0), 0.5);
+	add_coeff_to_objet(g, color_new_stack(0.2, 0.8, 0.1), color_new_stack(0.5, 0.5, 0.5), 1.0);
+
+	if (g)
+	{
+		add_geometry_negative(e->geos, 0, g);
 	}
 
-	/*g = new_sphere(vec3_new(0.2, 0.8, 0.0), 0.3);
+	g = new_sphere(vec3_new(0., -1.0, -3.0), 0.5);
 	add_coeff_to_objet(g, color_new_stack(0.2, 0.8, 0.1), color_new_stack(0.5, 0.5, 0.5), 1.0);
 
 	if (g)

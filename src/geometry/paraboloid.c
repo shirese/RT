@@ -68,11 +68,9 @@ t_hp				hit_paraboloid(t_geo *geo, t_ray r)
 	para = (t_paraboloid *)geo->curr;
 	dir = r.direction;
 	orig = r.origin;
+	hp.t = -1;
 	if (para->facta == 0 || para->factb == 0 || para->height == 0)
-	{
-		hp.t = -1;
 		return (hp);
-	}
 	abcd[0] = pow((dir.x / para->facta), 2) - pow((dir.y / para->factb), 2);
 	abcd[1] = (2 * orig.x * dir.x / pow(para->facta, 2)) - (2 * orig.y * dir.y \
 			/ pow(para->factb, 2)) - (dir.z / para->height);
@@ -86,7 +84,5 @@ t_hp				hit_paraboloid(t_geo *geo, t_ray r)
 		hp.p = point_at_parameter(hp.t, r);
 		hp.normal = para_norm(geo, hp.p);
 	}
-	if (hp.t <= 0)
-		hp.t = -1;
 	return (hp);
 }

@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <imago2.h>
-
 #include "matrice.h"
 #include "rt.h"
 #include "rt_multithread.h"

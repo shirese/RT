@@ -46,30 +46,27 @@ void        both_solutions(t_ray *r, t_geo *neg, t_hp *sol)
         solutions_sphere(neg, *r, sol);
 }
 
-int        set_borns_neg(t_geo *geo, t_ray r)
+int        set_borns_neg(t_geo *neg, t_ray r)
 {
-    t_geo   *neg;
+    t_geo   *tmp;
     t_hp    sol[2];
 
-    neg = geo->neg;
-    while (neg)
+    tmp = neg;
+    while (tmp)
     {
-        if (!(neg->borns_neg = (t_inter*)malloc(sizeof(t_inter))))
+        if (!(tmp->borns_neg = (t_inter*)malloc(sizeof(t_inter))))
             return (0);
         both_solutions(&r, neg, sol);
-        neg->borns_neg->t_start = min(sol[0].t, sol[1].t);
-        neg->borns_neg->t_end = max(sol[0].t, sol[1].t);
-        neg = neg->next;
+        tmp->borns_neg->t_start = min(sol[0].t, sol[1].t);
+        tmp->borns_neg->t_end = max(sol[0].t, sol[1].t);
+        tmp = tmp->next;
     }
     return (1);
 }
 
 t_hp                is_touched_by_neg(t_geo *geo, t_ray r, t_hp sol_geo)
 {
-    t_geo           *neg;
-
-    neg = geo->neg;
-    if (set_borns_neg(geo, r) == 0)
+    if (set_borns_neg(geo->neg, r) == 0)
     {
         sol_geo.t = -1;
         return (sol_geo);

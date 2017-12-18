@@ -52,9 +52,8 @@ static int			setup_geo_mater(t_geo **geo)
 	return (1);
 }
 
-void				add_coeff_to_objet(t_geo *geo, t_color kd,t_color ks, double ior)
+void				add_coeff_to_objet(t_geo *geo, t_color kd, t_color ks, double ior)
 {
-	
 	geo->mater->kd = kd;
 	geo->mater->ks = ks;
 	geo->mater->ior = ior;

@@ -30,7 +30,11 @@ t_geo			*new_sphere(t_vec3 *position, double radius)
 
 t_vec3				sphere_norm(t_geo *geo, t_vec3 pos)
 {
-	return (vec3_sub_stack(pos, *geo->origin));
+	t_vec3 norm;
+
+	norm = vec3_sub_stack(pos, *geo->origin);
+	vec3_normalize(&norm);
+	return (norm);
 }
 
 int					belong_to_sphere(t_geo *geo, t_vec3 pos)
@@ -53,6 +57,7 @@ void				solutions_sphere(t_geo *geo, t_ray r, t_hp *sol)
 	t_vec3			oc;
 
 	sol[0].t = -1;
+	sol[1].t = -1;
 	sphere = (t_sphere *)geo->curr;
 	oc = vec3_sub_stack(r.origin, *geo->origin);
 	abcd[0] = vec3_dot(r.direction, r.direction);
@@ -69,8 +74,6 @@ void				solutions_sphere(t_geo *geo, t_ray r, t_hp *sol)
 		sol[1].p = point_at_parameter(sol[1].t, r);
 		sol[0].normal = sphere_norm(geo, sol[0].p);
 		sol[1].normal = sphere_norm(geo, sol[1].p);
-		vec3_normalize(&sol[0].normal);
-		vec3_normalize(&sol[1].normal);
 	}
 }
 
@@ -79,7 +82,11 @@ t_hp				hit_sphere(t_geo *geo, t_ray r)
 	t_hp	sol[2];
 
 	solutions_sphere(geo, r, sol);
-	if (is_geo_dug(geo))
-		return (first_outside_neg(geo, r, sol));
+	if (sol[0].t > 0)
+	{
+		if (is_geo_dug(geo))
+			return (first_outside_neg(geo, r, sol));
+		return (sol[0]);
+	}
 	return (sol[0]);
 }

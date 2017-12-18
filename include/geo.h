@@ -98,6 +98,7 @@ int					is_geo_dug(t_geo *geo);
 int         		is_scene_dug(t_geo *geo);
 void				print_geo(t_geo *geo);
 void				solutions_cone(t_geo *geo, t_ray r, t_hp *sol);
+void				solutions_sphere(t_geo *geo, t_ray r, t_hp *sol);
 t_vec3				usual_norm(t_geo *geo, t_hp hp);
 t_vec3				cylinder_norm(t_geo *geo, t_vec3 hp);
 t_vec3				sphere_norm(t_geo *geo, t_vec3 pos);

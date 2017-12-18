@@ -83,6 +83,7 @@ void				solutions_cylinder(t_geo *geo, t_ray r, t_hp *sol)
 	abcd[2] = vec3_dot(x, x) - dot[1] * dot[1] - cyl->radius * cyl->radius;
 	abcd[3] = abcd[1] * abcd[1] - 4 * abcd[0] * abcd[2];
 	sol[0].t = -1;
+	sol[1].t = -1;
 	if (abcd[3] > 0)
 	{
 		sol[0].t = positive_smallest((-abcd[1] - sqrt(abcd[3])) / (2 * abcd[0]), \
@@ -104,7 +105,7 @@ t_hp				hit_cylinder(t_geo *geo, t_ray r)
 	if (sol[0].t > 0)
 	{
 		if (is_geo_dug(geo))
-			return (sol[0]);
+			return (first_outside_neg(geo, r, sol));
 		return (sol[0]);
 	}
 	return (sol[0]);

@@ -81,6 +81,7 @@ void				solutions_cone(t_geo *geo, t_ray r, t_hp *sol)
 	
 	c = (t_cone *)geo->curr;
 	sol[0].t = -1;
+	sol[1].t = -1;
 	vec3_normalize(&(c->axis));
 	expr[0] = c->axis.x * r.direction.x + c->axis.y * r.direction.y + \
 		c->axis.z * r.direction.z;

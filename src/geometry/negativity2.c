@@ -52,12 +52,12 @@ static t_vec3        normal_neg(t_geo *geo, t_hp hp)
     {   
         if (hp.t == neg->borns_neg->t_start || hp.t == neg->borns_neg->t_end)
         {
-            normal = vec3_mult_stack(usual_norm(neg, hp), -1);
+            normal = vec3_mult_stack(negative_norm(neg, hp), -1);
             return (normal);
         }
          neg = neg->next;
     }
-    normal = usual_norm(geo, hp);
+    normal = negative_norm(geo, hp);
     return (normal);
 }
 

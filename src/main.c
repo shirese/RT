@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/09 11:37:25 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/13 12:50:13 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/18 12:21:03 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,15 @@ static int			setup_error(int type, t_env *e)
 int					main(int ac, char **av)
 {
 	t_env		*e;
+	t_geo		*g;
 
-	t_geo *g;
 	e = NULL;
-	if (ac != 2 || !av[1]) 
+	g = NULL;
+	if (ac != 2 || !av[1])
 		return (setup_error(0, e));
 	init_environment(&e);
 	if (!(cson_parse(open(av[1], O_RDONLY), e)))
-		return (setup_error(1, e));
-
-	
+		return (setup_error(1, e));	
 	/*g = new_cylinder(vec3_new(0., 0.2, -1.5),vec3_stack(0.0, 0., 1.), 0.3);
 	add_coeff_to_objet(g, color_new_stack(0.2, 0.8, 0.1), color_new_stack(0.5, 0.5, 0.5), 1.0);
 	
@@ -55,7 +54,6 @@ int					main(int ac, char **av)
 
 	/*g = new_sphere(vec3_new(0., -1.0, -1.0), 0.5);
 	add_coeff_to_objet(g, color_new_stack(0.2, 0.8, 0.1), color_new_stack(0.5, 0.5, 0.5), 1.0);
-
 	if (g)
 	{
 		add_geometry_negative(e->geos, 0, g);
@@ -63,12 +61,10 @@ int					main(int ac, char **av)
 
 	g = new_sphere(vec3_new(0., -1.0, -3.0), 0.5);
 	add_coeff_to_objet(g, color_new_stack(0.2, 0.8, 0.1), color_new_stack(0.5, 0.5, 0.5), 1.0);
-
 	if (g)
 	{
 		add_geometry_negative(e->geos, 0, g);
 	}*/
-
 	if (!(e = sdl_init(e)))
 	{
 		ft_printf("Error while initializing SDL\n");

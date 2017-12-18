@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/13 10:19:11 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/05 12:52:08 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/13 10:51:42 by fgallois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 
 t_vec3				cone_normal(t_geo *geo, t_vec3 p)
 {
-	t_cone 			*c;
+	t_cone			*c;
 	t_vec3			h;
 	t_vec3			v;
 	t_vec3			sub;
 	t_vec3			add;
 
-	c = (t_cone *)geo->curr;
+	c = (t_cone*)geo->curr;
 	sub = vec3_sub_stack(p, *geo->origin);
 	h = vec3_mult_stack(c->axis, vec3_dot(sub, c->axis));
 	add = vec3_add_stack(*geo->origin, h);

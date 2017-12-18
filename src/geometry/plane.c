@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:35:24 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/11 16:51:20 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/14 12:27:49 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 t_geo				*new_plane(t_vec3 *position, t_vec3 normal)
 {
-	t_plane 	*plane;
+	t_plane		*plane;
 	t_geo		*geo;
 
 	geo = NULL;
@@ -64,27 +64,25 @@ static t_hp			hit_ortho(t_ray r, t_plane *p, t_vec3 min)
 t_hp				hit_plane(t_geo *geo, t_ray r)
 {
 	t_hp			sol;
-	t_vec3			min;
 	t_plane			*p;
 	double			dot[2];
 
 	sol.t = -1;
-	min = vec3_sub_stack(*geo->origin, r.origin);
-	p = geo->curr;
-	dot[0] = vec3_dot(p->normal, min);
-	dot[1] = vec3_dot(p->normal, r.direction);
-	if (dot[1] == 0.0)
-		return (hit_ortho(r, p, min));
-	else if (fabs(dot[1]) > 1e-6)
+	p = (t_plane*)geo->curr;
+	dot[0] = vec3_dot(p->normal, vec3_sub_stack(*geo->origin, r.origin));
+	if (vec3_dot(p->normal, r.direction) == 0.0)
+		return (hit_ortho(r, p, vec3_sub_stack(*geo->origin, r.origin)));
+	else if (fabs(vec3_dot(p->normal, r.direction)) > 1e-6)
 	{
-		dot[0] /= dot[1];
+		dot[0] /= vec3_dot(p->normal, r.direction);
 		if (dot[0] > 0.0)
 		{
-			sol.p = vec3_stack(r.origin.x + dot[0] * \
-			r.direction.x, r.origin.y + dot[0] * r.direction.y, \
-			r.origin.z + dot[0] * r.direction.z);
+			sol.p = vec3_stack(r.origin.x + dot[0] * r.direction.x, r.origin.y \
+			+ dot[0] * r.direction.y, r.origin.z + dot[0] * r.direction.z);
 			sol.t = vec3_norm(vec3_sub_stack(r.origin, sol.p));
 			sol.normal = p->normal;
+			if (is_cut(geo) && !belong_after_cut(geo, sol))
+				sol.t = -1;
 			if (is_geo_dug(geo))
 				return (is_touched_by_neg(geo, r, sol));
 		}

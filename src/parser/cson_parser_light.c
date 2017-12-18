@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cson_parser_light.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 17:40:36 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/01 22:05:40 by shirese          ###   ########.fr       */
+/*   Updated: 2017/12/15 14:51:54 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,16 @@ int					parse_light_colors(char *value, t_light **light)
 	return (1);
 }
 
-int					parse_light_direction(char *value, t_light **l)
+int					parse_light_direction(char *value, t_light **light)
 {
-	if ((*l)->type == 2)
+	t_directional	*l_dir;
+
+	l_dir = (*light)->curr;
+	l_dir->dir = vec3_new(0., 0., 0.);
+	if ((*light)->type == 2)
 	{
-		((t_directional *)((*l)->curr))->dir = vec3_new(atof_cson(&value), \
-			atof_cson(&value), atof_cson(&value));
+		vec3_set(atof_cson(&value), atof_cson(&value), atof_cson(&value), \
+			l_dir->dir);
 		return (0);
 	}
 	return (1);
@@ -41,10 +45,11 @@ int					parse_light_position(char *value, t_light **light)
 	t_spot			*spot;
 
 	spot = (*light)->curr;
+	spot->pos = vec3_new(0., 0., 0.);
 	if ((*light)->type == 3)
 	{
-		spot->pos = vec3_new(atof_cson(&value), \
-			atof_cson(&value), atof_cson(&value));
+		vec3_set(atof_cson(&value), atof_cson(&value), atof_cson(&value), \
+			spot->pos);
 		return (0);
 	}
 	return (1);

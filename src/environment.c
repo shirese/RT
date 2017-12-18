@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/13 12:52:08 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/18 13:42:55 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void			free_geos(t_env **e)
 		if (geo->tex)
 		{
 			if (geo->tex->curr)
-				SDL_FreeSurface(geo->tex->curr); 
+				SDL_FreeSurface(geo->tex->curr);
 			free(geo->tex);
 		}
 		(*e)->geos = (*e)->geos->next;
@@ -88,7 +88,7 @@ void				init_environment(t_env **e)
 	(*e)->img = NULL;
 	(*e)->win.w = 0;
 	(*e)->win.h = 0;
-	(*e)->samp_rate = 4;
+	(*e)->samp_rate = 1;
 	(*e)->cam = NULL;
 	(*e)->lights = NULL;
 	(*e)->geos = NULL;

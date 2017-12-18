@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:13:10 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/16 13:43:57 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/15 11:29:17 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_vec2					sphere_map(t_vec3 p, t_geo *geo)
 	phi = spherical_phi(v);
 	return (vec2_stack(theta * INV_PI, phi * INV2_PI));
 }
-
 
 t_vec2					sphere_mapping(t_hp hp, t_geo *geo)
 {

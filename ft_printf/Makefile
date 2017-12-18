@@ -31,7 +31,7 @@ SRC = 	ft_printf.c get_options.c conver_num.c conver_char.c conver_wchar.c\
 		ft_strncpy.c ft_strnequ.c ft_strnew.c ft_strnstr.c ft_strrchr.c \
 		ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_tolower.c \
 		ft_toupper.c ft_lstnew.c ft_lstdelone.c ft_putendl.c ft_putendl_fd.c \
-		ft_putnbr_fd.c ft_lstadd.c ft_strrev.c ft_strnrev.c ft_strtoupper.c \
+		ft_putnbr_fd.c ft_lstadd.c ft_realloc.c ft_strrev.c ft_strnrev.c ft_strtoupper.c \
 		ft_itoa_base.c ft_itoa_unsig_base.c ft_ftoa.c ft_strfjoin.c\
 
 SRC_0 = $(SRC:%.c=%.o)

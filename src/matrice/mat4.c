@@ -6,23 +6,12 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 11:57:16 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/12 16:29:37 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/15 11:24:04 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrice.h"
 #include "vector.h"
-#include <stdio.h>
-
-t_vec3				mat4_mult_vec3(t_mat4 m, t_vec3 v)
-{
-	t_vec3			res;
-
-	res.x = m.r1.x * v.x + m.r1.y * v.y + m.r1.z * v.z + m.r1.w;
-	res.y = m.r2.x * v.x + m.r2.y * v.y + m.r2.z * v.z + m.r2.w;
-	res.z = m.r3.x * v.x + m.r3.y * v.y + m.r3.z * v.z + m.r3.w;
-	return (res);
-}
 
 t_mat4				mat4_transf(t_vec4 t, t_vec4 r)
 {

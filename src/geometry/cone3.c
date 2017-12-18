@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/13 10:19:11 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/11 16:47:43 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/14 12:29:51 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@ t_hp					hit_cone(t_geo *geo, t_ray r)
 	t_hp		sol[2];
 
 	solutions_cone(geo, r, sol);
+	if (is_cut(geo))
+			return (hit_and_cut(geo, sol[0], sol[1], r));
 	return (sol[0]);
 }

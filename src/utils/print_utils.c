@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:59:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/13 13:34:05 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/15 16:56:59 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static void			print_lights(t_env *e)
 		}
 		if (light->type == 3)
 		{
-			ft_printf("\nPOS 		[%f %f %f]\n", ((t_spot *)light->curr)->pos->x,
+			ft_printf("\nPOS 		[%f %f %f]\n", \
+				((t_spot *)light->curr)->pos->x,
 				((t_spot *)light->curr)->pos->y,
 				((t_spot *)light->curr)->pos->z);
 		}
@@ -50,7 +51,8 @@ static void			print_geo_mater(t_mater *m)
 	color_print(m->ks);
 	ft_printf("ILLUM\t\t[%d]\nIOR\t\t[%f]\nNS\t\t[%f]\n", m->illum, \
 		m->ior, m->ns);
-	ft_printf("REFLECTIVITY\t[%f]\n\n", m->reflectivity);
+	ft_printf("REFLECTIVITY\t[%f]\n", m->reflectivity);
+	ft_printf("TRANSPARENCY\t[%f]\n\n", m->transparency);
 }
 
 static void			print_geo2(t_geo *geo)
@@ -97,7 +99,7 @@ void			print_geo(t_geo *geo)
 {
 	ft_printf("\n\n///		GEO	[%p]	////\n\nORIGIN		", (void *)geo);
 	vec3_print(*geo->origin);
-	if (geo->rotation && ft_printf("\nROTATION	"))
+	if (geo->rotation && ft_printf("\nROTATION\n\n"))
 	{
 		vec3_print(geo->rotation->r1);
 		vec3_print(geo->rotation->r2);
@@ -108,7 +110,7 @@ void			print_geo(t_geo *geo)
 		vec3_print(((t_plane *)(geo->curr))->normal);
 	else if (geo->type == 2)
 	{
-		ft_printf("CONE\nANGLE	[%f]\nAXIS\t\t", \
+		ft_printf("CONE\nANGLE\t\t[%f]\nAXIS\t\t", \
 			((t_cone *)(geo->curr))->angle);
 		vec3_print(((t_cone *)(geo->curr))->axis);
 	}
@@ -132,6 +134,7 @@ void				print_env(t_env *e)
 	while (geo)
 	{
 		print_geo(geo);
+		print_cut(geo);
 		geo = geo->next;
 	}
 }

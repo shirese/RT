@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 16:19:56 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/11 16:51:45 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/14 13:49:10 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 #include "rt.h"
 #include "utils.h"
 
-t_geo			*new_sphere(t_vec3 *position, double radius)
+t_geo				*new_sphere(t_vec3 *position, double radius)
 {
-	t_sphere 	*sphere;
-	t_geo		*geo;
+	t_sphere		*sphere;
+	t_geo			*geo;
 
 	geo = NULL;
 	if (!malloc_geo((void **)(&sphere), sizeof(t_sphere), 4, &geo))
@@ -30,7 +30,7 @@ t_geo			*new_sphere(t_vec3 *position, double radius)
 
 t_vec3				sphere_norm(t_geo *geo, t_vec3 pos)
 {
-	t_vec3 norm;
+	t_vec3			norm;
 
 	norm = vec3_sub_stack(pos, *geo->origin);
 	vec3_normalize(&norm);
@@ -79,11 +79,13 @@ void				solutions_sphere(t_geo *geo, t_ray r, t_hp *sol)
 
 t_hp				hit_sphere(t_geo *geo, t_ray r)
 {
-	t_hp	sol[2];
+	t_hp			sol[2];
 
 	solutions_sphere(geo, r, sol);
 	if (sol[0].t > 0)
 	{
+		if (is_cut(geo))
+			return (hit_and_cut(geo, sol[0], sol[1], r));
 		if (is_geo_dug(geo))
 			return (first_outside_neg(geo, r, sol));
 		return (sol[0]);

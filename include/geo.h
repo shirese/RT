@@ -59,6 +59,15 @@ typedef struct	s_paraboloid
 	double			height;
 }					t_paraboloid;
 
+typedef struct	s_cube
+{
+	t_vec3			position;
+	t_vec3			direction1;
+	double			size;
+	t_vec3			direction2;
+	t_vec3			direction3;
+}				t_cube;
+
 void				add_geometry(t_geo *geo, t_geo **geos);
 void				parse_geo_attributes(char **line, char *v, \
 t_geo *geo, int *fd);
@@ -121,4 +130,16 @@ double				value_t(t_vec3 normal, t_ray r, double *dn);
 t_vec3				negative_norm(t_geo *geo, t_hp hp);
 void				fill_solution_cylinder(t_geo *geo, t_ray r, double *abcd, t_hp *sol);
 void				fill_solution_disk(t_geo *geo, t_ray r, double *expr, t_hp *sol);
+void				create_axis(t_geo *geo);
+t_hp				hit_cube(t_geo *geo, t_ray r);
+int					add_cube(int *fd, char **line, t_env *e);
+double				solutions_cube(t_geo *geo, t_ray r);
+t_vec3				cube_norm(t_geo *geo, t_hp hp);
+int					belong_to_cube(t_geo *geo, t_vec3 pos);
+t_geo				*new_cube(t_vec3 *position, t_vec3 axis, \
+	double radius);
+void				create_axis(t_geo *geo);
+t_geo				*new_cube(t_vec3 *position, t_vec3 dir1, \
+	double size);
+t_vec3				cube_norm(t_geo *geo, t_hp hp);
 #endif

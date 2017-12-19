@@ -66,6 +66,9 @@ int        set_borns_neg(t_geo *neg, t_ray r)
 
 t_hp                is_touched_by_neg(t_geo *geo, t_ray r, t_hp sol_geo)
 {
+    t_geo   *neg;
+
+    neg = geo->neg;
     if (set_borns_neg(geo->neg, r) == 0)
     {
         sol_geo.t = -1;

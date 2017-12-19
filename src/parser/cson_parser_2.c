@@ -31,6 +31,8 @@ int					parse_geo(int *fd, char **line, t_env *e)
 		return (add_disk(fd, line, e));
 	else if (ft_strncmp(*line, "paraboloid", 10) == 0)
 		return (add_paraboloid(fd, line, e));
+	else if (ft_strncmp(*line, "cube", 4) == 0)
+		return (add_cube(fd, line, e));
 	return (4);
 }
 

@@ -79,6 +79,16 @@ static void			print_geo2(t_geo *geo)
 			((t_paraboloid *)(geo->curr))->factb,\
 			((t_paraboloid *)(geo->curr))->height);
 	}
+	else if (geo->type == 7)
+	{
+		ft_printf("CUBE\nSIZE\t\t[%f]\nDIRECTIONS\n", \
+			((t_cube *)(geo->curr))->size,\
+			((t_paraboloid *)(geo->curr))->factb,\
+			((t_paraboloid *)(geo->curr))->height);
+		vec3_print(((t_cube *)(geo->curr))->direction1);
+		vec3_print(((t_cube *)(geo->curr))->direction2);
+		vec3_print(((t_cube *)(geo->curr))->direction3);
+	}	
 	if (is_scene_dug(geo))
 	{
 		tmp = geo;

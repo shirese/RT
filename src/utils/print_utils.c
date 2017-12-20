@@ -82,13 +82,17 @@ static void			print_geo2(t_geo *geo)
 	else if (geo->type == 7)
 	{
 		ft_printf("CUBE\nSIZE\t\t[%f]\nDIRECTIONS\n", \
-			((t_cube *)(geo->curr))->size,\
-			((t_paraboloid *)(geo->curr))->factb,\
-			((t_paraboloid *)(geo->curr))->height);
+			((t_cube *)(geo->curr))->size);
 		vec3_print(((t_cube *)(geo->curr))->direction1);
 		vec3_print(((t_cube *)(geo->curr))->direction2);
 		vec3_print(((t_cube *)(geo->curr))->direction3);
-	}	
+	}
+	else if (geo->type == 8)
+	{
+		ft_printf("GLASS\nHEIGHT\t\t[%f]\nDIRECTION\n", \
+			((t_glass *)(geo->curr))->height);
+		vec3_print(((t_glass *)(geo->curr))->direction);
+	}		
 	if (is_scene_dug(geo))
 	{
 		tmp = geo;
@@ -115,7 +119,7 @@ void			print_geo(t_geo *geo)
 		vec3_print(geo->rotation->r2);
 		vec3_print(geo->rotation->r3);
 	}
-	//print_geo_mater(geo->mater);
+	print_geo_mater(geo->mater);
 	if (geo->type == 1 && ft_printf("PLANE\nNORMAL\t\t"))
 		vec3_print(((t_plane *)(geo->curr))->normal);
 	else if (geo->type == 2)

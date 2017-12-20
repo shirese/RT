@@ -32,6 +32,8 @@ t_hp				(*g_get_obj_collider(int id))(t_geo *geo, t_ray r)
 		return (hit_paraboloid);
 	if (id == 7)
 		return (hit_cube);
+	if (id == 8)
+		return (hit_glass);	
 	return (NULL);
 }
 

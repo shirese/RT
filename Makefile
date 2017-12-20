@@ -36,7 +36,7 @@ DIR_OBJ			= obj/
 SRC_MAIN		=	environment.c main.c
 SRC_CAMERA		=	camera.c camera_transform.c
 SRC_COLOR		=	color.c color_op.c color_op_2.c color_utils.c
-SRC_GEOS		=	cone.c cone2.c cone3.c cube.c cut.c cut2.c cut3.c cylinder1.c cylinder2.c disk.c geo1.c geo2.c negativity1.c negativity2.c \
+SRC_GEOS		=	cone.c cone2.c cone3.c cube.c cut.c cut2.c cut3.c cylinder1.c cylinder2.c disk.c geo1.c geo2.c glass.c negativity1.c negativity2.c \
 paraboloid.c plane.c sphere.c
 SRC_MATS		=	mat3.c mat3_rot.c mat4.c mat4_utils.c
 SRC_PARSER		=	get_next_line.c cson_parser.c cson_parser_2.c \

@@ -68,7 +68,7 @@ double *expr, t_hp *sol)
 		sol->t = expr[0];
 		sol->p = point_at_parameter(sol->t, r);
 		sol->normal = d->normal;
-		if (is_cut(geo) && !belong_after_cut(geo, *sol))
+		if (is_cut(geo) && !belong_after_cut(geo, sol->p))
 			sol->t = -1;
 	}
 }

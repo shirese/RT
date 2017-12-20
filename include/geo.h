@@ -59,9 +59,17 @@ typedef struct	s_paraboloid
 	double			height;
 }					t_paraboloid;
 
+typedef struct		s_glass
+{
+	t_cone			*under;
+	t_sphere		*basis;
+	t_cylinder		*high;
+	double			height;
+	t_vec3			direction;
+}				t_glass;
+
 typedef struct	s_cube
 {
-	t_vec3			position;
 	t_vec3			direction1;
 	double			size;
 	t_vec3			direction2;
@@ -120,7 +128,7 @@ double				distance_from_hp1(t_ray r, t_geo *geo, t_hp hp_1, t_hp hp_2);
 
 int					is_cut(t_geo *geo);
 int					is_on_cut(t_cut *cut, t_hp hp);
-int					belong_after_cut(t_geo *geo, t_hp hp);
+int					belong_after_cut(t_geo *geo, t_vec3 pos);
 t_hp				first_in_cut(t_geo *geo, t_ray r, t_hp hp_1, t_hp hp_2);
 t_hp				hit_and_cut(t_geo *geo, t_hp hp_1, t_hp hp_2, t_ray r);
 t_vec3				normal_cut(t_geo *geo, t_hp hp);
@@ -142,4 +150,10 @@ void				create_axis(t_geo *geo);
 t_geo				*new_cube(t_vec3 *position, t_vec3 dir1, \
 	double size);
 t_vec3				cube_norm(t_geo *geo, t_hp hp);
+t_geo				*new_glass(t_vec3 *position, t_vec3 direction, \
+	double height);
+int					belong_to_glass(t_geo *geo, t_vec3 pos);
+t_vec3				glass_norm(t_geo *geo, t_hp hp);
+int					add_glass(int *fd, char **line, t_env *e);
+t_hp				hit_glass(t_geo *geo, t_ray r);
 #endif

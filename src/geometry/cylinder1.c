@@ -46,7 +46,7 @@ int					belong_to_cylinder(t_geo *geo, t_vec3 pos)
 	proj = vec3_add_stack(*geo->origin, \
 		vec3_mult_stack(cyl->axis, len));
 	dif = vec3_sub_stack(proj, pos);
-	if (vec3_norm(dif) <= cyl->radius)
+	if (vec3_norm(dif) <= cyl->radius && belong_after_cut(geo, pos))
 		return (1);
 	return (0);
 }

@@ -169,3 +169,37 @@ int					add_cube(int *fd, char **line, t_env *e)
 	create_axis(geo);
 	return (0);
 }
+
+int					add_glass(int *fd, char **line, t_env *e)
+{
+	char			*v;
+	t_geo			*geo;
+	t_glass			*glass;
+	t_vec3			direction;
+	double			height;
+
+	v = NULL;
+	geo = NULL;
+	puts("GENIE");
+	if (!malloc_geo((void **)(&glass), sizeof(t_glass), 7, &geo))
+		return (13);
+	while (get_next_line(*fd, line) && **line == '\t')
+	{
+		v = *line + 4;
+		if (ft_strncmp(*line, "\tdirection", 10) == 0 && (v += 8))
+			direction = vec3_stack(atof_cson(&v), atof_cson(&v), \
+			atof_cson(&v));
+		else if (ft_strncmp(*line, "\theight", 7) == 0 && (v += 5))
+			height = ft_atof(v);
+		else
+			parse_geo_attributes(line, v, geo, fd);	
+	}
+	geo = new_glass(geo->origin, direction, height);
+	add_geometry(geo, &(e->geos));
+	if (geo->rotation)
+	{
+		rotate(&(glass->under->axis), *geo->rotation);
+		rotate(&(glass->high->axis), *geo->rotation);
+	}
+	return (0);
+}

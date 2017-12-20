@@ -27,5 +27,7 @@ int					belong_to(t_geo *g, t_vec3 pos)
 		return (belong_to_disk(g, pos));
 	else if (g->type == 7)
 		return (belong_to_cube(g, pos));
+	else if (g->type == 8)
+		return (belong_to_glass(g, pos));
 	return (0);
 }

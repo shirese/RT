@@ -81,7 +81,7 @@ t_hp				hit_plane(t_geo *geo, t_ray r)
 			+ dot[0] * r.direction.y, r.origin.z + dot[0] * r.direction.z);
 			sol.t = vec3_norm(vec3_sub_stack(r.origin, sol.p));
 			sol.normal = p->normal;
-			if (is_cut(geo) && !belong_after_cut(geo, sol))
+			if (is_cut(geo) && !belong_after_cut(geo, sol.p))
 				sol.t = -1;
 			if (is_geo_dug(geo))
 				return (is_touched_by_neg(geo, r, sol));

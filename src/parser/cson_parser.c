@@ -41,6 +41,10 @@ static int			handle_error(int err)
 			ft_printf("Invalid geo(disk)\n");
 		if (err == 10)
 			ft_printf("Invalid geo(hyperbolic paraboloid)\n");
+		if (err == 11)
+			ft_printf("Invalid geo(cube)\n");
+		if (err == 12)
+			ft_printf("Invalid geo(glass)\n");	
 		return (1);
 	}
 	return (0);

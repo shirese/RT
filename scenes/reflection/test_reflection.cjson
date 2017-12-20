@@ -10,7 +10,7 @@ light:
 light:
 	type: 3
 	color: 0.88, 0.88, 0.88
-	pos: 0, 1.4, 3.0
+	pos: 0.5, 1.4, 3.0
 sphere:
 	pos: 0.3, 0.4, -0.5
 	kd: 0., 0., 1.0

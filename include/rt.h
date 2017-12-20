@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/15 16:59:06 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/18 11:52:11 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct		s_mater
 }					t_mater;
 
 /*
-**	TYPE 1- Image 2- Normal map 3- Checkerboard 4- Perlin
+**	TYPE 1- Image 2- Normal map 3- Checkerboard 4- Perlin 5- Transparent
 */
 typedef struct		s_tex
 {

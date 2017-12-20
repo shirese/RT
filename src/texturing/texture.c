@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 15:44:36 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/15 11:33:55 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/18 12:09:09 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 #define SDL_STBIMAGE_IMPLEMENTATION
 #include "SDL_stbimage.h"
 
-static Uint32		get_pixel(SDL_Surface *surface, int x, int y)
+static Uint32		get_pixel(t_geo *geo, int x, int y)
 {
 	int				bpp;
 	Uint8			*p;
 
-	bpp = surface->format->BytesPerPixel;
-	p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
+	bpp = geo->tex->curr->format->BytesPerPixel;
+	p = (Uint8 *)geo->tex->curr->pixels + y * geo->tex->curr->pitch + x * bpp;
 	if (bpp == 1)
 		return (*p);
 	if (bpp == 2)
@@ -38,27 +38,12 @@ static Uint32		get_pixel(SDL_Surface *surface, int x, int y)
 			return (p[0] | p[1] << 8 | p[2] << 16);
 	}
 	if (bpp == 4)
+	{
+		geo->mater->transparency = (double)p[3] / 255.;
+		// printf("[%f]\n", geo->mater->transparency);
 		return (*(Uint32 *)p);
+	}
 	return (0);
-}
-
-t_color				get_image_px(t_vec2 st, SDL_Surface *tex)
-{
-	t_color			c;
-	int				i;
-	unsigned char	*px;
-
-	c = color_new_stack(0., 0., 0.);
-	i = (st.x * st.y * tex->w * tex->h) * tex->format->BytesPerPixel;
-	px = tex->pixels;
-	c.r = px[i];
-	c.g = px[i + 1];
-	c.b = px[i + 2];
-	if (tex->format->BytesPerPixel == 4)
-		c.a = px[i + 3];
-	else
-		c.a = 255.;
-	return (c);
 }
 
 void				apply_texture2(t_ray *r, t_geo *geo)
@@ -87,11 +72,13 @@ void				apply_texture(t_ray *r, t_hp *hp, t_geo *geo)
 	Uint32			col;
 
 	geo->tex->uv = sphere_mapping(*hp, geo);
-	if (geo->tex->type == 1 || geo->tex->type == 2)
+	if (geo->tex->type == 5 && geo->mater->illum < 3)
+		geo->mater->illum = 3;
+	if (geo->tex->type == 1 || geo->tex->type == 2 || geo->tex->type == 5)
 	{
-		col = get_pixel(geo->tex->curr, geo->tex->uv.x * geo->tex->curr->w, \
+		col = get_pixel(geo, geo->tex->uv.x * geo->tex->curr->w, \
 			geo->tex->uv.y * geo->tex->curr->h);
-		if (geo->tex->type == 1)
+		if (geo->tex->type == 1 || geo->tex->type == 5)
 		{
 			color_set(color_new_stack((col) & 0xff, \
 				(col >> 8) & 0xff, \
@@ -116,7 +103,7 @@ t_tex				*init_textures(int type, const char *img_path)
 
 	tex = NULL;
 	px = NULL;
-	if ((type == 1 || type == 2) && !(px = STBIMG_Load(img_path)))
+	if ((type == 1 || type == 2 || type == 5) && !(px = STBIMG_Load(img_path)))
 	{
 		ft_printf("Failed to load image: %s\n", img_path);
 		return (NULL);

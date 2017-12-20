@@ -52,6 +52,14 @@ static int			setup_geo_mater(t_geo **geo)
 	return (1);
 }
 
+void				add_coeff_to_objet(t_geo *geo, t_color kd,t_color ks, double ior)
+{
+	
+	geo->mater->kd = kd;
+	geo->mater->ks = ks;
+	geo->mater->ior = ior;
+}
+
 static int			setup_geo(t_geo **geo)
 {
 	*geo = malloc(sizeof(t_geo));
@@ -70,6 +78,7 @@ static int			setup_geo(t_geo **geo)
 	(*geo)->curr = NULL;
 	(*geo)->is_hit = NULL;
 	(*geo)->tex = NULL;
+	(*geo)->neg = NULL;
 	(*geo)->next = NULL;
 	return (1);
 }
@@ -85,19 +94,4 @@ int					malloc_geo(void **type, int size, int geo_id, t_geo **geo)
 	(*geo)->type = geo_id;
 	(*geo)->is_hit = g_get_obj_collider(geo_id);
 	return (1);
-}
-
-void				add_geometry(t_geo *geo, t_geo **geos)
-{
-	t_geo			*tmp;
-
-	if (!*geos)
-		*geos = geo;
-	else
-	{
-		tmp = *geos;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = geo;
-	}
 }

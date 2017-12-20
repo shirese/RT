@@ -33,7 +33,7 @@ void				print_cut(t_geo *geo)
 	}
 }
 
-t_vec3				norm_cut(t_geo *geo, t_hp hp)
+t_vec3				normal_cut(t_geo *geo, t_hp hp)
 {
 	t_cut			*cut;
 	int				i;
@@ -49,7 +49,7 @@ t_vec3				norm_cut(t_geo *geo, t_hp hp)
 			i++;
 		}
 	}
-	return (usual_norm(geo, hp));
+	return (cut_norm(geo, hp));
 }
 
 int					set_borns(double to, double dn, double *born_sup, \

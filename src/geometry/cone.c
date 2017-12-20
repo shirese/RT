@@ -15,31 +15,12 @@
 #include "rt.h"
 #include "utils.h"
 
-t_hp					c_intersec(t_geo *geo, t_ray r, double *abcd)
+static void				c_intersec(t_geo *geo, t_ray r, t_hp *sol)
 {
-	t_hp				hp_1;
-	t_hp				hp_2;
-	double				det;
-	t_cone				*c;
-	t_vec3				p;
-
-	c = (t_cone *)geo->curr;
-	det = sqrt(abcd[3]);
-	hp_1.t = positive_smallest((-abcd[1] - det) / (2 * abcd[0]),\
-	(-abcd[1] + det) / (2 * abcd[0]));
-	hp_1.p = point_at_parameter(hp_1.t, r);
-	p = vec3_stack(r.origin.x + hp_1.t * r.direction.x, \
-		r.origin.y + hp_1.t * r.direction.y, \
-		r.origin.z + hp_1.t * r.direction.z);
-	hp_1.normal = norm_cut(geo, hp_1);
-	hp_2.t = non_positive_smallest((-abcd[1] - det) / (2 * abcd[0]),\
-	(-abcd[1] + det) / (2 * abcd[0]));
-	hp_2.p = point_at_parameter(hp_2.t, r);
-	p = vec3_stack(r.origin.x + hp_2.t * r.direction.x, \
-		r.origin.y + hp_2.t * r.direction.y, \
-		r.origin.z + hp_2.t * r.direction.z);
-	hp_2.normal = norm_cut(geo, hp_2);
-	return (hit_and_cut(geo, hp_1, hp_2, r));
+	sol[0].p = point_at_parameter(sol[0].t, r);
+	sol[0].normal = cone_normal(geo,sol[0].p);
+	sol[1].p = point_at_parameter(sol[1].t, r);
+	sol[1].normal = cone_normal(geo, sol[1].p);
 }
 
 double					cone_gamma(double expr, t_geo *geo, t_ray r)
@@ -91,15 +72,16 @@ static double			cone_alpha(double expr, t_cone *c, t_ray r)
 	return (res);
 }
 
-t_hp					hit_cone(t_geo *geo, t_ray r)
+void				solutions_cone(t_geo *geo, t_ray r, t_hp *sol)
 {
+	t_cone				*c;
 	double				abcd[4];
 	double				expr[2];
-	t_cone				*c;
-	t_hp				hp;
-
+	double				det;
+	
 	c = (t_cone *)geo->curr;
-	hp.t = -1;
+	sol[0].t = -1;
+	sol[1].t = -1;
 	vec3_normalize(&(c->axis));
 	expr[0] = c->axis.x * r.direction.x + c->axis.y * r.direction.y + \
 		c->axis.z * r.direction.z;
@@ -111,6 +93,10 @@ t_hp					hit_cone(t_geo *geo, t_ray r)
 	abcd[2] = cone_gamma(expr[1], geo, r);
 	abcd[3] = abcd[1] * abcd[1] - 4 * abcd[0] * abcd[2];
 	if (abcd[3] >= 0)
-		return (c_intersec(geo, r, abcd));
-	return (hp);
+	{
+		det = sqrt(abcd[3]);
+		sol[0].t = positive_smallest((-abcd[1] - det) / (2 * abcd[0]), (-abcd[1] + det) / (2 * abcd[0]));
+		sol[1].t = non_positive_smallest((-abcd[1] - det) / (2 * abcd[0]), (-abcd[1] + det) / (2 * abcd[0]));
+		c_intersec(geo, r, sol);
+	}
 }

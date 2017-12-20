@@ -1,0 +1,26 @@
+window:
+	width: 1200
+	height: 800
+camera:
+	pos: 0.0, 0.0, 2.0
+	fov: 90
+light:
+	type: 1
+	color: 0.125, 0.125, 0.125, 1.0
+light:
+	type: 3
+	color: 0.80, 0.4, 0.4, 1.
+	dir: 0.0, 0.0, 0.0
+	pos: 2.0, 0.0, 2.0
+light:
+	type: 3
+	color: 0.80, 0.4, 0.4, 1.
+	dir: 0.0, 0.0, 0.0
+	pos: -2.0, 0.0, 2.0
+plane:
+	pos: 0., -1., -1.0
+	kd: .13, 0.93, 0.13, 1.0
+	ks: 0.5, 0.5, 0.5
+	normal: 0, 1, 0
+
+

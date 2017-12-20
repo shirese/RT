@@ -16,6 +16,22 @@
 #include "rt.h"
 #include "utils.h"
 
+
+t_geo					*new_paraboloid(t_vec3 *position, double a, double b)
+{
+	t_paraboloid	*pb;
+	t_geo			*geo;
+
+	geo = NULL;
+	if (!malloc_geo((void **)(&pb), sizeof(t_paraboloid), 6, &geo))
+		return (0);
+	geo->origin = position;
+	pb->facta = a;
+	pb->factb = b;
+	pb->height = 1.0;
+	return (geo);
+}
+
 int					belong_to_paraboloid(t_geo *geo, t_vec3 pos)
 {
 	t_paraboloid	*para;
@@ -29,10 +45,12 @@ int					belong_to_paraboloid(t_geo *geo, t_vec3 pos)
 	return (0);
 }
 
-static t_vec3		paraboloid_norm(t_paraboloid *para, t_vec3 hp)
+t_vec3				para_norm(t_geo *geo, t_vec3 hp)
 {
+	t_paraboloid 	*para;
 	t_vec3			normal;
 
+	para = (t_paraboloid*)geo;
 	normal = vec3_stack(2 * hp.x / pow(para->facta, 2), -2 * hp.y / \
 			pow(para->factb, 2), -1 / para->height);
 	normal = vec3_normalize_stack(normal);
@@ -50,11 +68,9 @@ t_hp				hit_paraboloid(t_geo *geo, t_ray r)
 	para = (t_paraboloid *)geo->curr;
 	dir = r.direction;
 	orig = r.origin;
+	hp.t = -1;
 	if (para->facta == 0 || para->factb == 0 || para->height == 0)
-	{
-		hp.t = -1;
 		return (hp);
-	}
 	abcd[0] = pow((dir.x / para->facta), 2) - pow((dir.y / para->factb), 2);
 	abcd[1] = (2 * orig.x * dir.x / pow(para->facta, 2)) - (2 * orig.y * dir.y \
 			/ pow(para->factb, 2)) - (dir.z / para->height);
@@ -66,9 +82,7 @@ t_hp				hit_paraboloid(t_geo *geo, t_ray r)
 		hp.t = positive_smallest((-abcd[1] - sqrt(abcd[3])) / (2 * abcd[0]), \
 				(-abcd[1] + sqrt(abcd[3])) / (2 * abcd[0]));
 		hp.p = point_at_parameter(hp.t, r);
-		hp.normal = paraboloid_norm(para, hp.p);
+		hp.normal = para_norm(geo, hp.p);
 	}
-	if (hp.t <= 0)
-		hp.t = -1;
 	return (hp);
 }

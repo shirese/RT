@@ -16,13 +16,13 @@
 #include "rt.h"
 #include "utils.h"
 
-t_vec3			usual_norm(t_geo *geo, t_hp hp)
+t_vec3			cut_norm(t_geo *geo, t_hp hp)
 {
 	if (geo->type == 2)
 		return (cone_normal(geo, hp.p));
 	else if (geo->type == 3)
 		return (cylinder_norm(geo, hp));
 	else if (geo->type == 4)
-		return (sphere_norm(geo, hp));
+		return (sphere_norm(geo, hp.p));
 	return (vec3_stack(0.0, 0.0, 0.0));
 }

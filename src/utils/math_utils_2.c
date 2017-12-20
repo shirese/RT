@@ -41,9 +41,9 @@ double				non_positive_smallest(double a, double b)
 	double ps;
 
 	ps = positive_smallest(a, b);
-	if (a == ps && b > a)
+	if (a == ps)
 		return (b);
-	else if (b == ps && a > b)
+	else if (b == ps)
 		return (a);
 	return (-1.0);
 }

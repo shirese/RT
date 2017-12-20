@@ -13,6 +13,27 @@
 #include "geo.h"
 #include "rt.h"
 
+t_geo				*new_plane(t_vec3 *position, t_vec3 normal)
+{
+	t_plane		*plane;
+	t_geo		*geo;
+
+	geo = NULL;
+	if (!malloc_geo((void **)(&plane), sizeof(t_plane), 1, &geo))
+		return (0);
+	geo->origin = position;
+	plane->normal = normal;
+	return (geo);
+}
+
+t_vec3				plane_norm(t_geo *geo)
+{
+	t_plane *plane;
+
+	plane = (t_plane*)geo->curr;
+	return (plane->normal);
+}
+
 int					belong_to_plane(t_geo *geo, t_vec3 pos)
 {
 	t_plane			*plane;
@@ -42,31 +63,29 @@ static t_hp			hit_ortho(t_ray r, t_plane *p, t_vec3 min)
 
 t_hp				hit_plane(t_geo *geo, t_ray r)
 {
-	t_hp			hp;
-	t_vec3			min;
+	t_hp			sol;
 	t_plane			*p;
 	double			dot[2];
 
-	hp.t = -1;
-	min = vec3_sub_stack(*geo->origin, r.origin);
-	p = geo->curr;
-	dot[0] = vec3_dot(p->normal, min);
-	dot[1] = vec3_dot(p->normal, r.direction);
-	if (dot[1] == 0.0)
-		return (hit_ortho(r, p, min));
-	else if (fabs(dot[1]) > 1e-6)
+	sol.t = -1;
+	p = (t_plane*)geo->curr;
+	dot[0] = vec3_dot(p->normal, vec3_sub_stack(*geo->origin, r.origin));
+	if ((dot[1] = vec3_dot(p->normal, r.direction)) == 0.0)
+		return (hit_ortho(r, p, vec3_sub_stack(*geo->origin, r.origin)));
+	else if (fabs(vec3_dot(p->normal, r.direction)) > 1e-6)
 	{
-		dot[0] /= dot[1];
+		dot[0] /= vec3_dot(p->normal, r.direction);
 		if (dot[0] > 0.0)
 		{
-			hp.p = vec3_stack(r.origin.x + dot[0] * \
-			r.direction.x, r.origin.y + dot[0] * r.direction.y, \
-			r.origin.z + dot[0] * r.direction.z);
-			hp.t = vec3_norm(vec3_sub_stack(r.origin, hp.p));
-			hp.normal = p->normal;
-			if (is_cut(geo) && !belong_after_cut(geo, hp))
-				hp.t = -1;
+			sol.p = vec3_stack(r.origin.x + dot[0] * r.direction.x, r.origin.y \
+			+ dot[0] * r.direction.y, r.origin.z + dot[0] * r.direction.z);
+			sol.t = vec3_norm(vec3_sub_stack(r.origin, sol.p));
+			sol.normal = p->normal;
+			if (is_cut(geo) && !belong_after_cut(geo, sol))
+				sol.t = -1;
+			if (is_geo_dug(geo))
+				return (is_touched_by_neg(geo, r, sol));
 		}
 	}
-	return (hp);
+	return (sol);
 }

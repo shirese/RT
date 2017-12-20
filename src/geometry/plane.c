@@ -70,7 +70,7 @@ t_hp				hit_plane(t_geo *geo, t_ray r)
 	sol.t = -1;
 	p = (t_plane*)geo->curr;
 	dot[0] = vec3_dot(p->normal, vec3_sub_stack(*geo->origin, r.origin));
-	if (vec3_dot(p->normal, r.direction) == 0.0)
+	if ((dot[1] = vec3_dot(p->normal, r.direction)) == 0.0)
 		return (hit_ortho(r, p, vec3_sub_stack(*geo->origin, r.origin)));
 	else if (fabs(vec3_dot(p->normal, r.direction)) > 1e-6)
 	{

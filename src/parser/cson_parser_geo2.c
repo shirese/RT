@@ -195,6 +195,7 @@ int					add_glass(int *fd, char **line, t_env *e)
 			parse_geo_attributes(line, v, geo, fd);	
 	}
 	geo = new_glass(geo->origin, direction, height);
+	add_coeff_to_objet(geo, t_color kd, t_color ks, double ior);git
 	add_geometry(geo, &(e->geos));
 	if (geo->rotation)
 	{

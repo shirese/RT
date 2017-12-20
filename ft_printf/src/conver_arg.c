@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 18:27:50 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/04 18:09:59 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/20 12:33:40 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void		convert_args(va_list args, t_opt *opt, int *len)
 {
 	char		*arg;
 
+	arg = NULL;
 	if (!(ft_strchr(CONVERTER, (*opt).conv)))
 		(*opt).field_width ? (*opt).field_width-- : 0;
 	if (!(*opt).len_modifier)
@@ -126,12 +127,11 @@ void		convert_args(va_list args, t_opt *opt, int *len)
 	}
 	(*opt).conv == 'S' && (*opt).precision == 0 ? (arg = NULL) : 0;
 	apply_flags(opt, &arg, len);
-	if ((ft_strchr(NUMBER, (*opt).conv)))
-	{
-		if (*arg == '0' && (*opt).precision == 0)
+	if ((ft_strchr(NUMBER, (*opt).conv)) && *arg == '0' && !(*opt).precision)
 			arg = NULL;
-	}
 	if (arg && ft_strcmp(arg, "(null)"))
 		(*len) += ft_strlen(arg);
 	convert_args_2(opt, len, arg);
+	if (arg)
+		free(arg);
 }

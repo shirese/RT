@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/09 11:51:32 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/21 15:58:25 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@
 # include "vector.h"
 # include "time.h"
 
-# define WIN_TITLE "Raytracer v0.0"
+# define EPSILON 0.000001
 # define FLT_MAX 3.402823e+38
+# define INV_PI 0.31830988618379067154
+# define INV2_PI 0.15915494309189533577
+# define MAX_RECURSION 4
+# define WIN_TITLE "Raytracer v0.2"
 
 typedef struct		s_color
 {
@@ -30,44 +34,84 @@ typedef struct		s_color
 }					t_color;
 
 /*
-**	RAY TYPE 1- Primary 2- Shadow
+**	RAY TYPE 1- Primary 2- Shadow 3- Refr/Refl
 */
 typedef struct		s_ray
 {
 	int				type;
 	t_vec3			origin;
 	t_vec3			direction;
-	t_vec3			point_at_parameter;
 	t_color			color;
+	double			ior;
+	int				rec;
 }					t_ray;
+
+typedef struct		s_cut
+{
+	t_vec3			cut_normal;
+	t_vec3			cut_position;
+}					t_cut;
 
 typedef struct		s_hit_point
 {
 	double			t;
 	t_vec3			p;
 	t_vec3			normal;
+	double			ior;
 }					t_hp;
 
+/*
+**	ILLUM TYPE 1- Diffuse 2- Relexion 3- Refraction
+**	4- Reflexion + Refraction
+*/
 typedef struct		s_mater
 {
 	t_color			kd;
 	t_color			ks;
-	double			alpha;
+	int				illum;
+	double			ior;
+	double			ns;
+	double			reflectivity;
+	double			transparency;
 }					t_mater;
 
 /*
-**	TYPE 1- Plane 2- Cone 3- Cylinder 4- Sphere
+**	TYPE 1- Image 2- Normal map 3- Checkerboard 4- Perlin 5- Transparent
 */
+typedef struct		s_tex
+{
+	int				type;
+	t_vec2			uv;
+	SDL_Surface		*curr;
+}					t_tex;
+
+typedef struct		s_inter
+{
+	double			t_start;
+	double			t_end;
+}					t_inter;
+
+/*
+**	TYPE 1- Plane 2- Cone 3- Cylinder 4- Sphere
+**	SHADER TYPE 1- Phong 2- Toon
+*/
+
 typedef struct s_geo	t_geo;
 struct				s_geo
 {
 	int				type;
+	int				shader_type;
 	void			*curr;
 	t_vec3			*origin;
 	t_mat3			*rotation;
 	t_mater			*mater;
 	t_hp			(*is_hit)(t_geo *geo, t_ray r);
+	t_tex			*tex;
+	t_geo			*neg;
+	t_inter			*borns_neg;
 	t_geo			*next;
+	t_cut			*cut;
+	int				nb_cut;
 };
 /*
 **	The camera matrix is a 4x4 matrix with
@@ -101,8 +145,8 @@ typedef struct		s_win
 {
 	SDL_Window		*handle;
 	SDL_Renderer	*rend;
-	int				width;
-	int				height;
+	int				w;
+	int				h;
 }					t_win;
 
 typedef struct		s_screen
@@ -130,11 +174,13 @@ typedef struct		s_env
 	t_cam			*cam;
 	t_geo			*geos;
 	t_light			*lights;
+	pthread_mutex_t	mutex;
 }					t_env;
 
 int					get_next_line(int const fd, char **line);
 
 t_color				get_px_col(int x, int y, t_env *e);
+t_color				find_ray_color(double x, double y, t_env *e);
 void				raytrace(t_env *e);
 
 void				set_background(t_env *e);
@@ -163,4 +209,15 @@ t_env				*sdl_init(t_env *e);
 void				sdl_render(t_env *e);
 void				sdl_stop(t_env *e);
 
+void				fresnel(t_ray r, t_hp hp, double n, double *krefl);
+double				coeff_fresnel(t_ray r, t_hp hp, t_geo *geo);
+double				find_krefl(t_geo *geo, t_hp hp, t_ray r);
+double				find_ior(t_geo *geo, t_ray r, t_hp hp);
+double				ior_at_point(t_geo *geo, t_vec3 pos);
+double				ior_at_point2(t_geo *g, t_vec3 pos);
+void				add_coeff_to_objet(t_geo *geo, t_color kd,t_color ks, double ior);
+int					add_geometry_negative(t_geo *geo, int i, t_geo *neg0);
+t_hp				first_outside_neg(t_geo *geo, t_ray r, t_hp *sol_geo);
+t_hp				is_touched_by_neg(t_geo *geo, t_ray r, t_hp sol_geo);
+int					set_borns_neg(t_geo *geo, t_ray r);
 #endif

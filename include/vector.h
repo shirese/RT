@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 13:22:20 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/12 13:54:46 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/21 15:58:16 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # include <stdlib.h>
 # include <math.h>
+
+typedef struct		s_vec2
+{
+	double			x;
+	double			y;
+}					t_vec2;
 
 typedef struct		s_vec3
 {
@@ -30,6 +36,9 @@ typedef struct		s_vec4
 	double			z;
 	double			w;
 }					t_vec4;
+
+t_vec2				vec2_stack(double x, double y);
+t_vec2				*vec2_new(double x, double y);
 
 double				vec3_dot(t_vec3 v1, t_vec3 v2);
 double				vec3_norm(t_vec3 v);
@@ -59,7 +68,7 @@ void				vec3_trans(t_vec3 t, t_vec3 *v);
 double				vec4_norm(t_vec4 v);
 t_vec4				vec4_normalize_stack(t_vec4 v);
 
-t_vec4				vec4_stack(double x, double y, double w, double z);
+t_vec4				vec4_stack(double x, double y, double z, double w);
 t_vec4				*vec4_new(double x, double y, double z, double w);
-
+t_vec3				vec3_add_mult_stack(t_vec3 v1, t_vec3 v2, double n);
 #endif

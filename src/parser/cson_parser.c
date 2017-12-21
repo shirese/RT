@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/23 11:19:35 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/17 16:46:13 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/20 12:39:43 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ static int			handle_error(int err)
 			ft_printf("Invalid geo(cylinder)\n");
 		if (err == 8)
 			ft_printf("Invalid geo(sphere)\n");
+		if (err == 9)
+			ft_printf("Invalid geo(disk)\n");
+		if (err == 10)
+			ft_printf("Invalid geo(hyperbolic paraboloid)\n");
 		return (1);
 	}
 	return (0);
@@ -54,7 +58,6 @@ int					cson_parse(int fd, t_env *e)
 	get_next_line(fd, &line);
 	while (*line)
 	{
-		//ft_putstr(line);
 		if (!err && !ft_strncmp(line, "window", 6) && get_next_line(fd, &line))
 			err = parse_window(&fd, &line, e);
 		if (!err && !ft_strncmp(line, "camera", 6))
@@ -66,5 +69,7 @@ int					cson_parse(int fd, t_env *e)
 		if (handle_error(err) != 0)
 			return (0);
 	}
+	if (line)
+		free(line);
 	return (1);
 }

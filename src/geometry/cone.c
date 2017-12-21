@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 11:45:04 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/18 15:39:44 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/13 10:51:24 by fgallois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,12 @@
 #include "rt.h"
 #include "utils.h"
 
-static void				c_intersec(t_geo *geo, t_ray r, double *abcd, t_hp *hp)
+static void				c_intersec(t_geo *geo, t_ray r, t_hp *sol)
 {
-	double				det;
-	double				t0;
-	double				t1;
-	t_cone				*c;
-	t_vec3				p;
-
-	det = sqrt(abcd[3]);
-	t0 = (-abcd[1] - det) / (2 * abcd[0]);
-	t1 = (-abcd[1] + det) / (2 * abcd[0]);
-	c = (t_cone *)geo->curr;
-	hp->t = positive_smallest(t0, t1);
-	hp->p = point_at_parameter(hp->t, r);
-	p = vec3_stack(r.origin.x + hp->t * r.direction.x, \
-		r.origin.y + hp->t * r.direction.y, \
-		r.origin.z + hp->t * r.direction.z);
-	hp->normal = cone_normal(geo, c, p);
+	sol[0].p = point_at_parameter(sol[0].t, r);
+	sol[0].normal = cone_normal(geo,sol[0].p);
+	sol[1].p = point_at_parameter(sol[1].t, r);
+	sol[1].normal = cone_normal(geo, sol[1].p);
 }
 
 double					cone_gamma(double expr, t_geo *geo, t_ray r)
@@ -84,15 +72,16 @@ static double			cone_alpha(double expr, t_cone *c, t_ray r)
 	return (res);
 }
 
-t_hp					hit_cone(t_geo *geo, t_ray r)
+void				solutions_cone(t_geo *geo, t_ray r, t_hp *sol)
 {
+	t_cone				*c;
 	double				abcd[4];
 	double				expr[2];
-	t_cone				*c;
-	t_hp				hp;
-
+	double				det;
+	
 	c = (t_cone *)geo->curr;
-	hp.t = -1;
+	sol[0].t = -1;
+	sol[1].t = -1;
 	vec3_normalize(&(c->axis));
 	expr[0] = c->axis.x * r.direction.x + c->axis.y * r.direction.y + \
 		c->axis.z * r.direction.z;
@@ -105,8 +94,9 @@ t_hp					hit_cone(t_geo *geo, t_ray r)
 	abcd[3] = abcd[1] * abcd[1] - 4 * abcd[0] * abcd[2];
 	if (abcd[3] >= 0)
 	{
-		c_intersec(geo, r, abcd, &hp);
-		return (hp);
+		det = sqrt(abcd[3]);
+		sol[0].t = positive_smallest((-abcd[1] - det) / (2 * abcd[0]), (-abcd[1] + det) / (2 * abcd[0]));
+		sol[1].t = non_positive_smallest((-abcd[1] - det) / (2 * abcd[0]), (-abcd[1] + det) / (2 * abcd[0]));
+		c_intersec(geo, r, sol);
 	}
-	return (hp);
 }

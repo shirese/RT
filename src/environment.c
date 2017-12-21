@@ -6,13 +6,15 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/11 17:32:42 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/18 13:42:55 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrice.h"
 #include "rt.h"
+#include "rt_multithread.h"
 #include "vector.h"
+#include "SDL_stbimage.h"
 
 t_screen			set_screen(t_win win, t_cam *cam)
 {
@@ -45,16 +47,23 @@ static void			free_lights(t_env **e)
 
 static void			free_geos(t_env **e)
 {
-	void			*tmp;
+	t_geo			*geo;
 
+	geo = NULL;
 	while ((*e)->geos)
 	{
-		tmp = (t_geo *)(*e)->geos;
-		free((*e)->geos->curr);
-		free((*e)->geos->origin);
-		free((*e)->geos->mater);
+		geo = (*e)->geos;
+		free(geo->curr);
+		free(geo->origin);
+		free(geo->mater);
+		if (geo->tex)
+		{
+			if (geo->tex->curr)
+				SDL_FreeSurface(geo->tex->curr);
+			free(geo->tex);
+		}
 		(*e)->geos = (*e)->geos->next;
-		free(tmp);
+		free(geo);
 	}
 	free((*e)->geos);
 }
@@ -67,6 +76,7 @@ void				free_env(t_env **e)
 	free_geos(e);
 	free_lights(e);
 	free((*e)->img);
+	pthread_mutex_destroy(&(*e)->mutex);
 	free(*e);
 }
 
@@ -76,8 +86,9 @@ void				init_environment(t_env **e)
 	(*e)->img = NULL;
 	(*e)->win.w = 0;
 	(*e)->win.h = 0;
-	(*e)->samp_rate = 4;
+	(*e)->samp_rate = 1;
 	(*e)->cam = NULL;
 	(*e)->lights = NULL;
 	(*e)->geos = NULL;
+	pthread_mutex_init(&(*e)->mutex, NULL);
 }

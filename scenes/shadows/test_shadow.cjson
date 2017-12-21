@@ -1,0 +1,47 @@
+window:
+	width: 400
+	height: 400
+camera:
+	pos: 0.0, 0.0, 2.0
+	fov: 90
+light:
+	type: 1
+	color: 0.14, 0.14, 0.17
+light:
+	type: 3
+	color: 0.80, 0.80, 0.80, 0.7
+	pos: -2.0, 1.0, 2.0
+light:
+	type: 3
+	color: 0.80, 0.80, 0.80, 0.7
+	pos: 2.0, -1.0, 2.0
+sphere:
+	pos: -1.5, 1., -1.5
+	kd: 1., 0.13, 0.13
+	ks: 1., 1., 1.
+	radius: 0.7
+sphere:
+	pos: -2.3, 1., -1.5
+	kd: 0.24, 0.13, 0.56
+	ks: 1., 1., 1.
+	radius: 0.23
+sphere:
+	pos: -1.0, 1., -0.65
+	kd: 0.14, 0.546, 0.13
+	ks: 1., 1., 1.
+	radius: 0.34
+cone:
+	pos: 0.5, 0.5, -4.5
+	kd: 0., 0., 0.66
+	ks: 0.01, 0.01, 0.01
+	axis: 0., 1.0, 0.0
+	angle: 15.
+cylinder:
+	pos: 1.5, 0., -3.
+	kd: 0.13, 1.13, 0.13
+	ks: 0.25, 0.25, 0.25
+	radius: 0.25
+plane:
+	pos: 0., -1.5
+	kd: 0.13, 0.13, 0.13
+	normal: 0., 1., 0.

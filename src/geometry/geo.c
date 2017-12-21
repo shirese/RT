@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:26:59 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/11 17:33:50 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/18 12:40:44 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static int			setup_geo_mater(t_geo **geo)
 	(*geo)->mater->ns = 32.;
 	(*geo)->mater->illum = 1;
 	(*geo)->mater->ior = 1.0;
+	(*geo)->mater->reflectivity = 1.;
+	(*geo)->mater->transparency = 1.;
 	return (1);
 }
 
@@ -56,6 +58,7 @@ static int			setup_geo(t_geo **geo)
 	if (!*geo)
 		return (0);
 	(*geo)->origin = vec3_new(0, 0, 0);
+	(*geo)->cut = NULL;
 	if (!(*geo)->origin || !(setup_geo_mater(geo)))
 	{
 		free(*geo);
@@ -63,8 +66,10 @@ static int			setup_geo(t_geo **geo)
 	}
 	(*geo)->rotation = NULL;
 	(*geo)->type = 0;
+	(*geo)->nb_cut = 0;
 	(*geo)->curr = NULL;
 	(*geo)->is_hit = NULL;
+	(*geo)->tex = NULL;
 	(*geo)->next = NULL;
 	return (1);
 }

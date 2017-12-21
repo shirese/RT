@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 14:13:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/11 17:27:57 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/15 11:27:55 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int					raytrace_thread(t_env *e)
 
 	i = 0;
 	thr_data.tile_id = 0;
+	pthread_mutex_init(&thr_data.mutex, NULL);
 	thr_data.e = e;
 	while (i < NUM_THREADS)
 	{
@@ -124,12 +125,10 @@ int					raytrace_thread(t_env *e)
 		}
 		i++;
 	}
-	i = 0;
-	while (i < NUM_THREADS)
-	{
+	i = -1;
+	while (++i < NUM_THREADS)
 		pthread_join(thr[i], NULL);
-		i++;
-	}
 	render_px(e);
+	pthread_mutex_destroy(&thr_data.mutex);
 	return (1);
 }

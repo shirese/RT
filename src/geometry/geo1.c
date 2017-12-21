@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:26:59 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/21 11:10:43 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/21 16:20:36 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "rt.h"
 #include "utils.h"
 
-t_hp				(*g_get_obj_collider(int id))(t_geo *geo, t_ray r)
+t_hp				(*g_get_obj_collider(int id))(t_geo *geo, t_ray *r)
 {
 	if (id == 1)
 		return (hit_plane);

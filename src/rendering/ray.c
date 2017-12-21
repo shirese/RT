@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 14:34:15 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/15 11:27:09 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/21 16:23:47 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ t_ray				init_ray(t_vec3 origin, t_vec3 dir, int r_type, float ior)
 	return (r);
 }
 
-t_vec3				point_at_parameter(double t, t_ray r)
+t_vec3				point_at_parameter(double t, t_ray *r)
 {
 	t_vec3			pap;
 	t_vec3			tmp;
 
-	tmp = vec3_mult_stack(r.direction, t);
-	pap = vec3_add_stack(r.origin, tmp);
+	tmp = vec3_mult_stack(r->direction, t);
+	pap = vec3_add_stack(r->origin, tmp);
 	return (pap);
 }
 

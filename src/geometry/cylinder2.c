@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cylinder.c                                         :+:      :+:    :+:   */
+/*   cylinder2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 13:30:03 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/14 14:00:54 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/21 16:26:43 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "rt.h"
 #include "utils.h"
 
-void				fill_solution_cylinder(t_geo *geo, t_ray r, \
+void				fill_solution_cylinder(t_geo *geo, t_ray *r, \
 double *abcd, t_hp *sol)
 {
 	sol[0].t = positive_smallest((-abcd[1] - sqrt(abcd[3])) / (2 * abcd[0]), \

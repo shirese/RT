@@ -15,7 +15,7 @@
 #include "rt.h"
 #include "utils.h"
 
-double			value_dist_neg(t_geo *geo, t_ray r, t_hp *sol_geo)
+double			value_dist_neg(t_geo *geo, t_ray *r, t_hp *sol_geo)
 {
 	t_geo		*neg;
 	double		min;
@@ -60,7 +60,7 @@ static t_vec3	normal_neg(t_geo *geo, t_hp hp)
 	return (normal);
 }
 
-t_hp			first_outside_neg(t_geo *geo, t_ray r, t_hp *sol_geo)
+t_hp			first_outside_neg(t_geo *geo, t_ray *r, t_hp *sol_geo)
 {
 	t_hp		hp_after_neg;
 	double		x;

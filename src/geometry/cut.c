@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 10:50:30 by fgallois          #+#    #+#             */
-/*   Updated: 2017/12/14 13:15:10 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/21 16:24:32 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int					belong_after_cut(t_geo *geo, t_hp hp)
 	return (1);
 }
 
-t_hp				first_in_cut(t_geo *geo, t_ray r, t_hp hp_1, t_hp hp_2)
+t_hp				first_in_cut(t_geo *geo, t_ray *r, t_hp hp_1, t_hp hp_2)
 {
 	t_hp			hp;
 	double			dist;
@@ -66,7 +66,7 @@ t_hp				first_in_cut(t_geo *geo, t_ray r, t_hp hp_1, t_hp hp_2)
 	return (hp);
 }
 
-t_hp				hit_and_cut(t_geo *geo, t_hp hp_1, t_hp hp_2, t_ray r)
+t_hp				hit_and_cut(t_geo *geo, t_hp hp_1, t_hp hp_2, t_ray *r)
 {
 	if (is_cut(geo) && !belong_after_cut(geo, hp_1))
 		return (first_in_cut(geo, r, hp_1, hp_2));

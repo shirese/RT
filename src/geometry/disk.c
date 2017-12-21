@@ -51,17 +51,17 @@ int					belong_to_disk(t_geo *geo, t_vec3 pos)
 	return (0);
 }
 
-void				fill_solution_disk(t_geo *geo, t_ray r, \
+void				fill_solution_disk(t_geo *geo, t_ray *r, \
 double *expr, t_hp *sol)
 {
 	t_disk *d;
 
 	d = (t_disk *)geo->curr;
 	if (expr[0] >= 0)
-		expr[1] = pow(r.origin.x + expr[0] * r.direction.x - \
-		(*geo->origin).x, 2) + pow(r.origin.y + expr[0] * \
-		r.direction.y - (*geo->origin).y, 2) + \
-		pow(r.origin.z + expr[0] * r.direction.z - \
+		expr[1] = pow(r->origin.x + expr[0] * r->direction.x - \
+		(*geo->origin).x, 2) + pow(r->origin.y + expr[0] * \
+		r->direction.y - (*geo->origin).y, 2) + \
+		pow(r->origin.z + expr[0] * r->direction.z - \
 		(*geo->origin).z, 2) - pow(d->radius, 2);
 	if (expr[1] <= 0)
 	{
@@ -73,7 +73,7 @@ double *expr, t_hp *sol)
 	}
 }
 
-t_hp				hit_disk(t_geo *geo, t_ray r)
+t_hp				hit_disk(t_geo *geo, t_ray *r)
 {
 	double			expr[2];
 	t_disk			*d;
@@ -82,11 +82,11 @@ t_hp				hit_disk(t_geo *geo, t_ray r)
 	d = (t_disk *)geo->curr;
 	sol.t = -1;
 	vec3_normalize(&(d->normal));
-	expr[0] = ((*geo->origin).x - r.origin.x) * d->normal.x + \
-	((*geo->origin).y - r.origin.y) * d->normal.y + \
-	((*geo->origin).z - r.origin.z) * d->normal.z;
-	expr[0] = expr[0] / (d->normal.x * r.direction.x + d->normal.y * \
-		r.direction.y + d->normal.z * r.direction.z);
+	expr[0] = ((*geo->origin).x - r->origin.x) * d->normal.x + \
+	((*geo->origin).y - r->origin.y) * d->normal.y + \
+	((*geo->origin).z - r->origin.z) * d->normal.z;
+	expr[0] = expr[0] / (d->normal.x * r->direction.x + d->normal.y * \
+		r->direction.y + d->normal.z * r->direction.z);
 	fill_solution_disk(geo, r, expr, &sol);
 	return (sol);
 }

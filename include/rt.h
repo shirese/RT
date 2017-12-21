@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/21 15:58:25 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/21 16:28:23 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ struct				s_geo
 	t_vec3			*origin;
 	t_mat3			*rotation;
 	t_mater			*mater;
-	t_hp			(*is_hit)(t_geo *geo, t_ray r);
+	t_hp			(*is_hit)(t_geo *geo, t_ray *r);
 	t_tex			*tex;
 	t_geo			*neg;
 	t_inter			*borns_neg;
@@ -216,8 +216,5 @@ double				find_ior(t_geo *geo, t_ray r, t_hp hp);
 double				ior_at_point(t_geo *geo, t_vec3 pos);
 double				ior_at_point2(t_geo *g, t_vec3 pos);
 void				add_coeff_to_objet(t_geo *geo, t_color kd,t_color ks, double ior);
-int					add_geometry_negative(t_geo *geo, int i, t_geo *neg0);
-t_hp				first_outside_neg(t_geo *geo, t_ray r, t_hp *sol_geo);
-t_hp				is_touched_by_neg(t_geo *geo, t_ray r, t_hp sol_geo);
-int					set_borns_neg(t_geo *geo, t_ray r);
+
 #endif

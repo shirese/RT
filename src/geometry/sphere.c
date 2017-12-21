@@ -49,7 +49,7 @@ int					belong_to_sphere(t_geo *geo, t_vec3 pos)
 	return (0);
 }
 
-void				solutions_sphere(t_geo *geo, t_ray r, t_hp *sol)
+void				sphere_solutions(t_geo *geo, t_ray *r, t_hp *sol)
 {
 	t_sphere		*sphere;
 	double			abcd[4];
@@ -59,9 +59,9 @@ void				solutions_sphere(t_geo *geo, t_ray r, t_hp *sol)
 	sol[0].t = -1;
 	sol[1].t = -1;
 	sphere = (t_sphere *)geo->curr;
-	oc = vec3_sub_stack(r.origin, *geo->origin);
-	abcd[0] = vec3_dot(r.direction, r.direction);
-	abcd[1] = 2.0 * vec3_dot(oc, r.direction);
+	oc = vec3_sub_stack(r->origin, *geo->origin);
+	abcd[0] = vec3_dot(r->direction, r->direction);
+	abcd[1] = 2.0 * vec3_dot(oc, r->direction);
 	abcd[2] = vec3_dot(oc, oc) - sphere->radius * sphere->radius;
 	abcd[3] = abcd[1] * abcd[1] - 4 * abcd[0] * abcd[2];
 	if (abcd[3] > 0)
@@ -77,11 +77,11 @@ void				solutions_sphere(t_geo *geo, t_ray r, t_hp *sol)
 	}
 }
 
-t_hp				hit_sphere(t_geo *geo, t_ray r)
+t_hp				hit_sphere(t_geo *geo, t_ray *r)
 {
 	t_hp			sol[2];
 
-	solutions_sphere(geo, r, sol);
+	sphere_solutions(geo, r, sol);
 	if (sol[0].t > 0)
 	{
 		if (is_cut(geo))

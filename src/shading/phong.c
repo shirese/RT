@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:03:22 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/21 16:01:06 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/21 16:16:32 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 #include "light.h"
 #include "rt.h"
 
-static t_color		calc_spec(t_mater *mater, t_hp hp, t_light *l, t_ray *r)
+static t_color		calc_spec(t_geo *geo, t_hp hp, t_light *l, t_ray *r)
 {
+	double			spec;
 	t_vec3			v;
 	t_vec3			reflection;
 	t_color			specular;
 
 	v = vec3_sub_stack(r->origin, hp.p);
 	reflection = vec3_reflection(get_light_pos(hp.p, l), hp);
-	specular.r = mater->ks.r * max(0.0, pow(vec3_dot(hp.normal, reflection), \
-		32.));
-	specular.g = mater->ks.g * max(0.0, pow(vec3_dot(hp.normal, reflection), \
-		32.));
-	specular.b = mater->ks.b * max(0.0, pow(vec3_dot(hp.normal, reflection), \
-		32.));
-	specular.a = 1.0;
+	spec = pow(vec3_dot(hp.normal, reflection), 32.);
+	if (geo->shader_type == 2)
+		spec = spec > 0.4 ? 1. : 0.;
+	specular.r = geo->mater->ks.r * spec;
+	specular.g = geo->mater->ks.g * spec;
+	specular.b = geo->mater->ks.b * spec;
 	color_clamp(&specular, 0.1, 1.0);
 	return (specular);
 }
@@ -83,7 +83,7 @@ void				shade_phong(t_geo *geo, t_hp hp, t_light *l, t_ray *r)
 			{
 				color_add(calc_diffuse(geo->mater, *l->color, lambertian), &(r->color));
 				if (l->type != 2)
-						color_add(calc_spec(geo->mater, hp, l, r), &(r->color));
+						color_add(calc_spec(geo, hp, l, r), &(r->color));
 			}
 		}
 	}

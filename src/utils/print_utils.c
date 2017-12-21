@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:59:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/15 16:56:59 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/21 10:57:33 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void			print_geo(t_geo *geo)
 		vec3_print(geo->rotation->r2);
 		vec3_print(geo->rotation->r3);
 	}
-	//print_geo_mater(geo->mater);
+	print_geo_mater(geo->mater);
 	if (geo->type == 1 && ft_printf("PLANE\nNORMAL\t\t"))
 		vec3_print(((t_plane *)(geo->curr))->normal);
 	else if (geo->type == 2)

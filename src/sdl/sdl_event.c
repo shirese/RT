@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 18:41:29 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 15:28:03 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/15 11:27:25 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static int			check_trans_event(SDL_Keycode k, t_env *e)
 
 	trans = 0;
 	if (k == SDLK_DOWN && (trans = 1))
-		e->geos->origin->y -= 0.01;
+		e->cam->pos->y += 0.1;
 	if (k == SDLK_UP && (trans = 1))
-		e->geos->origin->y += 0.01;
+		e->cam->pos->y -= 0.1;
 	if (k == SDLK_LEFT && (trans = 1))
 		e->cam->pos->x += 0.1;
 	if (k == SDLK_RIGHT && (trans = 1))
@@ -59,13 +59,15 @@ void				sdl_get_event(SDL_Event event, t_env *e)
 	{
 		if (check_rot_event(event.key.keysym.sym, e))
 		{
-			if (!(raytrace_thread(e)))
-				return ;
+			raytrace(e);
+			/*if (!(raytrace_thread(e)))
+				return ;*/
 		}
 		else if (check_trans_event(event.key.keysym.sym, e))
 		{
-			if (!(raytrace_thread(e)))
-				return ;
+			raytrace(e);
+			/*if (!(raytrace_thread(e)))
+				return ;*/
 		}
 	}
 }

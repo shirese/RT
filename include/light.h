@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 17:36:26 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/01 21:16:54 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/21 11:11:31 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ void				shade_phong(t_geo *geo, t_hp hp, t_light *l, t_ray *r);
 
 int					get_toon_edges(int geo_type, t_hp hp, t_ray r);
 double				set_toon_lambertian(double *l);
+
+t_color				calc_ambient(t_light *light);
 
 #endif

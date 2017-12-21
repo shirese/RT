@@ -6,30 +6,11 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 18:07:50 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/18 10:26:24 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/11 16:59:00 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-double				positive_smallest(double a, double b)
-{
-	if (a < 0)
-	{
-		if (b > 0)
-			return (b);
-		return (INFINITY);
-	}
-	if (b < 0)
-	{
-		if (a > 0)
-			return (a);
-		return (INFINITY);
-	}
-	if (a < b)
-		return (a);
-	return (b);
-}
 
 double				deg_to_rad(double deg)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
+/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 15:31:04 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/13 16:15:13 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/01 22:05:55 by shirese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int					setup_light(t_light **light)
 	if (!*light)
 		return (0);
 	(*light)->last = *light;
-	(*light)->color = color_new(0.0, 0.0, 0.0, 0.0);
+	(*light)->color = color_new(0.0, 0.0, 0.0);
 	(*light)->type = 0;
 	(*light)->next = NULL;
 	return (1);

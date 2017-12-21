@@ -6,21 +6,21 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 14:39:58 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/30 20:37:39 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/21 11:10:53 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RT_MULTITHREAD
+#ifndef RT_MULTITHREAD_H
 
-# define RT_MULTITHREAD
+# define RT_MULTITHREAD_H
 
-#include <pthread.h>
-#include <stdatomic.h>
+# include <pthread.h>
+# include <stdatomic.h>
 
-#include "rt.h"
+# include "rt.h"
 
-#define NUM_THREADS 4
-#define TILESIZE 16
+# define NUM_THREADS 4
+# define TILESIZE 16
 
 typedef struct		s_thread_data
 {

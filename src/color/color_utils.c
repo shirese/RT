@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/13 16:08:25 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/07 11:38:46 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/08 09:21:38 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@
 
 void				color_print(t_color c)
 {
-	ft_printf("[R %f G %f B %f A %f]\n", c.r, c.g, c.b, c.a);
+	ft_printf("[R %f G %f B %f]\n", c.r, c.g, c.b);
 }

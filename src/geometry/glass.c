@@ -22,7 +22,7 @@ t_geo				*new_glass(t_vec3 *position, t_vec3 direction, \
 	t_glass			*glass;
 	t_geo			*geo;
 
-	geo = NULL;
+	/*geo = NULL;
 	if (!malloc_geo((void **)(&glass), sizeof(t_glass), \
 	8, &geo))
 		return (0);
@@ -31,7 +31,7 @@ t_geo				*new_glass(t_vec3 *position, t_vec3 direction, \
 	glass->basis = (t_sphere*) new_sphere(position, 0.3);
 	glass->high = (t_cylinder*) new_cylinder(position, direction, 0.3);
 	glass->direction = direction;
-	glass->height = height;
+	glass->height = height;*/
 	return (geo);
 }
 
@@ -43,13 +43,13 @@ int					belong_to_glass(t_geo *geo, t_vec3 pos)
 	t_cylinder		*high;
 
 
-	glass = (t_glass*)geo->curr;
+	/*glass = (t_glass*)geo->curr;
 	under = glass->under;
 	basis = glass->basis;
 	high = glass->high;
 	if (belong_to_cone((t_geo*)under, pos) && belong_to_sphere(\
 	(t_geo *)basis,pos) && belong_to_cylinder((t_geo *)high,pos))
-		return (1);
+		return (1);*/
 	return (0);
 }
 

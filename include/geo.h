@@ -61,9 +61,7 @@ typedef struct	s_paraboloid
 
 typedef struct		s_glass
 {
-	t_cone			*under;
-	t_sphere		*basis;
-	t_cylinder		*high;
+	t_geo			*cyl;
 	double			height;
 	t_vec3			direction;
 }				t_glass;
@@ -156,4 +154,8 @@ int					belong_to_glass(t_geo *geo, t_vec3 pos);
 t_vec3				glass_norm(t_geo *geo, t_hp hp);
 int					add_glass(int *fd, char **line, t_env *e);
 t_hp				hit_glass(t_geo *geo, t_ray r);
+
+void				set_direction_glass(t_geo *geo, t_vec3 direction);
+void				set_position_glass(t_geo *geo, t_vec3 *position);
+void				set_coeffs_color(t_geo *geo);
 #endif

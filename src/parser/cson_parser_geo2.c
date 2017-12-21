@@ -176,31 +176,79 @@ int					add_glass(int *fd, char **line, t_env *e)
 	t_geo			*geo;
 	t_glass			*glass;
 	t_vec3			direction;
-	double			height;
 
 	v = NULL;
 	geo = NULL;
 	puts("GENIE");
-	if (!malloc_geo((void **)(&glass), sizeof(t_glass), 7, &geo))
-		return (13);
+	if (!malloc_geo((void **)(&glass), sizeof(t_glass), 8, &geo))
+		return (12);
 	while (get_next_line(*fd, line) && **line == '\t')
 	{
 		v = *line + 4;
+		puts(*line);
+		/*geo = new_glass(vec3_new(0.0, 0.0, 0.0), vec3_stack(0.0, 0.0, 0.0), \
+		0);*/
 		if (ft_strncmp(*line, "\tdirection", 10) == 0 && (v += 8))
 			direction = vec3_stack(atof_cson(&v), atof_cson(&v), \
 			atof_cson(&v));
 		else if (ft_strncmp(*line, "\theight", 7) == 0 && (v += 5))
-			height = ft_atof(v);
-		else
+		{
+			glass->height = ft_atof(v);
+		}
+		else 
 			parse_geo_attributes(line, v, geo, fd);	
 	}
-	geo = new_glass(geo->origin, direction, height);
-	add_coeff_to_objet(geo, t_color kd, t_color ks, double ior);git
+	
+	set_direction_glass(geo, direction);
+	
+	//set_position_glass(geo, geo->origin);
+	//set_coeffs_color(geo);
 	add_geometry(geo, &(e->geos));
-	if (geo->rotation)
+	/*if (geo->rotation)
 	{
 		rotate(&(glass->under->axis), *geo->rotation);
 		rotate(&(glass->high->axis), *geo->rotation);
-	}
+	}*/
 	return (0);
 }
+
+void				set_direction_glass(t_geo *geo, t_vec3 direction)
+{
+	t_glass		*glass;
+	t_geo		*g;
+	void* 		s;
+	t_cylinder	*ess;
+
+	glass = (t_glass*)geo->curr;
+		
+	g = glass->cyl;
+	
+	s = g->curr;
+	//ess = (t_cylinder*)g->curr;
+	ess = (t_cylinder*)g->curr;
+	puts("CHEVALET");
+	ess->radius = 0.5;
+	
+	ess->axis = direction;
+	
+}
+
+void				set_position_glass(t_geo *geo, t_vec3 *position)
+{
+	t_glass 	*glass;
+	t_geo		*g;
+
+	glass = (t_glass*)geo->curr;
+	g = glass->cyl;
+	g->origin = position;
+}
+
+/*void				fset_coeffs_color(t_geo *geo)
+
+	t_glass 	*glass;
+
+	glass = (t_glass*)geo->curr;
+	((t_geo*)glass->under)->mater = geo->mater;
+	((t_geo*)glass->basis)->mater = geo->mater;
+	((t_geo*)glass->high)->mater = geo->mater;
+}*/

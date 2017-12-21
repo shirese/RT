@@ -95,6 +95,21 @@ int					malloc_geo(void **type, int size, int geo_id, t_geo **geo)
 		return (0);
 	(*geo)->curr = *type;
 	(*geo)->type = geo_id;
+	if (geo_id == 8)
+	{
+		t_glass			*glass; 
+		t_cylinder		*cyl;
+		t_geo			*geo1;
+
+		glass = (t_glass*)(*geo)->curr;
+		geo1 = NULL;
+		geo1 = glass->cyl;
+
+		puts("LOIREY");
+		if (!malloc_geo((void **)(&cyl), sizeof(t_cylinder), 3, &geo1))
+			return (3);
+		puts("BISBILLE");
+	}
 	(*geo)->is_hit = g_get_obj_collider(geo_id);
 	return (1);
 }

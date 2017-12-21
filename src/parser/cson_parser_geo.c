@@ -64,7 +64,6 @@ int					add_plane(int *fd, char **line, t_env *e)
 	char			*v;
 	t_geo			*geo;
 	t_plane			*plane;
-	int				err;
 
 	v = NULL;
 	geo = NULL;
@@ -89,7 +88,6 @@ int					add_cone(int *fd, char **line, t_env *e)
 	char			*v;
 	t_geo			*geo;
 	t_cone			*cone;
-	int				err;
 
 	geo = NULL;
 	v = NULL;
@@ -118,7 +116,6 @@ int					add_cylinder(int *fd, char **line, t_env *e)
 	char			*v;
 	t_geo			*geo;
 	t_cylinder		*cylinder;
-	int				err;
 
 	geo = NULL;
 	if (!malloc_geo((void **)(&cylinder), sizeof(t_cylinder), 3, &geo))

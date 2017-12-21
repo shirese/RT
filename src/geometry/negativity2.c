@@ -18,7 +18,6 @@
 double        value_dist_neg(t_geo *geo, t_ray r, t_hp *sol_geo)
 {
     t_geo   *neg;
-    t_hp    sol[2];
     double min;
 
     min = sol_geo[0].t;

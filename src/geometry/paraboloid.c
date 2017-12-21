@@ -34,8 +34,8 @@ t_geo					*new_paraboloid(t_vec3 *position, double a, double b)
 
 int					belong_to_paraboloid(t_geo *geo, t_vec3 pos)
 {
-	t_paraboloid	*para;
-	double			res;
+	t_paraboloid		*para;
+	double				res;
 
 	para = (t_paraboloid*)geo->curr;
 	res = pow((pos.x / para->facta), 2) - pow((pos.y / para->factb), 2) - \
@@ -57,13 +57,23 @@ t_vec3				para_norm(t_geo *geo, t_vec3 hp)
 	return (normal);
 }
 
-t_hp				hit_paraboloid(t_geo *geo, t_ray r)
+static void				fill_hp(double *abcd, t_paraboloid *para, t_ray r\
+	, t_hp *hp)
 {
-	t_paraboloid	*para;
-	t_hp			hp;
-	t_vec3			dir;
-	t_vec3			orig;
-	double			abcd[4];
+	hp->t = -1;
+	hp->t = positive_smallest((-abcd[1] - sqrt(abcd[3])) / (2 * abcd[0]), \
+	(-abcd[1] + sqrt(abcd[3])) / (2 * abcd[0]));
+	hp->p = point_at_parameter(hp->t, r);
+	hp->normal = para_norm((t_geo*)para, hp->p);
+}
+
+t_hp					hit_paraboloid(t_geo *geo, t_ray r)
+{
+	t_paraboloid		*para;
+	t_hp				hp;
+	t_vec3				dir;
+	t_vec3				orig;
+	double				abcd[4];
 
 	para = (t_paraboloid *)geo->curr;
 	dir = r.direction;
@@ -78,11 +88,6 @@ t_hp				hit_paraboloid(t_geo *geo, t_ray r)
 	- (orig.z / para->height);
 	abcd[3] = pow(abcd[1], 2) - 4 * abcd[0] * abcd[2];
 	if (abcd[3] >= 0)
-	{
-		hp.t = positive_smallest((-abcd[1] - sqrt(abcd[3])) / (2 * abcd[0]), \
-				(-abcd[1] + sqrt(abcd[3])) / (2 * abcd[0]));
-		hp.p = point_at_parameter(hp.t, r);
-		hp.normal = para_norm(geo, hp.p);
-	}
+		fill_hp(abcd, para, r, &hp);
 	return (hp);
 }

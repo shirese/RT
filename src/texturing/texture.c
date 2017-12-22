@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 15:44:36 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/22 15:14:40 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/22 16:01:38 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ t_tex				*init_textures(int type, const char *img_path)
 	px = NULL;
 	if ((type == 1 || type == 2 || type == 5) && !(px = STBIMG_Load(img_path)))
 	{
-		ft_printf("Failed to load image: %s\n", img_path);
+		ft_printf("\n/!\\ Failed to load image: %s\n", img_path);
 		return (NULL);
 	}
 	tex = malloc(sizeof(t_tex));

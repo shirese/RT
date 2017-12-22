@@ -16,17 +16,6 @@ light:
 	color: 0.80, 0.80, 0.80
 	pos: 1.5, 0.8, 1.
 cylinder:
-	pos: 0., -0.4, -0.5
-	kd: 0.1, 0.1, 0.1
-	ks: 0.25, 0.25, 0.25
-	illum: 4
-	ior: 1.5
-	axis: 0., 1, 0.2
-	radius: 0.4
-	height: 0.9
-	cut_position: 0., 1., -0
-	cut_normal: 0., -1., 0.
-cylinder:
 	pos: -0.2, -0.15, -0.5
 	kd: 0.13, 0.13, 1.0
 	ks: 0.25, 0.25, 0.25
@@ -37,6 +26,17 @@ cylinder:
 	height: 1.5
 	cut_position: 0., 1.5, -0
 	cut_normal: -0.4., -1., 0.
+cylinder:
+	pos: 0., -0.4, -0.5
+	kd: 0.1, 0.1, 0.1
+	ks: 0.25, 0.25, 0.25
+	illum: 4
+	ior: 1.5
+	axis: 0., 1, 0.2
+	radius: 0.4
+	height: 0.9
+	cut_position: 0., 1., -0
+	cut_normal: 0., -1., 0.
 plane:
 	pos: 0., -0.2, -1
 	kd: 1., .77, .55

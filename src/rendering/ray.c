@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 14:34:15 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/21 16:23:47 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/22 10:49:09 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_ray				init_ray(t_vec3 origin, t_vec3 dir, int r_type, float ior)
 	r.type = r_type;
 	r.ior = ior;
 	r.rec = 0;
-	if (r.type == 1)
+	if (r.type == 2)
 	{
 		r.origin.x += 0.000001;
 		r.origin.y += 0.000001;

@@ -6,16 +6,20 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 18:41:29 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/21 15:52:44 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/22 11:45:58 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "light.h"
 #include "rt.h"
 #include "rt_multithread.h"
 
 static int			check_trans_event(SDL_Keycode k, t_env *e)
 {
 	int				trans;
+	t_point			*s;
+
+	s = (t_point *)(e->lights->next->curr);
 
 	trans = 0;
 	if (k == SDLK_DOWN && (trans = 1))

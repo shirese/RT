@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/21 15:59:01 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/22 15:19:00 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void				free_env(t_env **e)
 	free_geos(e);
 	free_lights(e);
 	free((*e)->img);
-	pthread_mutex_destroy(&(*e)->mutex);
 	free(*e);
 }
 
@@ -95,5 +94,4 @@ void				init_environment(t_env **e)
 	(*e)->cam = NULL;
 	(*e)->lights = NULL;
 	(*e)->geos = NULL;
-	pthread_mutex_init(&(*e)->mutex, NULL);
 }

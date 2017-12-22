@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/09 11:37:25 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/21 16:41:13 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/22 15:22:02 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int					main(int ac, char **av)
 		return (setup_error(0, e));
 	init_environment(&e);
 	if (!(cson_parse(open(av[1], O_RDONLY), e)))
-		return (setup_error(1, e));	
+		return (setup_error(1, e));
 	/*g = new_cylinder(vec3_new(0., 0.2, -1.5),vec3_stack(0.0, 0., 1.), 0.3);
 	add_coeff_to_objet(g, color_new_stack(0.2, 0.8, 0.1), color_new_stack(0.5, 0.5, 0.5), 1.0);
 	
@@ -76,7 +76,11 @@ int					main(int ac, char **av)
 		e->img = malloc(sizeof(t_color) * e->scr.nx * e->scr.ny);
 		cam_matrix(e->cam, *e->cam->pos, vec3_stack(0, 0, 1), \
 			vec3_stack(0, 1, 0));
+		// e->geos->tex = init_textures(1, "textures/basic/large_fgallois.jpg");
+		// e->geos->tex = init_textures(2, "texture/vump/normal_map.bmp");
 		// e->geos->tex = init_textures(3, NULL);
+		// e->geos->tex = init_textures(4, NULL);
+		// e->geos->tex = init_textures(5, "textures/transparent/frozen.png");
 		sdl_render(e);
 		sdl_stop(e);
 		free_env(&e);

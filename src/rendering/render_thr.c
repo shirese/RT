@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 14:13:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/21 11:09:39 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/22 14:51:44 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,9 @@ static void			*render_tile(void *arg)
 		tile = __sync_add_and_fetch(&thr_data->tile_id, 1) - 1;
 		if (tile >= tiles_num)
 			break ;
+		pthread_mutex_lock(&thr_data->mutex);
 		compute_tile_px(tile_xy, tile, thr_data->e);
+		pthread_mutex_unlock(&thr_data->mutex);
 	}
 	pthread_exit(NULL);
 }
@@ -128,7 +130,7 @@ int					raytrace_thread(t_env *e)
 	i = -1;
 	while (++i < NUM_THREADS)
 		pthread_join(thr[i], NULL);
-	render_px(e);
 	pthread_mutex_destroy(&thr_data.mutex);
+	render_px(e);
 	return (1);
 }

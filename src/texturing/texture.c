@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 15:44:36 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/18 12:09:09 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/22 15:14:40 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,18 @@ static Uint32		get_pixel(t_geo *geo, int x, int y)
 	if (bpp == 4)
 	{
 		geo->mater->transparency = (double)p[3] / 255.;
-		// printf("[%f]\n", geo->mater->transparency);
 		return (*(Uint32 *)p);
 	}
 	return (0);
 }
 
-void				apply_texture2(t_ray *r, t_geo *geo)
+static void			apply_texture2(t_ray *r, t_geo *geo)
 {
 	t_color			col;
 	double			rgb;
 
 	if (geo->tex->type == 3)
-	{
-		col = checkerboard_texture(geo->tex->uv);
-		r->color = col;
-	}
+		checkerboard_texture(geo->tex->uv, &(r->color));
 	else if (geo->tex->type == 4)
 	{
 		rgb = get_perlin_noise_pixel(geo->tex->uv.x * PERLIN_XY, \

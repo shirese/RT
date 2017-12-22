@@ -9,7 +9,7 @@
  ✔ Test Refraction with texture @done (17-12-21 16:46)
  ✔ Fix shadow left column test_multiple_spot @done (17-12-22 11:47)
  ✔ Fix specular Plane @done (17-12-22 11:49)
+ ✔ Fix Texture multithread issues @done (17-12-22 15:22)
+ ✔ Fix checkboard && perlin pixel multithread issue @done (17-12-22 15:22)
  ☐ test_refl_multiple_spot.cjson fucked if illum 3 on cylinders
- ☐ Fix checkboard && perlin pixel multithread issue
  ☐ Malloc error if texture not exist
- ☐ Fix Texture multithread issues

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/21 16:28:23 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/22 14:46:39 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct		s_color
 	double			r;
 	double			g;
 	double			b;
-	double			a;
 }					t_color;
 
 /*
@@ -174,7 +173,6 @@ typedef struct		s_env
 	t_cam			*cam;
 	t_geo			*geos;
 	t_light			*lights;
-	pthread_mutex_t	mutex;
 }					t_env;
 
 int					get_next_line(int const fd, char **line);

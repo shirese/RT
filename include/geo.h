@@ -110,7 +110,7 @@ t_vec3				plane_norm(t_geo *geo);
 */
 
 void				print_cut(t_geo *geo);
-double				distance_from_hp1(t_ray *r, t_geo *geo, t_hp hp_1, t_hp hp_2);
+double				dist_from_hp1(t_ray *r, t_geo *geo, t_hp hp_1, t_hp hp_2);
 int					is_cut(t_geo *geo);
 int					is_on_cut(t_cut *cut, t_hp hp);
 int					belong_after_cut(t_geo *geo, t_hp hp);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   geo.c                                              :+:      :+:    :+:   */
+/*   geo2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:26:59 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/13 13:51:05 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/22 16:23:06 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void				add_geometry(t_geo *geo, t_geo **geos)
 	}
 }
 
-int				add_geometry_negative(t_geo *geo, int i, t_geo *neg0)
+int					add_geometry_negative(t_geo *geo, int i, t_geo *neg0)
 {
-	t_geo		*tmp;
+	t_geo			*tmp;
 
 	if (!geo || !neg0)
 		return (0);
@@ -54,7 +54,7 @@ int				add_geometry_negative(t_geo *geo, int i, t_geo *neg0)
 	return (0);
 }
 
-t_vec3			negative_norm(t_geo *geo, t_hp hp)
+t_vec3				negative_norm(t_geo *geo, t_hp hp)
 {
 	if (geo->type == 1)
 		return (plane_norm(geo));

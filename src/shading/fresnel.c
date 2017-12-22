@@ -45,7 +45,7 @@ double				find_ior(t_geo *geo, t_ray r, t_hp hp)
 	g = geo;
 	diff = vec3_sub_stack(hp.p, r.origin);
 	len = vec3_norm(diff);
-	i = r.direction;
+	i = r.dir;
 	i = vec3_normalize_stack(i);
 	eps = vec3_add_mult_stack(r.origin, i, len + EPSILON);
 	return (ior_at_point(geo, eps));
@@ -71,8 +71,8 @@ double				coeff_fresnel(t_ray r, t_hp hp, t_geo *geo)
 	double			n;
 
 	n = find_ior(geo, r, hp);
-	r.direction = vec3_normalize_stack(r.direction);
-	cosi = clamp(vec3_dot(r.direction, vec3_normalize_stack(hp.normal)), -1, 1);
+	r.dir = vec3_normalize_stack(r.dir);
+	cosi = clamp(vec3_dot(r.dir, vec3_normalize_stack(hp.normal)), -1, 1);
 	sint = (r.ior / n) * sqrt(max(0, 1 - cosi * cosi));
 	if (sint >= 1.0)
 		return (1);

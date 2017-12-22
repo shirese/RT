@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/13 10:19:11 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/21 16:27:55 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/22 16:21:30 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "rt.h"
 #include "vector.h"
 
-t_geo					*new_cone(t_vec3 *position, t_vec3 axis, double angle)
+t_geo				*new_cone(t_vec3 *position, t_vec3 axis, double angle)
 {
-	t_cone 			*cone;
+	t_cone			*cone;
 	t_geo			*geo;
 
 	geo = NULL;
@@ -27,7 +27,6 @@ t_geo					*new_cone(t_vec3 *position, t_vec3 axis, double angle)
 	cone->angle = angle * M_PI / 180;
 	return (geo);
 }
-
 
 int					belong_to_cone(t_geo *geo, t_vec3 pos)
 {
@@ -48,12 +47,12 @@ int					belong_to_cone(t_geo *geo, t_vec3 pos)
 	return (0);
 }
 
-t_hp					hit_cone(t_geo *geo, t_ray *r)
+t_hp				hit_cone(t_geo *geo, t_ray *r)
 {
-	t_hp		sol[2];
+	t_hp			sol[2];
 
 	cone_solutions(geo, r, sol);
 	if (is_cut(geo))
-			return (hit_and_cut(geo, sol[0], sol[1], r));
+		return (hit_and_cut(geo, sol[0], sol[1], r));
 	return (sol[0]);
 }

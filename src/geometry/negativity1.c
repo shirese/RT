@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 12:52:17 by fgallois          #+#    #+#             */
-/*   Updated: 2017/12/21 16:31:48 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/22 16:27:26 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ t_hp			is_touched_by_neg(t_geo *geo, t_ray *r, t_hp sol_geo)
 	}
 	while (neg)
 	{
-		if (sol_geo.t >= neg->borns_neg->t_start && sol_geo.t <= neg->borns_neg->t_end)
+		if (sol_geo.t >= neg->borns_neg->t_start && \
+			sol_geo.t <= neg->borns_neg->t_end)
 		{
 			sol_geo.t = -1.0;
 			return (sol_geo);

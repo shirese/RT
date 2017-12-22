@@ -79,10 +79,10 @@ void				cylinder_solutions(t_geo *geo, t_ray *r, t_hp *sol)
 	sol[1].t = -1;
 	cyl = (t_cylinder *)geo->curr;
 	x = vec3_sub_stack(r->origin, *geo->origin);
-	dot[0] = vec3_dot(r->direction, cyl->axis);
+	dot[0] = vec3_dot(r->dir, cyl->axis);
 	dot[1] = vec3_dot(x, cyl->axis);
-	abcd[0] = vec3_dot(r->direction, r->direction) - dot[0] * dot[0];
-	abcd[1] = 2 * (vec3_dot(r->direction, x) - dot[0] * dot[1]);
+	abcd[0] = vec3_dot(r->dir, r->dir) - dot[0] * dot[0];
+	abcd[1] = 2 * (vec3_dot(r->dir, x) - dot[0] * dot[1]);
 	abcd[2] = vec3_dot(x, x) - dot[1] * dot[1] - cyl->radius * cyl->radius;
 	abcd[3] = abcd[1] * abcd[1] - 4 * abcd[0] * abcd[2];
 	if (abcd[3] > 0)

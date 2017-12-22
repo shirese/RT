@@ -60,8 +60,8 @@ void				sphere_solutions(t_geo *geo, t_ray *r, t_hp *sol)
 	sol[1].t = -1;
 	sphere = (t_sphere *)geo->curr;
 	oc = vec3_sub_stack(r->origin, *geo->origin);
-	abcd[0] = vec3_dot(r->direction, r->direction);
-	abcd[1] = 2.0 * vec3_dot(oc, r->direction);
+	abcd[0] = vec3_dot(r->dir, r->dir);
+	abcd[1] = 2.0 * vec3_dot(oc, r->dir);
 	abcd[2] = vec3_dot(oc, oc) - sphere->radius * sphere->radius;
 	abcd[3] = abcd[1] * abcd[1] - 4 * abcd[0] * abcd[2];
 	if (abcd[3] > 0)

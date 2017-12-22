@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:35:24 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/14 12:27:49 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/22 16:31:08 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,15 @@ t_hp				hit_plane(t_geo *geo, t_ray *r)
 	sol.t = -1;
 	p = (t_plane*)geo->curr;
 	dot[0] = vec3_dot(p->normal, vec3_sub_stack(*geo->origin, r->origin));
-	if ((dot[1] = vec3_dot(p->normal, r->direction)) == 0.0)
+	if ((dot[1] = vec3_dot(p->normal, r->dir)) == 0.0)
 		return (hit_ortho(r, p, vec3_sub_stack(*geo->origin, r->origin)));
-	else if (fabs(vec3_dot(p->normal, r->direction)) > 1e-6)
+	else if (fabs(vec3_dot(p->normal, r->dir)) > 1e-6)
 	{
-		dot[0] /= vec3_dot(p->normal, r->direction);
+		dot[0] /= vec3_dot(p->normal, r->dir);
 		if (dot[0] > 0.0)
 		{
-			sol.p = vec3_stack(r->origin.x + dot[0] * r->direction.x, r->origin.y \
-			+ dot[0] * r->direction.y, r->origin.z + dot[0] * r->direction.z);
+			sol.p = vec3_stack(r->origin.x + dot[0] * r->dir.x, r->origin.y \
+			+ dot[0] * r->dir.y, r->origin.z + dot[0] * r->dir.z);
 			sol.t = vec3_norm(vec3_sub_stack(r->origin, sol.p));
 			sol.normal = p->normal;
 			if (is_cut(geo) && !belong_after_cut(geo, sol))

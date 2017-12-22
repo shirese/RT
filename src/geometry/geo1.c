@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:26:59 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/21 16:20:36 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/22 16:33:02 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "rt.h"
 #include "utils.h"
 
-t_hp				(*g_get_obj_collider(int id))(t_geo *geo, t_ray *r)
+t_hp			(*g_get_obj_collider(int id))(t_geo *geo, t_ray *r)
 {
 	if (id == 1)
 		return (hit_plane);
@@ -33,7 +33,7 @@ t_hp				(*g_get_obj_collider(int id))(t_geo *geo, t_ray *r)
 	return (NULL);
 }
 
-static int			setup_geo_mater(t_geo **geo)
+static int		setup_geo_mater(t_geo **geo)
 {
 	(*geo)->mater = malloc(sizeof(t_mater));
 	if (!(*geo)->mater)
@@ -52,15 +52,14 @@ static int			setup_geo_mater(t_geo **geo)
 	return (1);
 }
 
-void				add_coeff_to_objet(t_geo *geo, t_color kd,t_color ks, double ior)
+void			add_geo_coeff(t_geo *geo, t_color kd, t_color ks, double ior)
 {
-	
 	geo->mater->kd = kd;
 	geo->mater->ks = ks;
 	geo->mater->ior = ior;
 }
 
-static int			setup_geo(t_geo **geo)
+static int		setup_geo(t_geo **geo)
 {
 	*geo = malloc(sizeof(t_geo));
 	if (!*geo)
@@ -84,7 +83,7 @@ static int			setup_geo(t_geo **geo)
 	return (1);
 }
 
-int					malloc_geo(void **type, int size, int geo_id, t_geo **geo)
+int				malloc_geo(void **type, int size, int geo_id, t_geo **geo)
 {
 	if (!setup_geo(geo))
 		return (0);

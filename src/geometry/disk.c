@@ -58,10 +58,10 @@ double *expr, t_hp *sol)
 
 	d = (t_disk *)geo->curr;
 	if (expr[0] >= 0)
-		expr[1] = pow(r->origin.x + expr[0] * r->direction.x - \
+		expr[1] = pow(r->origin.x + expr[0] * r->dir.x - \
 		(*geo->origin).x, 2) + pow(r->origin.y + expr[0] * \
-		r->direction.y - (*geo->origin).y, 2) + \
-		pow(r->origin.z + expr[0] * r->direction.z - \
+		r->dir.y - (*geo->origin).y, 2) + \
+		pow(r->origin.z + expr[0] * r->dir.z - \
 		(*geo->origin).z, 2) - pow(d->radius, 2);
 	if (expr[1] <= 0)
 	{
@@ -85,8 +85,8 @@ t_hp				hit_disk(t_geo *geo, t_ray *r)
 	expr[0] = ((*geo->origin).x - r->origin.x) * d->normal.x + \
 	((*geo->origin).y - r->origin.y) * d->normal.y + \
 	((*geo->origin).z - r->origin.z) * d->normal.z;
-	expr[0] = expr[0] / (d->normal.x * r->direction.x + d->normal.y * \
-		r->direction.y + d->normal.z * r->direction.z);
+	expr[0] = expr[0] / (d->normal.x * r->dir.x + d->normal.y * \
+		r->dir.y + d->normal.z * r->dir.z);
 	fill_solution_disk(geo, r, expr, &sol);
 	return (sol);
 }

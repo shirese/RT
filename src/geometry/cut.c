@@ -56,7 +56,7 @@ t_hp				first_in_cut(t_geo *geo, t_ray *r, t_hp hp_1, t_hp hp_2)
 	double			dist;
 
 	hp.t = -1;
-	dist = distance_from_hp1(r, geo, hp_1, hp_2);
+	dist = dist_from_hp1(r, geo, hp_1, hp_2);
 	if (dist != -1.0)
 	{
 		hp.t = dist;

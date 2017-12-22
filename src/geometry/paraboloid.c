@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 15:54:34 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/21 16:33:57 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/22 16:33:08 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 #include "rt.h"
 #include "utils.h"
 
-
-t_geo					*new_paraboloid(t_vec3 *position, double a, double b)
+t_geo				*new_paraboloid(t_vec3 *position, double a, double b)
 {
 	t_paraboloid	*pb;
 	t_geo			*geo;
@@ -47,7 +46,7 @@ int					belong_to_paraboloid(t_geo *geo, t_vec3 pos)
 
 t_vec3				para_norm(t_geo *geo, t_vec3 hp)
 {
-	t_paraboloid 	*para;
+	t_paraboloid	*para;
 	t_vec3			normal;
 
 	para = (t_paraboloid*)geo;
@@ -67,11 +66,11 @@ t_hp				hit_paraboloid(t_geo *geo, t_ray *r)
 	hp.t = -1;
 	if (para->facta == 0 || para->factb == 0 || para->height == 0)
 		return (hp);
-	abcd[0] = pow((r->direction.x / para->facta), 2) - \
-		pow((r->direction.y / para->factb), 2);
-	abcd[1] = (2 * r->origin.x * r->direction.x / pow(para->facta, 2)) - \
-		(2 * r->origin.y * r->direction.y / pow(para->factb, 2)) - \
-		(r->direction.z / para->height);
+	abcd[0] = pow((r->dir.x / para->facta), 2) - \
+		pow((r->dir.y / para->factb), 2);
+	abcd[1] = (2 * r->origin.x * r->dir.x / pow(para->facta, 2)) - \
+		(2 * r->origin.y * r->dir.y / pow(para->factb, 2)) - \
+		(r->dir.z / para->height);
 	abcd[2] = pow((r->origin.x / para->facta), 2) - \
 		pow((r->origin.y / para->factb), 2) - (r->origin.z / para->height);
 	abcd[3] = pow(abcd[1], 2) - 4 * abcd[0] * abcd[2];

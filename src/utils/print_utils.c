@@ -89,13 +89,14 @@ static void			print_geo2(t_geo *geo)
 	}
 	else if (geo->type == 8)
 	{
-		puts("ELEMENT UN");
-		/*ft_printf("GLASS\nHEIGHT\t\t[%f]\nDIRECTION\n", \
+		ft_printf("GLASS\nHEIGHT\t\t[%f]\nDIRECTION\n", \
 			((t_glass *)(geo->curr))->height);
 		vec3_print(((t_glass *)(geo->curr))->direction);
-		print_geo((t_geo*)((t_glass *)(geo->curr))->high);*/
-		/*print_geo((t_geo*)((t_glass *)(geo->curr))->basis);
-		print_geo((t_geo*)((t_glass *)(geo->curr))->under);*/
+		print_geo((t_geo*)((t_glass *)(geo->curr))->cyl);
+		print_cut((t_geo*)((t_glass *)(geo->curr))->cyl);
+		print_geo((t_geo*)((t_glass *)(geo->curr))->cone);
+		print_cut((t_geo*)((t_glass *)(geo->curr))->cone);
+		print_geo((t_geo*)((t_glass *)(geo->curr))->sphere);
 	}		
 	if (is_scene_dug(geo))
 	{
@@ -116,7 +117,7 @@ static void			print_geo2(t_geo *geo)
 void			print_geo(t_geo *geo)
 {
 	ft_printf("\n\n///		GEO	[%p]	////\n\nORIGIN		", (void *)geo);
-	//vec3_print(*geo->origin);
+	vec3_print(*geo->origin);
 	if (geo->rotation && ft_printf("\nROTATION\n\n"))
 	{
 		vec3_print(geo->rotation->r1);

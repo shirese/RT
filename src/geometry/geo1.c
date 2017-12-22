@@ -33,7 +33,7 @@ t_hp				(*g_get_obj_collider(int id))(t_geo *geo, t_ray r)
 	if (id == 7)
 		return (hit_cube);
 	if (id == 8)
-		return (hit_glass);	
+		return (hit_glass);
 	return (NULL);
 }
 
@@ -98,17 +98,20 @@ int					malloc_geo(void **type, int size, int geo_id, t_geo **geo)
 	if (geo_id == 8)
 	{
 		t_glass			*glass; 
-		t_cylinder		*cyl;
 		t_geo			*geo1;
+		t_geo			*geo2;
+		t_geo			*geo3;
 
-		glass = (t_glass*)(*geo)->curr;
 		geo1 = NULL;
-		geo1 = glass->cyl;
-
-		puts("LOIREY");
-		if (!malloc_geo((void **)(&cyl), sizeof(t_cylinder), 3, &geo1))
+		geo2 = NULL;
+		geo3 = NULL;
+		glass = (t_glass*)(*geo)->curr;
+		if (!malloc_geo((void **)(&geo1), sizeof(t_cylinder), 3, &glass->cyl))
 			return (3);
-		puts("BISBILLE");
+		if (!malloc_geo((void **)(&geo2), sizeof(t_cone), 2, &glass->cone))
+			return (3);
+		if (!malloc_geo((void **)(&geo3), sizeof(t_sphere), 4, &glass->sphere))
+			return (4);
 	}
 	(*geo)->is_hit = g_get_obj_collider(geo_id);
 	return (1);

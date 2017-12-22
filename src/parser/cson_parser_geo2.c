@@ -175,7 +175,6 @@ int					add_glass(int *fd, char **line, t_env *e)
 	char			*v;
 	t_geo			*geo;
 	t_glass			*glass;
-	t_vec3			direction;
 
 	v = NULL;
 	geo = NULL;
@@ -186,69 +185,120 @@ int					add_glass(int *fd, char **line, t_env *e)
 	{
 		v = *line + 4;
 		puts(*line);
-		/*geo = new_glass(vec3_new(0.0, 0.0, 0.0), vec3_stack(0.0, 0.0, 0.0), \
-		0);*/
+	
 		if (ft_strncmp(*line, "\tdirection", 10) == 0 && (v += 8))
-			direction = vec3_stack(atof_cson(&v), atof_cson(&v), \
-			atof_cson(&v));
-		else if (ft_strncmp(*line, "\theight", 7) == 0 && (v += 5))
 		{
-			glass->height = ft_atof(v);
+			vec3_normalize(&glass->direction);
+			glass->direction = vec3_stack(atof_cson(&v), atof_cson(&v), \
+			atof_cson(&v));
 		}
+		else if (ft_strncmp(*line, "\theight", 7) == 0 && (v += 5))
+			glass->height = ft_atof(v);
 		else 
 			parse_geo_attributes(line, v, geo, fd);	
 	}
 	
-	set_direction_glass(geo, direction);
-	
-	//set_position_glass(geo, geo->origin);
-	//set_coeffs_color(geo);
-	add_geometry(geo, &(e->geos));
-	/*if (geo->rotation)
+	if (geo->rotation)
 	{
-		rotate(&(glass->under->axis), *geo->rotation);
-		rotate(&(glass->high->axis), *geo->rotation);
-	}*/
+		rotate(&(((t_cylinder*)(glass->cyl)->curr)->axis), *geo->rotation);
+		rotate(&(((t_cone*)(glass->cone)->curr)->axis), *geo->rotation);
+	}
+	set_direction_glass(geo);
+	add_geometry(geo, &(e->geos));
 	return (0);
 }
 
-void				set_direction_glass(t_geo *geo, t_vec3 direction)
+int				set_direction_glass(t_geo *geo)
 {
-	t_glass		*glass;
-	t_geo		*g;
-	void* 		s;
-	t_cylinder	*ess;
+	t_glass			*glass;
+	t_geo			*g;
+	t_cylinder		*ess;
+	t_cone 			*cone;
+	t_sphere		*sphere;
 
 	glass = (t_glass*)geo->curr;
-		
 	g = glass->cyl;
-	
-	s = g->curr;
-	//ess = (t_cylinder*)g->curr;
+	g->origin = vec3_add(*geo->origin, vec3_mult_stack(glass->direction, 0.15));
+	g->mater = geo->mater;
 	ess = (t_cylinder*)g->curr;
-	puts("CHEVALET");
-	ess->radius = 0.5;
-	
-	ess->axis = direction;
-	
+	ess->radius = 0.35;
+	ess->axis = glass->direction;
+			
+	if (!cut_cylinder(g, glass->height))
+		return (0);
+	g = glass->cone;
+	g->origin = vec3_add(*geo->origin, vec3_mult_stack(glass->direction, -0.25));
+	//g->mater = geo->mater;
+	if (!ft_memcpy((t_mater*)g->mater, (t_mater*)geo->mater, sizeof(geo->mater)))
+		return (0);
+	g->mater->transparency = 0;
+	cone = (t_cone*)g->curr;
+	cone->angle = 15.0;
+	cone->axis = glass->direction;
+
+	if (!cut_cone(g))
+		return (0);
+	g = glass->sphere;
+	g->origin = vec3_add(*geo->origin, vec3_mult_stack(glass->direction, -0.25));
+	//g->mater = geo->mater;
+	if (!ft_memcpy((t_mater*)g->mater, (t_mater*)geo->mater, sizeof(geo->mater)))
+		return (0);
+	g->mater->transparency = 0;
+	sphere = (t_sphere*)g->curr;
+	sphere->radius = 0.10;
+	return (1);
 }
 
-void				set_position_glass(t_geo *geo, t_vec3 *position)
+int					cut_cylinder(t_geo *cyl, double height)
 {
-	t_glass 	*glass;
-	t_geo		*g;
+	t_vec3			position;
+	t_vec3			normal;
+	t_cut			*new_cut;
+	t_cylinder		*c;
+	t_vec3			*v;
+	t_geo			*neg;
 
-	glass = (t_glass*)geo->curr;
-	g = glass->cyl;
-	g->origin = position;
+	c = (t_cylinder*)cyl->curr;
+	new_cut = NULL;
+	if (!(new_cut = (t_cut*)malloc(3 * sizeof(t_cut))))
+		return (0);
+	new_cut[0].cut_position = *cyl->origin;
+	new_cut[0].cut_normal = c->axis;
+
+	position = vec3_add_stack(*cyl->origin, vec3_mult_stack(c->axis, height));
+	normal = vec3_stack(0.0, -1.0, -0.5);
+	//normal = vec3_mult_stack(c->axis, -1.0);
+	new_cut[1].cut_position = position;
+	new_cut[1].cut_normal = normal;
+	cyl->nb_cut = 2;
+	cyl->cut = new_cut;
+
+	v = vec3_add(*cyl->origin, vec3_mult_stack(c->axis, height));
+	neg = new_sphere(v, 0.8);
+	add_geometry_negative(cyl, 0, neg);
+	return (1);
 }
 
-/*void				fset_coeffs_color(t_geo *geo)
+int					cut_cone(t_geo *cone)
+{
+	t_vec3			position;
+	t_cut			*new_cut;
+	t_cone			*c;
 
-	t_glass 	*glass;
+	c = (t_cone*)cone->curr;
+	new_cut = NULL;
+	if (!(new_cut = (t_cut*)malloc(3 * sizeof(t_cut))))
+		return (0);
+		
+	position = vec3_add_stack(*cone->origin, vec3_mult_stack(c->axis, -0.25)); 
+	new_cut[0].cut_position = vec3_add_stack(*cone->origin, vec3_mult_stack(c->axis, 0.40));
+	new_cut[0].cut_normal = vec3_mult_stack(c->axis, -1.0);
 
-	glass = (t_glass*)geo->curr;
-	((t_geo*)glass->under)->mater = geo->mater;
-	((t_geo*)glass->basis)->mater = geo->mater;
-	((t_geo*)glass->high)->mater = geo->mater;
-}*/
+	position = vec3_add_stack(*cone->origin, vec3_mult_stack(c->axis, -0.4)); 
+	new_cut[1].cut_position = position;
+	new_cut[1].cut_normal = c->axis;
+	cone->cut = new_cut;
+	cone->nb_cut = 2;
+	return (1);
+}
+

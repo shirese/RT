@@ -64,10 +64,12 @@ t_vec3				glass_norm(t_geo *geo, t_hp hp)
 	cyl = glass->cyl;
 	cone = glass->cone;
 	sphere = glass->sphere;
+
 	if (belong_to_cylinder(cyl, hp.p))
 		return (normal_cut(cyl, hp));
 	if (belong_to_cone(cone, hp.p))
 		return (normal_cut(cyl, hp));
+		
 	if (belong_to_sphere(sphere, hp.p))
 		return (sphere_norm(sphere, hp.p));
 	return (vec3_stack(0.0, 0.0, 0.0));

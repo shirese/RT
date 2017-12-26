@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 16:44:31 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/26 11:57:21 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/26 12:06:42 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void			filter_deeppink(t_color *px_col)
 {
 	t_color			deeppink;
 
-	deeppink = color_new_stack(255 / 255., 20 / 255., 147 / 255., 1.);
+	deeppink = color_new_stack(255 / 255., 20 / 255., 147 / 255.);
 	color_mult(deeppink, px_col);
 }
 
@@ -46,7 +46,8 @@ static void			filter_sepia(int *r, int *g, int *b, t_color *px_col)
 	*g = (*g > 255) ? 255 : *g;
 	*b = 0.272 * *r + 0.534 * *g + 0.131 * *b;
 	*b = (*b > 255) ? 255 : *b;
-	color_set(color_new_stack((double)*r / 255, (double)*g / 255, (double)*b / 255, 1.), px_col);
+	color_set(color_new_stack((double)*r / 255, (double)*g / 255, \
+		(double)*b / 255), px_col);
 }
 
 void				apply_filters(t_color *px_col, t_env *e)

@@ -87,5 +87,6 @@ char		*ft_ultoa(unsigned long n);
 char		*ft_ulltoa(unsigned long long n);
 
 int			ft_printf(const char *format, ...);
+void		*ft_realloc(void *ptr, size_t new_size, size_t old_size);
 
 #endif

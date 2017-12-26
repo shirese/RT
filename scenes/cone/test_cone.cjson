@@ -1,0 +1,20 @@
+window:
+	width: 600
+	height: 500
+camera:
+	pos: 0.0, 0.0, 4.0
+	fov: 90
+light:
+	type: 1
+	color: 0.18, 0.18, 0.18
+light:
+	type: 3
+	color: 0.88, 0.88, 0.88
+	pos: 0.0, 0.5, 3.0
+cone:
+	pos: 0., 0., -1.5
+	kd: 0., 1., 0.2,
+	ks: 0.1, 0.1, 0.1
+	axis: 0., 1.0, 0.0
+	angle: 15.
+

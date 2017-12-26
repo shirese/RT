@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:03:22 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/08 17:45:23 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/26 10:57:14 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,46 @@
 #include "light.h"
 #include "rt.h"
 
-static t_color		calc_spec(t_mater *mater, t_hp hp, void *l, t_ray *r)
+static t_color		calc_spec(t_geo *geo, t_hp hp, t_light *l, t_ray *r)
 {
+	double			spec;
 	t_vec3			v;
 	t_vec3			reflection;
 	t_color			specular;
-	t_spot			*spot;
 
-	spot = l;
 	v = vec3_sub_stack(r->origin, hp.p);
-	reflection = vec3_reflection(l, hp);
-	specular.r = mater->ks.r * max(0.0, pow(vec3_dot(hp.normal, reflection), \
-		32.));
-	specular.g = mater->ks.g * max(0.0, pow(vec3_dot(hp.normal, reflection), \
-		32.));
-	specular.b = mater->ks.b * max(0.0, pow(vec3_dot(hp.normal, reflection), \
-		32.));
-	specular.a = 1.0;
+	reflection = vec3_reflection(get_light_pos(hp.p, l), hp);
+	spec = pow(vec3_dot(hp.normal, reflection), 32.);
+	if (geo->shader_type == 2)
+		spec = spec > 0.4 ? 1. : 0.;
+	specular.r = geo->mater->ks.r * spec;
+	specular.g = geo->mater->ks.g * spec;
+	specular.b = geo->mater->ks.b * spec;
 	color_clamp(&specular, 0.1, 1.0);
 	return (specular);
 }
 
-static t_color		calc_diffuse(t_mater *mater, double lambertian)
+static t_color		calc_diffuse(t_mater *mater, t_color c, double lambertian)
 {
-	t_color			diffuse;
+	t_color			diffuse_col;
 
-	diffuse.r = mater->kd.r * max(0.0, lambertian);
-	diffuse.g = mater->kd.g * max(0.0, lambertian);
-	diffuse.b = mater->kd.b * max(0.0, lambertian);
-	diffuse.a = 1.0;
-	return (diffuse);
+	diffuse_col.r = mater->kd.r * c.r * lambertian;
+	diffuse_col.g = mater->kd.g * c.g * lambertian;
+	diffuse_col.b = mater->kd.b * c.b * lambertian;
+	return (diffuse_col);
+}
+
+t_color				calc_ambient(t_light *light)
+{
+	static t_color	ambient;
+
+	if (!light)
+		return (ambient);
+	ambient.r = light->color->r;
+	ambient.g = light->color->g;
+	ambient.b = light->color->b;
+	color_clamp(&ambient, 0.0, 1.0);
+	return (ambient);
 }
 
 /*
@@ -51,20 +61,31 @@ static t_color		calc_diffuse(t_mater *mater, double lambertian)
 **	+ [rs,gs,bs]max0(R•Li)p ) )
 */
 
-void				shade_phong(t_mater *mater, t_hp hp, t_light *l, t_ray *r)
+void				shade_phong(t_geo *geo, t_hp hp, t_light *l, t_ray *r)
 {
-	t_spot			*s;
 	double			lambertian;
+	t_vec3			light_dir;
+	t_mater			*mater;
 
+	mater = geo->mater;
 	if (l->type != 1)
 	{
-		s = (t_spot *)l->curr;
-		lambertian = vec3_dot(hp.normal, vec3_sub_stack(*s->pos, hp.p));
+		light_dir = get_light_dir(hp.p, l);
+		lambertian = vec3_dot(hp.normal, vec3_normalize_stack(light_dir));
+		if (geo->type == 6)
+			lambertian = fabs(lambertian);
+		if (geo->shader_type == 2)
+			set_toon_lambertian(&lambertian);
 		if (lambertian > 0.0)
 		{
-			color_add(calc_diffuse(mater, lambertian), &(r->color));
-			color_add(calc_spec(mater, hp, s, r), &(r->color));
-			color_mult(*l->color, &(r->color));
+			if (geo->shader_type == 2 && get_toon_edges(geo->type, hp, *r))
+				color_set(color_new_stack(0., 0., 0.), &(r->color));
+			else
+			{
+				color_add(calc_diffuse(geo->mater, *l->color, lambertian), &(r->color));
+				if (l->type != 2)
+						color_add(calc_spec(geo, hp, l, r), &(r->color));
+			}
 		}
 	}
 }

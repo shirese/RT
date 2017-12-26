@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 16:12:49 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/21 16:29:43 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/26 10:52:17 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ t_hp				hit_disk(t_geo *geo, t_ray *r);
 
 int					malloc_geo(void **type, int size, int geo_id, t_geo **geo);
 int					belong_to_paraboloid(t_geo *geo, t_vec3 pos);
+t_vec3				paraboloid_norm(t_paraboloid *para, t_vec3 hp);
 
 int					belong_to(t_geo *g, t_vec3 pos);
 int					belong_to_cone(t_geo *geo, t_vec3 pos);

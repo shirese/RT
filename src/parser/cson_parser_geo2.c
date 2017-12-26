@@ -121,10 +121,10 @@ int					add_paraboloid(int *fd, char **line, t_env *e)
 	v = NULL;
 	geo = NULL;
 	if (!malloc_geo((void **)(&para), sizeof(t_paraboloid), 6, &geo))
-		return (10);
-	para->facta = 0.;
-	para->factb = 0.;
-	para->height = 0.;
+		return (6);
+	para->facta = 1.;
+	para->factb = 1.;
+	para->height = 1.;
 	while (get_next_line(*fd, line) && **line == '\t' && (v = *line + 4))
 	{
 		if (ft_strncmp(*line, "\tfacta", 6) == 0 && (v += 4))

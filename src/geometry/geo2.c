@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:26:59 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/22 16:23:06 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/26 10:53:54 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ t_vec3				negative_norm(t_geo *geo, t_hp hp)
 	else if (geo->type == 5)
 		return (disk_norm(geo));
 	else if (geo->type == 6)
-		return (para_norm(geo, hp.p));
+		return (paraboloid_norm((t_paraboloid *)geo->curr, hp.p));
 	return (vec3_stack(0.0, 0.0, 0.0));
 }

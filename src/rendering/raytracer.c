@@ -21,12 +21,9 @@
 
 static int			is_nearest(t_hp latest_hp, t_hp *hp, double *md)
 {
-	double			dist;
-
-	dist = vec3_norm(latest_hp.p);
-	if (dist < *md)
+	if (latest_hp.t < *md)
 	{
-		*md = dist;
+		*md = latest_hp.t;
 		*hp = latest_hp;
 		return (1);
 	}

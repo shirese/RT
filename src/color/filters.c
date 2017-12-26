@@ -6,12 +6,37 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 16:44:31 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/29 11:29:15 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/26 11:57:21 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
 #include "rt.h"
+
+static void			filter_deeppink(t_color *px_col)
+{
+	t_color			deeppink;
+
+	deeppink = color_new_stack(255 / 255., 20 / 255., 147 / 255., 1.);
+	color_mult(deeppink, px_col);
+}
+
+static void			filter_invert(t_color *px_col)
+{
+	px_col->r = 0xFF - px_col->r;
+	px_col->g = 0xFF - px_col->g;
+	px_col->b = 0xFF - px_col->b;
+}
+
+static void			filter_grayscale(t_color *px_col)
+{
+	double			gray;
+
+	gray = (px_col->r + px_col->g + px_col->b) / 3.;
+	px_col->r = gray;
+	px_col->g = gray;
+	px_col->b = gray;
+}
 
 static void			filter_sepia(int *r, int *g, int *b, t_color *px_col)
 {
@@ -35,4 +60,14 @@ void				apply_filters(t_color *px_col, t_env *e)
 	b = px_col->b * 255;
 	if (e->filter == 1)
 		filter_sepia(&r, &g, &b, px_col);
+	else if (e->filter == 2)
+		filter_grayscale(px_col);
+	else if (e->filter == 3)
+		filter_invert(px_col);
+	else if (e->filter == 4)
+		filter_deeppink(px_col);
+	else if (e->filter == 5)
+		filter_sunset(px_col);
+	else if (e->filter == 6)
+		filter_saturate(px_col);
 }

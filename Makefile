@@ -6,7 +6,7 @@
 #    By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/02 10:55:23 by chaueur           #+#    #+#              #
-#    Updated: 2017/11/28 16:44:42 by chaueur          ###   ########.fr        #
+#    Updated: 2017/12/26 11:58:30 by chaueur          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ INCS			= -I include -I frameworks/SDL2.framework/Headers -I ft_printf/inc/
 
 SRC				=	environment.c main.c
 SRC_CAMERA		=	camera.c camera_transform.c
-SRC_COLOR		=	color.c color_op.c color_op_2.c color_utils.c filters.c
+SRC_COLOR		=	color.c color_op.c color_op_2.c color_utils.c filters.c \
+					filters_2.c
 SRC_GEOS		=	cone.c cone2.c cylinder.c disk.c geo.c plane.c sphere.c
 SRC_MATS		=	mat3.c mat3_rot.c mat4.c
 SRC_PARSER		=	get_next_line.c cson_parser.c cson_parser_2.c \

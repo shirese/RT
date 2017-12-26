@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 17:40:36 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/21 15:56:06 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/26 08:55:17 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,20 @@ int					parse_light_colors(char *value, t_light **light)
 
 int					parse_light_direction(char *value, t_light **light)
 {
-	if ((*light)->type == 2)
-	{
-		vec3_set(atof_cson(&value), atof_cson(&value), \
-		atof_cson(&value), ((t_directional *)((*light)->curr))->dir);
-		return (0);
-	}
-	return (1);
+	if ((*light)->type != 2)
+		return (1);
+	vec3_set(atof_cson(&value), atof_cson(&value), \
+	atof_cson(&value), ((t_directional *)((*light)->curr))->dir);
+	return (0);
 }
 
 int					parse_light_position(char *value, t_light **l)
 {
-	if ((*l)->type == 3)
-	{
-		vec3_set(atof_cson(&value), atof_cson(&value), \
-		atof_cson(&value), ((t_point *)((*l)->curr))->pos);
-		return (0);
-	}
-	return (1);
+	if ((*l)->type != 3)
+		return (1);
+	vec3_set(atof_cson(&value), atof_cson(&value), \
+	atof_cson(&value), ((t_point *)((*l)->curr))->pos);
+	return (0);
 }
 
 int					assign_light(int type, t_light **light)

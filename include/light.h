@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 17:36:26 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/21 15:58:41 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/26 09:00:46 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_vec3				get_light_dir(t_vec3 from, t_light *to_light);
 t_vec3				get_light_pos(t_vec3 from, t_light *l);
 t_vec3				vec3_reflection(t_vec3 pos, t_hp hp);
 
-void				add_light(t_light *light, t_light **lights);
+int					add_light(t_light *light, t_light **lights);
 int					setup_light(t_light **light);
 
 void				shade_phong(t_geo *geo, t_hp hp, t_light *l, t_ray *r);

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/26 12:14:54 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/26 12:19:10 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void				init_environment(t_env **e)
 {
 	*e = malloc(sizeof(t_env));
 	(*e)->img = NULL;
-	(*e)->filter = 5;
+	(*e)->filter = 0;
 	(*e)->win.w = 0;
 	(*e)->win.h = 0;
 	(*e)->samp_rate = 1;

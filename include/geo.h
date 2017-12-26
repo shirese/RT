@@ -163,4 +163,5 @@ void				set_coeffs_color(t_geo *geo);
 int					cut_cylinder(t_geo *cyl, double height);
 int					cut_cone(t_geo *cone);
 t_hp				nearest_part(t_hp *sols);
+t_hp				first_in_cut_out_neg(t_geo *geo, t_ray r, t_hp *sol, t_hp *sol_new);
 #endif

@@ -16,3 +16,10 @@
 #include "rt.h"
 #include "utils.h"
 
+t_hp		first_in_cut_out_neg(t_geo *geo, t_ray r, t_hp *sol, t_hp *sol_new)
+{
+	t_hp	hp_new;
+
+
+	return (hp_new);
+}

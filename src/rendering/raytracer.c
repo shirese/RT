@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/18 11:44:52 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/22 15:21:35 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ t_geo				*ray_hit(t_ray *r, t_hp *hp, t_geo *from, t_env *e)
 {
 	double			min_dist;
 	t_hp			latest_hp;
-	t_ray			tr;
 	t_geo			*geo;
 	t_geo			*nearest_geo;
 
@@ -43,10 +42,9 @@ t_geo				*ray_hit(t_ray *r, t_hp *hp, t_geo *from, t_env *e)
 	nearest_geo = NULL;
 	while (geo != NULL)
 	{
-		tr = *r;
 		if (geo != from)
 		{
-			latest_hp = geo->is_hit(geo, tr);
+			latest_hp = geo->is_hit(geo, r);
 			if (latest_hp.t != -1 && is_nearest(latest_hp, hp, &min_dist))
 				nearest_geo = geo;
 		}

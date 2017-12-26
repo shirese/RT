@@ -6,10 +6,11 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 18:41:29 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/15 11:27:25 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/22 15:20:41 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "light.h"
 #include "rt.h"
 #include "rt_multithread.h"
 

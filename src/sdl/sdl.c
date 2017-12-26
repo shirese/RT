@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:26:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/14 12:23:02 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/26 10:04:24 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,25 @@ void				sdl_draw_point(SDL_Renderer *rend, int x, int y, t_color c)
 	SDL_RenderDrawPoint(rend, x, y);
 }
 
-t_env				*sdl_init(t_env *e)
+int					sdl_init(t_env **e)
 {
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
-		return (NULL);
+		return (0);
 	else
 	{
-		SDL_CreateWindowAndRenderer(e->win.w, e->win.h, \
-			SDL_WINDOW_RESIZABLE, &(e->win.handle), &(e->win.rend));
-		if (!e->win.handle)
+		SDL_CreateWindowAndRenderer((*e)->win.w, (*e)->win.h, \
+			SDL_WINDOW_RESIZABLE, &((*e)->win.handle), &((*e)->win.rend));
+		if (!(*e)->win.handle)
 		{
-			e->win.w = 0;
-			e->win.h = 0;
+			(*e)->win.w = 0;
+			(*e)->win.h = 0;
 		}
 		else
-			SDL_SetWindowTitle(e->win.handle, WIN_TITLE);
-		if (e->win.w == 0 || e->win.h == 0)
-			return (NULL);
+			SDL_SetWindowTitle((*e)->win.handle, WIN_TITLE);
+		if ((*e)->win.w == 0 || (*e)->win.h == 0)
+			return (0);
 	}
-	return (e);
+	return (1);
 }
 
 void				sdl_render(t_env *e)

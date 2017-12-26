@@ -15,6 +15,28 @@
 #include "rt.h"
 #include "utils.h"
 
+t_geo				*new_sphere(t_vec3 *position, double radius)
+{
+	t_sphere		*sphere;
+	t_geo			*geo;
+
+	geo = NULL;
+	if (!malloc_geo((void **)(&sphere), sizeof(t_sphere), 4, &geo))
+		return (0);
+	geo->origin = position;
+	sphere->radius = radius;
+	return (geo);
+}
+
+t_vec3				sphere_norm(t_geo *geo, t_vec3 pos)
+{
+	t_vec3			norm;
+
+	norm = vec3_sub_stack(pos, *geo->origin);
+	vec3_normalize(&norm);
+	return (norm);
+}
+
 int					belong_to_sphere(t_geo *geo, t_vec3 pos)
 {
 	t_sphere		*sphere;
@@ -27,39 +49,46 @@ int					belong_to_sphere(t_geo *geo, t_vec3 pos)
 	return (0);
 }
 
-t_vec3		sphere_norm(t_geo *geo, t_hp hp)
+void				sphere_solutions(t_geo *geo, t_ray *r, t_hp *sol)
 {
-	return (vec3_normalize_stack(vec3_sub_stack(hp.p, *geo->origin)));
-}
-
-t_hp				hit_sphere(t_geo *geo, t_ray r)
-{
+	t_sphere		*sphere;
 	double			abcd[4];
 	double			t[2];
-	t_hp			hp_1;
-	t_hp			hp_2;
 	t_vec3			oc;
-	t_sphere		*sphere;
 
-
-	hp_1.t = -1;
+	sol[0].t = -1;
+	sol[1].t = -1;
 	sphere = (t_sphere *)geo->curr;
-	oc = vec3_sub_stack(r.origin, *geo->origin);
-	abcd[0] = vec3_dot(r.direction, r.direction);
-	abcd[1] = 2.0 * vec3_dot(oc, r.direction);
+	oc = vec3_sub_stack(r->origin, *geo->origin);
+	abcd[0] = vec3_dot(r->dir, r->dir);
+	abcd[1] = 2.0 * vec3_dot(oc, r->dir);
 	abcd[2] = vec3_dot(oc, oc) - sphere->radius * sphere->radius;
 	abcd[3] = abcd[1] * abcd[1] - 4 * abcd[0] * abcd[2];
 	if (abcd[3] > 0)
 	{
 		t[0] = (-abcd[1] - sqrt(abcd[3])) / (2 * abcd[0]);
 		t[1] = (-abcd[1] + sqrt(abcd[3])) / (2 * abcd[0]);
-		hp_1.t = positive_smallest(t[0], t[1]);
-		hp_1.p = point_at_parameter(hp_1.t, r);
-		hp_1.normal = norm_cut(geo, hp_1);
-		hp_2.t = non_positive_smallest(t[0], t[1]);
-		hp_2.p = point_at_parameter(hp_2.t, r);
-		hp_2.normal = norm_cut(geo, hp_2);
-		return (hit_and_cut(geo, hp_1, hp_2, r));
+		sol[0].t = positive_smallest(t[0], t[1]);
+		sol[0].p = point_at_parameter(sol[0].t, r);
+		sol[1].t = non_positive_smallest(t[0], t[1]);
+		sol[1].p = point_at_parameter(sol[1].t, r);
+		sol[0].normal = sphere_norm(geo, sol[0].p);
+		sol[1].normal = sphere_norm(geo, sol[1].p);
 	}
-	return (hp_1);
+}
+
+t_hp				hit_sphere(t_geo *geo, t_ray *r)
+{
+	t_hp			sol[2];
+
+	sphere_solutions(geo, r, sol);
+	if (sol[0].t > 0)
+	{
+		if (is_cut(geo))
+			return (hit_and_cut(geo, sol[0], sol[1], r));
+		if (is_geo_dug(geo))
+			return (first_outside_neg(geo, r, sol));
+		return (sol[0]);
+	}
+	return (sol[0]);
 }

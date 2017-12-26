@@ -6,11 +6,18 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 11:56:56 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/16 17:58:20 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/12 13:55:38 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
+
+void				vec3_mult_fact(t_vec3 *v, double factor)
+{
+	v->x *= factor;
+	v->y *= factor;
+	v->z *= factor;
+}
 
 t_vec3				*vec3_div(t_vec3 v0, double factor)
 {

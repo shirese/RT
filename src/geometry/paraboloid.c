@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 15:54:34 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/11 18:04:40 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/26 10:52:07 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,25 @@
 #include "rt.h"
 #include "utils.h"
 
-int						belong_to_paraboloid(t_geo *geo, t_vec3 pos)
+t_geo				*new_paraboloid(t_vec3 *position, double a, double b)
 {
-	t_paraboloid		*para;
-	double				res;
+	t_paraboloid	*pb;
+	t_geo			*geo;
+
+	geo = NULL;
+	if (!malloc_geo((void **)(&pb), sizeof(t_paraboloid), 6, &geo))
+		return (0);
+	geo->origin = position;
+	pb->facta = a;
+	pb->factb = b;
+	pb->height = 1.0;
+	return (geo);
+}
+
+int					belong_to_paraboloid(t_geo *geo, t_vec3 pos)
+{
+	t_paraboloid	*para;
+	double			res;
 
 	para = (t_paraboloid*)geo->curr;
 	res = pow((pos.x / para->facta), 2) - pow((pos.y / para->factb), 2) - \
@@ -29,9 +44,10 @@ int						belong_to_paraboloid(t_geo *geo, t_vec3 pos)
 	return (0);
 }
 
-static t_vec3			paraboloid_norm(t_paraboloid *para, t_vec3 hp)
+
+t_vec3				paraboloid_norm(t_paraboloid *para, t_vec3 hp)
 {
-	t_vec3				normal;
+	t_vec3			normal;
 
 	normal = vec3_stack(2 * hp.x / pow(para->facta, 2), -2 * hp.y / \
 			pow(para->factb, 2), -1 / para->height);
@@ -39,7 +55,7 @@ static t_vec3			paraboloid_norm(t_paraboloid *para, t_vec3 hp)
 	return (normal);
 }
 
-static void				fill_hp(double *abcd, t_paraboloid *para, t_ray r\
+static void			fill_hp(double *abcd, t_paraboloid *para, t_ray *r\
 	, t_hp *hp)
 {
 	hp->t = -1;
@@ -49,17 +65,17 @@ static void				fill_hp(double *abcd, t_paraboloid *para, t_ray r\
 	hp->normal = paraboloid_norm(para, hp->p);
 }
 
-t_hp					hit_paraboloid(t_geo *geo, t_ray r)
+t_hp				hit_paraboloid(t_geo *geo, t_ray *r)
 {
-	t_paraboloid		*para;
-	t_hp				hp;
-	t_vec3				dir;
-	t_vec3				orig;
-	double				abcd[4];
+	t_paraboloid	*para;
+	t_hp			hp;
+	t_vec3			dir;
+	t_vec3			orig;
+	double			abcd[4];
 
 	para = (t_paraboloid *)geo->curr;
-	dir = r.direction;
-	orig = r.origin;
+	dir = r->dir;
+	orig = r->origin;
 	hp.t = -1;
 	if (para->facta == 0 || para->factb == 0 || para->height == 0)
 		return (hp);

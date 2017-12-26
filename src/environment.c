@@ -6,10 +6,11 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/18 13:42:55 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/26 09:57:07 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "light.h"
 #include "matrice.h"
 #include "rt.h"
 #include "rt_multithread.h"
@@ -32,19 +33,23 @@ t_screen			set_screen(t_win win, t_cam *cam)
 
 static void			free_lights(t_env **e)
 {
-	void			*tmp;
+	t_light			*tmp;
 
 	while ((*e)->lights)
 	{
-		tmp = (t_light *)(*e)->lights;
+		tmp = (*e)->lights;
 		(*e)->lights = (*e)->lights->next;
-		free(((t_light *)tmp)->curr);
-		free(((t_light *)tmp)->color);
+		if (tmp->type == 2)
+			free(((t_directional *)tmp->curr)->dir);
+		else if (tmp->type == 3)
+			free(((t_point *)tmp->curr)->pos);
+		if (tmp->curr)
+			free((tmp)->curr);
+		free((tmp)->color);
 		free(tmp);
 	}
 	free((*e)->lights);
 }
-
 static void			free_geos(t_env **e)
 {
 	t_geo			*geo;
@@ -70,13 +75,18 @@ static void			free_geos(t_env **e)
 
 void				free_env(t_env **e)
 {
-	free((*e)->cam->pos);
-	free((*e)->cam->cam_to_world);
-	free((*e)->cam);
-	free_geos(e);
-	free_lights(e);
-	free((*e)->img);
-	pthread_mutex_destroy(&(*e)->mutex);
+	if ((*e)->cam)
+	{
+		free((*e)->cam->pos);
+		free((*e)->cam->cam_to_world);
+		free((*e)->cam);
+	}
+	if ((*e)->geos)
+		free_geos(e);
+	if ((*e)->lights)
+		free_lights(e);
+	if ((*e)->img)
+		free((*e)->img);
 	free(*e);
 }
 
@@ -90,5 +100,4 @@ void				init_environment(t_env **e)
 	(*e)->cam = NULL;
 	(*e)->lights = NULL;
 	(*e)->geos = NULL;
-	pthread_mutex_init(&(*e)->mutex, NULL);
 }

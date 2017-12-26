@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cylinder.c                                         :+:      :+:    :+:   */
+/*   cylinder1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 13:30:03 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/14 14:00:54 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/21 16:26:31 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,22 @@
 #include "ray.h"
 #include "rt.h"
 #include "utils.h"
+
+t_geo				*new_cylinder(t_vec3 *position, t_vec3 axis, \
+	double radius)
+{
+	t_cylinder		*cyl;
+	t_geo			*geo;
+
+	geo = NULL;
+	if (!malloc_geo((void **)(&cyl), sizeof(t_cylinder), \
+	3, &geo))
+		return (0);
+	geo->origin = position;
+	cyl->axis = axis;
+	cyl->radius = radius;
+	return (geo);
+}
 
 int					belong_to_cylinder(t_geo *geo, t_vec3 pos)
 {
@@ -52,39 +68,39 @@ t_vec3				cylinder_norm(t_geo *geo, t_hp hp)
 	return (normal);
 }
 
-t_hp				hit_cylinder(t_geo *geo, t_ray r)
+void				cylinder_solutions(t_geo *geo, t_ray *r, t_hp *sol)
 {
 	t_cylinder		*cyl;
-	t_hp			hp_1;
-	t_hp			hp_2;
 	t_vec3			x;
-	double			abcd[4];
 	double			dot[2];
+	double			abcd[4];
 
-	hp_1.t = -1;
+	sol[0].t = -1;
+	sol[1].t = -1;
 	cyl = (t_cylinder *)geo->curr;
-	x = vec3_sub_stack(r.origin, *geo->origin);
-	vec3_normalize(&cyl->axis);
-	dot[0] = vec3_dot(r.direction, cyl->axis);
+	x = vec3_sub_stack(r->origin, *geo->origin);
+	dot[0] = vec3_dot(r->dir, cyl->axis);
 	dot[1] = vec3_dot(x, cyl->axis);
-	abcd[0] = vec3_dot(r.direction, r.direction) - dot[0] * dot[0];
-	abcd[1] = 2 * (vec3_dot(r.direction, x) - dot[0] * dot[1]);
+	abcd[0] = vec3_dot(r->dir, r->dir) - dot[0] * dot[0];
+	abcd[1] = 2 * (vec3_dot(r->dir, x) - dot[0] * dot[1]);
 	abcd[2] = vec3_dot(x, x) - dot[1] * dot[1] - cyl->radius * cyl->radius;
 	abcd[3] = abcd[1] * abcd[1] - 4 * abcd[0] * abcd[2];
 	if (abcd[3] > 0)
+		fill_solution_cylinder(geo, r, abcd, sol);
+}
+
+t_hp				hit_cylinder(t_geo *geo, t_ray *r)
+{
+	t_hp			sol[2];
+
+	cylinder_solutions(geo, r, sol);
+	if (sol[0].t > 0)
 	{
-		hp_1.t = positive_smallest((-abcd[1] - sqrt(abcd[3])) / (2 * abcd[0]), \
-			(-abcd[1] + sqrt(abcd[3])) / (2 * abcd[0]));
-		hp_1.p = point_at_parameter(hp_1.t, r);
-		hp_1.normal = cylinder_norm(geo, hp_1);
 		if (is_cut(geo))
-		{
-			hp_2.t = non_positive_smallest((-abcd[1] - sqrt(abcd[3])) / (2 * abcd[0]), \
-				(-abcd[1] + sqrt(abcd[3])) / (2 * abcd[0]));
-			hp_2.p = point_at_parameter(hp_2.t, r);
-			hp_2.normal = norm_cut(geo, hp_2);
-			return (hit_and_cut(geo, hp_1, hp_2, r));
-		}
+			return (hit_and_cut(geo, sol[0], sol[1], r));
+		if (is_geo_dug(geo))
+			return (first_outside_neg(geo, r, sol));
+		return (sol[0]);
 	}
-	return (hp_1);
+	return (sol[0]);
 }

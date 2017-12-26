@@ -54,7 +54,7 @@ int				add_geometry_negative(t_geo *geo, int i, t_geo *neg0)
 	return (0);
 }
 
-t_vec3			negative_norm(t_geo *geo, t_hp hp)
+t_vec3			norm(t_geo *geo, t_hp hp)
 {
 	if (geo->type == 1)
 		return (plane_norm(geo));

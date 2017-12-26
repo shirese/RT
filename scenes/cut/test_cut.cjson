@@ -19,4 +19,4 @@ sphere:
 	ior: 1.
 	radius: 0.8
 	cut_position : 0., 0., -0.5
-	cut_normal : 1.0, 1.0, 0.0
+	cut_normal : -1.0, 0.0, -1.0

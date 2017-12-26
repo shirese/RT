@@ -117,7 +117,6 @@ int         		is_scene_dug(t_geo *geo);
 void				print_geo(t_geo *geo);
 void				solutions_cone(t_geo *geo, t_ray r, t_hp *sol);
 void				solutions_sphere(t_geo *geo, t_ray r, t_hp *sol);
-t_vec3				cut_norm(t_geo *geo, t_hp hp);
 t_vec3				cylinder_norm(t_geo *geo, t_hp hp);
 t_vec3				sphere_norm(t_geo *geo, t_vec3 pos);
 t_vec3				disk_norm(t_geo *geo);
@@ -135,7 +134,7 @@ t_vec3				normal_cut(t_geo *geo, t_hp hp);
 int					set_borns(double to, double dn, double *born_sup, \
 double *born_inf);
 double				value_t(t_vec3 normal, t_ray r, double *dn);
-t_vec3				negative_norm(t_geo *geo, t_hp hp);
+t_vec3				norm(t_geo *geo, t_hp hp);
 void				fill_solution_cylinder(t_geo *geo, t_ray r, double *abcd, t_hp *sol);
 void				fill_solution_disk(t_geo *geo, t_ray r, double *expr, t_hp *sol);
 void				create_axis(t_geo *geo);

@@ -49,7 +49,7 @@ t_vec3				normal_cut(t_geo *geo, t_hp hp)
 			i++;
 		}
 	}
-	return (cut_norm(geo, hp));
+	return (norm(geo, hp));
 }
 
 int					set_borns(double to, double dn, double *born_sup, \

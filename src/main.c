@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/09 11:37:25 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/22 16:01:59 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/26 09:57:26 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,8 @@ int					main(int ac, char **av)
 	{
 		add_geometry_negative(e->geos, 0, g);
 	}*/
-	if (!(e = sdl_init(e)))
-	{
+	if (!sdl_init(&e))
 		ft_printf("Error while initializing SDL\n");
-		free(e);
-	}
 	else
 	{
 		e->scr = set_screen(e->win, e->cam);
@@ -83,7 +80,7 @@ int					main(int ac, char **av)
 		// e->geos->tex = init_textures(5, "textures/transparent/frozen.png");
 		sdl_render(e);
 		sdl_stop(e);
-		free_env(&e);
 	}
+	free_env(&e);
 	return (0);
 }

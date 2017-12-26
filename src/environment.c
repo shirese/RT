@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/22 15:19:00 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/26 09:57:07 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,18 @@ static void			free_geos(t_env **e)
 
 void				free_env(t_env **e)
 {
-	free((*e)->cam->pos);
-	free((*e)->cam->cam_to_world);
-	free((*e)->cam);
-	free_geos(e);
-	free_lights(e);
-	free((*e)->img);
+	if ((*e)->cam)
+	{
+		free((*e)->cam->pos);
+		free((*e)->cam->cam_to_world);
+		free((*e)->cam);
+	}
+	if ((*e)->geos)
+		free_geos(e);
+	if ((*e)->lights)
+		free_lights(e);
+	if ((*e)->img)
+		free((*e)->img);
 	free(*e);
 }
 

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/22 16:30:53 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/26 09:54:52 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,7 @@ double				max(double i, double j);
 
 void				sdl_get_event(SDL_Event event, t_env *e);
 void				sdl_draw_point(SDL_Renderer *rend, int x, int y, t_color c);
-t_env				*sdl_init(t_env *e);
+int					sdl_init(t_env **e);
 void				sdl_render(t_env *e);
 void				sdl_stop(t_env *e);
 

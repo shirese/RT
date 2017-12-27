@@ -6,7 +6,7 @@
 #    By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/02 10:55:23 by chaueur           #+#    #+#              #
-#    Updated: 2017/12/27 10:27:19 by chaueur          ###   ########.fr        #
+#    Updated: 2017/12/27 14:18:56 by chaueur          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ SRC_MATS		=	mat3.c mat3_rot.c mat4.c mat4_utils.c
 SRC_PARSER		=	get_next_line.c cson_parser.c cson_parser_2.c \
 					cson_parser_light.c cson_parser_geo.c cson_parser_geo2.c
 SRC_RENDER		=	ray.c ray_ref.c raytracer.c raytracer_ref.c render.c render_thr.c
-SRC_SDL			=	sdl.c sdl_drag.c sdl_event.c
+SRC_SDL			=	sdl.c sdl_bar.c sdl_drag.c sdl_event.c
 SRC_SHADING		=	fresnel.c light.c lighting.c phong.c toon.c
 SRC_TEX			=	checkerboard.c perlin.c planar_mapping.c spherical_mapping.c texture.c uv_texture.c
 SRC_UTILS		=	geo_utils.c math_utils.c math_utils_2.c print_utils.c transform.c utils.c

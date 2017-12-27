@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 14:13:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/27 10:27:45 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/27 17:10:40 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ static void			*render_tile(void *arg)
 		if (tile >= tiles_num)
 			break ;
 		pthread_mutex_lock(&thr_data->mutex);
+		render_loading_bar(tile, tiles_num, thr_data->e);
 		compute_tile_px(tile_xy, tile, thr_data->e);
 		pthread_mutex_unlock(&thr_data->mutex);
 	}

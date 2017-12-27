@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 10:23:28 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/27 11:54:14 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/27 16:09:06 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void				sdl_render(t_env *e);
 void				sdl_stop(t_env *e);
 
 void				release_virtual_plane(t_geo **virtual_plane);
+void				render_loading_bar(int x, int y, t_env *e);
 void				setup_virtual_plane(t_geo **virtual_plane);
 
 #endif

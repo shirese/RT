@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 10:12:51 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/27 11:57:00 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/27 12:10:39 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int					setup_virtual_plane(t_geo **virtual_plane)
 	return (1);
 }
 
-static int			check_drag_motion(t_geo **v_plane, t_geo **geo, \
+static int			check_drag_motion(t_geo **v_p, t_geo **geo, \
 	SDL_Event event, t_env *e)
 {
 	t_hp			hp;
@@ -58,7 +58,7 @@ static int			check_drag_motion(t_geo **v_plane, t_geo **geo, \
 		{
 			r = init_ray(gen_ray_origin(*e->cam->cam_to_world, *e->cam->pos), \
 			gen_ray_direction(event.motion.x, event.motion.y, e), 1, 1.0);
-			hp = hit_plane(*v_plane, &r);
+			hp = hit_plane(*v_p, &r);
 			*(*geo)->origin = hp.p;
 			return (1);
 		}
@@ -67,7 +67,7 @@ static int			check_drag_motion(t_geo **v_plane, t_geo **geo, \
 	{
 		(*geo)->origin->z += ((1 - 2 * (event.wheel.y + 0.5) / e->scr.ny) * \
 				e->scr.scale * 1 / e->scr.asp_ratio) / 10.;
-		(*v_plane)->origin->z = (*geo)->origin->z;
+		(*v_p)->origin->z = (*geo)->origin->z;
 		return (1);
 	}
 	return (0);
@@ -84,7 +84,7 @@ int					check_drag_event(SDL_Event ev, t_env *e)
 	if (ev.type == SDL_MOUSEBUTTONUP)
 	{
 		onclick = 0;
-		if (v_plane)
+		if (geo && v_plane)
 			release_virtual_plane(&v_plane);
 	}
 	else if (ev.type == SDL_MOUSEBUTTONDOWN)

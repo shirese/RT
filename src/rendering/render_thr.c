@@ -6,13 +6,14 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 14:13:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/26 12:09:20 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/27 10:27:45 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
 #include "ft_printf.h"
 #include "rt_multithread.h"
+#include "sdl_func.h"
 
 static void			render_px(t_env *e)
 {

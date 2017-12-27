@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:26:59 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/22 16:33:02 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/27 10:44:08 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void			add_geo_coeff(t_geo *geo, t_color kd, t_color ks, double ior)
 	geo->mater->ior = ior;
 }
 
-static int		setup_geo(t_geo **geo)
+int				setup_geo(t_geo **geo)
 {
 	*geo = malloc(sizeof(t_geo));
 	if (!*geo)

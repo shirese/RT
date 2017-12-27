@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 16:12:49 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/26 10:52:17 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/27 10:44:20 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct	s_paraboloid
 }					t_paraboloid;
 
 void				add_geometry(t_geo *geo, t_geo **geos);
+int					setup_geo(t_geo **geo);
 void				parse_geo_attributes(char **line, char *v, \
 t_geo *geo, int *fd);
 void				parse_geo_attributes_2(char **line, char *v, \

@@ -6,13 +6,14 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:26:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/26 12:08:25 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/27 10:54:29 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
 #include "rt.h"
 #include "rt_multithread.h"
+#include "sdl_func.h"
 #include "utils.h"
 
 void				sdl_draw_point(SDL_Renderer *rend, int x, int y, t_color c)

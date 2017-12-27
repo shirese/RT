@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/26 12:01:25 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/27 10:23:21 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,12 +201,6 @@ void				ft_translate(t_vec3 *vec, t_vec3 trs);
 double				deg_to_rad(double deg);
 double				clamp(double x, double up, double low);
 double				max(double i, double j);
-
-void				sdl_get_event(SDL_Event event, t_env *e);
-void				sdl_draw_point(SDL_Renderer *rend, int x, int y, t_color c);
-int					sdl_init(t_env **e);
-void				sdl_render(t_env *e);
-void				sdl_stop(t_env *e);
 
 void				fresnel(t_ray r, t_hp hp, double n, double *krefl);
 double				coeff_fresnel(t_ray r, t_hp hp, t_geo *geo);

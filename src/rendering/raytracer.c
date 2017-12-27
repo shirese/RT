@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/26 12:09:40 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/27 10:27:38 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "light.h"
 #include "pthread.h"
 #include "rt.h"
+#include "sdl_func.h"
 #include "texture.h"
 #include "utils.h"
 

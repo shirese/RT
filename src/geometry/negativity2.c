@@ -51,12 +51,12 @@ static t_vec3        normal_neg(t_geo *geo, t_hp hp)
     {   
         if (hp.t == neg->borns_neg->t_start || hp.t == neg->borns_neg->t_end)
         {
-            normal = vec3_mult_stack(negative_norm(neg, hp), -1);
+            normal = vec3_mult_stack(norm(neg, hp), -1);
             return (normal);
         }
          neg = neg->next;
     }
-    normal = negative_norm(geo, hp);
+    normal = norm(geo, hp);
     return (normal);
 }
 
@@ -73,4 +73,41 @@ t_hp                first_outside_neg(t_geo *geo, t_ray r, t_hp *sol_geo)
         hp_after_neg.normal = normal_neg(geo, hp_after_neg);
     }
     return (hp_after_neg);
+}
+
+t_hp                first_in_cut_out_neg(t_geo *geo, t_ray r, t_hp *sol, t_hp *sol_new)
+{
+	t_cut			*cut;
+	double			dn;
+	int				i;
+	double			born_inf;
+	double			born_sup;
+    int             solution;
+
+	cut = geo->cut;
+	born_sup = sol[1].t - sol[0].t;
+	born_inf = 0;
+	i = 0;
+    sol_new[0].t = -1;
+    sol_new[1].t = -1;
+    solution = 1;
+	while (i < geo->nb_cut && solution)
+	{
+		dn = vec3_dot(vec3_sub_stack(cut[i].cut_position, \
+		sol[0].p), cut[i].cut_normal);
+		if (set_borns(value_t(cut[i].cut_normal, r, &dn), dn, \
+		&born_sup, &born_inf) == 0)
+			solution = 0;
+		i++;
+	}
+	if (born_inf <= born_sup && solution)
+	{
+        sol_new[0].t = sol[0].t + min(born_inf, born_sup);
+        sol_new[0].p = point_at_parameter(sol_new[0].t, r);
+        sol_new[0].normal = norm(geo, sol_new[0]);
+        sol_new[1].t = sol[0].t + max(born_inf, born_sup);
+        sol_new[1].p = point_at_parameter(sol_new[1].t, r);
+        sol_new[1].normal = norm(geo, sol_new[1]);
+    }
+    return (sol_new[0]);
 }

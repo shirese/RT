@@ -61,7 +61,7 @@ t_hp				first_in_cut(t_geo *geo, t_ray r, t_hp hp_1, t_hp hp_2)
 	{
 		hp.t = dist;
 		hp.p = point_at_parameter(hp.t, r);
-		hp.normal = cut_norm(geo, hp);
+		hp.normal = normal_cut(geo, hp);
 	}
 	return (hp);
 }
@@ -72,3 +72,5 @@ t_hp				hit_and_cut(t_geo *geo, t_hp hp_1, t_hp hp_2, t_ray r)
 		return (first_in_cut(geo, r, hp_1, hp_2));
 	return (hp_1);
 }
+
+

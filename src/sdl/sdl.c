@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:26:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/27 10:54:29 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/27 17:46:27 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,16 @@ int					sdl_init(t_env **e)
 		return (0);
 	else
 	{
-		SDL_CreateWindowAndRenderer((*e)->win.w, (*e)->win.h, \
-			SDL_WINDOW_RESIZABLE, &((*e)->win.handle), &((*e)->win.rend));
-		if (!(*e)->win.handle)
+		(*e)->win.handle = SDL_CreateWindow(WIN_TITLE, SDL_WINDOWPOS_UNDEFINED\
+			, SDL_WINDOWPOS_UNDEFINED, (*e)->win.w, (*e)->win.h, 0);
+		(*e)->win.rend = SDL_CreateRenderer((*e)->win.handle, -1, \
+			SDL_RENDERER_ACCELERATED);
+		if (!(*e)->win.handle || !(*e)->win.rend)
 		{
 			(*e)->win.w = 0;
 			(*e)->win.h = 0;
-		}
-		else
-			SDL_SetWindowTitle((*e)->win.handle, WIN_TITLE);
-		if ((*e)->win.w == 0 || (*e)->win.h == 0)
 			return (0);
+		}
 	}
 	return (1);
 }

@@ -81,7 +81,7 @@ void				parse_geo_attributes(char **line, char *v, \
 t_geo *geo, int *fd);
 void				parse_geo_attributes_2(char **line, char *v, \
 t_geo *geo, int *fd);
-t_vec3				cone_normal(t_geo *geo, t_vec3 p);
+t_vec3				cone_norm(t_geo *geo, t_vec3 p);
 double				beta2_cone(double expr, double n, double angle);
 double				beta_cone(double expr, double n, double a, double o);
 double				alpha2_cone(double expr, double n, double angle);

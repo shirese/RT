@@ -54,19 +54,3 @@ int				add_geometry_negative(t_geo *geo, int i, t_geo *neg0)
 	return (0);
 }
 
-t_vec3			norm(t_geo *geo, t_hp hp)
-{
-	if (geo->type == 1)
-		return (plane_norm(geo));
-	if (geo->type == 2)
-		return (cone_normal(geo, hp.p));
-	else if (geo->type == 3)
-		return (cylinder_norm(geo, hp));
-	else if (geo->type == 4)
-		return (sphere_norm(geo, hp.p));
-	else if (geo->type == 5)
-		return (disk_norm(geo));
-	else if (geo->type == 6)
-		return (para_norm(geo, hp.p));
-	return (vec3_stack(0.0, 0.0, 0.0));
-}

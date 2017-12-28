@@ -39,14 +39,14 @@ int			is_geo_dug(t_geo *geo)
 void		both_solutions(t_ray *r, t_geo *neg, t_hp *sol)
 {
 	if (neg->type == 2)
-		solutions_cone(neg, *r, sol);
+		cone_solutions(neg, r, sol);
 	if (neg->type == 3)
-		solutions_cylinder(neg, *r, sol);
+		cylinder_solutions(neg, r, sol);
 	if (neg->type == 4)
-		solutions_sphere(neg, *r, sol);
+		sphere_solutions(neg, r, sol);
 }
 
-int					set_borns_neg(t_geo *neg, t_ray r)
+int					set_borns_neg(t_geo *neg, t_ray *r)
 {
 	t_geo   *tmp;
 	t_hp    sol[2];
@@ -56,7 +56,7 @@ int					set_borns_neg(t_geo *neg, t_ray r)
 	{
 		if (!(tmp->borns_neg = (t_inter*)malloc(sizeof(t_inter))))
 			return (0);
-		both_solutions(&r, neg, sol);
+		both_solutions(r, neg, sol);
 		tmp->borns_neg->t_start = min(sol[0].t, sol[1].t);
 		tmp->borns_neg->t_end = max(sol[0].t, sol[1].t);
 		tmp = tmp->next;

@@ -156,16 +156,18 @@ int					add_cube(int *fd, char **line, t_env *e)
 	{
 		v = *line + 4;
 		if (ft_strncmp(*line, "\tdirection", 10) == 0 && (v += 8))
+		{
 			cube->direction1 = vec3_stack(atof_cson(&v), atof_cson(&v), \
 			atof_cson(&v));
+		}
 		else if (ft_strncmp(*line, "\tsize", 5) == 0 && (v += 3))
 			cube->size = ft_atof(v);
 		else
 			parse_geo_attributes(line, v, geo, fd);	
 	}
 	add_geometry(geo, &(e->geos));
-	if (geo->rotation)
-		rotate(&(cube->direction1), *geo->rotation);
+	/*if (geo->rotation)
+		rotate(&(cube->direction1), *geo->rotation);*/
 	create_axis(geo);
 	return (0);
 }

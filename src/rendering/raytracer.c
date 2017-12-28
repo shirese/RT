@@ -81,8 +81,9 @@ t_color				find_ray_color(double x, double y, t_env *e)
 	geo = NULL;
 	r = init_ray(gen_ray_origin(*e->cam->cam_to_world, *e->cam->pos), \
 		gen_ray_direction(x, y, e), 1, 1.0);
-	if (x == 600 && y == 228)
+	//if (x == 427 && y == 251)
 		throw_ray(&r, e);
+	
 	return (r.color);
 }
 

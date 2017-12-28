@@ -50,17 +50,11 @@ void				sdl_render(t_env *e)
 {
 	SDL_Event		ev;
 
-<<<<<<< HEAD
 	
 	//print_env(e);
 	raytrace(e);
 	/*if (!raytrace_thread(e))
 		return ;*/
-=======
-	print_env(e);
-	if (!raytrace_thread(e))
-		return ;
->>>>>>> 856a70046c6bdd4e398fa065e2a6158925dc7b83
 	while (1 && SDL_WaitEvent(&ev))
 	{
 		if (ev.type == SDL_KEYDOWN && ev.key.keysym.sym == SDLK_ESCAPE)

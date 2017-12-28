@@ -61,6 +61,7 @@ void				sdl_get_event(SDL_Event event, t_env *e)
 {
 	int x;
 	int y;
+
 	if (event.type == SDL_KEYDOWN)
 	{
 		if (check_rot_event(event.key.keysym.sym, e))
@@ -74,16 +75,15 @@ void				sdl_get_event(SDL_Event event, t_env *e)
 				return ;
 		}
 	}
-<<<<<<< HEAD
-	if (event.type == SDL_MOUSEBUTTONUP) 
+	else if (event.type == SDL_MOUSEBUTTONUP) 
 	{
 		SDL_GetMouseState(&x, &y);
 		printf("Valeurs de x et y : [%d, %d]\n", x, y);
-=======
+	}
 	else if (check_drag_event(event, e))
 	{
-		if (!(raytrace_thread(e)))
-			return ;
->>>>>>> 856a70046c6bdd4e398fa065e2a6158925dc7b83
+			if (!(raytrace_thread(e)))
+				return ;
 	}
+	
 }

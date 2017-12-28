@@ -74,6 +74,7 @@ void				apply_lights(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
 
 	light = e->lights;
 	in_shadow = 0;
+	
 	while (light != NULL && geo)
 	{
 		if (light->type != 1)
@@ -88,10 +89,22 @@ void				apply_lights(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
 				}
 			}
 			if (!in_shadow && (!geo->tex || (geo->tex && geo->tex->type != 5)))
+			{
 				shade_phong(geo, hp, light, r);
+				//color_print(r->color);
+			}
 			if (geo->mater->illum != 1 && r->rec < MAX_RECURSION)
+			{
+				/*puts("A");
+				color_print(r->color);*/
 				throw_new_rays(r, hp, geo, e);
+				/*color_print(r->color);
+				puts("B");*/
+			}
+			
+			
 		}
 		light = light->next;
 	}
+	
 }

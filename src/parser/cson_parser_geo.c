@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 18:39:18 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/18 12:39:43 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/21 11:14:28 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ t_geo *geo, int *fd)
 		if (!register_cut(geo, fd, line, v))
 			return ;
 	}
+	else if (ft_strncmp(*line, "\tshader", 7) == 0 && (v += 5))
+		geo->shader_type = atof_cson(&v);
 }
 
 int					add_plane(int *fd, char **line, t_env *e)

@@ -37,7 +37,7 @@ t_ray				rotate_ray(t_ray *r, t_mat3 mat)
 
 	ret = *r;
 	ret.origin = rotate_stack(ret.origin, mat);
-	ret.direction = rotate_stack(r->direction, mat);
+	ret.dir = rotate_stack(r->dir, mat);
 	return (ret);
 }
 

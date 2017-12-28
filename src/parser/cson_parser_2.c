@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 11:55:40 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/14 12:26:56 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/26 09:00:52 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,26 @@ int					parse_light(int *fd, char **line, t_env *e)
 	char			*value;
 	t_light			*light;
 
-	err = 0;
+	err = 3;
 	value = NULL;
 	light = NULL;
 	if (!setup_light(&light))
-		return (3);
+		return (err);
 	while (get_next_line(*fd, line) && **line == '\t')
 	{
 		value = *line + 4;
 		if (ft_strncmp(*line, "\ttype", 5) == 0 && (value += 3))
 			err = assign_light(ft_atoi(value), &light);
-		else if (ft_strncmp(*line, "\tcolor", 6) == 0 && (value += 4))
+		else if (!err && ft_strncmp(*line, "\tcolor", 6) == 0 && (value += 4))
 			err = parse_light_colors(value, &light);
-		else if (ft_strncmp(*line, "\tdir", 4) == 0 && (value += 2))
+		else if (!err && ft_strncmp(*line, "\tdir", 4) == 0 && (value += 2))
 			err = parse_light_direction(value, &light);
-		else if (ft_strncmp(*line, "\tpos", 4) == 0 && (value += 2))
+		else if (!err && ft_strncmp(*line, "\tpos", 4) == 0 && (value += 2))
 			err = parse_light_position(value, &light);
 		else
-			break ;
+			return (3);
 	}
-	add_light(light, &(e->lights));
-	return (0);
+	return (add_light(light, &(e->lights)));
 }
 
 int					parse_camera(int *fd, char **line, t_env *e)

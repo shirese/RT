@@ -6,7 +6,7 @@
 #    By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/02 10:55:23 by chaueur           #+#    #+#              #
-#    Updated: 2017/12/21 11:12:30 by chaueur          ###   ########.fr        #
+#    Updated: 2017/12/28 15:39:00 by chaueur          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,14 +35,16 @@ DIR_OBJ			= obj/
 
 SRC_MAIN		=	environment.c main.c
 SRC_CAMERA		=	camera.c camera_transform.c
-SRC_COLOR		=	color.c color_op.c color_op_2.c color_utils.c
-SRC_GEOS		=	cone.c cone2.c cone3.c cube.c cut.c cut2.c cut3.c cylinder1.c cylinder2.c disk.c geo1.c geo2.c \
-glass.c negativity1.c negativity2.c paraboloid.c plane.c sphere.c
+SRC_COLOR		=	color.c color_op.c color_op_2.c color_utils.c filters.c \
+					filters_2.c
+SRC_GEOS		=	cone.c cone2.c cone3.c cube.c cut.c cut2.c cylinder1.c \
+					cylinder2.c disk.c geo1.c geo2.c glass.c negativity1.c \
+					negativity2.c paraboloid.c plane.c sphere.c
 SRC_MATS		=	mat3.c mat3_rot.c mat4.c mat4_utils.c
 SRC_PARSER		=	get_next_line.c cson_parser.c cson_parser_2.c \
 					cson_parser_light.c cson_parser_geo.c cson_parser_geo2.c
 SRC_RENDER		=	ray.c ray_ref.c raytracer.c raytracer_ref.c render.c render_thr.c
-SRC_SDL			=	sdl.c sdl_event.c
+SRC_SDL			=	sdl.c sdl_bar.c sdl_drag.c sdl_event.c
 SRC_SHADING		=	fresnel.c light.c lighting.c phong.c toon.c
 SRC_TEX			=	checkerboard.c perlin.c planar_mapping.c spherical_mapping.c texture.c uv_texture.c
 SRC_UTILS		=	geo_utils.c math_utils.c math_utils_2.c print_utils.c transform.c utils.c

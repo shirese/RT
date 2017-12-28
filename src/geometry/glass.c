@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cylinder.c                                         :+:      :+:    :+:   */
+/*   glass.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 13:30:03 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/14 14:00:54 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:42:02 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 #include "rt.h"
 #include "utils.h"
 
-t_geo				*new_glass(t_vec3 *position, t_vec3 direction, \
-	double height)
+t_geo				*new_glass(t_vec3 *position, t_vec3 direction, double h)
 {
 	t_glass			*glass;
 	t_geo			*geo;
@@ -31,7 +30,7 @@ t_geo				*new_glass(t_vec3 *position, t_vec3 direction, \
 	glass->basis = (t_sphere*) new_sphere(position, 0.3);
 	glass->high = (t_cylinder*) new_cylinder(position, direction, 0.3);
 	glass->direction = direction;
-	glass->height = height;*/
+	glass->h = h;*/
 	return (geo);
 }
 
@@ -88,7 +87,7 @@ t_hp				nearest_part(t_hp	*sols)
 		return (sols[2]);	
 }
 
-t_hp				hit_glass(t_geo *geo, t_ray r)
+t_hp				hit_glass(t_geo *geo, t_ray *r)
 {
 	t_glass 	*glass;
 	t_geo		*cyl;

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:59:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/15 16:56:59 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:02:25 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static void			print_lights(t_env *e)
 		if (light->type == 3)
 		{
 			ft_printf("\nPOS 		[%f %f %f]\n", \
-				((t_spot *)light->curr)->pos->x,
-				((t_spot *)light->curr)->pos->y,
-				((t_spot *)light->curr)->pos->z);
+				((t_point *)light->curr)->pos->x,
+				((t_point *)light->curr)->pos->y,
+				((t_point *)light->curr)->pos->z);
 		}
 		light = light->next;
 	}
@@ -116,7 +116,7 @@ static void			print_geo2(t_geo *geo)
 
 void			print_geo(t_geo *geo)
 {
-	ft_printf("\n\n///		GEO	[%p]	////\n\nORIGIN		", (void *)geo);
+	ft_printf("\n\n///\t\tGEO [%p]\t\t////\n\nORIGIN\t\t", (void *)geo);
 	vec3_print(*geo->origin);
 	if (geo->rotation && ft_printf("\nROTATION\n\n"))
 	{
@@ -124,6 +124,7 @@ void			print_geo(t_geo *geo)
 		vec3_print(geo->rotation->r2);
 		vec3_print(geo->rotation->r3);
 	}
+	ft_printf("\nSHADER\t\t[%d]", geo->shader_type);
 	print_geo_mater(geo->mater);
 	if (geo->type == 1 && ft_printf("PLANE\nNORMAL\t\t"))
 		vec3_print(((t_plane *)(geo->curr))->normal);

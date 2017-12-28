@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/13 10:19:11 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/14 12:29:51 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:27:11 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "rt.h"
 #include "vector.h"
 
-t_geo					*new_cone(t_vec3 *position, t_vec3 axis, double angle)
+t_geo				*new_cone(t_vec3 *position, t_vec3 axis, double angle)
 {
-	t_cone 			*cone;
+	t_cone			*cone;
 	t_geo			*geo;
 
 	geo = NULL;
@@ -24,10 +24,9 @@ t_geo					*new_cone(t_vec3 *position, t_vec3 axis, double angle)
 		return (0);
 	geo->origin = position;
 	cone->axis = axis;
-	cone->angle = angle * M_PI / 180;	
+	cone->angle = angle * M_PI / 180;
 	return (geo);
 }
-
 
 int					belong_to_cone(t_geo *geo, t_vec3 pos)
 {
@@ -43,16 +42,17 @@ int					belong_to_cone(t_geo *geo, t_vec3 pos)
 		vec3_mult_stack(*geo->origin, vec3_dot(diff, c->axis)));
 	dif = vec3_sub_stack(proj, pos);
 	oh = vec3_sub_stack(proj, *geo->origin);
-	if (vec3_norm(dif) <= tan(c->angle) * vec3_norm(oh) && belong_after_cut(geo, pos))
+	if (vec3_norm(dif) <= tan(c->angle) * vec3_norm(oh) && \
+		belong_after_cut(geo, pos))
 		return (1);
 	return (0);
 }
 
-t_hp					hit_cone(t_geo *geo, t_ray r)
+t_hp				hit_cone(t_geo *geo, t_ray *r)
 {
-	t_hp		sol[2];
+	t_hp			sol[2];
 
-	solutions_cone(geo, r, sol);
+	cone_solutions(geo, r, sol);
 	if (sol[0].t > 0)
 	{
 		if (is_geo_dug(geo) && is_cut(geo))

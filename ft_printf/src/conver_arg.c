@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 18:27:50 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/04 18:09:59 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/22 16:01:07 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 void		apply_flags(t_opt *opt, char **arg, int *len)
 {
-	if ((*opt).flags & LEFT || (*opt).precision > 0)
-		(*opt).flags &= ~ZEROPAD;
+	if (opt->flags & LEFT || opt->precision > 0)
+		opt->flags &= ~ZEROPAD;
 	(*arg) ? check_arg(opt, *arg) : 0;
-	if ((*opt).flags & ALTERNATE && (*opt).flags & ZEROPAD)
+	if (opt->flags & ALTERNATE && opt->flags & ZEROPAD)
 		apply_alternate_format(opt, *arg, len);
-	if ((*opt).flags & SPACE && !((*opt).flags & PLUS))
+	if (opt->flags & SPACE && !(opt->flags & PLUS))
 		apply_space(opt, len);
-	if ((*opt).field_width && !((*opt).flags & LEFT))
+	if (opt->field_width && !(opt->flags & LEFT))
 		apply_field_width(arg, opt, len);
-	if ((*opt).flags & ALTERNATE && !((*opt).flags & ZEROPAD))
+	if (opt->flags & ALTERNATE && !(opt->flags & ZEROPAD))
 		apply_alternate_format(opt, *arg, len);
 	if (*arg && ft_strcmp(*arg, "(null)"))
 	{
-		if ((*opt).flags & PLUS && !((*opt).flags & SIGN)
-			&& !(ft_strchr(UNSIG, (*opt).conv)))
+		if (opt->flags & PLUS && !(opt->flags & SIGN)
+			&& !(ft_strchr(UNSIG, opt->conv)))
 		{
 			(*len)++;
-			((*opt).flags & ZEROPAD) ? 0 : ft_putchar('+');
+			(opt->flags & ZEROPAD) ? 0 : ft_putchar('+');
 		}
-		if ((*opt).precision > 0 && (!((*opt).conv == 'c')
-					&& !((*opt).conv == 'C')))
+		if (opt->precision > 0 && (!(opt->conv == 'c')
+					&& !(opt->conv == 'C')))
 			apply_precision(arg, opt, len);
 	}
 }
@@ -83,55 +83,55 @@ void		convert_nolenmod_args(va_list args, t_opt opt, char **arg)
 
 void		convert_args_2(t_opt *opt, int *len, char *arg)
 {
-	if (!arg && (((*opt).conv == 'c') || ((*opt).conv) == 'C'))
+	if (arg && ft_strcmp(arg, "(null)"))
+		(*len) += ft_strlen(arg);
+	if (!arg && ((opt->conv == 'c') || (opt->conv) == 'C'))
 	{
 		ft_putchar('\0');
 		(*len)++;
 	}
-	else if (!(ft_strchr(CONVERTER, (*opt).conv)))
+	else if (!(ft_strchr(CONVERTER, opt->conv)))
 	{
 		(*len)++;
-		ft_putchar((*opt).conv);
+		ft_putchar(opt->conv);
 	}
 	if (arg)
 	{
-		(*opt).conv == 'X' ? ft_strtoupper(arg) : 0;
-		if (((*opt).flags & SIGN) &&
-				((*opt).flags & ZEROPAD || (*opt).precision >= 0))
+		opt->conv == 'X' ? ft_strtoupper(arg) : 0;
+		if ((opt->flags & SIGN) &&
+				(opt->flags & ZEROPAD || opt->precision >= 0))
 			ft_putstr(++arg);
 		else
 			ft_putstr(arg);
 	}
-	if ((*opt).flags & LEFT)
+	if (opt->flags & LEFT)
 		apply_field_width(&arg, opt, len);
-	ft_memset(opt, 0, sizeof(*opt));
 }
 
 void		convert_args(va_list args, t_opt *opt, int *len)
 {
 	char		*arg;
 
-	if (!(ft_strchr(CONVERTER, (*opt).conv)))
-		(*opt).field_width ? (*opt).field_width-- : 0;
-	if (!(*opt).len_modifier)
+	arg = NULL;
+	if (!(ft_strchr(CONVERTER, opt->conv)))
+		opt->field_width ? opt->field_width-- : 0;
+	if (!opt->len_modifier)
 		convert_nolenmod_args(args, *opt, &arg);
 	else
 		apply_len_mod(args, *opt, &arg);
 	if ((!arg || !(ft_strcmp(arg, "(null)"))) &&
-			(((*opt).conv == 's') || (*opt).conv == 'S'))
+			((opt->conv == 's') || opt->conv == 'S'))
 	{
-		(*opt).flags &= ~PLUS;
-		(*opt).field_width ? 0 : (arg = ft_strdup("(null)"));
+		opt->flags &= ~PLUS;
+		opt->field_width ? 0 : (arg = ft_strdup("(null)"));
 		arg ? (*len) += ft_strlen(arg) : 0;
 	}
-	(*opt).conv == 'S' && (*opt).precision == 0 ? (arg = NULL) : 0;
+	opt->conv == 'S' && opt->precision == 0 ? (arg = NULL) : 0;
 	apply_flags(opt, &arg, len);
-	if ((ft_strchr(NUMBER, (*opt).conv)))
-	{
-		if (*arg == '0' && (*opt).precision == 0)
-			arg = NULL;
-	}
-	if (arg && ft_strcmp(arg, "(null)"))
-		(*len) += ft_strlen(arg);
+	if ((ft_strchr(NUMBER, opt->conv)) && *arg == '0' && !opt->precision)
+		arg = NULL;
 	convert_args_2(opt, len, arg);
+	if (arg && opt->conv != 's')
+		free(arg);
+	ft_memset(opt, 0, sizeof(*opt));
 }

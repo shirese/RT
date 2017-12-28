@@ -51,7 +51,10 @@ t_geo				*ray_hit(t_ray *r, t_hp *hp, t_geo *from, t_env *e)
 		{
 			latest_hp = geo->is_hit(geo, tr);
 			if (latest_hp.t != -1 && is_nearest(latest_hp, hp, &min_dist))
+			{
 				nearest_geo = geo;
+				//printf("inter %d\n", nearest_geo->type);
+			}
 		}
 		geo = geo->next;
 	}
@@ -82,7 +85,7 @@ t_color				find_ray_color(double x, double y, t_env *e)
 	geo = NULL;
 	r = init_ray(gen_ray_origin(*e->cam->cam_to_world, *e->cam->pos), \
 		gen_ray_direction(x, y, e), 1, 1.0);
-	if (x == 400 && y == 211)
+	if (x == 600 && y == 228)
 		throw_ray(&r, e);
 	return (r.color);
 }

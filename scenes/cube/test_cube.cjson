@@ -1,6 +1,6 @@
 window:
-	width: 800
-	height: 600
+	width: 1200
+	height: 800
 camera:
 	pos: 0.0, 0., 2.0
 	fov: 90

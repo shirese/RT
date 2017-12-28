@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:26:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/27 17:10:48 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 13:27:52 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void				sdl_render(t_env *e)
 	SDL_Event		ev;
 
 	print_env(e);
-	SDL_SetRenderDrawColor(e->win.rend, 0, 0, 0, 255 );
 	if (!raytrace_thread(e))
 		return ;
 	while (1 && SDL_WaitEvent(&ev))

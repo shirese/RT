@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:21:10 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/27 17:38:45 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 13:38:28 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ void				render_loading_bar(int tile, int tiles_num, t_env *e)
 	progress = tile * max_count;
 	width = (e->win.w * progress) / 10;
 	r.w = width;
+	SDL_SetRenderDrawColor(e->win.rend, 0, 0, 0, 255 );
 	SDL_RenderClear(e->win.rend);
 	SDL_SetRenderDrawColor(e->win.rend, progress * 255, 0, \
 		1 - progress * 255, 255);
 	SDL_RenderFillRect(e->win.rend, &r);
 	SDL_RenderPresent(e->win.rend);
-	if (progress >= 0.999000)
+	if (progress >= 0.990000)
 		loading_done = 1;
 }

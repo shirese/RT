@@ -77,14 +77,11 @@ void				shade_phong(t_geo *geo, t_hp hp, t_light *l, t_ray *r)
 		normal = vec3_normalize_stack(hp.normal);
 		dir = vec3_normalize_stack(vec3_sub_stack(*s->pos, hp.p));
 		lambertian = vec3_dot(normal, dir);
-		//vec3_print(normal);
-		//printf("LAMBERTIAN %f\n", lambertian);
 		if (lambertian > 0.0)
 		{
 			color_add(calc_diffuse(mater, lambertian), &(r->color));
 			color_add(calc_spec(mater, hp, s, r), &(r->color));
 			color_mult(*l->color, &(r->color));
 		}
-		//color_print(r->color);
 	}
 }

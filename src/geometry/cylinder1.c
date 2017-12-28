@@ -94,14 +94,12 @@ t_hp				hit_cylinder(t_geo *geo, t_ray r)
 	t_hp			sol[2];
 
 	solutions_cylinder(geo, r, sol);
-	
 	if (sol[0].t > 0)
 	{
 		if (is_cut(geo))
 			return (hit_and_cut(geo, sol[0], sol[1], r));
 		if (is_geo_dug(geo))
 		{
-			
 			return (first_outside_neg(geo, r, sol));
 		}
 		return (sol[0]);

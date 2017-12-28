@@ -33,7 +33,7 @@ t_vec3				disk_norm(t_geo *geo)
 {
 	t_disk			*d;
 
-	d = (t_disk*)geo;
+	d = (t_disk*)geo->curr;
 	return (d->normal);
 }
 
@@ -58,19 +58,21 @@ double *expr, t_hp *sol)
 
 	d = (t_disk *)geo->curr;
 	if (expr[0] >= 0)
+	{
 		expr[1] = pow(r.origin.x + expr[0] * r.direction.x - \
 		(*geo->origin).x, 2) + pow(r.origin.y + expr[0] * \
 		r.direction.y - (*geo->origin).y, 2) + \
 		pow(r.origin.z + expr[0] * r.direction.z - \
 		(*geo->origin).z, 2) - pow(d->radius, 2);
-	if (expr[1] <= 0)
-	{
-		sol->t = expr[0];
-		sol->p = point_at_parameter(sol->t, r);
-		sol->normal = d->normal;
-		if (is_cut(geo) && !belong_after_cut(geo, sol->p))
-			sol->t = -1;
+		if (expr[1] <= 0)
+		{
+			sol->t = expr[0];
+			sol->p = point_at_parameter(sol->t, r);
+			sol->normal = d->normal;	
+		}
 	}
+	if (is_cut(geo) && !belong_after_cut(geo, sol->p))
+			sol->t = -1;
 }
 
 t_hp				hit_disk(t_geo *geo, t_ray r)
@@ -82,11 +84,8 @@ t_hp				hit_disk(t_geo *geo, t_ray r)
 	d = (t_disk *)geo->curr;
 	sol.t = -1;
 	vec3_normalize(&(d->normal));
-	expr[0] = ((*geo->origin).x - r.origin.x) * d->normal.x + \
-	((*geo->origin).y - r.origin.y) * d->normal.y + \
-	((*geo->origin).z - r.origin.z) * d->normal.z;
-	expr[0] = expr[0] / (d->normal.x * r.direction.x + d->normal.y * \
-		r.direction.y + d->normal.z * r.direction.z);
+	expr[0] = vec3_dot(vec3_sub_stack(*geo->origin, r.origin), d->normal);
+	expr[0] = expr[0] / vec3_dot(d->normal, r.direction);
 	fill_solution_disk(geo, r, expr, &sol);
 	return (sol);
 }

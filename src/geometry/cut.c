@@ -41,6 +41,7 @@ int					belong_after_cut(t_geo *geo, t_vec3 pos)
 	i = 0;
 	while (i < geo->nb_cut)
 	{
+		//puts("CUT");
 		res = vec3_dot(vec3_sub_stack(pos, cut[i].cut_position), \
 		cut[i].cut_normal);
 		if (res < 0)

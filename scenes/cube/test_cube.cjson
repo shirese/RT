@@ -19,11 +19,11 @@ light:
 	pos: 2.0, 1.0, 4.0
 cube:
 	pos: 0, -0.2, -1.5
-	kd: 0., 0., 1
+	kd: 1., 0., 0
 	ks: 0.55, 0.55, 0.55
 	size: 0.8
 	illum: 2
-	direction: 0., 1.0, 0.0
+	direction: 1., 1.0, 0.
 plane:
 	pos: 0., -1., -2.0
 	kd: .13, 0.13, 0.13

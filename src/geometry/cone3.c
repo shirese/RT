@@ -53,7 +53,13 @@ t_hp					hit_cone(t_geo *geo, t_ray r)
 	t_hp		sol[2];
 
 	solutions_cone(geo, r, sol);
-	if (is_cut(geo))
-			return (hit_and_cut(geo, sol[0], sol[1], r));
+	if (sol[0].t > 0)
+	{
+		if (is_geo_dug(geo) && is_cut(geo))
+			return (first_in_cut_out_neg(geo, r, sol));
+		else if (is_geo_dug(geo))
+			return (first_outside_neg(geo, r, sol));
+		return (hit_and_cut(geo, sol[0], sol[1], r));
+	}
 	return (sol[0]);
 }

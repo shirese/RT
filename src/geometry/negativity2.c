@@ -75,7 +75,7 @@ t_hp                first_outside_neg(t_geo *geo, t_ray r, t_hp *sol_geo)
     return (hp_after_neg);
 }
 
-t_hp                first_in_cut_out_neg(t_geo *geo, t_ray r, t_hp *sol, t_hp *sol_new)
+t_hp                first_in_cut_out_neg(t_geo *geo, t_ray r, t_hp *sol)
 {
 	t_cut			*cut;
 	double			dn;
@@ -83,6 +83,7 @@ t_hp                first_in_cut_out_neg(t_geo *geo, t_ray r, t_hp *sol, t_hp *s
 	double			born_inf;
 	double			born_sup;
     int             solution;
+    t_hp            sol_new[2];
 
 	cut = geo->cut;
 	born_sup = sol[1].t - sol[0].t;

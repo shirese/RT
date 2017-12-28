@@ -111,25 +111,8 @@ static int					belong_to_inter_of_cube(t_geo *geo, double t, t_inter *i)
 	t_cube	*cube;
 
 	cube = (t_cube*)geo->curr;
-	//printf("T %f\n", t);
 	if (t < i[0].t_start || t > i[0].t_end || t < i[1].t_start || t > i[1].t_end || t < i[2].t_start || t > i[2].t_end)
-	{
-			//puts("ORNELLA");
-			return (0);
-	}
-	/*if (t < i[0].t_start)
-		puts("A1");
-	if (t > i[0].t_end)
-		puts("A2");
-	if (t < i[1].t_start)
-		puts("A3");
-	if (t > i[1].t_end)
-		puts("A4");
-	if (t < i[2].t_start)
-		puts("A5");
-	if (t > i[2].t_end)
-		puts("A6");*/
-	//puts("Valide");
+		return (0);
 	return (1);	
 }
 
@@ -138,9 +121,12 @@ static double				max_3_interval(t_geo *geo, t_inter *i)
 	double t;
 
 	t = max(i[0].t_start, max(i[1].t_start, i[2].t_start));
-	//printf("T %f\n", t);	
+	printf("t %f\n", t);
 	if (t > 0 && belong_to_inter_of_cube(geo, t, i))
+	{
+		//puts("L.A\n");
 		return (t);
+	}
 	return (-1.0);
 }
 
@@ -150,32 +136,19 @@ double				solutions_cube(t_geo *geo, t_ray r)
 	t_inter			limit[3];
 
 	cube = (t_cube*)geo->curr;
-	//printf("R DIRECTION [%f, %f, %f]\n", r.direction.x, r.direction.y, r.direction.z);
-	//printf("R POSITION [%f, %f, %f]\n", geo->origin->x, geo->origin->y, geo->origin->z);
-	limit[0].t_start = 0.0;
-	limit[0].t_end = 0.0;
-	limit[1].t_start = 0.0; 
-	limit[1].t_end = 0.0;
-	limit[2].t_start = 0.0;
-	limit[2].t_end = 0.0;
-
-	/*limit[0].t_start = min((geo->origin->x - r.origin.x - cube->size) / r.direction.x, (geo->origin->x - r.origin.x + cube->size) / r.direction.x);
-	limit[0].t_end = max((geo->origin->x - r.origin.x - cube->size) / r.direction.x, (geo->origin->x - r.origin.x + cube->size) / r.direction.x);
-	limit[1].t_start = min((geo->origin->y - r.origin.y - cube->size) / r.direction.y,(geo->origin->y - r.origin.y + cube->size) / r.direction.y); 
-	limit[1].t_end = max((geo->origin->y - r.origin.y - cube->size) / r.direction.y,(geo->origin->y - r.origin.y + cube->size) / r.direction.y);
-	limit[2].t_start = min((geo->origin->z - r.origin.z - cube->size) / r.direction.z, (geo->origin->z - r.origin.z + cube->size) / r.direction.z);
-	limit[2].t_end = max((geo->origin->z - r.origin.z - cube->size) / r.direction.z, (geo->origin->z - r.origin.z + cube->size) / r.direction.z);
-	printf("Valeur 1 %f - %f SIZE %f\n", (geo->origin->z - r.origin.z)/ r.direction.z - (cube->size / r.direction.z), (geo->origin->z - r.origin.z) / r.direction.z + (cube->size / r.direction.z), cube->size);*/
-	limit[0].t_start = min((cube->size - vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction1)) / vec3_dot(r.direction, cube->direction1), (-cube->size - vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction1)) / vec3_dot(r.direction, cube->direction1));
-	limit[0].t_end = max((cube->size - vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction1)) / vec3_dot(r.direction, cube->direction1), (-cube->size - vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction1)) / vec3_dot(r.direction, cube->direction1));
-	limit[1].t_start = min((cube->size - vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction2)) / vec3_dot(r.direction, cube->direction2), (-cube->size - vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction2)) / vec3_dot(r.direction, cube->direction2));
-	limit[1].t_end = max((cube->size - vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction2)) / vec3_dot(r.direction, cube->direction2), (-cube->size - vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction2)) / vec3_dot(r.direction, cube->direction2));
-	limit[2].t_start = min((cube->size - vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction3)) / vec3_dot(r.direction, cube->direction3), (-cube->size - vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction3)) / vec3_dot(r.direction, cube->direction3));
-	limit[2].t_end = max((cube->size - vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction3)) / vec3_dot(r.direction, cube->direction3), (-cube->size - vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction3)) / vec3_dot(r.direction, cube->direction3));
-
-	/*printf("T_START %f T_END %f \n",limit[0].t_start, limit[0].t_end);
+	limit[0].t_start = min((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction1)) / vec3_dot(r.direction, cube->direction1), (-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction1)) / vec3_dot(r.direction, cube->direction1));
+	limit[0].t_end = max((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction1)) / vec3_dot(r.direction, cube->direction1), (-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction1)) / vec3_dot(r.direction, cube->direction1));
+	limit[1].t_start = min((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction2)) / vec3_dot(r.direction, cube->direction2), (-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction2)) / vec3_dot(r.direction, cube->direction2));
+	limit[1].t_end = max((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction2)) / vec3_dot(r.direction, cube->direction2), (-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction2)) / vec3_dot(r.direction, cube->direction2));
+	limit[2].t_start = min((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction3)) / vec3_dot(r.direction, cube->direction3), (-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction3)) / vec3_dot(r.direction, cube->direction3));
+	limit[2].t_end = max((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction3)) / vec3_dot(r.direction, cube->direction3), (-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r.origin), cube->direction3)) / vec3_dot(r.direction, cube->direction3));
+	
+	printf("T_START %f T_END %f \n",limit[0].t_start, limit[0].t_end);
 	printf("T_START %f T_END %f \n",limit[1].t_start, limit[1].t_end);	
-	printf("T_START %f T_END %f \n",limit[2].t_start, limit[2].t_end);*/
+	printf("T_START %f T_END %f \n",limit[2].t_start, limit[2].t_end);
+	/*vec3_print(vec3_sub_stack(*geo->origin, r.origin));
+	vec3_print(cube->direction3);
+	printf("VALEUR %f %f \n",cube->size, 1.0);*/
 	return (max_3_interval(geo, limit));
 }
 
@@ -186,12 +159,19 @@ t_hp				hit_cube(t_geo *geo, t_ray r)
 
 	sol.t = -1;
 	x = solutions_cube(geo, r);
-	//printf("T %f\n", t);
+	printf("x %f\n", x);
 	if (x > 0)
 	{
 		sol.t = x;
 		sol.p = point_at_parameter(sol.t, r);
 		sol.normal = cube_norm(geo, sol);
+		if (is_cut(geo) && !belong_after_cut(geo, sol.p))
+		{
+			//puts("HIT NOON\n");
+			sol.t = -1;
+			return (sol);
+		}
+		//puts("HIT\n");
 	}
 	return (sol);
 }

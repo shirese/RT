@@ -72,7 +72,9 @@ double *expr, t_hp *sol)
 		}
 	}
 	if (is_cut(geo) && !belong_after_cut(geo, sol->p))
-			sol->t = -1;
+		sol->t = -1;
+	if (is_geo_dug(geo) && is_touched_by_neg(geo, r, *sol).t == - 1)
+		sol->t = -1;
 }
 
 t_hp				hit_disk(t_geo *geo, t_ray r)

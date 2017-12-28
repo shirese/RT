@@ -80,18 +80,15 @@ void				solutions_sphere(t_geo *geo, t_ray r, t_hp *sol)
 t_hp				hit_sphere(t_geo *geo, t_ray r)
 {
 	t_hp			sol[2];
-	t_hp			sol_new[2];
 
 	solutions_sphere(geo, r, sol);
 	if (sol[0].t > 0)
 	{
-		if (is_cut(geo) && !is_geo_dug(geo))
-			return (hit_and_cut(geo, sol[0], sol[1], r));
-		if (is_geo_dug(geo) && !is_cut(geo))
-			return (first_outside_neg(geo, r, sol));
 		if (is_geo_dug(geo) && is_cut(geo))
-			return (first_in_cut_out_neg(geo, r, sol, sol_new));
-		return (sol[0]);
+			return (first_in_cut_out_neg(geo, r, sol));
+		else if (is_geo_dug(geo))
+			return (first_outside_neg(geo, r, sol));
+		return (hit_and_cut(geo, sol[0], sol[1], r));
 	}
 	return (sol[0]);
 }

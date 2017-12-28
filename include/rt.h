@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/18 11:52:11 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:18:44 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,13 @@
 # define INV_PI 0.31830988618379067154
 # define INV2_PI 0.15915494309189533577
 # define MAX_RECURSION 4
-# define WIN_TITLE "Raytracer v0.2"
+# define WIN_TITLE "Raytracer v0.3"
 
 typedef struct		s_color
 {
 	double			r;
 	double			g;
 	double			b;
-	double			a;
 }					t_color;
 
 /*
@@ -40,7 +39,7 @@ typedef struct		s_ray
 {
 	int				type;
 	t_vec3			origin;
-	t_vec3			direction;
+	t_vec3			dir;
 	t_color			color;
 	double			ior;
 	int				rec;
@@ -93,17 +92,19 @@ typedef struct		s_inter
 
 /*
 **	TYPE 1- Plane 2- Cone 3- Cylinder 4- Sphere
+**	SHADER TYPE 1- Phong 2- Toon
 */
 
 typedef struct s_geo	t_geo;
 struct				s_geo
 {
 	int				type;
+	int				shader_type;
 	void			*curr;
 	t_vec3			*origin;
 	t_mat3			*rotation;
 	t_mater			*mater;
-	t_hp			(*is_hit)(t_geo *geo, t_ray r);
+	t_hp			(*is_hit)(t_geo *geo, t_ray *r);
 	t_tex			*tex;
 	t_geo			*neg;
 	t_inter			*borns_neg;
@@ -126,7 +127,7 @@ typedef struct		s_cam
 }					t_cam;
 
 /*
-**	TYPE 1- Ambient 2- Directional 3- Spotlight
+**	TYPE 1- Ambient 2- Directional 3- Pointlight
 */
 typedef struct s_light	t_light;
 
@@ -165,6 +166,7 @@ typedef struct		s_screen
 typedef struct		s_env
 {
 	t_color			*img;
+	unsigned int	filter;
 	unsigned int	samp_rate;
 	t_win			win;
 	t_screen		scr;
@@ -172,7 +174,6 @@ typedef struct		s_env
 	t_cam			*cam;
 	t_geo			*geos;
 	t_light			*lights;
-	pthread_mutex_t	mutex;
 }					t_env;
 
 int					get_next_line(int const fd, char **line);
@@ -201,21 +202,13 @@ double				deg_to_rad(double deg);
 double				clamp(double x, double up, double low);
 double				max(double i, double j);
 
-void				sdl_get_event(SDL_Event event, t_env *e);
-void				sdl_draw_point(SDL_Renderer *rend, int x, int y, t_color c);
-t_env				*sdl_init(t_env *e);
-void				sdl_render(t_env *e);
-void				sdl_stop(t_env *e);
-
 void				fresnel(t_ray r, t_hp hp, double n, double *krefl);
 double				coeff_fresnel(t_ray r, t_hp hp, t_geo *geo);
 double				find_krefl(t_geo *geo, t_hp hp, t_ray r);
 double				find_ior(t_geo *geo, t_ray r, t_hp hp);
 double				ior_at_point(t_geo *geo, t_vec3 pos);
 double				ior_at_point2(t_geo *g, t_vec3 pos);
-void				add_coeff_to_objet(t_geo *geo, t_color kd,t_color ks, double ior);
-int					add_geometry_negative(t_geo *geo, int i, t_geo *neg0);
-t_hp                first_outside_neg(t_geo *geo, t_ray r, t_hp *sol_geo);
-t_hp                is_touched_by_neg(t_geo *geo, t_ray r, t_hp sol_geo);
-int        			set_borns_neg(t_geo *neg, t_ray r);
+
+void				add_geo_coeff(t_geo *geo, t_color kd,t_color ks, double ior);
+
 #endif

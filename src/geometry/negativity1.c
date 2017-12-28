@@ -1,9 +1,9 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   negativity.c                                       :+:      :+:    :+:   */
+/*   negativity1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgallois <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 12:52:17 by fgallois          #+#    #+#             */
 /*   Updated: 2017/12/28 15:15:43 by fgallois         ###   ########.fr       */
@@ -64,7 +64,7 @@ int					set_borns_neg(t_geo *neg, t_ray r)
 	return (1);
 }
 
-t_hp                is_touched_by_neg(t_geo *geo, t_ray r, t_hp sol_geo)
+t_hp				is_touched_by_neg(t_geo *geo, t_ray *r, t_hp sol_geo)
 {
 	t_geo   *neg;
 

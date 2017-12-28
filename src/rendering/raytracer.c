@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/18 11:44:52 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:48:05 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,15 @@
 #include "light.h"
 #include "pthread.h"
 #include "rt.h"
+#include "sdl_func.h"
 #include "texture.h"
 #include "utils.h"
 
 static int			is_nearest(t_hp latest_hp, t_hp *hp, double *md)
 {
-	double			dist;
-
-	dist = vec3_norm(latest_hp.p);
-	if (dist < *md)
+	if (latest_hp.t < *md)
 	{
-		*md = dist;
+		*md = latest_hp.t;
 		*hp = latest_hp;
 		return (1);
 	}
@@ -37,7 +35,6 @@ t_geo				*ray_hit(t_ray *r, t_hp *hp, t_geo *from, t_env *e)
 {
 	double			min_dist;
 	t_hp			latest_hp;
-	t_ray			tr;
 	t_geo			*geo;
 	t_geo			*nearest_geo;
 
@@ -46,10 +43,9 @@ t_geo				*ray_hit(t_ray *r, t_hp *hp, t_geo *from, t_env *e)
 	nearest_geo = NULL;
 	while (geo != NULL)
 	{
-		tr = *r;
 		if (geo != from)
 		{
-			latest_hp = geo->is_hit(geo, tr);
+			latest_hp = geo->is_hit(geo, r);
 			if (latest_hp.t != -1 && is_nearest(latest_hp, hp, &min_dist))
 			{
 				nearest_geo = geo;
@@ -67,10 +63,10 @@ void				throw_ray(t_ray *r, t_env *e)
 	t_hp			hp;
 
 	geo = ray_hit(r, &hp, NULL, e);
-	if (r->type != 3)
-		apply_ambient_light(r, e);
 	if (geo)
 	{
+		if (r->type != 3)
+			apply_ambient_light(r, e);
 		if (geo->tex)
 			apply_texture(r, &hp, geo);
 		apply_lights(r, geo, hp, e);
@@ -104,6 +100,8 @@ void				raytrace(t_env *e)
 		while (x < e->scr.nx)
 		{
 			c = find_ray_color(x, y, e);
+			if (e->filter != 0)
+				apply_filters(&c, e);
 			sdl_draw_point(e->win.rend, x, y, c);
 			x++;
 		}

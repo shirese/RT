@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 18:39:18 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/14 13:49:00 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:22:35 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,10 @@ int					add_paraboloid(int *fd, char **line, t_env *e)
 	v = NULL;
 	geo = NULL;
 	if (!malloc_geo((void **)(&para), sizeof(t_paraboloid), 6, &geo))
-		return (10);
-	para->facta = 0.;
-	para->factb = 0.;
-	para->height = 0.;
+		return (6);
+	para->facta = 1.;
+	para->factb = 1.;
+	para->height = 1.;
 	while (get_next_line(*fd, line) && **line == '\t' && (v = *line + 4))
 	{
 		if (ft_strncmp(*line, "\tfacta", 6) == 0 && (v += 4))
@@ -178,14 +178,11 @@ int					add_glass(int *fd, char **line, t_env *e)
 
 	v = NULL;
 	geo = NULL;
-	puts("GENIE");
 	if (!malloc_geo((void **)(&glass), sizeof(t_glass), 8, &geo))
 		return (12);
 	while (get_next_line(*fd, line) && **line == '\t')
 	{
 		v = *line + 4;
-		puts(*line);
-	
 		if (ft_strncmp(*line, "\tdirection", 10) == 0 && (v += 8))
 		{
 			vec3_normalize(&glass->direction);

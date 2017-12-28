@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 10:51:32 by fgallois          #+#    #+#             */
-/*   Updated: 2017/12/15 15:03:25 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:33:07 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int					belong_to_disk(t_geo *geo, t_vec3 pos)
 	return (0);
 }
 
-void				fill_solution_disk(t_geo *geo, t_ray r, \
+void				fill_solution_disk(t_geo *geo, t_ray *r, \
 double *expr, t_hp *sol)
 {
 	t_disk *d;
@@ -59,16 +59,16 @@ double *expr, t_hp *sol)
 	d = (t_disk *)geo->curr;
 	if (expr[0] >= 0)
 	{
-		expr[1] = pow(r.origin.x + expr[0] * r.direction.x - \
-		(*geo->origin).x, 2) + pow(r.origin.y + expr[0] * \
-		r.direction.y - (*geo->origin).y, 2) + \
-		pow(r.origin.z + expr[0] * r.direction.z - \
+		expr[1] = pow(r->origin.x + expr[0] * r->dir.x - \
+		(*geo->origin).x, 2) + pow(r->origin.y + expr[0] * \
+		r->dir.y - (*geo->origin).y, 2) + \
+		pow(r->origin.z + expr[0] * r->dir.z - \
 		(*geo->origin).z, 2) - pow(d->radius, 2);
 		if (expr[1] <= 0)
 		{
 			sol->t = expr[0];
 			sol->p = point_at_parameter(sol->t, r);
-			sol->normal = d->normal;	
+			sol->normal = d->normal;
 		}
 	}
 	if (is_cut(geo) && !belong_after_cut(geo, sol->p))
@@ -77,7 +77,7 @@ double *expr, t_hp *sol)
 		sol->t = -1;
 }
 
-t_hp				hit_disk(t_geo *geo, t_ray r)
+t_hp				hit_disk(t_geo *geo, t_ray *r)
 {
 	double			expr[2];
 	t_disk			*d;
@@ -86,8 +86,11 @@ t_hp				hit_disk(t_geo *geo, t_ray r)
 	d = (t_disk *)geo->curr;
 	sol.t = -1;
 	vec3_normalize(&(d->normal));
-	expr[0] = vec3_dot(vec3_sub_stack(*geo->origin, r.origin), d->normal);
-	expr[0] = expr[0] / vec3_dot(d->normal, r.direction);
+	expr[0] = ((*geo->origin).x - r->origin.x) * d->normal.x + \
+	((*geo->origin).y - r->origin.y) * d->normal.y + \
+	((*geo->origin).z - r->origin.z) * d->normal.z;
+	expr[0] = expr[0] / (d->normal.x * r->dir.x + d->normal.y * \
+		r->dir.y + d->normal.z * r->dir.z);
 	fill_solution_disk(geo, r, expr, &sol);
 	return (sol);
 }

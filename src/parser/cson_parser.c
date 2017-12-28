@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/23 11:19:35 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/14 12:26:38 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/26 10:13:08 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ int					cson_parse(int fd, t_env *e)
 {
 	char			*line;
 	int				err;
-	int				i;
 
 	line = NULL;
 	err = 0;
-	i = 0;
+	if (fd == -1)
+		return (0);
 	get_next_line(fd, &line);
 	while (*line)
 	{
@@ -73,5 +73,7 @@ int					cson_parse(int fd, t_env *e)
 		if (handle_error(err) != 0)
 			return (0);
 	}
+	if (line)
+		free(line);
 	return (1);
 }

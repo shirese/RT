@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cylinder.c                                         :+:      :+:    :+:   */
+/*   cube.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 13:30:03 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/14 14:00:54 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:49:03 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ void				create_axis(t_geo *geo)
 	cube->direction3 = dir3;
 }
 
-t_geo				*new_cube(t_vec3 *position, t_vec3 dir1, \
-	double size)
+t_geo				*new_cube(t_vec3 *position, t_vec3 dir1, double size)
 {
 	t_cube			*cube;
 	t_geo			*geo;
@@ -87,7 +86,7 @@ t_vec3				cube_norm(t_geo *geo, t_hp hp)
 	if (vec3_dot(diff, cube->direction1) > 0)
 		normal = cube->direction1;
 	else
-		normal = vec3_mult_stack(cube->direction1, -1.0);	
+		normal = vec3_mult_stack(cube->direction1, -1.0);
 	if (fabs(vec3_dot(diff, cube->direction2)) > max)
 	{
 		max = fabs(vec3_dot(diff, cube->direction2)); 
@@ -121,16 +120,12 @@ static double				max_3_interval(t_geo *geo, t_inter *i)
 	double t;
 
 	t = max(i[0].t_start, max(i[1].t_start, i[2].t_start));
-	printf("t %f\n", t);
 	if (t > 0 && belong_to_inter_of_cube(geo, t, i))
-	{
-		//puts("L.A\n");
 		return (t);
-	}
 	return (-1.0);
 }
 
-double				solutions_cube(t_geo *geo, t_ray r)
+double				cube_solutions(t_geo *geo, t_ray *r)
 {
 	t_cube			*cube;
 	t_inter			limit[3];
@@ -159,14 +154,13 @@ double				solutions_cube(t_geo *geo, t_ray r)
 	return (max_3_interval(geo, limit));
 }
 
-t_hp				hit_cube(t_geo *geo, t_ray r)
+t_hp				hit_cube(t_geo *geo, t_ray *r)
 {
 	t_hp			sol;
 	double			x;
 
 	sol.t = -1;
-	x = solutions_cube(geo, r);
-	printf("x %f\n", x);
+	x = cube_solutions(geo, r);
 	if (x > 0)
 	{
 		sol.t = x;
@@ -174,11 +168,17 @@ t_hp				hit_cube(t_geo *geo, t_ray r)
 		sol.normal = cube_norm(geo, sol);
 		if (is_cut(geo) && !belong_after_cut(geo, sol.p))
 		{
+<<<<<<< HEAD
 			puts("HIT NOON\n");
 			sol.t = -1;
 			return (sol);
 		}
 		puts("HIT\n");
+=======
+			sol.t = -1;
+			return (sol);
+		}
+>>>>>>> 856a70046c6bdd4e398fa065e2a6158925dc7b83
 	}
 	return (sol);
 }

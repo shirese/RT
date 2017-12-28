@@ -6,13 +6,14 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:26:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/14 12:23:02 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:03:04 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
 #include "rt.h"
 #include "rt_multithread.h"
+#include "sdl_func.h"
 #include "utils.h"
 
 void				sdl_draw_point(SDL_Renderer *rend, int x, int y, t_color c)
@@ -25,36 +26,41 @@ void				sdl_draw_point(SDL_Renderer *rend, int x, int y, t_color c)
 	SDL_RenderDrawPoint(rend, x, y);
 }
 
-t_env				*sdl_init(t_env *e)
+int					sdl_init(t_env **e)
 {
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
-		return (NULL);
+		return (0);
 	else
 	{
-		SDL_CreateWindowAndRenderer(e->win.w, e->win.h, \
-			SDL_WINDOW_RESIZABLE, &(e->win.handle), &(e->win.rend));
-		if (!e->win.handle)
+		(*e)->win.handle = SDL_CreateWindow(WIN_TITLE, SDL_WINDOWPOS_UNDEFINED\
+			, SDL_WINDOWPOS_UNDEFINED, (*e)->win.w, (*e)->win.h, 0);
+		(*e)->win.rend = SDL_CreateRenderer((*e)->win.handle, -1, \
+			SDL_RENDERER_ACCELERATED);
+		if (!(*e)->win.handle || !(*e)->win.rend)
 		{
-			e->win.w = 0;
-			e->win.h = 0;
+			(*e)->win.w = 0;
+			(*e)->win.h = 0;
+			return (0);
 		}
-		else
-			SDL_SetWindowTitle(e->win.handle, WIN_TITLE);
-		if (e->win.w == 0 || e->win.h == 0)
-			return (NULL);
 	}
-	return (e);
+	return (1);
 }
 
 void				sdl_render(t_env *e)
 {
 	SDL_Event		ev;
 
+<<<<<<< HEAD
 	
 	//print_env(e);
 	raytrace(e);
 	/*if (!raytrace_thread(e))
 		return ;*/
+=======
+	print_env(e);
+	if (!raytrace_thread(e))
+		return ;
+>>>>>>> 856a70046c6bdd4e398fa065e2a6158925dc7b83
 	while (1 && SDL_WaitEvent(&ev))
 	{
 		if (ev.type == SDL_KEYDOWN && ev.key.keysym.sym == SDLK_ESCAPE)

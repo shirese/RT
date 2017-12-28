@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cylinder.c                                         :+:      :+:    :+:   */
+/*   cylinder1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 13:30:03 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/14 14:00:54 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/21 16:26:31 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_vec3				cylinder_norm(t_geo *geo, t_hp hp)
 	return (normal);
 }
 
-void				solutions_cylinder(t_geo *geo, t_ray r, t_hp *sol)
+void				cylinder_solutions(t_geo *geo, t_ray *r, t_hp *sol)
 {
 	t_cylinder		*cyl;
 	t_vec3			x;
@@ -78,22 +78,22 @@ void				solutions_cylinder(t_geo *geo, t_ray r, t_hp *sol)
 	sol[0].t = -1;
 	sol[1].t = -1;
 	cyl = (t_cylinder *)geo->curr;
-	x = vec3_sub_stack(r.origin, *geo->origin);
-	dot[0] = vec3_dot(r.direction, cyl->axis);
+	x = vec3_sub_stack(r->origin, *geo->origin);
+	dot[0] = vec3_dot(r->dir, cyl->axis);
 	dot[1] = vec3_dot(x, cyl->axis);
-	abcd[0] = vec3_dot(r.direction, r.direction) - dot[0] * dot[0];
-	abcd[1] = 2 * (vec3_dot(r.direction, x) - dot[0] * dot[1]);
+	abcd[0] = vec3_dot(r->dir, r->dir) - dot[0] * dot[0];
+	abcd[1] = 2 * (vec3_dot(r->dir, x) - dot[0] * dot[1]);
 	abcd[2] = vec3_dot(x, x) - dot[1] * dot[1] - cyl->radius * cyl->radius;
 	abcd[3] = abcd[1] * abcd[1] - 4 * abcd[0] * abcd[2];
 	if (abcd[3] > 0)
 		fill_solution_cylinder(geo, r, abcd, sol);
 }
 
-t_hp				hit_cylinder(t_geo *geo, t_ray r)
+t_hp				hit_cylinder(t_geo *geo, t_ray *r)
 {
 	t_hp			sol[2];
 
-	solutions_cylinder(geo, r, sol);
+	cylinder_solutions(geo, r, sol);
 	if (sol[0].t > 0)
 	{
 		if (is_geo_dug(geo) && is_cut(geo))

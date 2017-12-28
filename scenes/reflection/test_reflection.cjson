@@ -8,9 +8,16 @@ light:
 	type: 1
 	color: 0.11, 0.11, 0.11
 light:
+	type: 1
+	color: 0.14, 0.14, 0.14
+light:
 	type: 3
 	color: 0.88, 0.88, 0.88
-	pos: 0.5, 1.4, 3.0
+	pos: 1.5, 1.4, 2.0
+light:
+	type: 3
+	color: 0.88, 0.88, 0.88
+	pos: -1.5, 1.4, 2.0
 sphere:
 	pos: 0.3, 0.4, -0.5
 	kd: 0., 0., 1.0

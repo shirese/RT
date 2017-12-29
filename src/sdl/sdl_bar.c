@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:21:10 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/28 17:36:03 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/29 18:56:30 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,10 @@ static void			fill_loading_bar(float ld, SDL_Rect r, t_env *e)
 
 void				render_loading_bar(int tile, int tiles_num, t_env *e)
 {
-	static int		ld_done;
 	static float	max_count;
 	static SDL_Rect	r;
 	float			ld;
 
-	if (ld_done)
-		return ;
 	if (!max_count)
 	{
 		max_count = 1.f / tiles_num;
@@ -45,6 +42,4 @@ void				render_loading_bar(int tile, int tiles_num, t_env *e)
 	ld = tile * max_count;
 	if ((int)(ld * 100) % 15 == 0)
 		fill_loading_bar(ld, r, e);
-	if (ld >= 0.990000)
-		ld_done = 1;
 }

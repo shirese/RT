@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 14:13:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/28 17:08:58 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/29 19:10:01 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ static void			*render_tile(void *arg)
 		if (tile >= tiles_num)
 			break ;
 		pthread_mutex_lock(&thr_data->mutex);
-		render_loading_bar(tile, tiles_num, thr_data->e);
+		if (thr_data->ld_done == 0)
+			render_loading_bar(tile, tiles_num, thr_data->e);
 		compute_tile_px(tile_xy, tile, thr_data->e);
 		pthread_mutex_unlock(&thr_data->mutex);
 	}
@@ -117,26 +118,27 @@ int					raytrace_thread(t_env *e)
 {
 	pthread_t		thr[NUM_THREADS];
 	t_thread_data	thr_data;
+	static int		first_load;
 	int				i;
-	int				rc;
 
-	i = 0;
+	i = -1;
 	thr_data.tile_id = 0;
+	thr_data.ld_done = first_load;
 	pthread_mutex_init(&thr_data.mutex, NULL);
 	thr_data.e = e;
-	while (i < NUM_THREADS)
+	while (++i < NUM_THREADS)
 	{
-		if ((rc = pthread_create(&thr[i], NULL, render_tile, &thr_data)))
+		if ((pthread_create(&thr[i], NULL, render_tile, &thr_data)))
 		{
 			ft_printf("Error while creating thread.\n");
 			return (0);
 		}
-		i++;
 	}
 	i = -1;
 	while (++i < NUM_THREADS)
 		pthread_join(thr[i], NULL);
 	pthread_mutex_destroy(&thr_data.mutex);
+	first_load = 1;
 	render_px(e);
 	return (1);
 }

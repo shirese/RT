@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 11:55:40 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/26 09:00:52 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/29 18:57:13 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,11 @@ int					parse_camera(int *fd, char **line, t_env *e)
 		else
 			break ;
 	}
-	if (e->cam->fov > 0)
-		return (0);
-	return (2);
+	if (e->cam->pos->z == 1)
+		return (2);
+	if (e->cam->fov <= 0)
+		return (2);
+	return (0);
 }
 
 int					parse_window(int *fd, char **line, t_env *e)

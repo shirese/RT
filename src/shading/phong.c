@@ -72,9 +72,6 @@ void				shade_phong(t_geo *geo, t_hp hp, t_light *l, t_ray *r)
 	{
 		light_dir = get_light_dir(hp.p, l);
 		lambertian = vec3_dot(hp.normal, vec3_normalize_stack(light_dir));
-		//puts("NORMALEEEE \n");
-		//vec3_print(hp.normal);
-		//printf("LAMBERTIAN %f\n", lambertian);
 		if (geo->type == 6)
 			lambertian = fabs(lambertian);
 		if (geo->shader_type == 2)

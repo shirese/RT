@@ -166,8 +166,6 @@ int					add_cube(int *fd, char **line, t_env *e)
 			parse_geo_attributes(line, v, geo, fd);	
 	}
 	add_geometry(geo, &(e->geos));
-	/*if (geo->rotation)
-		rotate(&(cube->direction1), *geo->rotation);*/
 	create_axis(geo);
 	return (0);
 }

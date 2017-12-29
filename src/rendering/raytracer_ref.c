@@ -27,7 +27,6 @@ t_color			throw_reflect_ray(t_ray *r, t_hp hp, t_geo *from, t_env *e)
 	
 	if (refl.type != 0)
 	{
-
 		color_mult_fac(&r->color, 1. - from->mater->reflectivity);
 		throw_ray(&refl, e);
 		color_mult_fac(&refl.color, from->mater->reflectivity);	

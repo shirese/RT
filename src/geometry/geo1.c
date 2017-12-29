@@ -110,7 +110,7 @@ int				malloc_geo(void **type, int size, int geo_id, t_geo **geo)
 		if (!malloc_geo((void **)(&geo1), sizeof(t_cylinder), 3, &glass->cyl))
 			return (3);
 		if (!malloc_geo((void **)(&geo2), sizeof(t_cone), 2, &glass->cone))
-			return (3);
+			return (2);
 		if (!malloc_geo((void **)(&geo3), sizeof(t_sphere), 4, &glass->sphere))
 			return (4);
 	}

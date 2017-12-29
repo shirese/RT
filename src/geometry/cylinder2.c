@@ -19,6 +19,7 @@
 void				fill_solution_cylinder(t_geo *geo, t_ray *r, \
 double *abcd, t_hp *sol)
 {
+	
 	sol[0].t = positive_smallest((-abcd[1] - sqrt(abcd[3])) / (2 * abcd[0]), \
 			(-abcd[1] + sqrt(abcd[3])) / (2 * abcd[0]));
 	sol[0].p = point_at_parameter(sol[0].t, r);

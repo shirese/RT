@@ -66,6 +66,7 @@ void				sphere_solutions(t_geo *geo, t_ray *r, t_hp *sol)
 	abcd[3] = abcd[1] * abcd[1] - 4 * abcd[0] * abcd[2];
 	if (abcd[3] > 0)
 	{
+//		puts("SPHERE");
 		t[0] = (-abcd[1] - sqrt(abcd[3])) / (2 * abcd[0]);
 		t[1] = (-abcd[1] + sqrt(abcd[3])) / (2 * abcd[0]);
 		sol[0].t = positive_smallest(t[0], t[1]);

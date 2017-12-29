@@ -55,6 +55,7 @@ t_hp				hit_cone(t_geo *geo, t_ray *r)
 	cone_solutions(geo, r, sol);
 	if (sol[0].t > 0)
 	{
+		//puts("CONE");
 		if (is_geo_dug(geo) && is_cut(geo))
 			return (first_in_cut_out_neg(geo, r, sol));
 		else if (is_geo_dug(geo))

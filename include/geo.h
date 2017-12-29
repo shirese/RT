@@ -154,7 +154,7 @@ int					belong_to_glass(t_geo *geo, t_vec3 pos);
 int					set_direction_glass(t_geo *geo);
 void				set_coeffs_color(t_geo *geo);
 void				set_position_glass(t_geo *geo, t_vec3 *position);
-t_geo				*new_glass(t_vec3 *position, t_vec3 direction, double h);
+int					modif_glass(t_env *e, t_geo *geo, t_glass *glass);
 
 /*
 ** CUT
@@ -168,8 +168,8 @@ t_vec3				normal_cut(t_geo *geo, t_hp hp);
 void				fill_solution_cylinder(t_geo *geo, t_ray *r, double *abcd, t_hp *sol);
 void				fill_solution_disk(t_geo *geo, t_ray *r, double *expr, t_hp *sol);
 int					belong_after_cut(t_geo *geo, t_vec3 pos);
-int					cut_cylinder(t_geo *cyl, double height);
-int					cut_cone(t_geo *cone);
+int					cut_cylinder_in_glass(t_geo *cyl, double height);
+int					cut_cone_in_glass(t_geo *cone);
 int					belong_after_cut(t_geo *geo, t_vec3 pos);
 int					is_cut(t_geo *geo);
 int					is_on_cut(t_cut *cut, t_hp hp);

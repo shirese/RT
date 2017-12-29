@@ -38,11 +38,11 @@ SRC_CAMERA		=	camera.c camera_transform.c
 SRC_COLOR		=	color.c color_op.c color_op_2.c color_utils.c filters.c \
 					filters_2.c
 SRC_GEOS		=	cone.c cone2.c cone3.c cube.c cut.c cut2.c cylinder1.c \
-					cylinder2.c disk.c geo1.c geo2.c glass.c negativity1.c \
-					negativity2.c paraboloid.c plane.c sphere.c
+					cylinder2.c disk.c geo1.c geo2.c glass1.c glass2.c glass3.c \
+					negativity1.c negativity2.c paraboloid.c plane.c sphere.c
 SRC_MATS		=	mat3.c mat3_rot.c mat4.c mat4_utils.c
 SRC_PARSER		=	get_next_line.c cson_parser.c cson_parser_2.c \
-					cson_parser_light.c cson_parser_geo.c cson_parser_geo2.c
+					cson_parser_light.c cson_parser_geo.c cson_parser_geo2.c cson_parser_geo3.c
 SRC_RENDER		=	ray.c ray_ref.c raytracer.c raytracer_ref.c render.c render_thr.c
 SRC_SDL			=	sdl.c sdl_bar.c sdl_drag.c sdl_event.c
 SRC_SHADING		=	fresnel.c light.c lighting.c phong.c toon.c

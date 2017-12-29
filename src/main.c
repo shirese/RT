@@ -74,11 +74,11 @@ int					main(int ac, char **av)
 		e->img = malloc(sizeof(t_color) * e->scr.nx * e->scr.ny);
 		cam_matrix(e->cam, *e->cam->pos, vec3_stack(0, 0, 1), \
 			vec3_stack(0, 1, 0));
-		// e->geos->tex = init_textures(1, "textures/basic/large_fgallois.jpg");
-		// e->geos->tex = init_textures(2, "texture/bump/normal_map.bmp");
-		// e->geos->tex = init_textures(3, NULL);
-		// e->geos->tex = init_textures(4, NULL);
-		// e->geos->tex = init_textures(5, "textures/transparent/frozen.png");
+		//e->geos->tex = init_textures(1, "textures/basic/wall.jpg");
+		//e->geos->tex = init_textures(2, "texture/bump/normal_map.bmp");
+		//e->geos->tex = init_textures(3, NULL);
+		//e->geos->tex = init_textures(4, NULL);
+		//e->geos->tex = init_textures(4, "textures/transparent/frozen.png");
 		sdl_render(e);
 		sdl_stop(e);
 	}

@@ -16,24 +16,6 @@
 #include "rt.h"
 #include "utils.h"
 
-t_geo				*new_glass(t_vec3 *position, t_vec3 direction, double h)
-{
-	t_glass			*glass;
-	t_geo			*geo;
-
-	/*geo = NULL;
-	if (!malloc_geo((void **)(&glass), sizeof(t_glass), \
-	8, &geo))
-		return (0);
-	geo->origin = position;
-	glass->under = (t_cone*) new_cone(position, direction, 20);
-	glass->basis = (t_sphere*) new_sphere(position, 0.3);
-	glass->high = (t_cylinder*) new_cylinder(position, direction, 0.3);
-	glass->direction = direction;
-	glass->h = h;*/
-	return (geo);
-}
-
 int					belong_to_glass(t_geo *geo, t_vec3 pos)
 {
 	t_glass			*glass;
@@ -97,6 +79,7 @@ t_hp				hit_glass(t_geo *geo, t_ray *r)
 
 	glass = (t_glass*)geo->curr;
 	cyl = glass->cyl;
+	
 	cone = glass->cone;
 	sphere = glass->sphere;
 	sols[0] = hit_cylinder(cyl, r);

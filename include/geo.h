@@ -144,7 +144,7 @@ void				create_axis(t_geo *geo);
 int					add_cube(int *fd, char **line, t_env *e);
 int					belong_to_cube(t_geo *geo, t_vec3 pos);
 t_geo				*new_cube(t_vec3 *position, t_vec3 dir1, double size);
-
+int					belong_to_inter_of_cube(t_geo *geo, double t, t_inter *i);
 /*
 ** GLASS
 */

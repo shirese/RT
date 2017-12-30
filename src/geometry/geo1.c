@@ -89,6 +89,11 @@ int				setup_geo(t_geo **geo)
 
 int				malloc_geo(void **type, int size, int geo_id, t_geo **geo)
 {
+	t_glass			*glass; 
+	t_geo			*geo1;
+	t_geo			*geo2;
+	t_geo			*geo3;
+
 	if (!setup_geo(geo))
 		return (0);
 	*type = malloc(size);
@@ -98,14 +103,6 @@ int				malloc_geo(void **type, int size, int geo_id, t_geo **geo)
 	(*geo)->type = geo_id;
 	if (geo_id == 8)
 	{
-		t_glass			*glass; 
-		t_geo			*geo1;
-		t_geo			*geo2;
-		t_geo			*geo3;
-
-		geo1 = NULL;
-		geo2 = NULL;
-		geo3 = NULL;
 		glass = (t_glass*)(*geo)->curr;
 		if (!malloc_geo((void **)(&geo1), sizeof(t_cylinder), 3, &glass->cyl))
 			return (3);

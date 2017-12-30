@@ -23,14 +23,12 @@ double			value_dist_neg(t_geo *geo, t_ray *r, t_hp *sol_geo)
 	min = sol_geo[0].t;
 	if (set_borns_neg(geo->neg, r) == 0)
 		return (-1);
-	
 	neg = geo->neg;
-	
 	while (neg && min != -1)
 	{
-		if (min > neg->borns_neg->t_start && min < neg->borns_neg->t_end)
+		if (min > neg->borns_neg->t_start && \
+		min < neg->borns_neg->t_end)
 		{
-			
 			if (neg->borns_neg->t_end > sol_geo[1].t)
 				min = -1;
 			else
@@ -41,7 +39,6 @@ double			value_dist_neg(t_geo *geo, t_ray *r, t_hp *sol_geo)
 		}
 		neg = neg->next;
 	}
-	
 	return (min);
 }
 
@@ -78,6 +75,11 @@ t_hp			first_outside_neg(t_geo *geo, t_ray *r, t_hp *sol_geo)
 	}
 
 	return (hp_after_neg);
+}
+
+void				first_in_cut_out_neg2(t_geo *geo, t_ray *r, t_hp *sol)
+{
+
 }
 
 t_hp				first_in_cut_out_neg(t_geo *geo, t_ray *r, t_hp *sol)

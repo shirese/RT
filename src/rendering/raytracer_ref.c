@@ -77,5 +77,4 @@ void			throw_new_rays(t_ray *r, t_hp hp, t_geo *from, t_env *e)
 		color_add(refr_col, &(r->color));
 		color_add(mater_col, &(r->color));
 	}
-	//color_print(r->color);
 }

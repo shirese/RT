@@ -77,46 +77,45 @@ t_hp			first_outside_neg(t_geo *geo, t_ray *r, t_hp *sol_geo)
 	return (hp_after_neg);
 }
 
-void				first_in_cut_out_neg2(t_geo *geo, t_ray *r, t_hp *sol)
+static t_hp				first_in_cut_out_neg2(t_geo *geo, t_ray *r, t_hp *sol, t_inter inter)
 {
+	t_hp	sol_new[2];
 
+	sol_new[0].t = -1;
+	sol_new[1].t = -1;
+	if (inter.t_start <= inter.t_end)
+	{
+		sol_new[0].t = sol[0].t + min(inter.t_start, inter.t_end);
+		sol_new[0].p = point_at_parameter(sol_new[0].t, r);
+		sol_new[0].normal = get_norm(geo, sol_new[0]);
+		sol_new[1].t = sol[0].t + max(inter.t_start, inter.t_end);
+		sol_new[1].p = point_at_parameter(sol_new[1].t, r);
+		sol_new[1].normal = get_norm(geo, sol_new[1]);
+	}
+	return (first_outside_neg(geo, r, sol_new));
 }
 
 t_hp				first_in_cut_out_neg(t_geo *geo, t_ray *r, t_hp *sol)
 {
 	t_cut			*cut;
+	t_hp			hp;
+	t_inter			inter;
 	double			dn;
 	int				i;
-	double			born_inf;
-	double			born_sup;
-	int				solution;
-	t_hp			sol_new[2];
 
-	t_hp			hp;
 	cut = geo->cut;
-	born_sup = sol[1].t - sol[0].t;
-	born_inf = 0;
+	inter.t_end = sol[1].t - sol[0].t;
+	inter.t_start = 0;
 	i = 0;
-	sol_new[0].t = -1;
-	sol_new[1].t = -1;
-	solution = 1;
-	while (i < geo->nb_cut && solution)
+	hp.t = -1;
+	while (i < geo->nb_cut)
 	{
 		dn = vec3_dot(vec3_sub_stack(cut[i].cut_position, \
 		sol[0].p), cut[i].cut_normal);
 		if (set_borns(value_t(cut[i].cut_normal, r, &dn), dn, \
-		&born_sup, &born_inf) == 0)
-			solution = 0;
+		&inter.t_end, &inter.t_start) == 0)
+			return (hp);
 		i++;
 	}
-	if (born_inf <= born_sup && solution)
-	{
-		sol_new[0].t = sol[0].t + min(born_inf, born_sup);
-		sol_new[0].p = point_at_parameter(sol_new[0].t, r);
-		sol_new[0].normal = get_norm(geo, sol_new[0]);
-		sol_new[1].t = sol[0].t + max(born_inf, born_sup);
-		sol_new[1].p = point_at_parameter(sol_new[1].t, r);
-		sol_new[1].normal = get_norm(geo, sol_new[1]);	
-	}
-	return (first_outside_neg(geo, r, sol_new));
+	return (first_in_cut_out_neg2(geo, r, sol, inter));
 }

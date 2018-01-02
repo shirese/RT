@@ -44,7 +44,6 @@ int					belong_to_paraboloid(t_geo *geo, t_vec3 pos)
 	return (0);
 }
 
-
 t_vec3				paraboloid_norm(t_paraboloid *para, t_vec3 hp)
 {
 	t_vec3			normal;

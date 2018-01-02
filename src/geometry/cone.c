@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 11:45:04 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/22 16:30:44 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:17:08 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 static void				c_intersec(t_geo *geo, t_ray *r, t_hp *sol)
 {
 	sol[0].p = point_at_parameter(sol[0].t, r);
-	sol[0].normal = cone_normal(geo, sol[0].p);
+	sol[0].normal = cone_norm(geo,sol[0].p);
 	sol[1].p = point_at_parameter(sol[1].t, r);
-	sol[1].normal = cone_normal(geo, sol[1].p);
+	sol[1].normal = cone_norm(geo, sol[1].p);
 }
 
 double					cone_gamma(double expr, t_geo *geo, t_ray *r)

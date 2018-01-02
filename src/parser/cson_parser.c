@@ -17,6 +17,21 @@
 #include "rt.h"
 #include "utils.h"
 
+
+static void			handle_error2(int err)
+{
+	if (err == 8)
+			ft_printf("Invalid geo(sphere)\n");
+		if (err == 9)
+			ft_printf("Invalid geo(disk)\n");
+		if (err == 10)
+			ft_printf("Invalid geo(hyperbolic paraboloid)\n");
+		if (err == 11)
+			ft_printf("Invalid geo(cube)\n");
+		if (err == 12)
+			ft_printf("Invalid geo(glass)\n");
+}
+
 static int			handle_error(int err)
 {
 	if (err != 0)
@@ -35,12 +50,7 @@ static int			handle_error(int err)
 			ft_printf("Invalid geo(cone)\n");
 		if (err == 7)
 			ft_printf("Invalid geo(cylinder)\n");
-		if (err == 8)
-			ft_printf("Invalid geo(sphere)\n");
-		if (err == 9)
-			ft_printf("Invalid geo(disk)\n");
-		if (err == 10)
-			ft_printf("Invalid geo(hyperbolic paraboloid)\n");
+		handle_error2(err);
 		return (1);
 	}
 	return (0);

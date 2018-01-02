@@ -46,7 +46,7 @@ int					belong_to_cylinder(t_geo *geo, t_vec3 pos)
 	proj = vec3_add_stack(*geo->origin, \
 		vec3_mult_stack(cyl->axis, len));
 	dif = vec3_sub_stack(proj, pos);
-	if (vec3_norm(dif) <= cyl->radius)
+	if (vec3_norm(dif) <= cyl->radius && belong_after_cut(geo, pos))
 		return (1);
 	return (0);
 }
@@ -77,7 +77,9 @@ void				cylinder_solutions(t_geo *geo, t_ray *r, t_hp *sol)
 
 	sol[0].t = -1;
 	sol[1].t = -1;
+	
 	cyl = (t_cylinder *)geo->curr;
+	
 	x = vec3_sub_stack(r->origin, *geo->origin);
 	dot[0] = vec3_dot(r->dir, cyl->axis);
 	dot[1] = vec3_dot(x, cyl->axis);
@@ -96,11 +98,11 @@ t_hp				hit_cylinder(t_geo *geo, t_ray *r)
 	cylinder_solutions(geo, r, sol);
 	if (sol[0].t > 0)
 	{
-		if (is_cut(geo))
-			return (hit_and_cut(geo, sol[0], sol[1], r));
-		if (is_geo_dug(geo))
+		if (is_geo_dug(geo) && is_cut(geo))
+			return (first_in_cut_out_neg(geo, r, sol));
+		else if (is_geo_dug(geo))
 			return (first_outside_neg(geo, r, sol));
-		return (sol[0]);
+		return (hit_and_cut(geo, sol[0], sol[1], r));
 	}
 	return (sol[0]);
 }

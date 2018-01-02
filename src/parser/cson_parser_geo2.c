@@ -6,13 +6,12 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 18:39:18 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/14 13:49:00 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:22:35 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
 #include "cson_parser.h"
-#include "ft_printf.h"
 #include "geo.h"
 #include "ft_printf.h"
 #include "light.h"

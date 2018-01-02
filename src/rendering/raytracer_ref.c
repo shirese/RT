@@ -22,15 +22,18 @@ t_color			throw_reflect_ray(t_ray *r, t_hp hp, t_geo *from, t_env *e)
 	t_ray		refl;
 
 	refl = reflect_ray(*r, hp);
+	
 	refl.rec = r->rec;
+	
 	if (refl.type != 0)
 	{
 		color_mult_fac(&r->color, 1. - from->mater->reflectivity);
 		throw_ray(&refl, e);
-		color_mult_fac(&refl.color, from->mater->reflectivity);
+		color_mult_fac(&refl.color, from->mater->reflectivity);	
 	}
 	else
 		r->rec--;
+	
 	return (refl.color);
 }
 

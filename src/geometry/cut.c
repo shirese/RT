@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 10:50:30 by fgallois          #+#    #+#             */
-/*   Updated: 2017/12/21 16:24:32 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:26:56 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int					is_on_cut(t_cut *cut, t_hp hp)
 	return (0);
 }
 
-int					belong_after_cut(t_geo *geo, t_hp hp)
+int					belong_after_cut(t_geo *geo, t_vec3 pos)
 {
 	double			res;
 	t_cut			*cut;
@@ -41,7 +41,7 @@ int					belong_after_cut(t_geo *geo, t_hp hp)
 	i = 0;
 	while (i < geo->nb_cut)
 	{
-		res = vec3_dot(vec3_sub_stack(hp.p, cut[i].cut_position), \
+		res = vec3_dot(vec3_sub_stack(pos, cut[i].cut_position), \
 		cut[i].cut_normal);
 		if (res < 0)
 			return (0);
@@ -61,14 +61,16 @@ t_hp				first_in_cut(t_geo *geo, t_ray *r, t_hp hp_1, t_hp hp_2)
 	{
 		hp.t = dist;
 		hp.p = point_at_parameter(hp.t, r);
-		hp.normal = cut_norm(geo, hp);
+		hp.normal = normal_cut(geo, hp);
 	}
 	return (hp);
 }
 
 t_hp				hit_and_cut(t_geo *geo, t_hp hp_1, t_hp hp_2, t_ray *r)
 {
-	if (is_cut(geo) && !belong_after_cut(geo, hp_1))
+	if (is_cut(geo) && !belong_after_cut(geo, hp_1.p))
 		return (first_in_cut(geo, r, hp_1, hp_2));
 	return (hp_1);
 }
+
+

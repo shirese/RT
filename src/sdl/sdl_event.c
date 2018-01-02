@@ -59,6 +59,9 @@ static int			check_rot_event(SDL_Keycode k, t_env *e)
 
 void				sdl_get_event(SDL_Event event, t_env *e)
 {
+	int x;
+	int y;
+
 	if (event.type == SDL_KEYDOWN)
 	{
 		if (check_rot_event(event.key.keysym.sym, e))
@@ -72,9 +75,15 @@ void				sdl_get_event(SDL_Event event, t_env *e)
 				return ;
 		}
 	}
+	else if (event.type == SDL_MOUSEBUTTONUP) 
+	{
+		SDL_GetMouseState(&x, &y);
+		printf("Valeurs de x et y : [%d, %d]\n", x, y);
+	}
 	else if (check_drag_event(event, e))
 	{
-		if (!(raytrace_thread(e)))
-			return ;
+			if (!(raytrace_thread(e)))
+				return ;
 	}
+	
 }

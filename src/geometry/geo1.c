@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:26:59 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/27 10:44:08 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:15:25 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ t_hp			(*g_get_obj_collider(int id))(t_geo *geo, t_ray *r)
 		return (hit_disk);
 	if (id == 6)
 		return (hit_paraboloid);
+	if (id == 7)
+		return (hit_cube);
+	if (id == 8)
+		return (hit_glass);
 	return (NULL);
 }
 
@@ -85,6 +89,11 @@ int				setup_geo(t_geo **geo)
 
 int				malloc_geo(void **type, int size, int geo_id, t_geo **geo)
 {
+	t_glass			*glass; 
+	t_geo			*geo1;
+	t_geo			*geo2;
+	t_geo			*geo3;
+
 	if (!setup_geo(geo))
 		return (0);
 	*type = malloc(size);
@@ -92,6 +101,16 @@ int				malloc_geo(void **type, int size, int geo_id, t_geo **geo)
 		return (0);
 	(*geo)->curr = *type;
 	(*geo)->type = geo_id;
+	if (geo_id == 8)
+	{
+		glass = (t_glass*)(*geo)->curr;
+		if (!malloc_geo((void **)(&geo1), sizeof(t_cylinder), 3, &glass->cyl))
+			return (3);
+		if (!malloc_geo((void **)(&geo2), sizeof(t_cone), 2, &glass->cone))
+			return (2);
+		if (!malloc_geo((void **)(&geo3), sizeof(t_sphere), 4, &glass->sphere))
+			return (4);
+	}
 	(*geo)->is_hit = g_get_obj_collider(geo_id);
 	return (1);
 }

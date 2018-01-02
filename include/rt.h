@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/27 17:46:33 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:18:44 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,7 @@ void				add_geo_coeff(t_geo *geo, t_color kd, \
 t_color ks, double ior);
 
 void				print_env(t_env *e);
+void				print_cut(t_geo *geo);
 void				print_geo2(t_geo *geo);
 void				print_geo(t_geo *geo);
 void				print_geo3(t_geo *geo);

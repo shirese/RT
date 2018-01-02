@@ -33,33 +33,35 @@ static int				setup_error(int type, t_env *e)
 	return (-1);
 }
 
-static void				add_neg_geos(t_env *e)
-{
-	t_geo *g;
-
-	g = NULL;
-	g = new_cylinder(vec3_new(0., 0.2, -1.5), vec3_stack(0.0, 0., 1.), 0.3);
-	add_geo_coeff(g, color_new_stack(0.2, 0.8, 0.1), \
-	color_new_stack(0.5, 0.5, 0.5), 1.0);
-	if (g)
-	{
-		add_geometry_negative(e->geos, 0, g);
-	}
-	g = new_sphere(vec3_new(0., -1.0, -1.0), 0.5);
-	add_geo_coeff(g, color_new_stack(0.2, 0.8, 0.1), \
-	color_new_stack(0.5, 0.5, 0.5), 1.0);
-	if (g)
-	{
-		add_geometry_negative(e->geos, 0, g);
-	}
-	g = new_sphere(vec3_new(0., -1.0, -3.0), 0.5);
-	add_geo_coeff(g, color_new_stack(0.2, 0.8, 0.1), \
-	color_new_stack(0.5, 0.5, 0.5), 1.0);
-	if (g)
-	{
-		add_geometry_negative(e->geos, 0, g);
-	}
-}
+/*
+** static void				add_neg_geos(t_env *e)
+** {
+** t_geo *g;
+**
+** g = NULL;
+** g = new_cylinder(vec3_new(0., 0.2, -1.5), vec3_stack(0.0, 0., 1.), 0.3);
+** add_geo_coeff(g, color_new_stack(0.2, 0.8, 0.1), \
+** color_new_stack(0.5, 0.5, 0.5), 1.0);
+** if (g)
+** {
+** add_geometry_negative(e->geos, 0, g);
+** }
+** g = new_sphere(vec3_new(0., -1.0, -1.0), 0.5);
+** add_geo_coeff(g, color_new_stack(0.2, 0.8, 0.1), \
+** color_new_stack(0.5, 0.5, 0.5), 1.0);
+** if (g)
+** {
+** add_geometry_negative(e->geos, 0, g);
+** }
+** g = new_sphere(vec3_new(0., -1.0, -3.0), 0.5);
+** add_geo_coeff(g, color_new_stack(0.2, 0.8, 0.1), \
+** color_new_stack(0.5, 0.5, 0.5), 1.0);
+** if (g)
+** {
+** add_geometry_negative(e->geos, 0, g);
+** }
+** }
+*/
 
 int						main(int ac, char **av)
 {

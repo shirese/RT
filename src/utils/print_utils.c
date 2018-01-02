@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:59:47 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/21 16:01:47 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:02:25 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,25 @@ void						print_geo3(t_geo *geo)
 			((t_paraboloid *)(geo->curr))->factb,\
 			((t_paraboloid *)(geo->curr))->height);
 	}
+	else if (geo->type == 7)
+	{
+		ft_printf("CUBE\nSIZE\t\t[%f]\nDIRECTIONS\n", \
+			((t_cube *)(geo->curr))->size);
+		vec3_print(((t_cube *)(geo->curr))->direction1);
+		vec3_print(((t_cube *)(geo->curr))->direction2);
+		vec3_print(((t_cube *)(geo->curr))->direction3);
+	}
+	else if (geo->type == 8)
+	{
+		ft_printf("GLASS\nHEIGHT\t\t[%f]\nDIRECTION\n", \
+			((t_glass *)(geo->curr))->height);
+		vec3_print(((t_glass *)(geo->curr))->direction);
+		print_geo((t_geo*)((t_glass *)(geo->curr))->cyl);
+		print_cut((t_geo*)((t_glass *)(geo->curr))->cyl);
+		print_geo((t_geo*)((t_glass *)(geo->curr))->cone);
+		print_cut((t_geo*)((t_glass *)(geo->curr))->cone);
+		print_geo((t_geo*)((t_glass *)(geo->curr))->sphere);
+	}		
 	if (is_scene_dug(geo))
 	{
 		tmp = geo;

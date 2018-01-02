@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 10:51:32 by fgallois          #+#    #+#             */
-/*   Updated: 2017/12/21 16:08:08 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:33:07 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_vec3				disk_norm(t_geo *geo)
 {
 	t_disk			*d;
 
-	d = (t_disk*)geo;
+	d = (t_disk*)geo->curr;
 	return (d->normal);
 }
 
@@ -58,19 +58,23 @@ double *expr, t_hp *sol)
 
 	d = (t_disk *)geo->curr;
 	if (expr[0] >= 0)
+	{
 		expr[1] = pow(r->origin.x + expr[0] * r->dir.x - \
 		(*geo->origin).x, 2) + pow(r->origin.y + expr[0] * \
 		r->dir.y - (*geo->origin).y, 2) + \
 		pow(r->origin.z + expr[0] * r->dir.z - \
 		(*geo->origin).z, 2) - pow(d->radius, 2);
-	if (expr[1] <= 0)
-	{
-		sol->t = expr[0];
-		sol->p = point_at_parameter(sol->t, r);
-		sol->normal = d->normal;
-		if (is_cut(geo) && !belong_after_cut(geo, *sol))
-			sol->t = -1;
+		if (expr[1] <= 0)
+		{
+			sol->t = expr[0];
+			sol->p = point_at_parameter(sol->t, r);
+			sol->normal = d->normal;
+		}
 	}
+	if (is_cut(geo) && !belong_after_cut(geo, sol->p))
+		sol->t = -1;
+	if (is_geo_dug(geo) && is_touched_by_neg(geo, r, *sol).t == - 1)
+		sol->t = -1;
 }
 
 t_hp				hit_disk(t_geo *geo, t_ray *r)

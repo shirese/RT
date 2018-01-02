@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/27 17:46:33 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:18:44 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,7 @@ double				find_krefl(t_geo *geo, t_hp hp, t_ray r);
 double				find_ior(t_geo *geo, t_ray r, t_hp hp);
 double				ior_at_point(t_geo *geo, t_vec3 pos);
 double				ior_at_point2(t_geo *g, t_vec3 pos);
+
 void				add_geo_coeff(t_geo *geo, t_color kd,t_color ks, double ior);
 
 #endif

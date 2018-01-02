@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 10:50:59 by fgallois          #+#    #+#             */
-/*   Updated: 2017/12/22 16:08:33 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:37:31 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ t_vec3				normal_cut(t_geo *geo, t_hp hp)
 			i++;
 		}
 	}
-	return (cut_norm(geo, hp));
+	return (get_norm(geo, hp));
 }
 
-static int			set_borns(double to, double dn, double *born_sup, \
+int					set_borns(double to, double dn, double *born_sup, \
 double *born_inf)
 {
 	if (to > 0)
@@ -69,7 +69,7 @@ double *born_inf)
 	return (1);
 }
 
-static double		value_t(t_vec3 normal, t_ray *r, double *dn)
+double				value_t(t_vec3 normal, t_ray *r, double *dn)
 {
 	double			ndx;
 	double			to;

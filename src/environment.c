@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/02 10:25:52 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/02 10:57:57 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void			free_lights(t_env **e)
 	}
 	free((*e)->lights);
 }
+
 static void			free_geos(t_env **e)
 {
 	t_geo			*geo;

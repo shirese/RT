@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 10:12:51 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/27 12:10:39 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 14:46:41 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,34 @@ static int			check_drag_motion(t_geo **v_p, t_geo **geo, \
 
 	if (event.type == SDL_MOUSEMOTION)
 	{
-		if (event.button.button == SDL_BUTTON_LEFT)
-		{
-			r = init_ray(gen_ray_origin(*e->cam->cam_to_world, *e->cam->pos), \
-			gen_ray_direction(event.motion.x, event.motion.y, e), 1, 1.0);
-			hp = hit_plane(*v_p, &r);
-			*(*geo)->origin = hp.p;
-			return (1);
-		}
+		r = init_ray(gen_ray_origin(*e->cam->cam_to_world, *e->cam->pos), \
+		gen_ray_direction(event.motion.x, event.motion.y, e), 1, 1.0);
+		hp = hit_plane(*v_p, &r);
+		*(*geo)->origin = hp.p;
+		return (1);
 	}
-	else if ((*geo) && event.type == SDL_MOUSEWHEEL)
+	if ((*geo) && event.type == SDL_MOUSEWHEEL)
 	{
-		(*geo)->origin->z += ((1 - 2 * (event.wheel.y + 0.5) / e->scr.ny) * \
-				e->scr.scale * 1 / e->scr.asp_ratio) / 10.;
+		if (event.wheel.y > 0 && (*geo)->origin->z > e->cam->pos->z - 0.2)
+			return (0);
+		(*geo)->origin->z += (double)event.wheel.y * 0.05;
 		(*v_p)->origin->z = (*geo)->origin->z;
 		return (1);
 	}
 	return (0);
+}
+
+static void			check_mouse_geo(t_geo **p, t_geo **geo, SDL_Event ev, t_env *e)
+{
+	t_ray			r;
+	t_hp			hp;
+
+	r = init_ray(gen_ray_origin(*e->cam->cam_to_world, *e->cam->pos), \
+	gen_ray_direction(ev.button.x, ev.button.y, e), 1, 1.0);
+	*geo = ray_hit(&r, &hp, NULL, e);
+	if (*geo && setup_virtual_plane(p))
+		vec3_set((*geo)->origin->x, (*geo)->origin->y, (*geo)->origin->z, \
+			(*p)->origin);
 }
 
 int					check_drag_event(SDL_Event ev, t_env *e)
@@ -78,26 +89,23 @@ int					check_drag_event(SDL_Event ev, t_env *e)
 	static int		onclick;
 	static t_geo	*geo;
 	static t_geo	*v_plane;
-	t_hp			hp;
-	t_ray			r;
 
 	if (ev.type == SDL_MOUSEBUTTONUP)
 	{
 		onclick = 0;
-		if (geo && v_plane)
+		if (!onclick && geo && v_plane)
+		{
+			geo = NULL;
 			release_virtual_plane(&v_plane);
+			v_plane = NULL;
+		}
 	}
-	else if (ev.type == SDL_MOUSEBUTTONDOWN)
+	if (!v_plane && !geo && ev.type == SDL_MOUSEBUTTONDOWN)
 	{
-		r = init_ray(gen_ray_origin(*e->cam->cam_to_world, *e->cam->pos), \
-		gen_ray_direction(ev.motion.x, ev.motion.y, e), 1, 1.0);
-		geo = ray_hit(&r, &hp, NULL, e);
 		onclick = 1;
-		if (geo && setup_virtual_plane(&v_plane))
-			vec3_set(geo->origin->x, geo->origin->y, geo->origin->z, \
-				v_plane->origin);
+		check_mouse_geo(&v_plane, &geo, ev, e);
 	}
-	if (geo && onclick)
+	if (v_plane && geo && onclick)
 		return (check_drag_motion(&v_plane, &geo, ev, e));
 	return (0);
 }

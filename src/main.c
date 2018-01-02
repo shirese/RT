@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/09 11:37:25 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/27 10:27:30 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/28 13:35:36 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int					main(int ac, char **av)
 			vec3_stack(0, 1, 0));
 		// e->geos->tex = init_textures(1, "textures/basic/large_fgallois.jpg");
 		// e->geos->tex = init_textures(2, "texture/bump/normal_map.bmp");
-		e->geos->tex = init_textures(3, NULL);
+		// e->geos->tex = init_textures(3, NULL);
 		// e->geos->tex = init_textures(4, NULL);
 		// e->geos->tex = init_textures(5, "textures/transparent/frozen.png");
 		sdl_render(e);

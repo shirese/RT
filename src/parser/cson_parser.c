@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/23 11:19:35 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/26 10:13:08 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/02 10:38:30 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int					cson_parse(int fd, t_env *e)
 
 	line = NULL;
 	err = 0;
-	if (fd == -1)
-		return (0);
 	get_next_line(fd, &line);
+	if (!line || !*line)
+		return (0);
 	while (*line)
 	{
 		if (!err && !ft_strncmp(line, "window", 6) && get_next_line(fd, &line))

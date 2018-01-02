@@ -14,3 +14,4 @@
  ☐ test_refl_multiple_spot.cjson fucked if illum 3 on cylinders
  ✔ Malloc error if texture not exist @done (17-12-22 16:02)
  ☐ refl fucked on shadow refl color?
+ ☐ Seg cut3 a reproduire

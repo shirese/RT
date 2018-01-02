@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 12:21:10 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/27 17:48:52 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/12/27 19:08:13 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ void				render_loading_bar(int tile, int tiles_num, t_env *e)
 		1 - progress * 255, 255);
 	SDL_RenderFillRect(e->win.rend, &r);
 	SDL_RenderPresent(e->win.rend);
-	if (progress >= 0.999000)
+	if (progress >= 0.990000)
 		loading_done = 1;
 }

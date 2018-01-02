@@ -18,7 +18,7 @@
 static void				c_intersec(t_geo *geo, t_ray *r, t_hp *sol)
 {
 	sol[0].p = point_at_parameter(sol[0].t, r);
-	sol[0].normal = cone_norm(geo,sol[0].p);
+	sol[0].normal = cone_norm(geo, sol[0].p);
 	sol[1].p = point_at_parameter(sol[1].t, r);
 	sol[1].normal = cone_norm(geo, sol[1].p);
 }

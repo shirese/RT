@@ -13,7 +13,7 @@
 #include "geo.h"
 #include "rt.h"
 
-t_geo				*new_plane(t_vec3 *position, t_vec3 normal)
+t_geo					*new_plane(t_vec3 *position, t_vec3 normal)
 {
 	t_plane		*plane;
 	t_geo		*geo;
@@ -26,7 +26,7 @@ t_geo				*new_plane(t_vec3 *position, t_vec3 normal)
 	return (geo);
 }
 
-int					belong_to_plane(t_geo *geo, t_vec3 pos)
+int						belong_to_plane(t_geo *geo, t_vec3 pos)
 {
 	t_plane			*plane;
 	t_vec3			diff;
@@ -38,7 +38,7 @@ int					belong_to_plane(t_geo *geo, t_vec3 pos)
 	return (0);
 }
 
-static t_hp			hit_ortho(t_ray *r, t_plane *p, t_vec3 min)
+static t_hp				hit_ortho(t_ray *r, t_plane *p, t_vec3 min)
 {
 	t_hp			hp;
 
@@ -57,7 +57,7 @@ static t_hp				hit_plane2(t_geo *geo, t_ray *r, double *dot)
 {
 	t_hp			sol;
 	t_plane			*p;
-	
+
 	p = (t_plane*)geo->curr;
 	sol.p = vec3_stack(r->origin.x + dot[0] * r->dir.x, r->origin.y \
 		+ dot[0] * r->dir.y, r->origin.z + dot[0] * r->dir.z);
@@ -73,7 +73,7 @@ static t_hp				hit_plane2(t_geo *geo, t_ray *r, double *dot)
 	return (sol);
 }
 
-t_hp				hit_plane(t_geo *geo, t_ray *r)
+t_hp					hit_plane(t_geo *geo, t_ray *r)
 {
 	t_hp			sol;
 	t_plane			*p;

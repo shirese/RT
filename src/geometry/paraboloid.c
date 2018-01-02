@@ -16,8 +16,8 @@
 #include "rt.h"
 #include "utils.h"
 
-
-t_geo					*new_paraboloid(t_vec3 *position, double a, double b)
+t_geo						*new_paraboloid(t_vec3 *position, \
+double a, double b)
 {
 	t_paraboloid	*pb;
 	t_geo			*geo;
@@ -32,7 +32,7 @@ t_geo					*new_paraboloid(t_vec3 *position, double a, double b)
 	return (geo);
 }
 
-int					belong_to_paraboloid(t_geo *geo, t_vec3 pos)
+int							belong_to_paraboloid(t_geo *geo, t_vec3 pos)
 {
 	t_paraboloid		*para;
 	double				res;
@@ -45,9 +45,9 @@ int					belong_to_paraboloid(t_geo *geo, t_vec3 pos)
 	return (0);
 }
 
-t_vec3				para_norm(t_geo *geo, t_vec3 hp)
+t_vec3						para_norm(t_geo *geo, t_vec3 hp)
 {
-	t_paraboloid 	*para;
+	t_paraboloid	*para;
 	t_vec3			normal;
 
 	para = (t_paraboloid*)geo;
@@ -57,7 +57,7 @@ t_vec3				para_norm(t_geo *geo, t_vec3 hp)
 	return (normal);
 }
 
-static void				fill_hp(double *abcd, t_paraboloid *para, t_ray r\
+static void					fill_hp(double *abcd, t_paraboloid *para, t_ray r\
 	, t_hp *hp)
 {
 	hp->t = -1;
@@ -65,10 +65,9 @@ static void				fill_hp(double *abcd, t_paraboloid *para, t_ray r\
 	(-abcd[1] + sqrt(abcd[3])) / (2 * abcd[0]));
 	hp->p = point_at_parameter(hp->t, &r);
 	hp->normal = para_norm((t_geo*)para, hp->p);
-	
 }
 
-t_hp					hit_paraboloid(t_geo *geo, t_ray *r)
+t_hp						hit_paraboloid(t_geo *geo, t_ray *r)
 {
 	t_paraboloid		*para;
 	t_hp				hp;

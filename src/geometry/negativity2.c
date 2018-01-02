@@ -15,7 +15,7 @@
 #include "rt.h"
 #include "utils.h"
 
-double			value_dist_neg(t_geo *geo, t_ray *r, t_hp *sol_geo)
+double						value_dist_neg(t_geo *geo, t_ray *r, t_hp *sol_geo)
 {
 	t_geo		*neg;
 	double		min;
@@ -42,7 +42,7 @@ double			value_dist_neg(t_geo *geo, t_ray *r, t_hp *sol_geo)
 	return (min);
 }
 
-static t_vec3	normal_neg(t_geo *geo, t_hp hp)
+static t_vec3				normal_neg(t_geo *geo, t_hp hp)
 {
 	t_geo		*neg;
 	t_vec3		normal;
@@ -61,7 +61,8 @@ static t_vec3	normal_neg(t_geo *geo, t_hp hp)
 	return (normal);
 }
 
-t_hp			first_outside_neg(t_geo *geo, t_ray *r, t_hp *sol_geo)
+t_hp						first_outside_neg(t_geo *geo, \
+t_ray *r, t_hp *sol_geo)
 {
 	t_hp		hp_after_neg;
 	double		x;
@@ -73,11 +74,11 @@ t_hp			first_outside_neg(t_geo *geo, t_ray *r, t_hp *sol_geo)
 		hp_after_neg.p = point_at_parameter(x, r);
 		hp_after_neg.normal = normal_neg(geo, hp_after_neg);
 	}
-
 	return (hp_after_neg);
 }
 
-static t_hp				first_in_cut_out_neg2(t_geo *geo, t_ray *r, t_hp *sol, t_inter inter)
+static t_hp					first_in_cut_out_neg2(t_geo *geo, \
+t_ray *r, t_hp *sol, t_inter inter)
 {
 	t_hp	sol_new[2];
 
@@ -95,7 +96,8 @@ static t_hp				first_in_cut_out_neg2(t_geo *geo, t_ray *r, t_hp *sol, t_inter in
 	return (first_outside_neg(geo, r, sol_new));
 }
 
-t_hp				first_in_cut_out_neg(t_geo *geo, t_ray *r, t_hp *sol)
+t_hp						first_in_cut_out_neg(t_geo *geo, \
+t_ray *r, t_hp *sol)
 {
 	t_cut			*cut;
 	t_hp			hp;

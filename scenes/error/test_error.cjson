@@ -1,21 +1,28 @@
 window:
 	width: 800
 	height: 500
-camera:
+camera :	pos: 0.0, 0.0, 10.0
 	pos: 0.0, 0.0, 10.0
 	fov: 90
 light:
 	type: 1
 	color: 0.11, 0.11, 0.11, 3.0
-light:
-	type: 3
+light :
+
+	type: 9
 	color: 0.80, 0.80, 0.80, 1.
 	dir: 0.0, 0.0, 0.0
 	pos: 0.8, 0.9, 4.0
 plane:
-	pos: 0., 0., -5.0
+	pos: 0., 086464553856456456r4e5f4er54fer564f5r6e4g564re5g4re56g4r5e4., -5.0
 	kd: 0, 0.0, 0.8
-	ks: 0.5, 0.5, 0.5
+
+	kT: 0.5, 0.5, 0.,,,5
 	illum: 1
 	normal: 0, 0, 1
 	ior: 1.
+
+
+
+
+

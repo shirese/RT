@@ -36,7 +36,6 @@ t_ray				reflect_ray(t_ray r, t_hp hp)
 	t_vec3			refl;
 	double			len;
 
-	
 	normal = hp.normal;
 	i = r.dir;
 	len = vec3_dot(i, normal);

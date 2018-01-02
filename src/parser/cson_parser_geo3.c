@@ -41,7 +41,7 @@ int					add_cube(int *fd, char **line, t_env *e)
 		else if (ft_strncmp(*line, "\tsize", 5) == 0 && (v += 3))
 			cube->size = ft_atof(v);
 		else
-			parse_geo_attributes(line, v, geo, fd);	
+			parse_geo_attributes(line, v, geo, fd);
 	}
 	add_geometry(geo, &(e->geos));
 	create_axis(geo);

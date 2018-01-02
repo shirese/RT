@@ -15,7 +15,7 @@
 #include "rt.h"
 #include "utils.h"
 
-int				is_scene_dug(t_geo *geo)
+int							is_scene_dug(t_geo *geo)
 {
 	t_geo *tmp;
 
@@ -29,14 +29,14 @@ int				is_scene_dug(t_geo *geo)
 	return (0);
 }
 
-int			is_geo_dug(t_geo *geo)
+int							is_geo_dug(t_geo *geo)
 {
 	if (geo->neg)
 		return (1);
 	return (0);
 }
 
-void		both_solutions(t_ray *r, t_geo *neg, t_hp *sol)
+void						both_solutions(t_ray *r, t_geo *neg, t_hp *sol)
 {
 	if (neg->type == 2)
 		cone_solutions(neg, r, sol);
@@ -46,10 +46,10 @@ void		both_solutions(t_ray *r, t_geo *neg, t_hp *sol)
 		sphere_solutions(neg, r, sol);
 }
 
-int					set_borns_neg(t_geo *neg, t_ray *r)
+int							set_borns_neg(t_geo *neg, t_ray *r)
 {
-	t_geo   *tmp;
-	t_hp    sol[2];
+	t_geo	*tmp;
+	t_hp	sol[2];
 
 	tmp = neg;
 	while (tmp)
@@ -64,9 +64,10 @@ int					set_borns_neg(t_geo *neg, t_ray *r)
 	return (1);
 }
 
-t_hp				is_touched_by_neg(t_geo *geo, t_ray *r, t_hp sol_geo)
+t_hp						is_touched_by_neg(t_geo *geo, \
+t_ray *r, t_hp sol_geo)
 {
-	t_geo   *neg;
+	t_geo		*neg;
 
 	neg = geo->neg;
 	if (set_borns_neg(geo->neg, r) == 0)
@@ -76,7 +77,8 @@ t_hp				is_touched_by_neg(t_geo *geo, t_ray *r, t_hp sol_geo)
 	}
 	while (neg)
 	{
-		if (sol_geo.t >= neg->borns_neg->t_start && sol_geo.t <= neg->borns_neg->t_end)
+		if (sol_geo.t >= neg->borns_neg->t_start && \
+		sol_geo.t <= neg->borns_neg->t_end)
 		{
 			sol_geo.t = -1.0;
 			return (sol_geo);

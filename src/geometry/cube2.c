@@ -26,7 +26,7 @@ static double				max_3_interval(t_geo *geo, t_inter *i)
 	return (-1.0);
 }
 
-int					belong_to_cube(t_geo *geo, t_vec3 pos)
+int							belong_to_cube(t_geo *geo, t_vec3 pos)
 {
 	t_cube			*cube;
 	t_vec3			diff;
@@ -40,22 +40,48 @@ int					belong_to_cube(t_geo *geo, t_vec3 pos)
 	return (0);
 }
 
-double				cube_solutions(t_geo *geo, t_ray *r)
+static void					cube_solutions2(t_geo *geo, t_ray r, t_inter *limit)
+{
+	t_cube					*cube;
+
+	cube = (t_cube*)geo->curr;
+	limit[1].t_end = max((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, \
+	r->origin), cube->direction2)) / vec3_dot(r->dir, cube->direction2), \
+	(-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), \
+	cube->direction2)) / vec3_dot(r->dir, cube->direction2));
+	limit[2].t_start = min((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, \
+	r->origin), cube->direction3)) / vec3_dot(r->dir, cube->direction3), \
+	(-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), \
+	cube->direction3)) / vec3_dot(r->dir, cube->direction3));
+	limit[2].t_end = max((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, \
+	r->origin), cube->direction3)) / vec3_dot(r->dir, cube->direction3), \
+	(-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), \
+	cube->direction3)) / vec3_dot(r->dir, cube->direction3));
+}
+
+double						cube_solutions(t_geo *geo, t_ray *r)
 {
 	t_cube			*cube;
 	t_inter			limit[3];
 
 	cube = (t_cube*)geo->curr;
-	limit[0].t_start = min((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), cube->direction1)) / vec3_dot(r->dir, cube->direction1), (-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), cube->direction1)) / vec3_dot(r->dir, cube->direction1));
-	limit[0].t_end = max((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), cube->direction1)) / vec3_dot(r->dir, cube->direction1), (-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), cube->direction1)) / vec3_dot(r->dir, cube->direction1));
-	limit[1].t_start = min((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), cube->direction2)) / vec3_dot(r->dir, cube->direction2), (-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), cube->direction2)) / vec3_dot(r->dir, cube->direction2));
-	limit[1].t_end = max((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), cube->direction2)) / vec3_dot(r->dir, cube->direction2), (-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), cube->direction2)) / vec3_dot(r->dir, cube->direction2));
-	limit[2].t_start = min((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), cube->direction3)) / vec3_dot(r->dir, cube->direction3), (-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), cube->direction3)) / vec3_dot(r->dir, cube->direction3));
-	limit[2].t_end = max((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), cube->direction3)) / vec3_dot(r->dir, cube->direction3), (-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), cube->direction3)) / vec3_dot(r->dir, cube->direction3));
+	limit[0].t_start = min((cube->size + vec3_dot(vec3_sub_stack(*geo->origin,\
+	r->origin), cube->direction1)) / vec3_dot(r->dir, cube->direction1), \
+	(-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), \
+	cube->direction1)) / vec3_dot(r->dir, cube->direction1));
+	limit[0].t_end = max((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, \
+	r->origin), cube->direction1)) / vec3_dot(r->dir, cube->direction1), \
+	(-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), \
+	cube->direction1)) / vec3_dot(r->dir, cube->direction1));
+	limit[1].t_start = min((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, \
+	r->origin), cube->direction2)) / vec3_dot(r->dir, cube->direction2), \
+	(-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), \
+	cube->direction2)) / vec3_dot(r->dir, cube->direction2));
+	cube_solutions2(geo, r, limit);
 	return (max_3_interval(geo, limit));
 }
 
-t_hp				hit_cube(t_geo *geo, t_ray *r)
+t_hp						hit_cube(t_geo *geo, t_ray *r)
 {
 	t_hp			sol;
 	double			x;

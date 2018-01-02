@@ -56,7 +56,6 @@ void				sphere_solutions(t_geo *geo, t_ray *r, t_hp *sol)
 	double			abcd[4];
 	double			t[2];
 
-
 	sol[0].t = -1;
 	sol[1].t = -1;
 	sphere = (t_sphere *)geo->curr;

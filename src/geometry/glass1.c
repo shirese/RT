@@ -17,7 +17,7 @@
 #include "utils.h"
 #include "ft_printf.h"
 
-int					add_glass(int *fd, char **line, t_env *e)
+int							add_glass(int *fd, char **line, t_env *e)
 {
 	char			*v;
 	t_geo			*geo;
@@ -38,13 +38,13 @@ int					add_glass(int *fd, char **line, t_env *e)
 		}
 		else if (ft_strncmp(*line, "\theight", 7) == 0 && (v += 5))
 			glass->height = ft_atof(v);
-		else 
-			parse_geo_attributes(line, v, geo, fd);	
+		else
+			parse_geo_attributes(line, v, geo, fd);
 	}
 	return (modif_glass(e, geo, glass));
 }
 
-static int			set_cylinder_of_glass(t_geo *geo)
+static int					set_cylinder_of_glass(t_geo *geo)
 {
 	t_cylinder		*cyl;
 	t_geo			*g;
@@ -62,7 +62,7 @@ static int			set_cylinder_of_glass(t_geo *geo)
 	return (1);
 }
 
-static int			set_cone_of_glass(t_geo *geo)
+static int					set_cone_of_glass(t_geo *geo)
 {
 	t_glass			*glass;
 	t_geo			*g;
@@ -73,8 +73,10 @@ static int			set_cone_of_glass(t_geo *geo)
 	if (!set_cylinder_of_glass(geo))
 		return (0);
 	g = glass->cone;
-	g->origin = vec3_add(*geo->origin, vec3_mult_stack(glass->direction, -0.25));
-	if (!ft_memcpy((t_mater*)g->mater, (t_mater*)geo->mater, sizeof(geo->mater)))
+	g->origin = vec3_add(*geo->origin, \
+	vec3_mult_stack(glass->direction, -0.25));
+	if (!ft_memcpy((t_mater*)g->mater, (t_mater*)geo->mater\
+	, sizeof(geo->mater)))
 		return (0);
 	g->mater->transparency = 0;
 	cone = (t_cone*)g->curr;
@@ -85,7 +87,7 @@ static int			set_cone_of_glass(t_geo *geo)
 	return (1);
 }
 
-static int			set_sphere_of_glass(t_geo *geo)
+static int					set_sphere_of_glass(t_geo *geo)
 {
 	t_glass			*glass;
 	t_geo			*g;
@@ -94,8 +96,10 @@ static int			set_sphere_of_glass(t_geo *geo)
 	glass = (t_glass*)geo->curr;
 	g = glass->sphere;
 	sphere = (t_sphere*)g->curr;
-	g->origin = vec3_add(*geo->origin, vec3_mult_stack(glass->direction, -0.25));
-	if (!ft_memcpy((t_mater*)g->mater, (t_mater*)geo->mater, sizeof(geo->mater)))
+	g->origin = vec3_add(*geo->origin, \
+	vec3_mult_stack(glass->direction, -0.25));
+	if (!ft_memcpy((t_mater*)g->mater, \
+	(t_mater*)geo->mater, sizeof(geo->mater)))
 		return (0);
 	g->mater->transparency = 0;
 	sphere = (t_sphere*)g->curr;
@@ -103,7 +107,7 @@ static int			set_sphere_of_glass(t_geo *geo)
 	return (1);
 }
 
-int				set_direction_glass(t_geo *geo)
+int							set_direction_glass(t_geo *geo)
 {
 	if (!set_cylinder_of_glass(geo) || !set_cone_of_glass(geo) || \
 	!set_sphere_of_glass(geo))

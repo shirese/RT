@@ -16,9 +16,8 @@
 #include "rt.h"
 #include "utils.h"
 
-int			modif_glass(t_env *e, t_geo *geo, t_glass *glass)
+int						modif_glass(t_env *e, t_geo *geo, t_glass *glass)
 {
-	
 	if (geo->rotation)
 	{
 		rotate(&(((t_cylinder*)(glass->cyl)->curr)->axis), *geo->rotation);
@@ -30,7 +29,7 @@ int			modif_glass(t_env *e, t_geo *geo, t_glass *glass)
 	return (0);
 }
 
-int					cut_cylinder_in_glass(t_geo *cyl, double height)
+int						cut_cylinder_in_glass(t_geo *cyl, double height)
 {
 	t_vec3			position;
 	t_vec3			normal;
@@ -52,8 +51,7 @@ int					cut_cylinder_in_glass(t_geo *cyl, double height)
 	return (1);
 }
 
-
-int					cut_cone_in_glass(t_geo *cone)
+int						cut_cone_in_glass(t_geo *cone)
 {
 	t_vec3			position;
 	t_cut			*new_cut;
@@ -63,10 +61,12 @@ int					cut_cone_in_glass(t_geo *cone)
 	new_cut = NULL;
 	if (!(new_cut = (t_cut*)malloc(3 * sizeof(t_cut))))
 		return (0);
-	position = vec3_add_stack(*cone->origin, vec3_mult_stack(c->axis, -0.25)); 
-	new_cut[0].cut_position = vec3_add_stack(*cone->origin, vec3_mult_stack(c->axis, 0.40));
+	position = vec3_add_stack(*cone->origin, vec3_mult_stack(c->axis, -0.25));
+	new_cut[0].cut_position = vec3_add_stack(*cone->origin, \
+	vec3_mult_stack(c->axis, 0.40));
 	new_cut[0].cut_normal = vec3_mult_stack(c->axis, -1.0);
-	position = vec3_add_stack(*cone->origin, vec3_mult_stack(c->axis, -0.4)); 
+	position = vec3_add_stack(*cone->origin, \
+	vec3_mult_stack(c->axis, -0.4));
 	new_cut[1].cut_position = position;
 	new_cut[1].cut_normal = c->axis;
 	cone->cut = new_cut;

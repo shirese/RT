@@ -89,7 +89,7 @@ int				setup_geo(t_geo **geo)
 
 int				malloc_geo(void **type, int size, int geo_id, t_geo **geo)
 {
-	t_glass			*glass; 
+	t_glass			*glass;
 	t_geo			*geo1;
 	t_geo			*geo2;
 	t_geo			*geo3;

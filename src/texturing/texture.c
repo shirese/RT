@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 15:44:36 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/22 16:01:38 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/02 14:37:06 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void				apply_texture(t_ray *r, t_hp *hp, t_geo *geo)
 {
 	Uint32			col;
 
-	geo->tex->uv = sphere_mapping(*hp, geo);
+	geo->tex->uv = planar_mapping(hp, geo);
 	if (geo->tex->type == 5 && geo->mater->illum < 3)
 		geo->mater->illum = 3;
 	if (geo->tex->type == 1 || geo->tex->type == 2 || geo->tex->type == 5)

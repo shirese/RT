@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/28 13:34:07 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/02 14:25:39 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ t_geo				*ray_hit(t_ray *r, t_hp *hp, t_geo *from, t_env *e)
 		if (geo != from)
 		{
 			latest_hp = geo->is_hit(geo, r);
+			// printf("= before is nearest =\n");
+			// vec3_print(latest_hp.p);
 			if (latest_hp.t != -1 && is_nearest(latest_hp, hp, &min_dist))
 				nearest_geo = geo;
 		}

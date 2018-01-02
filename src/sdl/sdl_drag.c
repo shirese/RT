@@ -71,7 +71,8 @@ static int			check_drag_motion(t_geo **v_p, t_geo **geo, \
 	return (0);
 }
 
-static void			check_mouse_geo(t_geo **p, t_geo **geo, SDL_Event ev, t_env *e)
+static void			check_mouse_geo(t_geo **p, t_geo **geo, \
+SDL_Event ev, t_env *e)
 {
 	t_ray			r;
 	t_hp			hp;

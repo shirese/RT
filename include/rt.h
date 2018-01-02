@@ -208,6 +208,13 @@ double				find_krefl(t_geo *geo, t_hp hp, t_ray r);
 double				find_ior(t_geo *geo, t_ray r, t_hp hp);
 double				ior_at_point(t_geo *geo, t_vec3 pos);
 double				ior_at_point2(t_geo *g, t_vec3 pos);
-void				add_geo_coeff(t_geo *geo, t_color kd,t_color ks, double ior);
+void				add_geo_coeff(t_geo *geo, t_color kd, \
+t_color ks, double ior);
 
+void				print_env(t_env *e);
+void				print_geo2(t_geo *geo);
+void				print_geo(t_geo *geo);
+void				print_geo3(t_geo *geo);
+void				print_geo_mater(t_mater *m);
+void				print_lights(t_env *e);
 #endif

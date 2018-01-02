@@ -19,7 +19,7 @@ static void			fill_loading_bar(float ld, SDL_Rect r, t_env *e)
 
 	width = (e->win.w * ld) / 10;
 	r.w = width;
-	SDL_SetRenderDrawColor(e->win.rend, 0, 0, 0, 255 );
+	SDL_SetRenderDrawColor(e->win.rend, 0, 0, 0, 255);
 	SDL_RenderClear(e->win.rend);
 	SDL_SetRenderDrawColor(e->win.rend, ld * 255, 0, 1 - ld * 255, 255);
 	SDL_RenderFillRect(e->win.rend, &r);

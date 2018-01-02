@@ -12,26 +12,27 @@
 
 #include "vector.h"
 
-t_vec3				*vec3_add(t_vec3 v1, t_vec3 v2)
+void				vec3_mult_fact(t_vec3 *v, double factor)
+{
+	v->x *= factor;
+	v->y *= factor;
+	v->z *= factor;
+}
+
+t_vec3				*vec3_div(t_vec3 v0, double factor)
 {
 	t_vec3			*v;
 
-	v = vec3_new((v1.x + v2.x), (v1.y + v2.y), (v1.z + v2.z));
+	v = NULL;
+	if (factor != 0)
+		v = vec3_new(v0.x / factor, v0.y / factor, v0.z / factor);
 	return (v);
 }
 
-t_vec3				*vec3_mult(t_vec3 *v, double factor)
+t_vec3				*vec3_sub(t_vec3 v1, t_vec3 v2)
 {
-	t_vec3			*v_ret;
+	t_vec3			*v;
 
-	v_ret = vec3_new(v->x * factor, v->y * factor, v->z * factor);
-	return (v_ret);
-}
-
-t_vec3				vec3_add_mult_stack(t_vec3 v1, t_vec3 v2, double n)
-{
-	t_vec3			v;
-
-	v = vec3_stack((v1.x + n * v2.x), (v1.y + n * v2.y), (v1.z + n * v2.z));
+	v = vec3_new((v1.x - v2.x), (v1.y - v2.y), (v1.z - v2.z));
 	return (v);
 }

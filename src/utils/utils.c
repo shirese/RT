@@ -17,6 +17,27 @@
 #include "rt.h"
 #include "vector.h"
 
+void				print_env(t_env *e)
+{
+	t_geo			*geo;
+
+	ft_printf("\n\n///////////		ENV		///////////\n\n");
+	ft_printf("WIN\t\t%d*%d\n", e->win.w, e->win.h);
+	ft_printf("SCREEN\t\tRATIO [%f] SCALE [%f]\n", e->scr.asp_ratio, \
+		e->scr.scale);
+	ft_printf("CAM\t\t");
+	vec3_print(*e->cam->pos);
+	ft_printf("\nFOV\t\t[%f]\n", e->cam->fov);
+	print_lights(e);
+	geo = e->geos;
+	while (geo)
+	{
+		print_geo(geo);
+		print_cut(geo);
+		geo = geo->next;
+	}
+}
+
 static void			atof_cson_norme(int d, double *f, double *r, char **str)
 {
 	if (d)

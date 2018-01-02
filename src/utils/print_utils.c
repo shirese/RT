@@ -16,7 +16,7 @@
 #include "light.h"
 #include "utils.h"
 
-static void			print_lights(t_env *e)
+void						print_lights(t_env *e)
 {
 	t_light			*light;
 
@@ -43,7 +43,7 @@ static void			print_lights(t_env *e)
 	}
 }
 
-static void			print_geo_mater(t_mater *m)
+void						print_geo_mater(t_mater *m)
 {
 	ft_printf("\nMATER\t\t");
 	color_print(m->kd);
@@ -55,24 +55,11 @@ static void			print_geo_mater(t_mater *m)
 	ft_printf("TRANSPARENCY\t[%f]\n\n", m->transparency);
 }
 
-static void			print_geo2(t_geo *geo)
+void						print_geo3(t_geo *geo)
 {
 	t_geo		*tmp;
-	if (geo->type == 3)
-	{
-		ft_printf("CYLINDER\nRAD\t\t[%f]\nAXIS\t\t", \
-			((t_cylinder *)(geo->curr))->radius);
-		vec3_print(((t_cylinder *)(geo->curr))->axis);
-	}
-	else if (geo->type == 4)
-		ft_printf("SPHERE\nRAD\t\t[%f]\n", ((t_sphere *)(geo->curr))->radius);
-	else if (geo->type == 5)
-	{
-		ft_printf("DISK\nRAD\t\t[%f]\nNORMAL\t\t", \
-			((t_disk *)(geo->curr))->radius);
-		vec3_print(((t_disk *)(geo->curr))->normal);
-	}
-	else if (geo->type == 6)
+
+	if (geo->type == 6)
 	{
 		ft_printf("PARABOLOID\nFACTA\t\t[%f]\nFACTB\t\t[%f]\nHEIGHT\t\t[%f]", \
 			((t_paraboloid *)(geo->curr))->facta,\
@@ -95,7 +82,26 @@ static void			print_geo2(t_geo *geo)
 	}
 }
 
-void			print_geo(t_geo *geo)
+void						print_geo2(t_geo *geo)
+{
+	if (geo->type == 3)
+	{
+		ft_printf("CYLINDER\nRAD\t\t[%f]\nAXIS\t\t", \
+			((t_cylinder *)(geo->curr))->radius);
+		vec3_print(((t_cylinder *)(geo->curr))->axis);
+	}
+	else if (geo->type == 4)
+		ft_printf("SPHERE\nRAD\t\t[%f]\n", ((t_sphere *)(geo->curr))->radius);
+	else if (geo->type == 5)
+	{
+		ft_printf("DISK\nRAD\t\t[%f]\nNORMAL\t\t", \
+			((t_disk *)(geo->curr))->radius);
+		vec3_print(((t_disk *)(geo->curr))->normal);
+	}
+	print_geo3(geo);
+}
+
+void						print_geo(t_geo *geo)
 {
 	ft_printf("\n\n///\t\tGEO [%p]\t\t////\n\nORIGIN\t\t", (void *)geo);
 	vec3_print(*geo->origin);
@@ -117,25 +123,4 @@ void			print_geo(t_geo *geo)
 	}
 	else
 		print_geo2(geo);
-}
-
-void				print_env(t_env *e)
-{
-	t_geo			*geo;
-
-	ft_printf("\n\n///////////		ENV		///////////\n\n");
-	ft_printf("WIN\t\t%d*%d\n", e->win.w, e->win.h);
-	ft_printf("SCREEN\t\tRATIO [%f] SCALE [%f]\n", e->scr.asp_ratio, \
-		e->scr.scale);
-	ft_printf("CAM\t\t");
-	vec3_print(*e->cam->pos);
-	ft_printf("\nFOV\t\t[%f]\n", e->cam->fov);
-	print_lights(e);
-	geo = e->geos;
-	while (geo)
-	{
-		print_geo(geo);
-		print_cut(geo);
-		geo = geo->next;
-	}
 }

@@ -16,7 +16,8 @@
 #include "rt.h"
 #include "vector.h"
 
-static int			has_shadow(t_light *light, t_vec3 hp_pos, t_geo *geo, t_env *e)
+static int			has_shadow(t_light *light, t_vec3 hp_pos, \
+t_geo *geo, t_env *e)
 {
 	t_geo			*shadow_geo;
 	t_hp			shadow_hp;

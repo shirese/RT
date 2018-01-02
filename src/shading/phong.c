@@ -82,7 +82,8 @@ void				shade_phong(t_geo *geo, t_hp hp, t_light *l, t_ray *r)
 			color_set(color_new_stack(0., 0., 0.), &(r->color));
 		else
 		{
-			color_add(calc_diffuse(geo->mater, *l->color, lambertian), &(r->color));
+			color_add(calc_diffuse(geo->mater, *l->color, \
+			lambertian), &(r->color));
 			if (l->type != 2)
 				color_add(calc_spec(geo, hp, l, r), &(r->color));
 		}

@@ -17,42 +17,42 @@
 # include "ray.h"
 # include "vector.h"
 
-typedef struct	s_cone
+typedef struct		s_cone
 {
-	t_vec3		axis;
-	double		angle;
-}				t_cone;
+	t_vec3			axis;
+	double			angle;
+}					t_cone;
 
-typedef struct	s_cylinder
+typedef struct		s_cylinder
 {
-	double		radius;
-	t_vec3		axis;
-	t_vec3		normal;
-}				t_cylinder;
+	double			radius;
+	t_vec3			axis;
+	t_vec3			normal;
+}					t_cylinder;
 
-typedef struct	s_plane
+typedef struct		s_plane
 {
-	t_vec3		normal;
-}				t_plane;
+	t_vec3			normal;
+}					t_plane;
 
-typedef struct	s_sphere
+typedef struct		s_sphere
 {
-	double		radius;
-}				t_sphere;
+	double			radius;
+}					t_sphere;
 
-typedef struct	s_parallelog
+typedef struct		s_parallelog
 {
-	t_vec3		direction1;
-	t_vec3		direction2;
-}				t_parallelog;
+	t_vec3			direction1;
+	t_vec3			direction2;
+}					t_parallelog;
 
-typedef struct	s_disk
+typedef struct		s_disk
 {
-	t_vec3		normal;
-	double		radius;
-}				t_disk;
+	t_vec3			normal;
+	double			radius;
+}					t_disk;
 
-typedef struct	s_paraboloid
+typedef struct		s_paraboloid
 {
 	double			facta;
 	double			factb;
@@ -120,8 +120,10 @@ t_hp				first_in_cut(t_geo *geo, t_ray *r, t_hp hp_1, t_hp hp_2);
 t_hp				hit_and_cut(t_geo *geo, t_hp hp_1, t_hp hp_2, t_ray *r);
 t_vec3				normal_cut(t_geo *geo, t_hp hp);
 t_vec3				negative_norm(t_geo *geo, t_hp hp);
-void				fill_solution_cylinder(t_geo *geo, t_ray *r, double *abcd, t_hp *sol);
-void				fill_solution_disk(t_geo *geo, t_ray *r, double *expr, t_hp *sol);
+void				fill_solution_cylinder(t_geo *geo, t_ray *r, \
+double *abcd, t_hp *sol);
+void				fill_solution_disk(t_geo *geo, t_ray *r, \
+double *expr, t_hp *sol);
 
 /*
 ** NEGATIVE

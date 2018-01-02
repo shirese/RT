@@ -47,7 +47,7 @@ static int		ft_str_size(double n, size_t precision)
 	len = 0;
 	dot = 0;
 	if (n > -1 && n < 1)
-		len ++;
+		len++;
 	if (n < 0)
 	{
 		n = -n;
@@ -71,7 +71,6 @@ static void		ft_convert(char *str, double n, size_t precision)
 
 	n_tmp = n;
 	dot = 0;
-
 	if (n < 0)
 	{
 		n_tmp = n;
@@ -94,7 +93,7 @@ char			*ft_ftoa(double n, size_t precision)
 	char		*str;
 
 	str = NULL;
-	str = (char *) malloc(sizeof(*str) * ft_str_size(n, precision) + 1);
+	str = (char *)malloc(sizeof(*str) * ft_str_size(n, precision) + 1);
 	if (str)
 		ft_convert(str, n, precision);
 	return (str);

@@ -48,7 +48,7 @@ SRC_SHADING		=	fresnel.c light.c lighting.c phong.c toon.c
 SRC_TEX			=	checkerboard.c perlin.c planar_mapping.c spherical_mapping.c texture.c uv_texture.c
 SRC_UTILS		=	geo_utils.c math_utils.c math_utils_2.c print_utils.c transform.c utils.c
 SRC_VECS		=	vec2.c\
-					vec3.c vec3_adv_op.c vec3_basic_op.c vec3_basic_op_stack.c\
+					vec3.c vec3_adv_op.c vec3_basic_op.c vec3_basic_op2.c vec3_basic_op_stack.c\
 					vec3_utils.c\
 					vec4.c vec4_utils.c
 

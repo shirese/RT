@@ -22,7 +22,6 @@ void				apply_texture(t_ray *r, t_hp *hp, t_geo *geo);
 
 double				get_perlin_noise_pixel(int x, int y);
 
-// t_color				compute_uv_texture(t_vec2 st);
 void				checkerboard_texture(t_vec2 st, t_color *c);
 t_vec2				planar_mapping(t_hp hp, t_geo *geo);
 t_vec2				sphere_mapping(t_hp hp, t_geo *geo);

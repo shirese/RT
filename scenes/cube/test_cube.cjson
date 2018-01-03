@@ -15,26 +15,14 @@ light:
 	type: 3
 	color: 0.88, 0.88, 0.88, 1.
 	pos: 2.0, 1.0, 4.0
-cube:
-	pos: 0, -0.2, -1.5
-	kd: 1., 0., 0
-	ks: 0.55, 0.55, 0.55
-	size: 0.8
-	illum: 1
-	direction: 1, 0, 1
 plane:
-	pos: 0., -1., -2.0
-	kd: .13, 0.13, 0.13
-	ks: 0.55, 0.55, 0.55
-	normal: 0, 0, 1.0
-plane:
-	pos: 0., -1., -1.0
-	kd: .13, 1, 0.13
-	ks: 0.55, 0.55, 0.55
-	normal: 0, 1, 0
-sphere:
-	pos: 0.6, -0.2, 0.5
-	kd: 1., 1., 0.
-	ks: 0.55, 0.55, 0.55
-	illum: 1
-	radius: 0.25
+	pos: 0., -0.15, -1.5
+	kd: 0.44, 0, 0
+	ks: 0, 0, 0
+	normal: 0, 1, 0.
+	cut_position: 0, 0, -0.5
+	cut_normal: 0.0, 0.0, 1.0
+	cut_position: 0, 0, 0
+	cut_normal: 1.0, 0.0, 0
+	cut_position: 0.2, 0, 0
+	cut_normal: -1.0, 0.0, 0

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 15:44:36 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/22 16:01:38 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/03 13:49:27 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ static Uint32		get_pixel(t_geo *geo, int x, int y)
 	return (0);
 }
 
-static void			apply_texture2(t_ray *r, t_geo *geo)
+static void			apply_texture2(t_ray *r, t_hp *hp, t_geo *geo)
 {
 	t_color			col;
 	double			rgb;
 
 	if (geo->tex->type == 3)
-		checkerboard_texture(geo->tex->uv, &(r->color));
+		checkerboard_texture(geo->tex->uv, hp->p, &(r->color));
 	else if (geo->tex->type == 4)
 	{
 		rgb = get_perlin_noise_pixel(geo->tex->uv.x * PERLIN_XY, \
@@ -67,7 +67,10 @@ void				apply_texture(t_ray *r, t_hp *hp, t_geo *geo)
 {
 	Uint32			col;
 
-	geo->tex->uv = sphere_mapping(*hp, geo);
+	if (geo->type == 4)
+		geo->tex->uv = spherical_mapping(hp, geo);
+	else
+		geo->tex->uv = planar_mapping(hp);
 	if (geo->tex->type == 5 && geo->mater->illum < 3)
 		geo->mater->illum = 3;
 	if (geo->tex->type == 1 || geo->tex->type == 2 || geo->tex->type == 5)
@@ -89,7 +92,7 @@ void				apply_texture(t_ray *r, t_hp *hp, t_geo *geo)
 		}
 	}
 	else
-		apply_texture2(r, geo);
+		apply_texture2(r, hp, geo);
 }
 
 t_tex				*init_textures(int type, const char *img_path)

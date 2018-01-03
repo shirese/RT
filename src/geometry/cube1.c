@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube.c                                             :+:      :+:    :+:   */
+/*   cube1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 13:30:03 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/28 15:49:03 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/03 11:53:27 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,12 @@ void				create_axis(t_geo *geo)
 	vec3_normalize(&cube->direction3);
 }
 
-static void				cube_norm2(t_geo *geo, t_hp hp, t_vec3 diff, t_vec3 *normal)
+static void				cube_norm2(t_geo *geo, t_vec3 diff, t_vec3 *normal)
 {
 	t_cube			*cube;
 	double			max;
 
+	cube = geo->curr;
 	max = fabs(vec3_dot(diff, cube->direction1));
 	cube = (t_cube*)geo->curr;
 	if (fabs(vec3_dot(diff, cube->direction2)) > max)
@@ -99,7 +100,7 @@ t_vec3				cube_norm(t_geo *geo, t_hp hp)
 		normal = cube->direction1;
 	else
 		normal = vec3_mult_stack(cube->direction1, -1.0);
-	cube_norm2(geo, hp, diff, &normal);
+	cube_norm2(geo, diff, &normal);
 	return (normal);
 }
 

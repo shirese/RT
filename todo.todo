@@ -11,7 +11,7 @@
  ✔ Fix specular Plane @done (17-12-22 11:49)
  ✔ Fix Texture multithread issues @done (17-12-22 15:22)
  ✔ Fix checkboard && perlin pixel multithread issue @done (17-12-22 15:22)
- ☐ test_refl_multiple_spot.cjson fucked if illum 3 on cylinders
+ ✔ test_refl_multiple_spot.cjson fucked if illum 3 on cylinders @done (18-01-02 14:34)
  ✔ Malloc error if texture not exist @done (17-12-22 16:02)
- ☐ refl fucked on shadow refl color?
- ☐ Seg cut3 a reproduire
+ ✔ refl fucked on shadow refl color? @done (18-01-02 14:34)
+ ✔ Seg cut3 a reproduire @done (18-01-02 14:34)

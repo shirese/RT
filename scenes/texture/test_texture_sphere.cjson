@@ -8,11 +8,11 @@ light:
 	type: 3
 	color: 0.88, 0.88, 0.88
 	pos: -1.0, 1.0, 2.
-plane:
-	pos: 0., -4., -2.
+sphere:
+	pos: 0., 0., -2.
 	kd: 0.4, 0.4, 0.4
 	ks: 0, 0, 0
 	illum: 1
 	ior: 1
-	normal: 0, 0, 1
 	texture: 3
+	radius: 1.

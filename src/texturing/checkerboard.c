@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 11:29:20 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/22 15:21:11 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/03 11:26:17 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,18 @@
 #include "rt_multithread.h"
 #include "texture.h"
 
+static double		modulo(double x)
+{
+	return (x - floor(x));
+}
+
 void				checkerboard_texture(t_vec2 st, t_color *c)
 {
-	st.x *= 10;
-	st.y *= 10;
-	if (((int)st.x + (int)st.y) % 2 == 0)
+	int				pattern;
+
+	pattern = (modulo(st.y * 5.) < 0.5) ^ \
+		(modulo(st.x * 5.) < 0.5);
+	if (pattern == 0)
 	{
 		c->r = 1.;
 		c->g = 1.;

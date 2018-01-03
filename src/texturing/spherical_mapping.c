@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:13:10 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/02 14:35:56 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/03 11:30:43 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,5 @@ t_vec2					spherical_mapping(t_hp *hp, t_geo *geo)
 	t_vec2				st;
 
 	st = sphere_map(hp->p, geo);
-	printf("[%f] [%f]\n", st.x, st.y);
 	return (st);
 }

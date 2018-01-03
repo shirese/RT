@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:01:02 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/02 16:13:32 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/03 11:30:27 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ t_vec2				planar_mapping(t_hp *hp, t_geo *geo)
 	t_vec3			vt;
 	double			ds;
 	double			dt;
+	double			integer;
+
 	vs = vec3_stack(1., 0., 0.);
 	vt = vec3_stack(0., 1., 0.);
-	// vec3_print(vs);
 	ds = vec3_dot(hp->p, vs);
-	ds /= geo->tex->curr->w;
+	ds = fabs(modf(ds, &integer));
 	dt = vec3_dot(hp->p, vt);
-	dt /= geo->tex->curr->h;
-	printf("%f %f\n", ds, dt);
-	return (vec2_stack(clamp(ds, -1, 1), clamp(dt, -1, 1)));
+	dt = fabs(modf(dt, &integer));
+	return (vec2_stack(ds, dt));
 }

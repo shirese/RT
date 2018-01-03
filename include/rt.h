@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/27 17:46:33 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/03 11:08:58 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct		s_inter
 }					t_inter;
 
 /*
-**	TYPE 1- Plane 2- Cone 3- Cylinder 4- Sphere
+**	TYPE 1- Plane 2- Cone 3- Cylinder 4- Sphere 5- Disk 6- Paraboloid
 **	SHADER TYPE 1- Phong 2- Toon
 */
 

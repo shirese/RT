@@ -6,17 +6,17 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:35:24 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/04 11:35:58 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/04 11:38:09 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "geo.h"
 #include "rt.h"
 
-t_geo			*new_plane(t_vec3 *position, t_vec3 normal)
+t_geo				*new_plane(t_vec3 *position, t_vec3 normal)
 {
-	t_plane		*plane;
-	t_geo		*geo;
+	t_plane			*plane;
+	t_geo			*geo;
 
 	geo = NULL;
 	if (!malloc_geo((void **)(&plane), sizeof(t_plane), 1, &geo))

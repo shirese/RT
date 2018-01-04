@@ -86,7 +86,7 @@ void				cylinder_solutions(t_geo *geo, t_ray *r, t_hp *sol)
 	abcd[2] = vec3_dot(x, x) - dot[1] * dot[1] - cyl->radius * cyl->radius;
 	abcd[3] = abcd[1] * abcd[1] - 4 * abcd[0] * abcd[2];
 	if (abcd[3] > 0)
-		fill_solution_cylinder(geo, r, abcd, sol);
+		solve_cylinder(geo, r, abcd, sol);
 }
 
 t_hp				hit_cylinder(t_geo *geo, t_ray *r)

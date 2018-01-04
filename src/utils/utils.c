@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 13:16:21 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/11 16:59:37 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/04 12:54:14 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "light.h"
 #include "geo.h"
 #include "rt.h"
+#include "utils.h"
 #include "vector.h"
 
 void				print_env(t_env *e)

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 12:20:53 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/03 14:54:15 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/04 12:22:02 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void				apply_lights(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
 
 	light = e->lights;
 	in_shadow = 0;
-	
 	while (light != NULL && geo)
 	{
 		if (light->type != 1)

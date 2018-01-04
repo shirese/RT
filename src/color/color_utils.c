@@ -14,7 +14,7 @@
 #include "ft_printf.h"
 #include "rt.h"
 
-void				color_print(t_color c)
+void				print_color(t_color c)
 {
 	ft_printf("[R %f G %f B %f]\n", c.r, c.g, c.b);
 }

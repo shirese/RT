@@ -6,7 +6,7 @@
 #    By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/02 10:55:23 by chaueur           #+#    #+#              #
-#    Updated: 2017/12/28 15:39:00 by chaueur          ###   ########.fr        #
+#    Updated: 2018/01/04 12:38:05 by chaueur          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ SRC_RENDER		=	ray.c ray_ref.c raytracer.c raytracer_ref.c render.c render_thr.c
 SRC_SDL			=	sdl.c sdl_bar.c sdl_drag.c sdl_event.c
 SRC_SHADING		=	fresnel.c light.c lighting.c phong.c toon.c
 SRC_TEX			=	checkerboard.c perlin.c planar_mapping.c spherical_mapping.c texture.c uv_texture.c
-SRC_UTILS		=	geo_utils.c math_utils.c math_utils_2.c print_utils.c transform.c utils.c
+SRC_UTILS		=	geo_utils.c math_utils.c math_utils_2.c print_utils.c \
+					print_utils2.c render_thr_utils.c transform.c utils.c
 SRC_VECS		=	vec2.c\
 					vec3.c vec3_adv_op.c vec3_basic_op.c vec3_basic_op2.c vec3_basic_op_stack.c\
 					vec3_utils.c\

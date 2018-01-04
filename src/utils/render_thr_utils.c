@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_multithread.h                                   :+:      :+:    :+:   */
+/*   render_thr_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/08 14:39:58 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/04 14:46:54 by chaueur          ###   ########.fr       */
+/*   Created: 2018/01/04 12:19:41 by chaueur           #+#    #+#             */
+/*   Updated: 2018/01/04 12:20:12 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RT_MULTITHREAD_H
+#include "rt_multithread.h"
 
-# define RT_MULTITHREAD_H
-
-# include <pthread.h>
-# include <stdatomic.h>
-
-# include "rt.h"
-
-# define NUM_THREADS 4
-# define TILESIZE 32
-
-typedef struct		s_thread_data
+int					find_factor(int n, int f)
 {
-	int				tile_id;
-	int				ld_done;
-	pthread_mutex_t	mutex;
-	t_env			*e;
-}					t_thread_data;
+	int				i;
 
-int					find_factor(int n, int f);
-int					raytrace_thread(t_env *e);
-
-#endif
+	i = 0;
+	while (i < TILESIZE)
+	{
+		if (n % (f - i) == 0)
+			return (f - i);
+		else if (n % (f + i) == 0)
+			return (f + i);
+		i++;
+	}
+	return (0);
+}

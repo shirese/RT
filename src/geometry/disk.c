@@ -51,7 +51,7 @@ int					belong_to_disk(t_geo *geo, t_vec3 pos)
 	return (0);
 }
 
-void				fill_solution_disk(t_geo *geo, t_ray *r, \
+void				solve_disk(t_geo *geo, t_ray *r, \
 double *expr, t_hp *sol)
 {
 	t_disk *d;
@@ -91,6 +91,6 @@ t_hp				hit_disk(t_geo *geo, t_ray *r)
 	((*geo->origin).z - r->origin.z) * d->normal.z;
 	expr[0] = expr[0] / (d->normal.x * r->dir.x + d->normal.y * \
 		r->dir.y + d->normal.z * r->dir.z);
-	fill_solution_disk(geo, r, expr, &sol);
+	solve_disk(geo, r, expr, &sol);
 	return (sol);
 }

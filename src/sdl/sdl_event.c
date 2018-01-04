@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 18:41:29 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/03 13:12:21 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/04 12:10:00 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ void				sdl_get_event(SDL_Event event, t_env *e)
 	}
 	else if (check_drag_event(event, e))
 	{
-			if (!(raytrace_thread(e)))
-				return ;
+		if (!(raytrace_thread(e)))
+			return ;
 	}
-	
 }

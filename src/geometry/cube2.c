@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube.c                                             :+:      :+:    :+:   */
+/*   cube2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 13:30:03 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/28 15:49:03 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/04 12:08:55 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,20 @@ int							belong_to_cube(t_geo *geo, t_vec3 pos)
 	return (0);
 }
 
-static void					cube_solutions2(t_geo *geo, t_ray r, t_inter *limit)
+static void					cube_solutions2(t_geo *geo, t_ray *r, t_inter *lim)
 {
 	t_cube					*cube;
 
 	cube = (t_cube*)geo->curr;
-	limit[1].t_end = max((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, \
+	lim[1].t_end = max((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, \
 	r->origin), cube->direction2)) / vec3_dot(r->dir, cube->direction2), \
 	(-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), \
 	cube->direction2)) / vec3_dot(r->dir, cube->direction2));
-	limit[2].t_start = min((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, \
+	lim[2].t_start = min((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, \
 	r->origin), cube->direction3)) / vec3_dot(r->dir, cube->direction3), \
 	(-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), \
 	cube->direction3)) / vec3_dot(r->dir, cube->direction3));
-	limit[2].t_end = max((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, \
+	lim[2].t_end = max((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, \
 	r->origin), cube->direction3)) / vec3_dot(r->dir, cube->direction3), \
 	(-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), \
 	cube->direction3)) / vec3_dot(r->dir, cube->direction3));
@@ -62,23 +62,23 @@ static void					cube_solutions2(t_geo *geo, t_ray r, t_inter *limit)
 double						cube_solutions(t_geo *geo, t_ray *r)
 {
 	t_cube			*cube;
-	t_inter			limit[3];
+	t_inter			lim[3];
 
 	cube = (t_cube*)geo->curr;
-	limit[0].t_start = min((cube->size + vec3_dot(vec3_sub_stack(*geo->origin,\
+	lim[0].t_start = min((cube->size + vec3_dot(vec3_sub_stack(*geo->origin,\
 	r->origin), cube->direction1)) / vec3_dot(r->dir, cube->direction1), \
 	(-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), \
 	cube->direction1)) / vec3_dot(r->dir, cube->direction1));
-	limit[0].t_end = max((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, \
+	lim[0].t_end = max((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, \
 	r->origin), cube->direction1)) / vec3_dot(r->dir, cube->direction1), \
 	(-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), \
 	cube->direction1)) / vec3_dot(r->dir, cube->direction1));
-	limit[1].t_start = min((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, \
+	lim[1].t_start = min((cube->size + vec3_dot(vec3_sub_stack(*geo->origin, \
 	r->origin), cube->direction2)) / vec3_dot(r->dir, cube->direction2), \
 	(-cube->size + vec3_dot(vec3_sub_stack(*geo->origin, r->origin), \
 	cube->direction2)) / vec3_dot(r->dir, cube->direction2));
-	cube_solutions2(geo, r, limit);
-	return (max_3_interval(geo, limit));
+	cube_solutions2(geo, r, lim);
+	return (max_3_interval(geo, lim));
 }
 
 t_hp						hit_cube(t_geo *geo, t_ray *r)

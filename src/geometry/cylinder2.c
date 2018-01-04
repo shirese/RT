@@ -16,7 +16,7 @@
 #include "rt.h"
 #include "utils.h"
 
-void				fill_solution_cylinder(t_geo *geo, t_ray *r, \
+void				solve_cylinder(t_geo *geo, t_ray *r, \
 double *abcd, t_hp *sol)
 {
 	sol[0].t = positive_smallest((-abcd[1] - sqrt(abcd[3])) / (2 * abcd[0]), \

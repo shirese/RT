@@ -21,7 +21,7 @@ cube:
 	ks: 0.55, 0.55, 0.55
 	size: 0.8
 	illum: 1
-	direction: 1, 0, 
+	direction: 1, 0, 1
 plane:
 	pos: 0., -1., -2.0
 	kd: .13, 0.13, 0.13

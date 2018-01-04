@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:01:02 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/03 15:18:08 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/04 12:21:49 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_vec2				planar_mapping(t_hp *hp)
 	double			dt;
 	double			integer;
 
-	if (fabs(hp->normal.x) == 1 )
+	if (fabs(hp->normal.x) == 1)
 		vs = vec3_stack(0., 0., 1.);
 	else
 		vs = vec3_stack(1., 0., 0.);

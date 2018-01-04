@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/03 14:42:06 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/04 12:40:50 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,11 +211,4 @@ double				ior_at_point2(t_geo *g, t_vec3 pos);
 void				add_geo_coeff(t_geo *geo, t_color kd, \
 t_color ks, double ior);
 
-void				print_env(t_env *e);
-void				print_cut(t_geo *geo);
-void				print_geo2(t_geo *geo);
-void				print_geo(t_geo *geo);
-void				print_geo3(t_geo *geo);
-void				print_geo_mater(t_mater *m);
-void				print_lights(t_env *e);
 #endif

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 14:13:06 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/29 19:10:01 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/04 14:53:28 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,17 @@ static void			compute_tile_px(int *tile_xy, int tile, t_env *e)
 	}
 }
 
-static int			find_factor(int n, int f)
+static int			handle_t(int *t_xy, int *t, int t_n, t_thread_data *thr_dt)
 {
-	int				i;
-
-	i = 0;
-	while (i < TILESIZE)
-	{
-		if (n % (f - i) == 0)
-			return (f - i);
-		else if (n % (f + i) == 0)
-			return (f + i);
-		i++;
-	}
-	return (0);
+	*t = __sync_add_and_fetch(&thr_dt->tile_id, 1) - 1;
+	if (*t >= t_n)
+		return (0);
+	pthread_mutex_lock(&thr_dt->mutex);
+	if (thr_dt->ld_done == 0)
+		render_loading_bar(*t, t_n, thr_dt->e);
+	compute_tile_px(t_xy, *t, thr_dt->e);
+	pthread_mutex_unlock(&thr_dt->mutex);
+	return (1);
 }
 
 /*
@@ -102,14 +99,8 @@ static void			*render_tile(void *arg)
 		(thr_data->e->win.h / tile_xy[1]);
 	while (1)
 	{
-		tile = __sync_add_and_fetch(&thr_data->tile_id, 1) - 1;
-		if (tile >= tiles_num)
+		if (!handle_t(tile_xy, &tile, tiles_num, thr_data))
 			break ;
-		pthread_mutex_lock(&thr_data->mutex);
-		if (thr_data->ld_done == 0)
-			render_loading_bar(tile, tiles_num, thr_data->e);
-		compute_tile_px(tile_xy, tile, thr_data->e);
-		pthread_mutex_unlock(&thr_data->mutex);
 	}
 	pthread_exit(NULL);
 }
@@ -131,7 +122,7 @@ int					raytrace_thread(t_env *e)
 		if ((pthread_create(&thr[i], NULL, render_tile, &thr_data)))
 		{
 			ft_printf("Error while creating thread.\n");
-			return (0);
+			exit(-1);
 		}
 	}
 	i = -1;

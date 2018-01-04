@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 12:25:50 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/26 12:01:40 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/04 12:42:39 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "rt.h"
 
-void				color_print(t_color c);
 void				color_clamp(t_color *c, double min, double max);
 void				color_add_no_clamp(t_color c1, t_color *c2);
 void				color_add(t_color c1, t_color *c2);

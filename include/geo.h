@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 16:12:49 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/28 15:46:10 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/04 12:49:15 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,15 @@ typedef struct		s_glass
 	t_geo			*sphere;
 	double			height;
 	t_vec3			direction;
-}				t_glass;
+}					t_glass;
 
-typedef struct	s_cube
+typedef struct		s_cube
 {
 	t_vec3			direction1;
 	double			size;
 	t_vec3			direction2;
 	t_vec3			direction3;
-}				t_cube;
+}					t_cube;
 
 void				add_geometry(t_geo *geo, t_geo **geos);
 int					setup_geo(t_geo **geo);
@@ -165,8 +165,8 @@ t_hp				first_in_cut(t_geo *geo, t_ray *r, t_hp hp_1, t_hp hp_2);
 t_hp				hit_and_cut(t_geo *geo, t_hp hp_1, t_hp hp_2, t_ray *r);
 t_hp				nearest_part(t_hp *sols);
 t_vec3				normal_cut(t_geo *geo, t_hp hp);
-void				fill_solution_cylinder(t_geo *geo, t_ray *r, double *abcd, t_hp *sol);
-void				fill_solution_disk(t_geo *geo, t_ray *r, double *expr, t_hp *sol);
+void				solve_cylinder(t_geo *geo, t_ray *r, double *ds, t_hp *sol);
+void				solve_disk(t_geo *geo, t_ray *r, double *expr, t_hp *sol);
 int					belong_after_cut(t_geo *geo, t_vec3 pos);
 int					cut_cylinder_in_glass(t_geo *cyl, double height);
 int					cut_cone_in_glass(t_geo *cone);

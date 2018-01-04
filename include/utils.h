@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 12:16:39 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/28 15:38:20 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/04 12:53:19 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,13 @@
 
 # include "rt.h"
 
+void				print_color(t_color c);
 void				print_cut(t_geo *geo);
 void				print_env(t_env *e);
+void				print_geo(t_geo *geo);
+void				print_geo_mater(t_mater *m);
+void				print_lights(t_env *e);
+
 void				free_env(t_env **e);
 void				init_environment(t_env **e);
 

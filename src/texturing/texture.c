@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 15:44:36 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/03 13:49:27 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/04 12:26:21 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,8 @@ void				apply_texture(t_ray *r, t_hp *hp, t_geo *geo)
 			color_div_fac(&(r->color), 255);
 		}
 		else
-		{
-			hp->normal.x = ((col) & 0xff) / 255.;
-			hp->normal.y = ((col >> 8) & 0xff) / 255.;
-			hp->normal.z = ((col >> 16) & 0xff) / 255.;
-		}
+			vec3_set((col & 0xff) / 255., ((col >> 8) & 0xff) / 255., \
+				((col >> 16) & 0xff) / 255., &hp->normal);
 	}
 	else
 		apply_texture2(r, hp, geo);

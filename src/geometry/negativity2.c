@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 12:52:17 by fgallois          #+#    #+#             */
-/*   Updated: 2017/12/28 15:37:19 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/04 16:19:59 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ double						value_dist_neg(t_geo *geo, t_ray *r, t_hp *sol_geo)
 	double		min;
 
 	min = sol_geo[0].t;
-	if (set_borns_neg(geo->neg, r) == 0)
+	if (set_borns_neg(geo, r) == 0)
 		return (-1);
 	neg = geo->neg;
 	while (neg && min != -1)

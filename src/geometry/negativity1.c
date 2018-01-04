@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 12:52:17 by fgallois          #+#    #+#             */
-/*   Updated: 2017/12/28 15:15:43 by fgallois         ###   ########.fr       */
+/*   Updated: 2018/01/04 16:20:02 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_ray *r, t_hp sol_geo)
 	t_geo		*neg;
 
 	neg = geo->neg;
-	if (set_borns_neg(geo->neg, r) == 0)
+	if (set_borns_neg(geo, r) == 0)
 	{
 		sol_geo.t = -1;
 		return (sol_geo);

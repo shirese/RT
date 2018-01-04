@@ -1,6 +1,6 @@
 window:
-	width: 900
-	height: 600
+	width: 400
+	height: 300
 camera:
 	pos: 0.0, 0., 2.0
 	fov: 90
@@ -20,7 +20,7 @@ cube:
 	kd: 1., 0., 0
 	ks: 0.55, 0.55, 0.55
 	size: 0.8
-	illum: 1
+	illum: 2
 	direction: 1, 0, 1
 plane:
 	pos: 0., -1., -2.0
@@ -36,5 +36,5 @@ sphere:
 	pos: 0.6, -0.2, 0.5
 	kd: 1., 1., 0.
 	ks: 0.55, 0.55, 0.55
-	illum: 1
+	illum: 2
 	radius: 0.25

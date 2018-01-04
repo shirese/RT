@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/09 11:37:25 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/04 11:31:10 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/04 16:40:15 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,20 @@ static int				setup_error(int type, t_env *e)
 	return (-1);
 }
 
-/*
-** static void				add_neg_geos(t_env *e)
-** {
-** t_geo *g;
-**
-** g = NULL;
-** g = new_cylinder(vec3_new(0., 0.2, -1.5), vec3_stack(0.0, 0., 1.), 0.3);
-** add_geo_coeff(g, color_new_stack(0.2, 0.8, 0.1), \
-** color_new_stack(0.5, 0.5, 0.5), 1.0);
-** if (g)
-** {
-** add_geometry_negative(e->geos, 0, g);
-** }
-** g = new_sphere(vec3_new(0., -1.0, -1.0), 0.5);
-** add_geo_coeff(g, color_new_stack(0.2, 0.8, 0.1), \
-** color_new_stack(0.5, 0.5, 0.5), 1.0);
-** if (g)
-** {
-** add_geometry_negative(e->geos, 0, g);
-** }
-** g = new_sphere(vec3_new(0., -1.0, -3.0), 0.5);
+
+static void				add_neg_geos(t_env *e)
+{
+	t_geo *g;
+
+	g = NULL;
+	g = new_cylinder(vec3_new(0., 0.2, -1.5), vec3_stack(0.0, 0., 1.), 0.3);
+	if (g)
+		add_geometry_negative(e->geos, 0, g);
+	g = new_cylinder(vec3_new(0., 0.2, -1.5), vec3_stack(1.0, 0., 0.), 0.3);
+	if (g)
+		add_geometry_negative(e->geos, 0, g);
+}
+/** g = new_sphere(vec3_new(0., -1.0, -3.0), 0.5);
 ** add_geo_coeff(g, color_new_stack(0.2, 0.8, 0.1), \
 ** color_new_stack(0.5, 0.5, 0.5), 1.0);
 ** if (g)
@@ -83,6 +76,7 @@ int						main(int ac, char **av)
 		e->img = malloc(sizeof(t_color) * e->scr.nx * e->scr.ny);
 		cam_matrix(e->cam, *e->cam->pos, vec3_stack(0, 0, 1), \
 			vec3_stack(0, 1, 0));
+		add_neg_geos(e);
 		sdl_render(e);
 		sdl_stop(e);
 	}

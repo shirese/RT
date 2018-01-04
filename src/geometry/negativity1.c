@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 12:52:17 by fgallois          #+#    #+#             */
-/*   Updated: 2018/01/04 16:20:02 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/04 16:38:43 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "rt.h"
 #include "utils.h"
 
-int							is_scene_dug(t_geo *geo)
+int					is_scene_dug(t_geo *geo)
 {
 	t_geo *tmp;
 
@@ -29,14 +29,14 @@ int							is_scene_dug(t_geo *geo)
 	return (0);
 }
 
-int							is_geo_dug(t_geo *geo)
+int					is_geo_dug(t_geo *geo)
 {
 	if (geo->neg)
 		return (1);
 	return (0);
 }
 
-void						both_solutions(t_ray *r, t_geo *neg, t_hp *sol)
+void				both_solutions(t_ray *r, t_geo *neg, t_hp *sol)
 {
 	if (neg->type == 2)
 		cone_solutions(neg, r, sol);
@@ -46,28 +46,28 @@ void						both_solutions(t_ray *r, t_geo *neg, t_hp *sol)
 		sphere_solutions(neg, r, sol);
 }
 
-int							set_borns_neg(t_geo *neg, t_ray *r)
+int					set_borns_neg(t_geo *geo, t_ray *r)
 {
-	t_geo	*tmp;
-	t_hp	sol[2];
+	t_geo			*neg;
+	t_hp			sol[2];
 
-	tmp = neg;
-	while (tmp)
+	neg = geo->neg;
+	while (neg)
 	{
-		if (!(tmp->borns_neg = (t_inter*)malloc(sizeof(t_inter))))
+		if (!(neg->borns_neg = (t_inter*)malloc(sizeof(t_inter))))
 			return (0);
 		both_solutions(r, neg, sol);
-		tmp->borns_neg->t_start = min(sol[0].t, sol[1].t);
-		tmp->borns_neg->t_end = max(sol[0].t, sol[1].t);
-		tmp = tmp->next;
+		neg->borns_neg->t_start = min(sol[0].t, sol[1].t);
+		neg->borns_neg->t_end = max(sol[0].t, sol[1].t);
+		neg = neg->next;
 	}
 	return (1);
 }
 
-t_hp						is_touched_by_neg(t_geo *geo, \
+t_hp				is_touched_by_neg(t_geo *geo, \
 t_ray *r, t_hp sol_geo)
 {
-	t_geo		*neg;
+	t_geo			*neg;
 
 	neg = geo->neg;
 	if (set_borns_neg(geo, r) == 0)

@@ -12,11 +12,10 @@ light:
 	color: 0.80, 0.80, 0.80, 1.
 	pos: 0.8, 0.9, 10.0
 paraboloid:
-	pos: 0, 0, 0.
+	pos: 0, 0, 0.0
 	kd: 0.8, 0.02, 0.02
 	ks: 0.5, 0.5, 0.5
-	illum: 2
-	facta: 1.0
+	facta: 2.0
 	factb: 2.0
 	height: 1.0
 	ior: 1.1

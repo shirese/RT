@@ -6,13 +6,14 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 15:37:42 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/22 15:10:25 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/04 11:37:21 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TEXTURE_H
 # define TEXTURE_H
 
+# define CHECKER_SIZE 5.
 # define PERLIN_XY 512
 
 # include "rt.h"

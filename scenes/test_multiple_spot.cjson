@@ -1,6 +1,6 @@
 window:
-	width: 900
-	height: 700
+	width: 300
+	height: 200
 camera:
 	pos: 0.0, 0.0, 2.0
 	fov: 90
@@ -86,9 +86,9 @@ plane:
 	kd: 0.13, 0.13, 0.13
 	normal: 0., 1., 0.
 plane:
-	pos: 0., 1.2, 1.
+	pos: 0., 1.5, 1.
 	kd: 0.13, 0.13, 0.13
-	normal: 0., -1.2, -0.1
+	normal: 0., -1, 0.
 plane:
 	pos: 0., 0., -4.
 	kd: 0., 0., 0.8

@@ -6,10 +6,11 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 18:41:29 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/27 11:38:00 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/03 13:12:21 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include "geo.h"
 #include "light.h"
 #include "ray.h"
@@ -59,9 +60,6 @@ static int			check_rot_event(SDL_Keycode k, t_env *e)
 
 void				sdl_get_event(SDL_Event event, t_env *e)
 {
-	int x;
-	int y;
-
 	if (event.type == SDL_KEYDOWN)
 	{
 		if (check_rot_event(event.key.keysym.sym, e))
@@ -74,11 +72,6 @@ void				sdl_get_event(SDL_Event event, t_env *e)
 			if (!(raytrace_thread(e)))
 				return ;
 		}
-	}
-	else if (event.type == SDL_MOUSEBUTTONUP) 
-	{
-		SDL_GetMouseState(&x, &y);
-		printf("Valeurs de x et y : [%d, %d]\n", x, y);
 	}
 	else if (check_drag_event(event, e))
 	{

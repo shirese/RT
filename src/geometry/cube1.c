@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube.c                                             :+:      :+:    :+:   */
+/*   cube1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 13:30:03 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/28 15:49:03 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/04 11:36:38 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void				cube_norm2(t_geo *geo, t_vec3 diff, t_vec3 *normal)
 	t_cube			*cube;
 	double			max;
 
-	cube = NULL;
+	cube = geo->curr;
 	max = fabs(vec3_dot(diff, cube->direction1));
 	cube = (t_cube*)geo->curr;
 	if (fabs(vec3_dot(diff, cube->direction2)) > max)

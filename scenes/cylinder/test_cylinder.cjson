@@ -1,0 +1,26 @@
+window:
+	width: 600
+	height: 400
+camera:
+	pos: 0.0, 0.0, 2.0
+	fov: 90
+light:
+	type: 1
+	color: 0.18, 0.18, 0.18, 1.0
+light:
+	type: 3
+	color: 0.88, 0.88, 0.88
+	pos: -2.0, 1.0, 3.0
+light:
+	type: 3
+	color: 0.88, 0.88, 0.88
+	pos: 2.0, 1.0, 3.0
+cylinder:
+	pos: 0., 0., -2.
+	axis: 1., 1.0, 0.0
+	kd: 1., 1., 0.
+	ks: 0.5, 0.5, 0.5
+	ior: 1.0
+	illum: 1
+	radius: 0.3
+

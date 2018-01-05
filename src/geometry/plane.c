@@ -6,53 +6,62 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:35:24 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/19 12:19:29 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/04 11:38:09 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "geo.h"
 #include "rt.h"
 
-static t_hp			hit_ortho(t_ray r, t_plane *p, t_vec3 min)
+t_geo				*new_plane(t_vec3 *position, t_vec3 normal)
 {
-	t_hp			hp;
+	t_plane			*plane;
+	t_geo			*geo;
 
-	hp.t = -1;
-	vec3_normalize(&p->normal);
-	if (vec3_dot(min, p->normal) == 0.0)
-	{
-		hp.p = vec3_stack(r.origin.x, r.origin.y, r.origin.z);
-		hp.t = vec3_norm(vec3_sub_stack(r.origin, hp.p));
-		hp.normal = p->normal;
-	}
-	return (hp);
+	geo = NULL;
+	if (!malloc_geo((void **)(&plane), sizeof(t_plane), 1, &geo))
+		return (0);
+	geo->origin = position;
+	plane->normal = normal;
+	return (geo);
 }
 
-t_hp				hit_plane(t_geo *geo, t_ray r)
+int					belong_to_plane(t_geo *geo, t_vec3 pos)
 {
-	t_hp			hp;
-	t_vec3			min;
-	t_plane			*p;
-	double			dot[2];
+	t_plane			*plane;
+	t_vec3			diff;
 
-	hp.t = -1;
-	min = vec3_sub_stack(*geo->origin, r.origin);
-	p = geo->curr;
-	dot[0] = vec3_dot(p->normal, min);
-	dot[1] = vec3_dot(p->normal, r.direction);
-	if (dot[1] == 0.0)
-		return (hit_ortho(r, p, min));
-	else if (fabs(dot[1]) > 1e-6)
+	plane = (t_plane*)geo->curr;
+	diff = vec3_sub_stack(*geo->origin, pos);
+	if (vec3_dot(diff, plane->normal) == 0.0)
+		return (1);
+	return (0);
+}
+
+t_hp				hit_plane(t_geo *geo, t_ray *r)
+{
+	t_hp			sol;
+	t_plane			*p;
+	double			dot;
+	double			t;
+
+	sol.t = -1;
+	p = (t_plane*)geo->curr;
+	dot = vec3_dot(vec3_normalize_stack(p->normal), r->dir);
+	if (fabs(dot) > 1e-6)
 	{
-		dot[0] /= dot[1];
-		if (dot[0] > 0.0)
+		t = vec3_dot(vec3_sub_stack(*geo->origin, r->origin), p->normal) / dot;
+		if (t >= 0.0001)
 		{
-			hp.p = vec3_stack(r.origin.x + dot[0] * \
-			r.direction.x, r.origin.y + dot[0] * r.direction.y, \
-			r.origin.z + dot[0] * r.direction.z);
-			hp.t = vec3_norm(vec3_sub_stack(r.origin, hp.p));
-			hp.normal = p->normal;
+			sol.p = vec3_stack(r->origin.x + t * r->dir.x, r->origin.y \
+			+ t * r->dir.y, r->origin.z + t * r->dir.z);
+			sol.t = t;
+			sol.normal = p->normal;
+			if (is_cut(geo) && !belong_after_cut(geo, sol.p))
+				sol.t = -1;
+			if (is_geo_dug(geo))
+				return (is_touched_by_neg(geo, r, sol));
 		}
 	}
-	return (hp);
+	return (sol);
 }

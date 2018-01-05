@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 16:00:00 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/17 10:44:38 by chaueur          ###   ########.fr       */
+/*   Updated: 2017/11/12 16:29:53 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ t_mat3				*mat3_rot(double x, double y, double z);
 
 void				mat4_print(t_mat4 m);
 
-t_mat4				*mat4_new(t_vec4 r1, t_vec4 r2, t_vec4 r3, t_vec4 r4);
-
-t_vec3				mat4_mult_vec(t_mat4 m, t_vec3 v);
+t_vec3				mat4_mult_vec3(t_mat4 m, t_vec3 v);
+t_mat4				mat4_id(void);
 t_mat4				mat4_transf(t_vec4 t, t_vec4 r);
+t_mat4				*mat4_new(t_vec4 r1, t_vec4 r2, t_vec4 r3, t_vec4 r4);
 t_mat4				*mat4_mult(t_mat4 *m1, t_mat4 m2);
 
 #endif

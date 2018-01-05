@@ -3,58 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   sdl_event.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shirese <shirese@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 18:41:29 by chaueur           #+#    #+#             */
-/*   Updated: 2017/11/30 21:53:38 by shirese          ###   ########.fr       */
+/*   Updated: 2018/01/05 12:25:10 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "geo.h"
+#include "light.h"
+#include "ray.h"
 #include "rt.h"
 #include "rt_multithread.h"
-
-static void			sdl_save_img_norme(unsigned char *px, SDL_Surface *info_surface)
-{
-	SDL_Surface		*save_surface;
-
-	save_surface = SDL_CreateRGBSurfaceFrom(px, info_surface->w, \
-		info_surface->h, info_surface->format->BitsPerPixel, \
-		info_surface->w * info_surface->format->BytesPerPixel, \
-		info_surface->format->Rmask, info_surface->format->Gmask, \
-		info_surface->format->Bmask, info_surface->format->Amask);
-	if (save_surface == NULL)
-	{
-		ft_printf("SDL_CreateRGBSurfaceFrom failed: %s\n", SDL_GetError());
-		free(px);
-		return ;
-	}
-	SDL_SaveBMP(save_surface, "saves/save.bmp");
-	free(px);
-	SDL_FreeSurface(save_surface);
-}
+#include "sdl_func.h"
 
 static void			sdl_save_img(t_env *e)
 {
-	SDL_Surface		*info_surface;
-	int				w;
-	int				h;
-	unsigned char	*pixels;
+	char			*save_path;
 
-	if (!(info_surface = SDL_GetWindowSurface(e->win.handle)))
-	{
-		ft_printf("SDL_GetWindowSurface failed: %s\n", SDL_GetError());
-		return ;
-	}
-	pixels = malloc(sizeof(unsigned char) * info_surface->w * info_surface->h \
-		* info_surface->format->BytesPerPixel);
-	if (SDL_RenderReadPixels(e->win.rend, &info_surface->clip_rect, info_surface->format->format, pixels, info_surface->w * info_surface->format->BytesPerPixel) != 0)
-	{
-		ft_printf("SDL_RenderReadPixels failed: %s\n", SDL_GetError());
-		free(pixels);
-		return ;
-	}
-	sdl_save_img_norme(pixels, info_surface);
+	save_path = malloc(sizeof(char) * 50);
+	ft_strncpy(save_path, "saves/", 6);
+	SDL_SaveBMP(e->win.sshot, ft_strcat(save_path, SAVE_NAME));
+	free(save_path);
 }
 
 static int			check_trans_event(SDL_Keycode k, t_env *e)
@@ -63,9 +34,9 @@ static int			check_trans_event(SDL_Keycode k, t_env *e)
 
 	trans = 0;
 	if (k == SDLK_DOWN && (trans = 1))
-		e->geos->origin->y -= 0.01;
+		e->cam->pos->y += 0.1;
 	if (k == SDLK_UP && (trans = 1))
-		e->geos->origin->y += 0.01;
+		e->cam->pos->y -= 0.1;
 	if (k == SDLK_LEFT && (trans = 1))
 		e->cam->pos->x += 0.1;
 	if (k == SDLK_RIGHT && (trans = 1))
@@ -113,5 +84,10 @@ void				sdl_get_event(SDL_Event event, t_env *e)
 		}
 		else if (event.key.keysym.sym == SDLK_p)
 			sdl_save_img(e);
+	}
+	else if (check_drag_event(event, e))
+	{
+		if (!(raytrace_thread(e)))
+			return ;
 	}
 }

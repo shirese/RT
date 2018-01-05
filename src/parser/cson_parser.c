@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/23 11:19:35 by chaueur           #+#    #+#             */
-/*   Updated: 2017/10/17 16:46:13 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/02 10:38:30 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,20 @@
 #include "light.h"
 #include "rt.h"
 #include "utils.h"
+
+static void			handle_error2(int err)
+{
+	if (err == 8)
+		ft_printf("Invalid geo(sphere)\n");
+	if (err == 9)
+		ft_printf("Invalid geo(disk)\n");
+	if (err == 10)
+		ft_printf("Invalid geo(hyperbolic paraboloid)\n");
+	if (err == 11)
+		ft_printf("Invalid geo(cube)\n");
+	if (err == 12)
+		ft_printf("Invalid geo(glass)\n");
+}
 
 static int			handle_error(int err)
 {
@@ -35,8 +49,7 @@ static int			handle_error(int err)
 			ft_printf("Invalid geo(cone)\n");
 		if (err == 7)
 			ft_printf("Invalid geo(cylinder)\n");
-		if (err == 8)
-			ft_printf("Invalid geo(sphere)\n");
+		handle_error2(err);
 		return (1);
 	}
 	return (0);
@@ -46,15 +59,14 @@ int					cson_parse(int fd, t_env *e)
 {
 	char			*line;
 	int				err;
-	int				i;
 
 	line = NULL;
 	err = 0;
-	i = 0;
 	get_next_line(fd, &line);
+	if (!line || !*line)
+		return (0);
 	while (*line)
 	{
-		//ft_putstr(line);
 		if (!err && !ft_strncmp(line, "window", 6) && get_next_line(fd, &line))
 			err = parse_window(&fd, &line, e);
 		if (!err && !ft_strncmp(line, "camera", 6))
@@ -66,5 +78,7 @@ int					cson_parse(int fd, t_env *e)
 		if (handle_error(err) != 0)
 			return (0);
 	}
+	if (line)
+		free(line);
 	return (1);
 }

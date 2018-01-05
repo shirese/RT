@@ -1,0 +1,128 @@
+window:
+	width: 400
+	height: 300
+camera:
+	pos: 0.0, 0.0, 2.0
+	fov: 110
+light:
+	type: 1
+	color: 0.13, 0.1, 0.1
+light:
+	type: 3
+	color: 0.33, 0.05, 0.05
+	pos: -4.0, 1.3, 1.5
+light:
+	type: 3
+	color: 0.05, 0.05, 0.33
+	pos: 2.0, -0.3, 2.0
+sphere:
+	pos: -4., 2.5, -4.
+	kd: 0.1, 0.1, 0.44
+	ks: 0.5, 0.5, 0.5
+	radius: 0.8
+	texture: 1, textures/basic/mc.png
+	illum: 2
+	reflectivity: 0.3
+sphere:
+	pos: -2., 2.5, -4.
+	kd: 0.1, 0.1, 0.44
+	ks: 0.5, 0.5, 0.5
+	radius: 0.8
+	texture: 2, textures/bump/rock2_bump.jpg
+	illum: 2
+	reflectivity: 0.3
+sphere:
+	pos: 0., 2.5, -4.
+	kd: 0.1, 0.1, 0.44
+	ks: 0.5, 0.5, 0.5
+	radius: 0.8
+	texture: 3
+	illum: 2
+	reflectivity: 0.3
+sphere:
+	pos: 2., 2.5, -4.
+	kd: 0.1, 0.1, 0.44
+	ks: 0.5, 0.5, 0.5
+	radius: 0.8
+	texture: 4
+	illum: 2
+	reflectivity: 0.3
+sphere:
+	pos: 4., 2.5, -4.
+	kd: 0.1, 0.1, 0.44
+	ks: 0.5, 0.5, 0.5
+	radius: 0.8
+	texture: 5, textures/transparent/frozen.png
+	illum: 2
+	reflectivity: 0.3
+sphere:
+	pos: -4., 0., -4.
+	kd: 0.1, 0.1, 0.44
+	ks: 0.5, 0.5, 0.5
+	radius: 0.8
+	texture: 1, textures/basic/mc.png
+sphere:
+	pos: -2., 0., -4.
+	kd: 0.1, 0.1, 0.44
+	ks: 0.5, 0.5, 0.5
+	radius: 0.8
+	texture: 2, textures/bump/rock2_bump.jpg
+sphere:
+	pos: 0., 0., -4.
+	kd: 0.1, 0.1, 0.44
+	ks: 0.5, 0.5, 0.5
+	radius: 0.8
+	texture: 3
+sphere:
+	pos: 2., 0., -4.
+	kd: 0.1, 0.1, 0.44
+	ks: 0.5, 0.5, 0.5
+	radius: 0.8
+	texture: 4
+sphere:
+	pos: 4., 0., -4.
+	kd: 0.1, 0.1, 0.44
+	ks: 0.5, 0.5, 0.5
+	radius: 0.8
+	texture: 5, textures/transparent/frozen.png
+sphere:
+	pos: -4., -2.5, -4.
+	kd: 0.1, 0.1, 0.44
+	ks: 0.5, 0.5, 0.5
+	radius: 0.8
+	texture: 1, textures/basic/mc.png
+	shader: 2
+sphere:
+	pos: -2., -2.5, -4.
+	kd: 0.1, 0.1, 0.44
+	ks: 0.5, 0.5, 0.5
+	radius: 0.8
+	texture: 2, textures/bump/rock2_bump.jpg
+	shader: 2
+sphere:
+	pos: 0., -2.5, -4.
+	kd: 0.1, 0.1, 0.44
+	ks: 0.5, 0.5, 0.5
+	radius: 0.8
+	texture: 3
+	shader: 2
+sphere:
+	pos: 2., -2.5, -4.
+	kd: 0.1, 0.1, 0.44
+	ks: 0.5, 0.5, 0.5
+	radius: 0.8
+	texture: 4
+	shader: 2
+sphere:
+	pos: 4., -2.5, -4.
+	kd: 0.1, 0.1, 0.44
+	ks: 0.5, 0.5, 0.5
+	radius: 0.8
+	texture: 5, textures/transparent/frozen.png
+	shader: 2
+plane:
+	pos: 0., -4., -30.
+	kd: 0.33, 0.33, 0.33
+	normal: 0.02, 1., 0.
+	illum: 2
+	reflectivity: 0.98

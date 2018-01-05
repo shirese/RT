@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 16:12:49 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/05 12:46:07 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/05 18:38:06 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,12 @@ int					belong_to_sphere(t_geo *geo, t_vec3 pos);
 int					belong_to_plane(t_geo *geo, t_vec3 pos);
 t_vec3				get_norm(t_geo *geo, t_hp hp);
 
-t_geo				*new_cone(t_vec3 *position, t_vec3 axis, double angle);
-t_geo				*new_cylinder(t_vec3 *position, t_vec3 axis, double radius);
-t_geo				*new_disk(t_vec3 *position, t_vec3 normal, double radius);
-t_geo				*new_paraboloid(t_vec3 *position, double a, double b);
-t_geo				*new_plane(t_vec3 *position, t_vec3 normal);
-t_geo				*new_sphere(t_vec3 *position, double radius);
+t_geo				*new_cone(t_vec3 position, t_vec3 axis, double angle);
+t_geo				*new_cylinder(t_vec3 position, t_vec3 axis, double radius);
+t_geo				*new_disk(t_vec3 position, t_vec3 normal, double radius);
+t_geo				*new_paraboloid(t_vec3 position, double a, double b);
+t_geo				*new_plane(t_vec3 position, t_vec3 normal);
+t_geo				*new_sphere(t_vec3 position, double radius);
 void				print_geo(t_geo *geo);
 
 void				cone_solutions(t_geo *geo, t_ray *r, t_hp *sol);

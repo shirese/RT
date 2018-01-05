@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 14:13:06 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/05 12:21:59 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/05 18:40:42 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static void			*render_tile(void *arg)
 	tile_xy[1] = find_factor(thr_data->e->win.h, TILESIZE);
 	if (!tile_xy[0] || !tile_xy[1])
 	{
-		ft_printf("Invalid resolution.\n");
+		ft_putendl("Invalid resolution.");
 		pthread_exit(NULL);
 	}
 	tiles_num = (thr_data->e->win.w / tile_xy[0]) * \
@@ -122,7 +122,7 @@ int					raytrace_thread(t_env *e)
 	{
 		if ((pthread_create(&thr[i], NULL, render_tile, &thr_data)))
 		{
-			ft_printf("Error while creating thread.\n");
+			ft_putendl("Error while creating thread.");
 			exit(-1);
 		}
 	}

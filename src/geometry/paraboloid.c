@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 15:54:34 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/11 18:04:40 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/05 18:39:10 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "rt.h"
 #include "utils.h"
 
-t_geo						*new_paraboloid(t_vec3 *position, \
+t_geo						*new_paraboloid(t_vec3 position, \
 double a, double b)
 {
 	t_paraboloid	*pb;
@@ -25,7 +25,7 @@ double a, double b)
 	geo = NULL;
 	if (!malloc_geo((void **)(&pb), sizeof(t_paraboloid), 6, &geo))
 		return (0);
-	geo->origin = position;
+	vec3_set(position.x, position.y, position.z, geo->origin);
 	pb->facta = a;
 	pb->factb = b;
 	pb->height = 1.0;

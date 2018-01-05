@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 16:19:56 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/14 13:49:10 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/05 18:39:28 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "rt.h"
 #include "utils.h"
 
-t_geo				*new_sphere(t_vec3 *position, double radius)
+t_geo				*new_sphere(t_vec3 position, double radius)
 {
 	t_sphere		*sphere;
 	t_geo			*geo;
@@ -23,7 +23,7 @@ t_geo				*new_sphere(t_vec3 *position, double radius)
 	geo = NULL;
 	if (!malloc_geo((void **)(&sphere), sizeof(t_sphere), 4, &geo))
 		return (0);
-	geo->origin = position;
+	vec3_set(position.x, position.y, position.z, geo->origin);
 	sphere->radius = radius;
 	return (geo);
 }

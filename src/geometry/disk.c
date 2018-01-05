@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 10:51:32 by fgallois          #+#    #+#             */
-/*   Updated: 2017/12/28 15:33:07 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/05 18:39:03 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "rt.h"
 #include "utils.h"
 
-t_geo				*new_disk(t_vec3 *position, t_vec3 normal, double radius)
+t_geo				*new_disk(t_vec3 position, t_vec3 normal, double radius)
 {
 	t_disk			*d;
 	t_geo			*geo;
@@ -23,7 +23,7 @@ t_geo				*new_disk(t_vec3 *position, t_vec3 normal, double radius)
 	geo = NULL;
 	if (!malloc_geo((void **)(&d), sizeof(t_disk), 5, &geo))
 		return (0);
-	geo->origin = position;
+	vec3_set(position.x, position.y, position.z, geo->origin);
 	d->normal = normal;
 	d->radius = radius;
 	return (geo);

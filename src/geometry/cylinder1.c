@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 13:30:03 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/21 16:26:31 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/05 18:38:11 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,18 @@
 #include "rt.h"
 #include "utils.h"
 
-t_geo				*new_cylinder(t_vec3 *position, t_vec3 axis, \
+t_geo				*new_cylinder(t_vec3 position, t_vec3 axis, \
 	double radius)
 {
 	t_cylinder		*cyl;
 	t_geo			*geo;
 
+	cyl = NULL;
 	geo = NULL;
 	if (!malloc_geo((void **)(&cyl), sizeof(t_cylinder), \
 	3, &geo))
 		return (0);
-	geo->origin = position;
+	vec3_set(position.x, position.y, position.z, geo->origin);
 	cyl->axis = axis;
 	cyl->radius = radius;
 	return (geo);

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/05 12:23:52 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/05 12:34:18 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ struct				s_geo
 	t_mater			*mater;
 	t_hp			(*is_hit)(t_geo *geo, t_ray *r);
 	t_tex			*tex;
-	t_geo			*neg;
 	t_inter			*borns_neg;
+	t_geo			*neg;
 	t_geo			*next;
 	t_cut			*cut;
 	int				nb_cut;

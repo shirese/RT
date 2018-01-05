@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/05 12:17:57 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/05 12:43:17 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "matrice.h"
 #include "rt.h"
 #include "rt_multithread.h"
+#include "utils.h"
 #include "vector.h"
 #include "SDL_stbimage.h"
 
@@ -68,6 +69,8 @@ static void			free_geos(t_env **e)
 				SDL_FreeSurface(geo->tex->curr);
 			free(geo->tex);
 		}
+		if (geo->neg)
+			free_geo_neg(&(geo->neg));
 		(*e)->geos = (*e)->geos->next;
 		free(geo);
 	}

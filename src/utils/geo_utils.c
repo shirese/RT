@@ -6,12 +6,29 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 12:06:59 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/04 12:22:30 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/05 12:46:23 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "geo.h"
 #include "rt.h"
+
+void				free_geo_neg(t_geo **negs)
+{
+	t_geo			*tmp;
+
+	tmp = NULL;
+	while (*negs)
+	{
+		tmp = *negs;
+		free(tmp->curr);
+		free(tmp->origin);
+		free(tmp->mater);
+		*negs = (*negs)->next;
+		free(tmp);
+	}
+	free(*negs);
+}
 
 t_vec3				get_norm(t_geo *geo, t_hp hp)
 {

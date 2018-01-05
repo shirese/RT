@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 16:12:49 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/04 12:49:15 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/05 12:46:07 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,9 +183,9 @@ double				value_t(t_vec3 normal, t_ray *r, double *dn);
 ** NEGATIVE
 */
 
+int					add_geometry_negative(t_geo **geo, int i, t_geo *neg0);
 int					is_geo_dug(t_geo *geo);
 int					is_scene_dug(t_geo *geo);
-int					add_geometry_negative(t_geo *geo, int i, t_geo *neg0);
 int					set_borns_neg(t_geo *geo, t_ray *r);
 t_hp				first_outside_neg(t_geo *geo, t_ray *r, t_hp *sol_geo);
 t_hp				is_touched_by_neg(t_geo *geo, t_ray *r, t_hp sol_geo);

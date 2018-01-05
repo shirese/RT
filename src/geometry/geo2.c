@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:26:59 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/03 11:52:19 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/05 12:45:52 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ void				add_geometry(t_geo *geo, t_geo **geos)
 	}
 }
 
-int					add_geometry_negative(t_geo *geo, int i, t_geo *neg0)
+int					add_geometry_negative(t_geo **geo, int i, t_geo *neg0)
 {
 	t_geo			*tmp;
 
-	if (!geo || !neg0)
+	if (!*geo || !neg0)
 		return (0);
 	else
 	{
-		tmp = geo;
+		tmp = *geo;
 		while (tmp && i > 0)
 		{
 			i--;

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:26:47 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/03 12:04:06 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/05 11:29:45 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void				sdl_draw_point(SDL_Renderer *rend, int x, int y, t_color c)
 
 int					sdl_init(t_env **e)
 {
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
+	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 		return (0);
 	else
 	{

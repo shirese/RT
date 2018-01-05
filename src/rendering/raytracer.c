@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/04 11:38:17 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/05 11:23:46 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,5 @@ void				raytrace(t_env *e)
 		}
 		y++;
 	}
-	SDL_UpdateWindowSurface(e->win.handle);
 	SDL_RenderPresent(e->win.rend);
 }

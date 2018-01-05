@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/04 12:40:50 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/05 11:23:26 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # define FLT_MAX 3.402823e+38
 # define INV_PI 0.31830988618379067154
 # define INV2_PI 0.15915494309189533577
-# define MAX_RECURSION 6
-# define WIN_TITLE "Raytracer v0.3"
+# define MAX_RECURSION 4
+# define WIN_TITLE "Raytracer v0.4"
 
 typedef struct		s_color
 {

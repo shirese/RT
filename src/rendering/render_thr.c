@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 14:13:06 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/04 14:53:28 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/05 11:23:50 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void			render_px(t_env *e)
 		}
 		y++;
 	}
-	SDL_UpdateWindowSurface(e->win.handle);
 	SDL_RenderPresent(e->win.rend);
 }
 

@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/13 10:19:11 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/28 15:27:11 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/08 10:10:13 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "rt.h"
 #include "vector.h"
 
-t_geo				*new_cone(t_vec3 *position, t_vec3 axis, double angle)
+t_geo				*new_cone(t_vec3 position, t_vec3 axis, double angle)
 {
 	t_cone			*cone;
 	t_geo			*geo;
@@ -22,7 +22,7 @@ t_geo				*new_cone(t_vec3 *position, t_vec3 axis, double angle)
 	geo = NULL;
 	if (!malloc_geo((void **)(&cone), sizeof(t_cone), 2, &geo))
 		return (0);
-	geo->origin = position;
+	vec3_set(position.x, position.y, position.z, geo->origin);
 	cone->axis = axis;
 	cone->angle = angle * M_PI / 180;
 	return (geo);

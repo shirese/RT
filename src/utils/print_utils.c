@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:59:47 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/04 12:41:48 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/08 10:10:57 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ void				print_negative_geos(t_geo *geo)
 	if (is_scene_dug(geo))
 	{
 		tmp = geo;
-		ft_printf("NEGATIF OBJECTS :\n");
+		ft_printf("NEGATIVE OBJECTS :\n");
 		while (tmp)
 		{
 			if (tmp->neg)
 			{
 				print_geo(tmp->neg);
-				ft_printf("\n");
+				ft_putchar('\n');
 			}
 			tmp = tmp->next;
 		}

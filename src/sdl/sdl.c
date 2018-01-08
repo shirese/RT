@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:26:47 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/05 18:40:27 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/08 10:16:32 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ void				sdl_render(t_env *e)
 	SDL_Event		ev;
 
 	print_env(e);
-	if (!raytrace_thread(e))
-		return ;
+	raytrace(e);
+	// if (!raytrace_thread(e))
+	// 	return ;
 	while (1 && SDL_WaitEvent(&ev))
 	{
 		if (ev.type == SDL_KEYDOWN && ev.key.keysym.sym == SDLK_ESCAPE)

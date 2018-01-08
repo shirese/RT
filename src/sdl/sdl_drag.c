@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 10:12:51 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/28 14:46:41 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/08 10:53:10 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int					setup_virtual_plane(t_geo **virtual_plane)
 	(*virtual_plane)->cut = NULL;
 	(*virtual_plane)->nb_cut = 0;
 	(*virtual_plane)->neg = NULL;
-	(*virtual_plane)->borns_neg = NULL;
 	(*virtual_plane)->curr = malloc(sizeof(t_plane));
 	if (!(*virtual_plane)->curr)
 	{

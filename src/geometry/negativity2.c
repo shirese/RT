@@ -26,14 +26,14 @@ double						value_dist_neg(t_geo *geo, t_ray *r, t_hp *sol_geo)
 	neg = geo->neg;
 	while (neg && min != -1)
 	{
-		if (min > neg->borns_neg->t_start && \
-		min < neg->borns_neg->t_end)
+		if (min > neg->borns_neg[0] && \
+		min < neg->borns_neg[1])
 		{
-			if (neg->borns_neg->t_end > sol_geo[1].t)
+			if (neg->borns_neg[1] > sol_geo[1].t)
 				min = -1;
 			else
 			{
-				min = neg->borns_neg->t_end;
+				min = neg->borns_neg[1];
 				neg = geo->neg;
 			}
 		}
@@ -50,7 +50,7 @@ static t_vec3				normal_neg(t_geo *geo, t_hp hp)
 	neg = geo->neg;
 	while (neg)
 	{
-		if (hp.t == neg->borns_neg->t_start || hp.t == neg->borns_neg->t_end)
+		if (hp.t == neg->borns_neg[0] || hp.t == neg->borns_neg[1])
 		{
 			normal = vec3_mult_stack(negative_norm(neg, hp), -1);
 			return (normal);

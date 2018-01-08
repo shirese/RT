@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/05 12:34:18 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/08 10:51:48 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ typedef struct		s_inter
 typedef struct s_geo	t_geo;
 struct				s_geo
 {
+	double			borns_neg[2];
+	int				nb_cut;
 	int				type;
 	int				shader_type;
 	void			*curr;
@@ -107,11 +109,9 @@ struct				s_geo
 	t_mater			*mater;
 	t_hp			(*is_hit)(t_geo *geo, t_ray *r);
 	t_tex			*tex;
-	t_inter			*borns_neg;
 	t_geo			*neg;
 	t_geo			*next;
 	t_cut			*cut;
-	int				nb_cut;
 };
 /*
 **	The camera matrix is a 4x4 matrix with

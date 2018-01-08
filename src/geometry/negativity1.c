@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 12:52:17 by fgallois          #+#    #+#             */
-/*   Updated: 2018/01/04 16:38:43 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/08 11:26:15 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,9 @@ int					set_borns_neg(t_geo *geo, t_ray *r)
 	neg = geo->neg;
 	while (neg)
 	{
-		if (!(neg->borns_neg = (t_inter*)malloc(sizeof(t_inter))))
-			return (0);
 		both_solutions(r, neg, sol);
-		neg->borns_neg->t_start = min(sol[0].t, sol[1].t);
-		neg->borns_neg->t_end = max(sol[0].t, sol[1].t);
+		neg->borns_neg[0] = min(sol[0].t, sol[1].t);
+		neg->borns_neg[1] = max(sol[0].t, sol[1].t);
 		neg = neg->next;
 	}
 	return (1);
@@ -77,8 +75,8 @@ t_ray *r, t_hp sol_geo)
 	}
 	while (neg)
 	{
-		if (sol_geo.t >= neg->borns_neg->t_start && \
-		sol_geo.t <= neg->borns_neg->t_end)
+		if (sol_geo.t >= neg->borns_neg[0] && \
+		sol_geo.t <= neg->borns_neg[1])
 		{
 			sol_geo.t = -1.0;
 			return (sol_geo);

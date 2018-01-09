@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 10:50:59 by fgallois          #+#    #+#             */
-/*   Updated: 2017/12/28 15:37:31 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/09 10:36:42 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void				print_cut(t_geo *geo)
 	cut = geo->cut;
 	while (i < geo->nb_cut)
 	{
-		ft_printf("\nCUT\nPOS\t\t");
+		ft_putstr("\nCUT\nPOS\t\t");
 		vec3_print(cut[i].cut_position);
-		ft_printf("NORMAL\t\t");
+		ft_putstr("NORMAL\t\t");
 		vec3_print(cut[i].cut_normal);
 		i++;
 	}

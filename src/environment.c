@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/05 12:43:17 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/09 10:28:45 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ static void			free_geos(t_env **e)
 		}
 		if (geo->neg)
 			free_geo_neg(&(geo->neg));
+		if (geo->cut)
+			free(geo->cut);
 		(*e)->geos = (*e)->geos->next;
 		free(geo);
 	}

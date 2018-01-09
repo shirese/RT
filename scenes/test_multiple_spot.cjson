@@ -5,6 +5,9 @@ camera:
 	pos: 0.0, 0.0, 2.0
 	fov: 90
 light:
+	type: 1
+	color: 1., 0., 0.
+light:
 	type: 3
 	color: 0.75, 0.75, 0.75
 	pos: -3.9, 0.0, 2.0

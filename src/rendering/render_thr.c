@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 14:13:06 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/05 18:40:42 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/09 11:06:11 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static void			*render_tile(void *arg)
 	if (!tile_xy[0] || !tile_xy[1])
 	{
 		ft_putendl("Invalid resolution.");
-		pthread_exit(NULL);
+		pthread_exit(0);
 	}
 	tiles_num = (thr_data->e->win.w / tile_xy[0]) * \
 		(thr_data->e->win.h / tile_xy[1]);
@@ -103,7 +103,7 @@ static void			*render_tile(void *arg)
 		if (!handle_t(tile_xy, &tile, tiles_num, thr_data))
 			break ;
 	}
-	pthread_exit(NULL);
+	pthread_exit(0);
 }
 
 int					raytrace_thread(t_env *e)
@@ -125,12 +125,11 @@ int					raytrace_thread(t_env *e)
 			ft_putendl("Error while creating thread.");
 			exit(-1);
 		}
+		if (pthread_join(thr[i], NULL))
+			ft_printf("Error while suspending thread %d.", i);
 	}
-	i = -1;
-	while (++i < NUM_THREADS)
-		pthread_join(thr[i], NULL);
 	pthread_mutex_destroy(&thr_data.mutex);
 	first_load = 1;
 	render_px(e);
- 	return (1);
+	return (1);
 }

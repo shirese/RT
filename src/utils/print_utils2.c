@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 12:37:26 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/04 12:53:28 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/09 10:37:12 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void				print_lights(t_env *e)
 	light = e->lights;
 	while (light)
 	{
-		ft_printf("\n\n///		LIGHT		////\n\n");
+		ft_putstr("\n\n///		LIGHT		////\n\n");
 		ft_printf("TYPE 		[%d]\n", light->type);
-		ft_printf("COLOR 		");
+		ft_putstr("COLOR 		");
 		print_color(*light->color);
 		if (light->type == 2)
 		{
-			ft_printf("DIR 		");
+			ft_putstr("DIR 		");
 			vec3_print(*((t_directional *)light->curr)->dir);
 		}
 		if (light->type == 3)

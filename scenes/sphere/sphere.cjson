@@ -6,7 +6,7 @@ camera:
 	fov: 90
 light:
 	type: 1
-	color: 0.18, 0.18, 0.18
+	color: 0.77, 0.18, 0.18
 light:
 	type: 3
 	color: 0.88, 0.88, 0.88

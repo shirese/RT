@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/08 10:51:48 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/08 17:45:24 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,6 @@ struct				s_light
 	void			*curr;
 	t_color			*color;
 	t_light			*next;
-	t_light			*last;
 };
 
 typedef struct		s_win

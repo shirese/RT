@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:59:47 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/08 10:10:57 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/09 10:45:08 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 
 void				print_geo_mater(t_mater *m)
 {
-	ft_printf("\nMATER\t\t");
+	ft_putstr("\nMATER\t\t");
 	print_color(m->kd);
-	ft_printf("\t\t");
+	ft_putstr("\t\t");
 	print_color(m->ks);
 	ft_printf("ILLUM\t\t[%d]\nIOR\t\t[%f]\nNS\t\t[%f]\n", m->illum, \
 		m->ior, m->ns);
@@ -92,7 +92,7 @@ void				print_negative_geos(t_geo *geo)
 	if (is_scene_dug(geo))
 	{
 		tmp = geo;
-		ft_printf("NEGATIVE OBJECTS :\n");
+		ft_putendl("NEGATIVE OBJECTS :");
 		while (tmp)
 		{
 			if (tmp->neg)
@@ -109,10 +109,14 @@ void				print_geo(t_geo *geo)
 {
 	ft_printf("\n\n///\t\tGEO [%p]\t\t////\n\nORIGIN\t\t", (void *)geo);
 	vec3_print(*geo->origin);
-	if (geo->rotation && ft_printf("\nROTATION\n\n"))
+	if (geo->rotation)
 	{
+		ft_putstr("\nROTATION\n\n");
+		ft_putchar('\t');
 		vec3_print(geo->rotation->r1);
+		ft_putchar('\t');
 		vec3_print(geo->rotation->r2);
+		ft_putchar('\t');
 		vec3_print(geo->rotation->r3);
 	}
 	ft_printf("\nSHADER\t\t[%d]", geo->shader_type);

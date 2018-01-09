@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 15:31:04 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/26 10:54:47 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/09 11:33:15 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int					add_light(t_light *light, t_light **lights)
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = light;
-		(*lights)->last = light;
 	}
 	return (0);
 }
@@ -83,7 +82,6 @@ int					setup_light(t_light **light)
 	*light = malloc(sizeof(t_light));
 	if (!*light)
 		return (0);
-	(*light)->last = *light;
 	(*light)->color = color_new(0.0, 0.0, 0.0);
 	(*light)->curr = NULL;
 	(*light)->type = 0;

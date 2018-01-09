@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 16:12:49 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/08 17:31:54 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/09 15:13:47 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,21 +145,25 @@ int					add_cube(int *fd, char **line, t_env *e);
 int					belong_to_cube(t_geo *geo, t_vec3 pos);
 t_geo				*new_cube(t_vec3 *position, t_vec3 dir1, double size);
 int					belong_to_inter_of_cube(t_geo *geo, double t, t_inter *i);
+
 /*
 ** GLASS
 */
 
 int					add_glass(int *fd, char **line, t_env *e);
 int					belong_to_glass(t_geo *geo, t_vec3 pos);
-int					set_direction_glass(t_geo *geo);
+int					setup_glass(t_env *e, t_geo *geo, t_glass *glass);
 void				set_coeffs_color(t_geo *geo);
 void				set_position_glass(t_geo *geo, t_vec3 *position);
-int					modif_glass(t_env *e, t_geo *geo, t_glass *glass);
+int					modif_glass(t_env *e, t_geo **geo, t_glass *glass);
 
 /*
 ** CUT
 */
 
+void				free_geo(t_geo *geo);
+void				free_geo_glass(t_glass *glass);
+void				free_geo_neg(t_geo **negs);
 t_hp				first_in_cut_out_neg(t_geo *geo, t_ray *r, t_hp *sol);
 t_hp				first_in_cut(t_geo *geo, t_ray *r, t_hp hp_1, t_hp hp_2);
 t_hp				hit_and_cut(t_geo *geo, t_hp hp_1, t_hp hp_2, t_ray *r);

@@ -6,10 +6,11 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/09 10:28:45 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/09 11:49:45 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "geo.h"
 #include "light.h"
 #include "matrice.h"
 #include "rt.h"
@@ -60,21 +61,10 @@ static void			free_geos(t_env **e)
 	while ((*e)->geos)
 	{
 		geo = (*e)->geos;
-		free(geo->curr);
-		free(geo->origin);
-		free(geo->mater);
-		if (geo->tex)
-		{
-			if (geo->tex->curr)
-				SDL_FreeSurface(geo->tex->curr);
-			free(geo->tex);
-		}
-		if (geo->neg)
-			free_geo_neg(&(geo->neg));
-		if (geo->cut)
-			free(geo->cut);
+		if (geo->type == 8)
+			free_geo_glass(geo->curr);
+		free_geo(geo);
 		(*e)->geos = (*e)->geos->next;
-		free(geo);
 	}
 	free((*e)->geos);
 }

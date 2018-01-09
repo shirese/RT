@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   glass.c                                            :+:      :+:    :+:   */
+/*   glass3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 13:30:03 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/28 15:42:02 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/09 15:13:32 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,6 @@
 #include "ray.h"
 #include "rt.h"
 #include "utils.h"
-
-int						modif_glass(t_env *e, t_geo *geo, t_glass *glass)
-{
-	if (geo->rotation)
-	{
-		rotate(&(((t_cylinder*)(glass->cyl)->curr)->axis), *geo->rotation);
-		rotate(&(((t_cone*)(glass->cone)->curr)->axis), *geo->rotation);
-	}
-	if (!set_direction_glass(geo))
-		return (12);
-	add_geometry(geo, &(e->geos));
-	return (0);
-}
 
 int						cut_cylinder_in_glass(t_geo *cyl, double height)
 {

@@ -33,9 +33,10 @@ static int				setup_error(int type, t_env *e)
 	return (-1);
 }
 
-/**	static void				add_neg_geos(t_env *e)
+/*
+**	static void				add_neg_geos(t_env *e)
 **	{
-**		t_geo *g;
+**	t_geo *g;
 **
 **		g = NULL;
 **		g = new_cylinder(vec3_stack(0., 0.2, -1.5), vec3_stack(0.0, 0., 1.), 0.3);
@@ -74,7 +75,7 @@ int						main(int ac, char **av)
 			0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 		cam_matrix(e->cam, *e->cam->pos, vec3_stack(0, 0, 1), \
 			vec3_stack(0, 1, 0));
-		// add_neg_geos(e);
+		//add_neg_geos(e);
 		sdl_render(e);
 		sdl_stop(e);
 	}

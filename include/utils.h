@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 12:16:39 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/05 12:40:48 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/09 12:27:51 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void				print_geo_mater(t_mater *m);
 void				print_lights(t_env *e);
 
 void				free_env(t_env **e);
-void				free_geo_neg(t_geo **negs);
 void				init_environment(t_env **e);
 
 double				atof_cson(char **str);

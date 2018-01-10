@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 12:20:53 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/04 12:22:02 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/10 17:45:44 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void				apply_lights(t_ray *r, t_geo *geo, t_hp hp, t_env *e)
 			}
 			if (!in_shadow && (!geo->tex || (geo->tex && geo->tex->type != 5)))
 				shade_phong(geo, hp, light, r);
-			if (geo->mater->illum != 1 && r->rec < MAX_RECURSION)
+			if (geo->mater->illum != 1)
 				throw_new_rays(r, hp, geo, e);
 		}
 		light = light->next;

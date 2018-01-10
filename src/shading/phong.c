@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:03:22 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/28 17:06:24 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/10 14:57:24 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void				shade_phong(t_geo *geo, t_hp hp, t_light *l, t_ray *r)
 	t_mater			*mater;
 
 	if (geo->mater->illum == 2 && geo->mater->reflectivity == 1.)
+		return ;
+	if (geo->mater->illum > 2 && geo->mater->transparency == 1.)
 		return ;
 	mater = geo->mater;
 	light_dir = get_light_dir(hp.p, l);

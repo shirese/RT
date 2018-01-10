@@ -23,7 +23,7 @@ cylinder:
 	height: 1.5
 sphere:
 	pos: 0., -0.4, -2.5
-	kd: 0.1, 0.1, 0.1
+	kd: 1., 0.1, 0.1
 	ks: 0.25, 0.25, 0.25
 	illum: 3
 	ior: 1.3
@@ -31,7 +31,7 @@ sphere:
 	radius: 0.4
 sphere:
 	pos: 0., 1.4, -2.3
-	kd: 0.1, 0.1, 0.1
+	kd: 0.1, 1., 0.1
 	ks: 0.25, 0.25, 0.25
 	illum: 3
 	ior: 1.5
@@ -39,7 +39,7 @@ sphere:
 	radius: 0.8
 sphere:
 	pos: 1.5., 3.8, -1.6
-	kd: 0.1, 0.1, 0.1
+	kd: 0.1, 0.1, 1.
 	ks: 0.25, 0.25, 0.25
 	illum: 3
 	ior: 2.417

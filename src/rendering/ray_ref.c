@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 12:12:35 by chaueur           #+#    #+#             */
-/*   Updated: 2017/12/22 16:31:48 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/10 18:09:25 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ t_ray				reflect_ray(t_ray r, t_hp hp)
 	t_vec3			refl;
 	double			len;
 
+	r_refl.color = color_new_stack(0., 0., 0.);
 	normal = hp.normal;
 	i = r.dir;
 	len = vec3_dot(i, normal);
 	refl = vec3_add_mult_stack(i, normal, -2 * len);
 	r_refl = init_ray(hp.p, refl, 3, r.ior);
+	r_refl.rec = r.rec;
 	add_epsilon(&r_refl, normal);
 	return (r_refl);
 }
@@ -65,6 +67,7 @@ t_ray				refract_ray(t_geo *geo, t_ray r, t_hp hp)
 	double			c1;
 	double			c2;
 
+	r_refr.color = color_new_stack(0., 0., 0.);
 	c2 = 0.0;
 	ior_2 = find_ior(geo, r, hp);
 	c1 = clamp(vec3_dot(r.dir, hp.normal), -1, 1);
@@ -79,6 +82,7 @@ t_ray				refract_ray(t_geo *geo, t_ray r, t_hp hp)
 		(r.ior / ior_2) * c1 - c2), t);
 	t = vec3_normalize_stack(t);
 	r_refr = init_ray(hp.p, t, 3, ior_2);
+	r_refr.rec = r.rec;
 	add_epsilon(&r_refr, hp.normal);
 	return (r_refr);
 }

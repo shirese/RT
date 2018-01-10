@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:12:06 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/10 12:58:18 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/10 18:49:12 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ void				init_environment(t_env **e)
 {
 	*e = malloc(sizeof(t_env));
 	(*e)->img = NULL;
-	(*e)->filter = 1;
+	(*e)->filter = 0;
 	(*e)->win.w = 0;
 	(*e)->win.h = 0;
-	(*e)->samp_rate = 4;
+	(*e)->samp_rate = 1;
 	(*e)->cam = NULL;
 	(*e)->lights = NULL;
 	(*e)->geos = NULL;

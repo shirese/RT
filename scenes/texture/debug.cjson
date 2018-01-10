@@ -1,0 +1,58 @@
+window:
+	width: 800
+	height: 600
+camera:
+	pos: 0.0, 0., 2.5
+	fov: 90
+light:
+	type: 1
+	color: 0.14, 0.14, 0.22
+light:
+	type: 3
+	color: 0.70, 0.55, 0.55
+	pos: -1, 1.5, 2.
+light:
+	type: 3
+	color: 0.66, 0.66, 0.66
+	pos: 1.5, 0.8, 2.
+light:
+	type: 3
+	color: 0.66, 0.66, 0.66
+	pos: 1.5, 0.8, -2.
+light:
+	type: 2
+	color: 0.66, 0.66, 0.66
+	dir: 0.2, -1.0, -2.0
+cylinder:
+	pos: -0.4., -0.4, -0.4
+	kd: 0.1, 0.1, 0.1
+	ks: 0.25, 0.25, 0.25
+	illum: 4
+	ior: 1.5
+	axis: 0., 1, 0.2
+	radius: 0.4
+	height: 0.9
+	cut_position: 0., 1., -0
+	cut_normal: 0., -1., 0.
+plane:
+	pos: 0., -0.2, -1
+	kd: 0.11., .22, .42
+	ks: 0.25, 0.25, 0.25
+	illum: 1
+	ior: 1
+	normal: 0, 0., 1.
+plane:
+	pos: 0., -0.2, -1.5
+	rotation: 15., 0., 0.
+	kd: 0.44, 0, 0
+	ks: 0, 0, 0
+	illum: 2
+	ior: 1.1
+	reflectiviy: 0.9
+	normal: 0, 1, 0.
+	cut_position: 0, -1., -1.5
+	cut_normal: 0.0, 0.0, 1.0
+	cut_position: -1., -1., -1.5
+	cut_normal: 1.0, 0.0, 1.0
+	cut_position: 1., -1., -1.5
+	cut_normal: -1.0, 0.0, 1.0

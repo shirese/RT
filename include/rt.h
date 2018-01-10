@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 11:29:42 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/08 17:45:24 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/10 18:39:16 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 # include "vector.h"
 # include "time.h"
 
-# define EPSILON 0.000001
+# define EPSILON 0.00000001
 # define FLT_MAX 3.402823e+38
 # define INV_PI 0.31830988618379067154
 # define INV2_PI 0.15915494309189533577
-# define MAX_RECURSION 4
+# define MAX_RECURSION 8
 # define SAVE_NAME "save00.bmp"
 # define WIN_TITLE "Raytracer v0.5"
 

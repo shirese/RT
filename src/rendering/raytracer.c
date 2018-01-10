@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:04:54 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/05 12:13:31 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/10 18:12:27 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,19 @@ void				throw_ray(t_ray *r, t_env *e)
 	t_geo			*geo;
 	t_hp			hp;
 
-	geo = ray_hit(r, &hp, NULL, e);
-	if (geo)
+	if (r->type == 3)
+		r->rec++;
+	if (r->rec <= MAX_RECURSION)
 	{
-		if (r->type != 3)
-			apply_ambient_light(r, e);
-		if (geo->tex)
-			apply_texture(r, &hp, geo);
-		apply_lights(r, geo, hp, e);
+		geo = ray_hit(r, &hp, NULL, e);
+		if (geo)
+		{
+			if (r->type != 3)
+				apply_ambient_light(r, e);
+			if (geo->tex)
+				apply_texture(r, &hp, geo);
+			apply_lights(r, geo, hp, e);
+		}
 	}
 }
 

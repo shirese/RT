@@ -5,9 +5,6 @@ camera:
 	pos: 0.0, 0., 2.5
 	fov: 90
 light:
-	type: 1
-	color: 0.14, 0.14, 0.22
-light:
 	type: 3
 	color: 0.70, 0.55, 0.55
 	pos: -1, 1.5, 2.
@@ -15,14 +12,6 @@ light:
 	type: 3
 	color: 0.66, 0.66, 0.66
 	pos: 1.5, 0.8, 2.
-light:
-	type: 3
-	color: 0.66, 0.66, 0.66
-	pos: 1.5, 0.8, -2.
-light:
-	type: 2
-	color: 0.66, 0.66, 0.66
-	dir: 0.2, -1.0, -2.0
 cube:
 	pos: -1.6., -0.5, 0.4
 	rotation: -15, 0, 0

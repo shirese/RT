@@ -118,12 +118,12 @@ $(DIR_OBJ)%.o: %.c
 	$(CC) $(FLAG) $(INCS) -o $@ -c $<
 
 clean:
-	@make -C ft_printf/ fclean
+	@make -C ft_printf/ clean
 	rm -fv $(OBJ)
 	@rmdir $(DIR_OBJ) 2> /dev/null || true
 
 fclean: clean
-	@make -C ft_printf/ clean
+	@make -C ft_printf/ fclean
 	rm -rf $(NAME)
 
 re: fclean all

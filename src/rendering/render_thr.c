@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 14:13:06 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/09 11:06:11 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/10 13:04:42 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,13 @@ static int			handle_t(int *t_xy, int *t, int t_n, t_thread_data *thr_dt)
 	*t = __sync_add_and_fetch(&thr_dt->tile_id, 1) - 1;
 	if (*t >= t_n)
 		return (0);
-	pthread_mutex_lock(&thr_dt->mutex);
-	if (thr_dt->ld_done == 0)
-		render_loading_bar(*t, t_n, thr_dt->e);
-	compute_tile_px(t_xy, *t, thr_dt->e);
-	pthread_mutex_unlock(&thr_dt->mutex);
+	if (!SDL_LockMutex(thr_dt->mutex))
+	{
+		if (thr_dt->ld_done == 0)
+			render_loading_bar(*t, t_n, thr_dt->e);
+		compute_tile_px(t_xy, *t, thr_dt->e);
+		SDL_UnlockMutex(thr_dt->mutex);
+	}
 	return (1);
 }
 
@@ -80,7 +82,7 @@ static int			handle_t(int *t_xy, int *t, int t_n, t_thread_data *thr_dt)
 **	works on a different tile.
 */
 
-static void			*render_tile(void *arg)
+static int			render_tile(void *arg)
 {
 	t_thread_data	*thr_data;
 	int				tile_xy[2];
@@ -94,7 +96,7 @@ static void			*render_tile(void *arg)
 	if (!tile_xy[0] || !tile_xy[1])
 	{
 		ft_putendl("Invalid resolution.");
-		pthread_exit(0);
+		return (0);
 	}
 	tiles_num = (thr_data->e->win.w / tile_xy[0]) * \
 		(thr_data->e->win.h / tile_xy[1]);
@@ -103,32 +105,33 @@ static void			*render_tile(void *arg)
 		if (!handle_t(tile_xy, &tile, tiles_num, thr_data))
 			break ;
 	}
-	pthread_exit(0);
+	return (0);
 }
 
 int					raytrace_thread(t_env *e)
 {
-	pthread_t		thr[NUM_THREADS];
+	SDL_Thread		*thr;
 	t_thread_data	thr_data;
 	static int		first_load;
+	char			*thr_name;
 	int				i;
 
 	i = -1;
+	thr_name = NULL;
 	thr_data.tile_id = 0;
 	thr_data.ld_done = first_load;
-	pthread_mutex_init(&thr_data.mutex, NULL);
+	thr_data.mutex = SDL_CreateMutex();
 	thr_data.e = e;
 	while (++i < NUM_THREADS)
 	{
-		if ((pthread_create(&thr[i], NULL, render_tile, &thr_data)))
-		{
-			ft_putendl("Error while creating thread.");
-			exit(-1);
-		}
-		if (pthread_join(thr[i], NULL))
-			ft_printf("Error while suspending thread %d.", i);
+		thr_name = ft_itoa(i);
+		if ((!(thr = SDL_CreateThread(render_tile, thr_name, &thr_data))))
+			ft_printf("\nSDL_CreateThread failed: %s\n", SDL_GetError());
+		else
+			SDL_WaitThread(thr, NULL);
+		free(thr_name);
 	}
-	pthread_mutex_destroy(&thr_data.mutex);
+	SDL_DestroyMutex(thr_data.mutex);
 	first_load = 1;
 	render_px(e);
 	return (1);

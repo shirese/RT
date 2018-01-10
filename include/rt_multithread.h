@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 14:39:58 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/04 14:46:54 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/10 12:40:29 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct		s_thread_data
 {
 	int				tile_id;
 	int				ld_done;
-	pthread_mutex_t	mutex;
+	SDL_mutex		*mutex;
 	t_env			*e;
 }					t_thread_data;
 

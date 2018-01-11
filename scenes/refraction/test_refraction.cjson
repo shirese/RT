@@ -26,6 +26,7 @@ cylinder:
 	height: 0.9
 	cut_position: 0., 1., -0
 	cut_normal: 0., -1., 0.
+	textures: 2, textures/bump/crystal.jpg
 sphere:
 	pos: 1.5., 0.4, 0.
 	kd: 0.14, 0.14, 0.14

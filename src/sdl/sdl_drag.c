@@ -6,7 +6,7 @@
 /*   By: chaueur <chaueur@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 10:12:51 by chaueur           #+#    #+#             */
-/*   Updated: 2018/01/08 10:53:10 by chaueur          ###   ########.fr       */
+/*   Updated: 2018/01/11 15:09:49 by chaueur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int			check_drag_motion(t_geo **v_p, t_geo **geo, \
 	{
 		if (event.wheel.y > 0 && (*geo)->origin->z > e->cam->pos->z - 0.2)
 			return (0);
-		(*geo)->origin->z += (double)event.wheel.y * 0.05;
+		(*geo)->origin->z += (double)event.wheel.y * 0.005;
 		(*v_p)->origin->z = (*geo)->origin->z;
 		return (1);
 	}

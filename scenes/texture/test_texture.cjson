@@ -1,9 +1,9 @@
 window:
-	width: 400
-	height: 300
+	width: 800
+	height: 600
 camera:
 	pos: 0.0, 0.0, 2.0
-	fov: 110
+	fov: 90
 light:
 	type: 1
 	color: 0.13, 0.1, 0.1
@@ -123,6 +123,6 @@ sphere:
 plane:
 	pos: 0., -4., -30.
 	kd: 0.33, 0.33, 0.33
-	normal: 0.02, 1., 0.
+	normal: 0., 1., 0.
 	illum: 2
 	reflectivity: 0.98

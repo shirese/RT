@@ -94,7 +94,7 @@ void				init_environment(t_env **e)
 	(*e)->filter = 0;
 	(*e)->win.w = 0;
 	(*e)->win.h = 0;
-	(*e)->samp_rate = 16;
+	(*e)->samp_rate = 1;
 	(*e)->cam = NULL;
 	(*e)->lights = NULL;
 	(*e)->geos = NULL;
